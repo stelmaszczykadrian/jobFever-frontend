@@ -10,6 +10,8 @@ import logo from "../../images/logo2.png";
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
 
 
 function LoginSheet() {
@@ -82,12 +84,24 @@ function LoginSheet() {
                     >
                     <span>Don't have an account?</span>
                     </Typography>
-                    <Sheet id="flexedBox" style={{ background: 'transparent'}} sx={{mx: 'auto', display: 'flex', flexDirection: 'row', alignSelf: 'center', color: 'white'}}>
-                        <div id="gridedBox">
-                        <FacebookOutlinedIcon></FacebookOutlinedIcon>
-                        <InstagramIcon></InstagramIcon>
-                        <WhatsAppIcon></WhatsAppIcon>
-                        </div>
+                    <Sheet style={{ background: 'transparent'}}
+                           sx={{
+                               mx: 'auto',
+                               py: 8,
+                               display: 'flex',
+                               flexDirection: 'row',
+                               gap: 0,
+                           }}
+                    >
+                            <IconButton size="large" sx={{color: 'white'}}>
+                                <FacebookOutlinedIcon/>
+                            </IconButton>
+                            <IconButton size="large" sx={{color: 'white'}}>
+                                <InstagramIcon/>
+                            </IconButton>
+                            <IconButton size="large" sx={{color: 'white'}}>
+                                <WhatsAppIcon/>
+                            </IconButton>
                     </Sheet>
                     </Sheet>
                     </div>
@@ -95,4 +109,4 @@ function LoginSheet() {
                     );
                 }
 
-                    export default LoginSheet;
+export default LoginSheet;
