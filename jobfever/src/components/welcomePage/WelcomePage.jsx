@@ -2,6 +2,11 @@ import React from 'react';
 import './WelcomePage.css'
 import logo from "../../images/logo2.png";
 import Navbar from "./Navbar";
+import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import {IconButton} from "@mui/material";
+import Button from "@mui/material/Button";
 
 
 function WelcomePage() {
@@ -23,6 +28,32 @@ function WelcomePage() {
                             developer or just starting out in your career, we're here to connect you with
                             employers who are looking for talented programmers just like you.
                         </div>
+                    </div>
+                    <div className="sideContainer buttons">
+                        <Button sx={{ ':hover': {
+                            bgcolor: '#852222', color: 'white'},
+
+                            mr: 2,
+                            width: 1/6,
+                            alignSelf: 'center',
+                            mt: 1,
+                            backgroundColor: 'rgb(255,255,255)',}}
+                        >
+                            Log in
+                        </Button>
+                        <Button sx={{ ':hover': {
+                            bgcolor: '#852222', color: 'white'},
+                            width: 1/6,
+                            alignSelf: 'center',
+                            mt: 1, backgroundColor: 'rgb(255,255,255)'}}
+                        >
+                            REGISTER
+                        </Button>
+                    </div>
+                    <div className="sideContainer socialMediaIcons">
+                        <IconButton><FacebookOutlinedIcon fontSize="large"/></IconButton>
+                        <IconButton><InstagramIcon fontSize="large"/></IconButton>
+                        <IconButton><WhatsAppIcon fontSize="large"/></IconButton>
                     </div>
                 </div>
             </div>
