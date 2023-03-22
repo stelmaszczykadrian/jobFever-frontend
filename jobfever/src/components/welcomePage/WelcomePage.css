@@ -75,3 +75,20 @@ body {
     width: 90%;
     font-size: 25px;
 }
+
+.socialMediaIcons {
+    height: 100%;
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    place-items: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    place-items: center;
+    text-decoration-color: white;
+    margin-block-start: auto;
+    height: auto;
+}
