@@ -145,7 +145,7 @@ function Register() {
                                 onChange={onInputChange}
                                 onBlur={validateInput}
                             />
-                            {error.username && <span className='err'>{error.username}</span>}
+                                {error.username && <span className='err' >{error.username}</span>}
                         </FormControl>
                         <FormControl>
                             <FormLabel
