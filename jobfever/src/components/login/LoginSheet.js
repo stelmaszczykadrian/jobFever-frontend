@@ -11,6 +11,7 @@ import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import IconButton from '@mui/material/IconButton';
+import RedButton from "./RedButton";
 
 function LoginSheet() {
     return (
@@ -66,14 +67,9 @@ function LoginSheet() {
                             sx={{color: 'white', fontWeight: 'bold', textAlign: 'center', alignSelf: 'center'}}
                         ></Typography>
                     </FormControl>
-                    <Button sx={{
-                        ':hover': {
-                            bgcolor: '#852222',
-                            color: 'white'
-                        }, width: 1 / 4, alignSelf: 'center', mt: 1, backgroundColor: 'rgba(171, 36, 36)'
-                    }}>
-                        Log in
-                    </Button>
+                    <RedButton
+                        text={'LOG IN'}>
+                    </RedButton>
                     <Typography
                         endDecorator={<a style={{color: 'rgba(171, 36, 36)'}} href="/sign-up">Sign up</a>}
                         fontSize="sm"
