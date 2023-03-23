@@ -4,7 +4,7 @@ import React from "react";
 function Logo() {
     return (
         <div id="gridedBox">
-            <img id="logo" src={logo} />
+            <img id="logo" src={logo}  alt='Job fever logo'/>
         </div>
     );
 }
