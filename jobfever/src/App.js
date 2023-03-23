@@ -7,10 +7,6 @@ function App() {
     <div>
       <ResponsiveAppBar />
       <FilterBar />
-      <header>
-        <p>Welcome on jobFever!</p>
-      </header>
-
     </div>
   );
 }
