@@ -22,11 +22,11 @@ function LoginSheet() {
                            width: 1/2,
                            mx: 'auto', // margin left & right
                            my: 0, // margin top & botom
-                           py: 20, // padding top & bottom
+                           py: 3, // padding top & bottom
                            px: 4, // padding left & right
                            display: 'flex',
                            flexDirection: 'column',
-                           gap: 5,
+                           gap: 2,
                        }}
                 >
                     <div>
