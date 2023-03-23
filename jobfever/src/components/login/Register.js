@@ -6,13 +6,13 @@ import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import './LoginSheet.css';
 import React, {useState} from "react";
-import logo from "../../images/logo2.png";
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import IconButton from '@mui/material/IconButton';
 
 import axios from "axios";
+import Logo from "./Logo";
 
 function Register() {
     const [input, setInput] = useState({
@@ -120,9 +120,7 @@ function Register() {
                        }}
                 >
                     <div>
-                        <div id="gridedBox">
-                            <img id="logo" src={logo}/>
-                        </div>
+                        <Logo />
                         <Typography level="h4" component="h1"
                                     sx={{color: 'rgba(171, 36, 36)', fontWeight: 'bold', textAlign: 'center'}}>
                             <span>Welcome!</span>
