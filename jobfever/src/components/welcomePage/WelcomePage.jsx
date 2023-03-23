@@ -34,20 +34,20 @@ function WelcomePage() {
                             bgcolor: '#852222', color: 'white'},
 
                             mr: 2,
-                            width: 1/6,
+                            width: 1/4,
                             alignSelf: 'center',
                             mt: 1,
                             backgroundColor: 'rgb(255,255,255)',}}
                         >
-                            Log in
+                            <span className="button-text">Log in</span>
                         </Button>
                         <Button sx={{ ':hover': {
                             bgcolor: '#852222', color: 'white'},
-                            width: 1/6,
+                            width: 1/4,
                             alignSelf: 'center',
                             mt: 1, backgroundColor: 'rgb(255,255,255)'}}
                         >
-                            REGISTER
+                            <span className="button-text">Register</span>
                         </Button>
                     </div>
                     <div className="sideContainer socialMediaIcons">
