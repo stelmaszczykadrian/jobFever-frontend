@@ -14,6 +14,8 @@ import IconButton from '@mui/material/IconButton';
 import axios from "axios";
 import Logo from "./Logo";
 import SocialmediaButtons from "./SocialmediaButtons";
+import axiosFetch from './axiosFetch'
+import RedButton from "./RedButton";
 
 function Register() {
     const [input, setInput] = useState({
@@ -70,10 +72,12 @@ function Register() {
                 default:
                     break;
             }
-
             return stateObj;
         });
     }
+
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -82,25 +86,9 @@ function Register() {
             password: input.password,
             repeatPassword: input.confirmPassword
         };
-
         if (input.password === input.confirmPassword) {
-            axios
-                .post("http://localhost:8080/api/candidates/register-candidate", userData)
-                .then((response) => {
-                    console.log(response);
-                })
-                .catch((error) => {
-                    if (error.response) {
-                        console.log(error.response);
-                        console.log("server responded");
-                    } else if (error.request) {
-                        console.log("network error");
-                    } else {
-                        console.log(error);
-                    }
-                });
+            axiosFetch(userData, "http://localhost:8080/api/candidates/register-candidate");
         }
-
     };
 
 
@@ -176,21 +164,9 @@ function Register() {
                             {error.confirmPassword && <span className='err'>{error.confirmPassword}</span>}
                         </FormControl>
                         <FormControl sx={{justifyContent: 'center'}}>
-                            <Button
-                                type="submit"
-                                sx={{
-                                    ':hover': {
-                                        bgcolor: '#852222',
-                                        color: 'white'
-                                    },
-                                    width: 1 / 4,
-                                    alignSelf: 'center',
-                                    mt: 5,
-                                    backgroundColor: 'rgba(171, 36, 36)'
-                                }}
-                            >
-                                Register
-                            </Button>
+                            <RedButton
+                                text={'REGISTER'}>
+                            </RedButton>
                         </FormControl>
                     </form>
                     <SocialmediaButtons />
