@@ -10,9 +10,7 @@ import logo from "../../images/logo2.png";
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-
 
 function LoginSheet() {
     return (
@@ -24,7 +22,7 @@ function LoginSheet() {
                            width: 1/2,
                            mx: 'auto', // margin left & right
                            my: 0, // margin top & botom
-                           py: 30, // padding top & bottom
+                           py: 20, // padding top & bottom
                            px: 4, // padding left & right
                            display: 'flex',
                            flexDirection: 'column',
@@ -74,7 +72,7 @@ function LoginSheet() {
                     </FormControl>
                     <Button sx={{ ':hover': {
                     bgcolor: '#852222',
-                    color: 'white'}, width: 1/4, alignSelf: 'center', mt: 1, backgroundColor: 'rgba(171, 36, 36)' /* margin top */ }}>
+                    color: 'white'}, width: 1/4, alignSelf: 'center', mt: 1, backgroundColor: 'rgba(171, 36, 36)'}}>
                     Log in
                     </Button>
                     <Typography
