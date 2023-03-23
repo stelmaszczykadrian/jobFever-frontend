@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 function WelcomePage() {
     return (
         <div>
-            <div className="container" >
+            <div className="container background" >
                 <div className="halfSide leftSide">
                     <div className="sideContainer logoContainer">
                         <img className="logo" src={logo}/>
