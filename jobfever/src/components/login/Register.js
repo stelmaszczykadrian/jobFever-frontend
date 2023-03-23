@@ -13,6 +13,7 @@ import IconButton from '@mui/material/IconButton';
 
 import axios from "axios";
 import Logo from "./Logo";
+import SocialmediaButtons from "./SocialmediaButtons";
 
 function Register() {
     const [input, setInput] = useState({
@@ -192,25 +193,7 @@ function Register() {
                             </Button>
                         </FormControl>
                     </form>
-                    <Sheet style={{background: 'transparent'}}
-                           sx={{
-                               mx: 'auto',
-                               py: 8,
-                               display: 'flex',
-                               flexDirection: 'row',
-                               gap: 0,
-                           }}
-                    >
-                        <IconButton size="large" sx={{color: 'white'}}>
-                            <FacebookOutlinedIcon/>
-                        </IconButton>
-                        <IconButton size="large" sx={{color: 'white'}}>
-                            <InstagramIcon/>
-                        </IconButton>
-                        <IconButton size="large" sx={{color: 'white'}}>
-                            <WhatsAppIcon/>
-                        </IconButton>
-                    </Sheet>
+                    <SocialmediaButtons />
                 </Sheet>
             </div>
         </div>
