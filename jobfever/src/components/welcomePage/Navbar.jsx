@@ -9,7 +9,7 @@ const pages = ['FOR EMPLOYERS', 'ABOUT US', 'CONTACT'];
 
 function Navbar() {
     return (
-    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'space-between', margin: '0 50px' }}>
+    <Box sx={{ flexGrow: 1, display: {md: 'flex' }, justifyContent: 'space-between', margin: '0 50px' }}>
         {pages.map((page) => (
             <Button
                 key={page}

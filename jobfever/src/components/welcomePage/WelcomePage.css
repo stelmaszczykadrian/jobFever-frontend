@@ -48,8 +48,10 @@ body {
 }
 
 .textContainer {
-    align-items: flex-start;
-
+    align-items: center;
+    white-space: pre-line;
+    text-align: justify;
+    color: white;
 }
 
 .logo {
@@ -58,22 +60,13 @@ body {
 }
 
 .header {
-    font-size: 80px;
-    white-space: pre-line;
-    text-align: justify;
-    color: white;
-    margin: 0;
     width: 90%;
-
+    font-size: xxx-large;
 }
 
 .text {
-    white-space: pre-line;
-    text-align: justify;
-    color: white;
-    margin: 0;
     width: 90%;
-    font-size: 25px;
+    font-size: x-large;
 }
 
 .socialMediaIcons {
