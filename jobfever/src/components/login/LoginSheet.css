@@ -30,6 +30,13 @@
    height: auto;
 }
 
+.err {
+   color: #aa2425;
+   align-self: center;
+   justify-content: center;
+   place-items: center;
+}
+
 a {
    text-decoration: none;
 }
@@ -38,3 +45,5 @@ a {
    color: dimgrey;
    opacity: 1;
 }
+
+
