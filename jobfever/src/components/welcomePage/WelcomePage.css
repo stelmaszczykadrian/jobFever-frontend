@@ -92,3 +92,7 @@ body {
     margin-block-start: auto;
     height: auto;
 }
+
+.button-text {
+    color: black;
+}
