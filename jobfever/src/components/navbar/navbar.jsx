@@ -1,4 +1,4 @@
-import logo from "../images/logo.png";
+import logo from "../../images/logo.png";
 
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
