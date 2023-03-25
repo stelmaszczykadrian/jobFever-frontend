@@ -45,7 +45,6 @@ function Register() {
                         stateObj[name] = "Please enter Username.";
                     }
                     break;
-
                 case "password":
                     if (!value) {
                         stateObj[name] = "Please enter Password.";
@@ -55,7 +54,6 @@ function Register() {
                         stateObj["confirmPassword"] = input.confirmPassword ? "" : error.confirmPassword;
                     }
                     break;
-
                 case "confirmPassword":
                     if (!value) {
                         stateObj[name] = "Please enter Confirm Password.";
@@ -63,7 +61,6 @@ function Register() {
                         stateObj[name] = "Password and Confirm Password does not match.";
                     }
                     break;
-
                 default:
                     break;
             }
@@ -102,7 +99,6 @@ function Register() {
                             </Typography>
                         </div>
                         <p></p>
-                        {/*<form onSubmit={handleSubmit}>*/}
                         <form onSubmit={handleSubmit}>
                             <FormControl width="40">
                                 <FormLabel sx={{alignSelf: 'center', color: 'white'}}>Email</FormLabel>
