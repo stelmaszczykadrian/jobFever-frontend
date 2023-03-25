@@ -1,17 +1,10 @@
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
-import Button from '@mui/joy/Button';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import './LoginSheet.css';
 import React, {useState} from "react";
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import IconButton from '@mui/material/IconButton';
-
-import axios from "axios";
 import Logo from "./Logo";
 import SocialmediaButtons from "./SocialmediaButtons";
 import axiosFetch from './axiosFetch'
