@@ -10,6 +10,7 @@ import Logo from "./Logo";
 import SocialmediaButtons from "./SocialmediaButtons";
 import axiosFetch from './axiosFetch'
 import RedButton from "./RedButton";
+import {UserInputValidationStyleComponent} from "./UserInputValidationStyleComponent";
 
 
 function Register() {
@@ -84,7 +85,7 @@ function Register() {
     return (
         <div>
             <div id="container">
-                <LeftContainer />
+                <LeftContainer/>
                 <RightContainer>
                     <Sheet style={{backgroundColor: 'transparent'}}>
                         <div>
@@ -102,43 +103,44 @@ function Register() {
                         <form onSubmit={handleSubmit}>
                             <FormControl width="40">
                                 <FormLabel sx={{alignSelf: 'center', color: 'white'}}>Email</FormLabel>
-                                <Input
-                                    sx={{border: '1px', width: 2 / 5, alignSelf: 'center', color: 'grey', mt: 2}}
-                                    type="text"
-                                    name="username"
-                                    placeholder='jobFever@email.com'
-                                    value={input.username}
-                                    onChange={onInputChange}
-                                    onBlur={validateInput}
-                                />
+                                <UserInputValidationStyleComponent>
+                                    <Input
+                                        type="text"
+                                        name="username"
+                                        placeholder='jobFever@email.com'
+                                        value={input.username}
+                                        onChange={onInputChange}
+                                        onBlur={validateInput}
+                                    /></UserInputValidationStyleComponent>
                                 {error.username && <span className='err'>{error.username}</span>}
                             </FormControl>
                             <FormControl>
                                 <FormLabel
-                                    sx={{border: '1px', alignSelf: 'center', color: 'white'}}>Password</FormLabel>
-                                <Input
-                                    sx={{width: 2 / 5, alignSelf: 'center', color: 'grey', mt: 2}}
-                                    type="password"
-                                    name="password"
-                                    placeholder='Enter Password'
-                                    value={input.password}
-                                    onChange={onInputChange}
-                                    onBlur={validateInput}
-                                />
+                                    sx={{alignSelf: 'center', color: 'white'}}>Password</FormLabel>
+                                <UserInputValidationStyleComponent>
+                                    <Input
+                                        type="password"
+                                        name="password"
+                                        placeholder='Enter Password'
+                                        value={input.password}
+                                        onChange={onInputChange}
+                                        onBlur={validateInput}
+                                    ></Input></UserInputValidationStyleComponent>
                                 {error.password && <span className='err'>{error.password}</span>}
                             </FormControl>
                             <FormControl>
                                 <FormLabel sx={{border: '1px', alignSelf: 'center', color: 'white'}}>Repeat
                                     Password</FormLabel>
-                                <Input
-                                    sx={{width: 2 / 5, alignSelf: 'center', color: 'grey', mt: 2}}
-                                    type="password"
-                                    name="confirmPassword"
-                                    placeholder='Enter Confirm Password'
-                                    value={input.confirmPassword}
-                                    onChange={onInputChange}
-                                    onBlur={validateInput}
-                                />
+                                <UserInputValidationStyleComponent>
+                                    <Input
+                                        type="password"
+                                        name="confirmPassword"
+                                        placeholder='Enter Confirm Password'
+                                        value={input.confirmPassword}
+                                        onChange={onInputChange}
+                                        onBlur={validateInput}
+                                    />
+                                </UserInputValidationStyleComponent>
                                 {error.confirmPassword && <span className='err'>{error.confirmPassword}</span>}
                             </FormControl>
                             <FormControl sx={{justifyContent: 'center'}}>
