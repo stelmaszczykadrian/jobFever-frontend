@@ -10,7 +10,7 @@ function SocialmediaButtons(){
     return (
         <Sheet style={{background: 'transparent'}}
                sx={{
-                   mx: 'auto',
+                   alignSelf: 'center',
                    py: 8,
                    display: 'flex',
                    flexDirection: 'row',
