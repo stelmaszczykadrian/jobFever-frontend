@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "../components/NavBarForNotLoggedUsers";
-import Footer from "../components/footer";
+import Navbar from "../components/navbar/NavBarForNotLoggedUsers";
+import Footer from "../components/footer/footer";
 function Layout(props) {
     return (
         <div>
