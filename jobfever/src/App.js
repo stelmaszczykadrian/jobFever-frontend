@@ -1,15 +1,27 @@
 import React from "react";
-import WelcomePage from "./components/welcomePage/WelcomePage";
-import ResponsiveAppBar from "./components/navbar";
-import FilterBar from "./components/filter-bar";
-import LoginSheet from './components/login/LoginSheet';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Register from "./components/login/Register";
+import Home from "./components/welcomePage/WelcomePage";
+import Login from "./components/login/LoginSheet";
+import About from "./pages/About";
+import NoPage from "./pages/NoPage";
+import Layout from "./pages/Layout";
 
 function App() {
   return (
     <div>
-      <Register />
-      {/*  <LoginSheet/>*/}
+        <BrowserRouter>
+            <Layout>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="*" element={<NoPage/>}></Route>
+                </Routes>
+            </Layout>
+        </BrowserRouter>
+
     </div>
   );
 }
