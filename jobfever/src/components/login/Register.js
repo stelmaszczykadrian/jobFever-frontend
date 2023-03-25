@@ -6,6 +6,7 @@ import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import './LoginSheet.css';
 import React, {useState} from "react";
+import {RightContainer, LeftContainer} from "./register.style";
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
@@ -16,6 +17,7 @@ import Logo from "./Logo";
 import SocialmediaButtons from "./SocialmediaButtons";
 import axiosFetch from './axiosFetch'
 import RedButton from "./RedButton";
+import {styled} from "@mui/material";
 
 function Register() {
     const [input, setInput] = useState({
@@ -77,7 +79,6 @@ function Register() {
     }
 
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -90,87 +91,78 @@ function Register() {
             axiosFetch(userData, "http://localhost:8080/api/candidates/register-candidate");
         }
     };
-
-
     return (
         <div>
             <div id="container">
-                <div id="flexedBox"></div>
-                <Sheet style={{background: 'rgba(29, 25, 23, 0.7)'}}
-                       sx={{
-                           width: 1 / 2,
-                           mx: 'auto', // margin left & right
-                           my: 0, // margin top & botom
-                           py: 3, // padding top & bottom
-                           px: 4, // padding left & right
-                           display: 'flex',
-                           flexDirection: 'column',
-                           gap: 2,
-                       }}
-                >
-                    <div>
-                        <Logo />
-                        <Typography level="h4" component="h1"
-                                    sx={{color: 'rgba(171, 36, 36)', fontWeight: 'bold', textAlign: 'center'}}>
-                            <span>Welcome!</span>
-                        </Typography>
-                        <Typography level="body2" component="h1"
-                                    sx={{color: 'white', fontWeight: 'bold', textAlign: 'center'}}>
-                            <span>Create account</span>
-                        </Typography>
-                    </div>
-                    <p></p>
-                    {/*<form onSubmit={handleSubmit}>*/}
-                    <form onSubmit={handleSubmit}>
-                        <FormControl width="40">
-                            <FormLabel sx={{alignSelf: 'center', color: 'white'}}>Email</FormLabel>
-                            <Input
-                                sx={{border: '1px', width: 2 / 5, alignSelf: 'center', color: 'grey', mt: 2}}
-                                type="text"
-                                name="username"
-                                placeholder='jobFever@email.com'
-                                value={input.username}
-                                onChange={onInputChange}
-                                onBlur={validateInput}
-                            />
-                                {error.username && <span className='err' >{error.username}</span>}
-                        </FormControl>
-                        <FormControl>
-                            <FormLabel
-                                sx={{border: '1px', alignSelf: 'center', color: 'white'}}>Password</FormLabel>
-                            <Input
-                                sx={{width: 2 / 5, alignSelf: 'center', color: 'grey', mt: 2}}
-                                type="password"
-                                name="password"
-                                placeholder='Enter Password'
-                                value={input.password}
-                                onChange={onInputChange}
-                                onBlur={validateInput}
-                            />
-                            {error.password && <span className='err'>{error.password}</span>}
-                        </FormControl>
-                        <FormControl>
-                            <FormLabel sx={{border: '1px', alignSelf: 'center', color: 'white'}}>Repeat
-                                Password</FormLabel>
-                            <Input
-                                sx={{width: 2 / 5, alignSelf: 'center', color: 'grey', mt: 2}}
-                                type="password"
-                                name="confirmPassword"
-                                placeholder='Enter Confirm Password'
-                                value={input.confirmPassword}
-                                onChange={onInputChange}
-                                onBlur={validateInput}
-                            />
-                            {error.confirmPassword && <span className='err'>{error.confirmPassword}</span>}
-                        </FormControl>
-                        <FormControl sx={{justifyContent: 'center'}}>
-                            <RedButton
-                                text={'REGISTER'}>
-                            </RedButton>
-                        </FormControl>
-                    </form>
-                    <SocialmediaButtons />
-                </Sheet>
+                <LeftContainer />
+                <RightContainer>
+                    <Sheet style={{backgroundColor: 'transparent'}}>
+                        <div>
+                            <Logo/>
+                            <Typography level="h4" component="h1"
+                                        sx={{color: 'rgba(171, 36, 36)', fontWeight: 'bold', textAlign: 'center'}}>
+                                <span>Welcome!</span>
+                            </Typography>
+                            <Typography level="body2" component="h1"
+                                        sx={{color: 'white', fontWeight: 'bold', textAlign: 'center'}}>
+                                <span>Create account</span>
+                            </Typography>
+                        </div>
+                        <p></p>
+                        {/*<form onSubmit={handleSubmit}>*/}
+                        <form onSubmit={handleSubmit}>
+                            <FormControl width="40">
+                                <FormLabel sx={{alignSelf: 'center', color: 'white'}}>Email</FormLabel>
+                                <Input
+                                    sx={{border: '1px', width: 2 / 5, alignSelf: 'center', color: 'grey', mt: 2}}
+                                    type="text"
+                                    name="username"
+                                    placeholder='jobFever@email.com'
+                                    value={input.username}
+                                    onChange={onInputChange}
+                                    onBlur={validateInput}
+                                />
+                                {error.username && <span className='err'>{error.username}</span>}
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel
+                                    sx={{border: '1px', alignSelf: 'center', color: 'white'}}>Password</FormLabel>
+                                <Input
+                                    sx={{width: 2 / 5, alignSelf: 'center', color: 'grey', mt: 2}}
+                                    type="password"
+                                    name="password"
+                                    placeholder='Enter Password'
+                                    value={input.password}
+                                    onChange={onInputChange}
+                                    onBlur={validateInput}
+                                />
+                                {error.password && <span className='err'>{error.password}</span>}
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel sx={{border: '1px', alignSelf: 'center', color: 'white'}}>Repeat
+                                    Password</FormLabel>
+                                <Input
+                                    sx={{width: 2 / 5, alignSelf: 'center', color: 'grey', mt: 2}}
+                                    type="password"
+                                    name="confirmPassword"
+                                    placeholder='Enter Confirm Password'
+                                    value={input.confirmPassword}
+                                    onChange={onInputChange}
+                                    onBlur={validateInput}
+                                />
+                                {error.confirmPassword && <span className='err'>{error.confirmPassword}</span>}
+                            </FormControl>
+                            <FormControl sx={{justifyContent: 'center'}}>
+                                <RedButton
+                                    text={'REGISTER'}>
+                                </RedButton>
+                            </FormControl>
+                        </form>
+
+                    </Sheet>
+                    <SocialmediaButtons/>
+                </RightContainer>
+
             </div>
         </div>
     );
