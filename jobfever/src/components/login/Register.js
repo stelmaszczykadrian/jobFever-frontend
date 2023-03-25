@@ -1,23 +1,15 @@
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
-import Button from '@mui/joy/Button';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import './LoginSheet.css';
 import React, {useState} from "react";
 import {RightContainer, LeftContainer} from "./register.style";
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import IconButton from '@mui/material/IconButton';
-
-import axios from "axios";
 import Logo from "./Logo";
 import SocialmediaButtons from "./SocialmediaButtons";
 import axiosFetch from './axiosFetch'
 import RedButton from "./RedButton";
-import {styled} from "@mui/material";
 
 function Register() {
     const [input, setInput] = useState({
@@ -52,7 +44,6 @@ function Register() {
                         stateObj[name] = "Please enter Username.";
                     }
                     break;
-
                 case "password":
                     if (!value) {
                         stateObj[name] = "Please enter Password.";
@@ -62,7 +53,6 @@ function Register() {
                         stateObj["confirmPassword"] = input.confirmPassword ? "" : error.confirmPassword;
                     }
                     break;
-
                 case "confirmPassword":
                     if (!value) {
                         stateObj[name] = "Please enter Confirm Password.";
@@ -70,7 +60,6 @@ function Register() {
                         stateObj[name] = "Password and Confirm Password does not match.";
                     }
                     break;
-
                 default:
                     break;
             }
@@ -109,7 +98,6 @@ function Register() {
                             </Typography>
                         </div>
                         <p></p>
-                        {/*<form onSubmit={handleSubmit}>*/}
                         <form onSubmit={handleSubmit}>
                             <FormControl width="40">
                                 <FormLabel sx={{alignSelf: 'center', color: 'white'}}>Email</FormLabel>
