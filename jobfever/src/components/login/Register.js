@@ -1,18 +1,18 @@
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
-import Input from '@mui/joy/Input';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import './LoginSheet.css';
 import React, {useState} from "react";
-import {RightContainer, LeftContainer} from "./register.style";
+import {RightContainer} from "./styled-components/StyledRightConatiner";
 import Logo from "./Logo";
 import SocialmediaButtons from "./SocialmediaButtons";
 import axiosFetch from './axiosFetch'
 import RedButton from "./RedButton";
-import {UserInputValidationStyleComponent} from "./input-components/UserInputValidationStyleComponent";
+import {StyledUserInputValidation} from "./styled-components/StyledUserInputValidation";
 import UsernameInput from "./input-components/UsernameInput";
 import PasswordInput from "./input-components/PasswordInput";
+import {StyledLeftContainer} from "./styled-components/StyledLeftContainer";
 
 
 function Register() {
@@ -87,7 +87,7 @@ function Register() {
     return (
         <div>
             <div id="container">
-                <LeftContainer/>
+                <StyledLeftContainer/>
                 <RightContainer>
                     <Sheet style={{backgroundColor: 'transparent'}}>
                         <div>
@@ -105,33 +105,33 @@ function Register() {
                         <form onSubmit={handleSubmit}>
                             <FormControl width="40">
                                 <FormLabel sx={{alignSelf: 'center', color: 'white'}}>Email</FormLabel>
-                                <UserInputValidationStyleComponent>
+                                <StyledUserInputValidation>
                                     <UsernameInput value = {input.username}
                                                    onChange={onInputChange}
                                                    onBlur={validateInput}/>
-                                </UserInputValidationStyleComponent>
+                                </StyledUserInputValidation>
                                 {error.username && <span className='err'>{error.username}</span>}
                             </FormControl>
                             <FormControl>
                                 <FormLabel
                                     sx={{alignSelf: 'center', color: 'white'}}>Password</FormLabel>
-                                <UserInputValidationStyleComponent>
+                                <StyledUserInputValidation>
                                     <PasswordInput name = {'password'} value={input.password}
                                         onChange={onInputChange}
                                         onBlur={validateInput}
                                     />
-                                </UserInputValidationStyleComponent>
+                                </StyledUserInputValidation>
                                 {error.password && <span className='err'>{error.password}</span>}
                             </FormControl>
                             <FormControl>
                                 <FormLabel sx={{border: '1px', alignSelf: 'center', color: 'white'}}>Repeat
                                     Password</FormLabel>
-                                <UserInputValidationStyleComponent>
+                                <StyledUserInputValidation>
                                     <PasswordInput name = {'confirmPassword'} value={input.confirmPassword}
                                                    onChange={onInputChange}
                                                    onBlur={validateInput}
                                     />
-                                </UserInputValidationStyleComponent>
+                                </StyledUserInputValidation>
                                 {error.confirmPassword && <span className='err'>{error.confirmPassword}</span>}
                             </FormControl>
                             <FormControl sx={{justifyContent: 'center'}}>
