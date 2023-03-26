@@ -18,10 +18,3 @@ export const RightContainer = styled(Sheet)`
       gap: 2px;
 
     `;
-export const LeftContainer = styled("div")`
-      flex-basis: 50%;
-      height: 100%;
-      display: grid;
-      align-items: center;
-      justify-content: center;
-    `;
