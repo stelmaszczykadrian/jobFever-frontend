@@ -13,6 +13,8 @@ import {StyledUserInputValidation} from "./styled-components/StyledUserInputVali
 import UsernameInput from "./input-components/UsernameInput";
 import PasswordInput from "./input-components/PasswordInput";
 import {StyledLeftContainer} from "./styled-components/StyledLeftContainer";
+import {StyledText} from "./styled-components/StyledText";
+import {StyledLabel} from "./styled-components/StyledLabel";
 
 
 function Register() {
@@ -92,42 +94,50 @@ function Register() {
                     <Sheet style={{backgroundColor: 'transparent'}}>
                         <div>
                             <Logo/>
-                            <Typography level="h4" component="h1"
-                                        sx={{color: 'rgba(171, 36, 36)', fontWeight: 'bold', textAlign: 'center'}}>
-                                <span>Welcome!</span>
-                            </Typography>
-                            <Typography level="body2" component="h1"
-                                        sx={{color: 'white', fontWeight: 'bold', textAlign: 'center'}}>
-                                <span>Create account</span>
-                            </Typography>
+                            <StyledText>
+                                <Typography level="h4" component="h1"
+                                            sx={{color: 'rgba(171, 36, 36)'}}>
+                                    <span>Welcome!</span>
+                                </Typography>
+                            </StyledText>
+                            <StyledText>
+                                <Typography level="body1" component="h1"
+                                            sx={{color: 'white'}}>
+                                    <span>Create account</span>
+                                </Typography>
+                            </StyledText>
                         </div>
                         <p></p>
                         <form onSubmit={handleSubmit}>
                             <FormControl width="40">
-                                <FormLabel sx={{alignSelf: 'center', color: 'white'}}>Email</FormLabel>
+                                <StyledLabel>
+                                    <span>E-mail</span>
+                                </StyledLabel>
                                 <StyledUserInputValidation>
-                                    <UsernameInput value = {input.username}
+                                    <UsernameInput value={input.username}
                                                    onChange={onInputChange}
                                                    onBlur={validateInput}/>
                                 </StyledUserInputValidation>
                                 {error.username && <span className='err'>{error.username}</span>}
                             </FormControl>
                             <FormControl>
-                                <FormLabel
-                                    sx={{alignSelf: 'center', color: 'white'}}>Password</FormLabel>
+                                <StyledLabel>
+                                    <span>Password</span>
+                                </StyledLabel>
                                 <StyledUserInputValidation>
-                                    <PasswordInput name = {'password'} value={input.password}
-                                        onChange={onInputChange}
-                                        onBlur={validateInput}
+                                    <PasswordInput name={'password'} value={input.password}
+                                                   onChange={onInputChange}
+                                                   onBlur={validateInput}
                                     />
                                 </StyledUserInputValidation>
                                 {error.password && <span className='err'>{error.password}</span>}
                             </FormControl>
                             <FormControl>
-                                <FormLabel sx={{border: '1px', alignSelf: 'center', color: 'white'}}>Repeat
-                                    Password</FormLabel>
+                                <StyledLabel>
+                                    <span>Confirm Password</span>
+                                </StyledLabel>
                                 <StyledUserInputValidation>
-                                    <PasswordInput name = {'confirmPassword'} value={input.confirmPassword}
+                                    <PasswordInput name={'confirmPassword'} value={input.confirmPassword}
                                                    onChange={onInputChange}
                                                    onBlur={validateInput}
                                     />
