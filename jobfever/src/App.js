@@ -1,8 +1,8 @@
 import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Register from "./components/login/Register";
+import Register from "./pages/Register";
 import Home from "./components/welcomePage/WelcomePage";
-import Login from "./components/login/LoginSheet";
+import Login from "../src/pages/Login";
 import About from "./pages/About";
 import NoPage from "./pages/NoPage";
 import Layout from "./pages/Layout";
