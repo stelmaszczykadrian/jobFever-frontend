@@ -1,8 +1,7 @@
 import React from "react";
 import {StyledMainComponent} from "../components/styled-components/StyledMainComponent";
-import {SortButton} from "../components/buttons/SortButton";
-import Button from "@mui/joy/Button";
 import {StyledSortButtonsContainer} from "../components/styled-components/StyledSortButtonsContainer";
+import {SortButton} from "../components/buttons/SortButton";
 
 
 
@@ -18,6 +17,7 @@ export default function JobsPage(){
             <SortButton>JS</SortButton>
             <SortButton>C++</SortButton>
             <SortButton>JAVA</SortButton>
+            <SortButton>Java Developer</SortButton>
             </StyledSortButtonsContainer>
         </StyledMainComponent>
         </div>
