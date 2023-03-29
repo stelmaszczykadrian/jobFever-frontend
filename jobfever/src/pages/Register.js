@@ -3,7 +3,7 @@ import {StyledLeftContainer} from "../components/styled-components/StyledLeftCon
 import {RightContainer} from "../components/styled-components/StyledRightConatiner";
 import Sheet from "@mui/joy/Sheet";
 import Logo from "../components/logo/Logo";
-import {StyledText} from "../components/styled-components/StyledText";
+import {StyledText} from "../components/text/StyledText";
 import Typography from "@mui/joy/Typography";
 import FormControl from "@mui/joy/FormControl";
 import {StyledLabel} from "../components/styled-components/StyledLabel";

@@ -5,7 +5,7 @@ import RedButton from "../components/buttons/RedButton";
 import '../css/LoginPage.css';
 import React, {useState} from "react";
 import axiosFetch from "../components/fetch/axiosFetch";
-import {StyledText} from "../components/styled-components/StyledText";
+import {StyledText} from "../components/text/StyledText";
 import Logo from "../components/logo/Logo";
 import {StyledLabel} from "../components/styled-components/StyledLabel";
 import {StyledUserInputValidation} from "../components/styled-components/StyledUserInputValidation";
