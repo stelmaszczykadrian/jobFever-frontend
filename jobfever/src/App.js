@@ -6,6 +6,7 @@ import Login from "../src/pages/Login";
 import About from "./pages/About";
 import NoPage from "./pages/NoPage";
 import Layout from "./pages/Layout";
+import JobOfferCreationForm from "./pages/JobOfferCreationForm";
 import JobsPage from "./pages/JobsPage";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/about" element={<About />} />
+                    <Route path="/add-job" element={<JobOfferCreationForm />} />
                     <Route path="/jobs" element={<JobsPage />} />
                     <Route path="*" element={<NoPage/>}></Route>
                 </Routes>
