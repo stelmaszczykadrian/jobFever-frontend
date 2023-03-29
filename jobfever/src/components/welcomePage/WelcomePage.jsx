@@ -1,64 +1,54 @@
 import React from 'react';
 import './WelcomePage.css'
 import logo from "../../images/logo2.png";
-import Navbar from "./Navbar";
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import {IconButton} from "@mui/material";
-import Button from "@mui/material/Button";
-
+import WelcomePageNavbar from "../navbar/WelcomePageNavbar";
+import { Link } from 'react-router-dom'
+import WhiteButtonMainPage from "../buttons/WhiteButton";
+import {StyledInlineContainer} from "../styled-components/StyledInlineContainer";
+import SocialmediaButtons from "../buttons/SocialmediaButtons";
+import {StyledInlineFlexContainer} from "../styled-components/StyledInlineFlexContainer";
+import {StyledSimpleText} from "../text/StyledSimpleText";
+import {Header} from "../text/Header";
+import {StyledLogo} from "../logo/StyledLogo";
+import {StyledSTextSideContainer} from "../text/StyledTextSideContainer";
+import {StyledHalfSideRightWelcomePage} from "../styled-components/StyledHalfSideRightWelcomePage";
+import {StyledHalfSideLeftWelcomePage} from "../styled-components/StyledHalfSideLeftWelcomePage";
+import {StyledMainPageBackground} from "../styled-components/StyledMainPageBackground";
 
 function WelcomePage() {
     return (
         <div>
-            <div className="container background" >
-                <div className="halfSide leftSide">
-                    <div className="sideContainer logoContainer">
-                        <img className="logo" src={logo}/>
-                    </div>
-                </div>
-                <div className="halfSide rightSide">
-                    <Navbar />
-                    <div className="sideContainer textContainer">
-                        <span className="header">Welcome</span>
-                        <div className="text">
+            <StyledMainPageBackground>
+                <StyledHalfSideLeftWelcomePage>
+                    <StyledSTextSideContainer>
+                        <StyledLogo src={logo}/>
+                    </StyledSTextSideContainer>
+                </StyledHalfSideLeftWelcomePage>
+                <StyledHalfSideRightWelcomePage>
+                    <WelcomePageNavbar />
+                    <StyledSTextSideContainer>
+                        <Header>Welcome</Header>
+                        <StyledSimpleText>
                             Our website is dedicated to providing programmers like you with the latest
                             and greatest job  opportunity in the industry. Whether you're a seasoned
                             developer or just starting out in your career, we're here to connect you with
                             employers who are looking for talented programmers just like you.
-                        </div>
-                    </div>
-                    <div className="sideContainer buttons">
-                        <Button sx={{ ':hover': {
-                            bgcolor: '#852222', color: 'white'},
-
-                            mr: 2,
-                            width: 1/4,
-                            alignSelf: 'center',
-                            mt: 1,
-                            backgroundColor: 'rgb(255,255,255)',}}
-                        >
-                            <span className="button-text">Log in</span>
-                        </Button>
-                        <Button sx={{ ':hover': {
-                            bgcolor: '#852222', color: 'white'},
-                            width: 1/4,
-                            alignSelf: 'center',
-                            mt: 1, backgroundColor: 'rgb(255,255,255)'}}
-                        >
-                            <span className="button-text">Register</span>
-                        </Button>
-                    </div>
-                    <div className="sideContainer socialMediaIcons">
-                        <IconButton><FacebookOutlinedIcon fontSize="large"/></IconButton>
-                        <IconButton><InstagramIcon fontSize="large"/></IconButton>
-                        <IconButton><WhatsAppIcon fontSize="large"/></IconButton>
-                    </div>
-                </div>
-            </div>
+                        </StyledSimpleText>
+                    </StyledSTextSideContainer>
+                    <StyledInlineContainer>
+                        <Link to='/login'>
+                        <WhiteButtonMainPage text={'LOGIN'}/>
+                        </Link>
+                        <Link to='/register'>
+                        <WhiteButtonMainPage text={'REGISTER'}/>
+                        </Link>
+                    </StyledInlineContainer>
+                    <StyledInlineFlexContainer>
+                        <SocialmediaButtons/>
+                    </StyledInlineFlexContainer>
+                </StyledHalfSideRightWelcomePage>
+            </StyledMainPageBackground>
         </div>
-    )
-}
+    )}
 
 export default WelcomePage;
