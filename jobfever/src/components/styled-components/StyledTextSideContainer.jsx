@@ -6,7 +6,7 @@ export const StyledSTextSideContainer = styled("div")`
     display: grid;
     justify-content: center;
     place-items: center;
-    lign-items: center;
+    align-items: center;
     white-space: pre-line;
     text-align: justify;
     color: white;`
