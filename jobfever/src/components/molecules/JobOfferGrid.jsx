@@ -1,31 +1,16 @@
-import {ButtonBase, Paper, styled} from "@mui/material";
+import {ButtonBase} from "@mui/material";
 import {Grid} from "@mui/joy";
 import Typography from "@mui/joy/Typography";
-
-const Img = styled('img')({
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
-});
+import {Img, StyledPaper} from "./JobOfferGrid.styled";
+import img from "../../images/logo.png";
 
 export default function JobOfferGrid() {
     return (
-        <Paper
-            sx={{
-                p: 2,
-                margin: 'auto',
-                mb: '10px',
-                // maxWidth: 500,
-                flexGrow: 1,
-                backgroundColor: (theme) =>
-                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-            }}
-        >
+        <StyledPaper>
             <Grid container spacing={2}>
                 <Grid item>
                     <ButtonBase sx={{ width: 128, height: 128 }}>
-                        <Img alt="complex" src="../../images/background_1.jpg" />
+                        <Img alt="Employer logo" src={img}></Img>
                     </ButtonBase>
                 </Grid>
                 <Grid item xs={12} sm container>
@@ -49,6 +34,6 @@ export default function JobOfferGrid() {
                     </Grid>
                 </Grid>
             </Grid>
-        </Paper>
+        </StyledPaper>
     );
 }
