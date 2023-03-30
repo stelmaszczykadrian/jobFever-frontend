@@ -1,5 +1,5 @@
 import React from "react";
-import JobsPageMainComponent from "../components/organisms/JobsPageMainComponent";
+import JobsPageMainComponent from "../components/templates/JobsPageMainComponent";
 
 
 export default function JobsPage() {
