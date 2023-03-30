@@ -1,17 +1,17 @@
 import Sheet from "@mui/joy/Sheet";
 import Typography from "@mui/joy/Typography";
 import FormControl from "@mui/joy/FormControl";
-import RedButton from "../components/buttons/RedButton";
+import RedButton from "../components/atoms/RedButton";
 import '../css/LoginPage.css';
 import React, {useState} from "react";
-import axiosFetch from "../components/fetch/axiosFetch";
-import {StyledText} from "../components/text/StyledText";
-import Logo from "../components/logo/Logo";
+import axiosFetch from "../api/axiosFetch";
+import {StyledText} from "../components/styled-components/StyledText";
+import LogoIcon from "../components/atoms/LogoIcon";
 import {StyledLabel} from "../components/styled-components/StyledLabel";
 import {StyledUserInputValidation} from "../components/styled-components/StyledUserInputValidation";
-import UsernameInput from "../components/inputs/UsernameInput";
-import PasswordInput from "../components/inputs/PasswordInput";
-import SocialmediaButtons from "../components/buttons/SocialmediaButtons";
+import UsernameInput from "../components/atoms/UsernameInput";
+import PasswordInput from "../components/atoms/PasswordInput";
+import SocialmediaButtons from "../components/molecules/SocialmediaButtons";
 import {StyledLeftContainer} from "../components/styled-components/StyledLeftContainer";
 import {RightContainer} from "../components/styled-components/StyledRightConatiner";
 
@@ -89,7 +89,7 @@ function LoginSheet() {
                 <RightContainer>
                     <Sheet style={{backgroundColor: 'transparent'}}>
                         <div>
-                            <Logo/>
+                            <LogoIcon/>
                             <StyledText>
                                 <Typography level="h4" component="h1"
                                             sx={{color: 'rgba(171, 36, 36)'}}>
