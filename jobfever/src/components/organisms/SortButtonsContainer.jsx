@@ -18,7 +18,6 @@ export default function SortButtonsContainer(){
             <SortButton>C++</SortButton>
             <SortButton>JAVA</SortButton>
             <SortButton>Java Developer</SortButton>
-
         </StyledSortButtonsContainer>
     )
 }
