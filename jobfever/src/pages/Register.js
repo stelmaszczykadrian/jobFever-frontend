@@ -1,17 +1,17 @@
-import axiosFetch from "../components/fetch/axiosFetch";
+import axiosFetch from "../api/axiosFetch";
 import {StyledLeftContainer} from "../components/styled-components/StyledLeftContainer";
 import {RightContainer} from "../components/styled-components/StyledRightConatiner";
 import Sheet from "@mui/joy/Sheet";
-import Logo from "../components/logo/Logo";
-import {StyledText} from "../components/text/StyledText";
+import LogoIcon from "../components/atoms/LogoIcon";
+import {StyledText} from "../components/styled-components/StyledText";
 import Typography from "@mui/joy/Typography";
 import FormControl from "@mui/joy/FormControl";
 import {StyledLabel} from "../components/styled-components/StyledLabel";
 import {StyledUserInputValidation} from "../components/styled-components/StyledUserInputValidation";
-import UsernameInput from "../components/inputs/UsernameInput";
-import PasswordInput from "../components/inputs/PasswordInput";
-import RedButton from "../components/buttons/RedButton";
-import SocialmediaButtons from "../components/buttons/SocialmediaButtons";
+import UsernameInput from "../components/atoms/UsernameInput";
+import PasswordInput from "../components/atoms/PasswordInput";
+import RedButton from "../components/atoms/RedButton";
+import SocialmediaButtons from "../components/molecules/SocialmediaButtons";
 import {useState} from "react";
 
 function Register() {
@@ -90,7 +90,7 @@ function Register() {
                 <RightContainer>
                     <Sheet style={{backgroundColor: 'transparent'}}>
                         <div>
-                            <Logo/>
+                            <LogoIcon/>
                             <StyledText>
                                 <Typography level="h4" component="h1"
                                             sx={{color: 'rgba(171, 36, 36)'}}>

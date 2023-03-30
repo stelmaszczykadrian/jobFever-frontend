@@ -1,15 +1,15 @@
 import React from 'react';
 import logo from "../images/logo2.png";
-import WelcomePageNavbar from "../components/navbar/WelcomePageNavbar";
+import WelcomePageNavbar from "../components/molecules/WelcomePageNavbar";
 import { Link } from 'react-router-dom'
-import WhiteButtonMainPage from "../components/buttons/WhiteButton";
+import WhiteButtonMainPage from "../components/atoms/WhiteButton";
 import {StyledInlineContainer} from "../components/styled-components/StyledInlineContainer";
-import SocialmediaButtons from "../components/buttons/SocialmediaButtons";
+import SocialmediaButtons from "../components/molecules/SocialmediaButtons";
 import {StyledInlineFlexContainer} from "../components/styled-components/StyledInlineFlexContainer";
-import {StyledSimpleText} from "../components/text/StyledSimpleText";
-import {Header} from "../components/text/Header";
-import {StyledLogo} from "../components/logo/StyledLogo";
-import {StyledSTextSideContainer} from "../components/text/StyledTextSideContainer";
+import {StyledSimpleText} from "../components/styled-components/StyledSimpleText";
+import {StyledHeader} from "../components/styled-components/StyledHeader";
+import {StyledLogo} from "../components/styled-components/StyledLogo";
+import {StyledSTextSideContainer} from "../components/styled-components/StyledTextSideContainer";
 import {StyledHalfSideRightWelcomePage} from "../components/styled-components/StyledHalfSideRightWelcomePage";
 import {StyledHalfSideLeftWelcomePage} from "../components/styled-components/StyledHalfSideLeftWelcomePage";
 import {StyledMainPageBackground} from "../components/styled-components/StyledMainPageBackground";
@@ -26,7 +26,7 @@ function WelcomePage() {
                 <StyledHalfSideRightWelcomePage>
                     <WelcomePageNavbar />
                     <StyledSTextSideContainer>
-                        <Header>Welcome</Header>
+                        <StyledHeader>Welcome</StyledHeader>
                         <StyledSimpleText>
                             Our website is dedicated to providing programmers like you with the latest
                             and greatest job  opportunity in the industry. Whether you're a seasoned

@@ -1,9 +1,9 @@
 import React from "react";
 import {StyledMainComponent} from "../components/styled-components/StyledMainComponent";
 import {StyledSortButtonsContainer} from "../components/styled-components/StyledSortButtonsContainer";
-import {SortButton} from "../components/buttons/SortButton";
+import {SortButton} from "../components/atoms/SortButton";
 import {StyledJobOffersContainer} from "../components/styled-components/StyledJobOffersContainer";
-import JobOfferGrid from "../components/containers/JobOfferGrid";
+import JobOfferGrid from "../components/molecules/JobOfferGrid";
 
 
 export default function JobsPage() {
