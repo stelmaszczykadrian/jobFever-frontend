@@ -5,6 +5,7 @@ import {StyledJobOffersContainer} from "./JobOffersContainer.styled";
 
 
 export default function JobOffersContainer(){
+
     return (
         <StyledJobOffersContainer>
             <JobOfferGrid />

@@ -6,11 +6,11 @@ import {StyledUserInputValidation} from "../styled-components/StyledUserInputVal
 import RedButton from "../atoms/RedButton";
 import SocialmediaButtons from "../molecules/SocialmediaButtons";
 import {useState} from "react";
-import axiosFetch from "../../api/axiosFetch";
 import {StyledRightContainer} from "./RightConatiner.styles";
 import Input from "@mui/joy/Input";
 import StyledText from "../atoms/StyledText";
 import WelcomeMessage from "../molecules/WelcomeMessage";
+import axiosPost from "../../api/axiosFetch";
 
 
 export default function RightContainer(props) {
@@ -76,9 +76,15 @@ export default function RightContainer(props) {
             password: input.password,
             repeatPassword: input.confirmPassword
         };
-        if (input.password === input.confirmPassword) {
-            axiosFetch(userData, "http://localhost:8080/api/candidates/" + props.page.toLowerCase());
+        console.log(props.page.toLowerCase())
+        if(props.page === "REGISTER"){
+            if (input.password === input.confirmPassword) {
+                axiosPost(userData, "http://localhost:8080/api/candidates/" + props.page.toLowerCase());
+            }
+        }else{
+            axiosPost(userData, "http://localhost:8080/api/candidates/" + props.page.toLowerCase());
         }
+
     };
     let ConfirmPassword =
         <FormControl>

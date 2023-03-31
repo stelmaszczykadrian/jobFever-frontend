@@ -11,7 +11,6 @@ import JobOfferForm from "./pages/JobOfferForm";
 
 function App() {
   return (
-    <div>
         <BrowserRouter>
             <Layout>
                 <Routes>
@@ -26,7 +25,6 @@ function App() {
             </Layout>
         </BrowserRouter>
 
-    </div>
   );
 }
 
