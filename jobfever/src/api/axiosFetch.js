@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default function axiosFetch(userData, url) {
+export default function axiosPost(userData, url) {
     axios
         .post(url, userData)
         .then((response) => {
