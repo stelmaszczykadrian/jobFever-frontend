@@ -13,7 +13,7 @@ import {useState} from "react";
 import {Radio, RadioGroup} from "@mui/joy";
 import RedButton from "../atoms/RedButton";
 import {Form} from "react-bootstrap";
-import axiosFetch from "../../api/axiosFetch";
+import axiosPost from "../../api/axiosFetch";
 
 
 const jobType = [
@@ -76,7 +76,7 @@ export default function JobOfferFormContainer() {
             workOptions: input.workOptions
         };
 
-        axiosFetch(userData,'http://localhost:8080/api/jobs')
+        axiosPost(userData,'http://localhost:8080/api/jobs')
     };
 
     const onInputChange = e => {
