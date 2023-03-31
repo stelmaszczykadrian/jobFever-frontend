@@ -3,7 +3,7 @@ import RegisterMainComponent from "../components/templates/RegisterPageMainCompo
 function Register() {
 
     return (
-            <RegisterMainComponent />
+            <RegisterMainComponent page={"REGISTER"}/>
     );
 }
 
