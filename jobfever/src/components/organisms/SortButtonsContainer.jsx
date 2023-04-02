@@ -1,6 +1,6 @@
 import {SortButton} from "../atoms/SortButton";
 import React from "react";
-import {StyledSortButtonsContainer} from "./SortButtonsContainer.styled";
+import {StyledSortButtonsContainer} from "./SortButtonsContainer.styles";
 
 export default function SortButtonsContainer(){
     return (

@@ -1,7 +1,7 @@
 import {ButtonBase} from "@mui/material";
 import {Grid} from "@mui/joy";
 import Typography from "@mui/joy/Typography";
-import {Img, StyledPaper} from "./JobOfferGrid.styled";
+import {Img, StyledPaper} from "./JobOfferGrid.styles";
 import img from "../../images/logo.png";
 
 export default function JobOfferGrid() {
