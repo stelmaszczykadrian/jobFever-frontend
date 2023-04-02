@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from "../images/logo2.png";
 import WelcomePageNavbar from "../components/molecules/WelcomePageNavbar";
-import { Link } from 'react-router-dom'
 import WhiteButtonMainPage from "../components/atoms/WhiteButton";
 import {StyledInlineContainer} from "../components/styled-components/StyledInlineContainer";
 import SocialmediaButtons from "../components/molecules/SocialmediaButtons";
@@ -13,6 +12,7 @@ import {StyledSTextSideContainer} from "../components/styled-components/StyledTe
 import {StyledHalfSideRightWelcomePage} from "../components/styled-components/StyledHalfSideRightWelcomePage";
 import {StyledHalfSideLeftWelcomePage} from "../components/styled-components/StyledHalfSideLeftWelcomePage";
 import {StyledMainPageBackground} from "../components/styled-components/StyledMainPageBackground";
+import {StyledLink} from "../components/atoms/Link.styled";
 
 function WelcomePage() {
     return (
@@ -35,12 +35,12 @@ function WelcomePage() {
                         </StyledSimpleText>
                     </StyledSTextSideContainer>
                     <StyledInlineContainer>
-                        <Link to='/login'>
+                        <StyledLink to='/login'>
                         <WhiteButtonMainPage text={'LOGIN'}/>
-                        </Link>
-                        <Link to='/register'>
+                        </StyledLink>
+                        <StyledLink to='/register'>
                         <WhiteButtonMainPage text={'REGISTER'}/>
-                        </Link>
+                        </StyledLink>
                     </StyledInlineContainer>
                     <StyledInlineFlexContainer>
                         <SocialmediaButtons/>
