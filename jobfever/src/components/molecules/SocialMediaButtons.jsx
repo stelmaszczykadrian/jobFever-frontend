@@ -6,7 +6,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import React from "react";
 
 
-function SocialmediaButtons(){
+function SocialMediaButtons(){
     return (
         <Sheet style={{background: 'transparent'}}
                sx={{
@@ -15,6 +15,7 @@ function SocialmediaButtons(){
                    display: 'flex',
                    flexDirection: 'row',
                    gap: 0,
+                   marginInline: 'auto',
                }}
         >
             <IconButton size="large" sx={{color: 'white'}}>
@@ -30,4 +31,4 @@ function SocialmediaButtons(){
     );
 
 }
-export default SocialmediaButtons
+export default SocialMediaButtons

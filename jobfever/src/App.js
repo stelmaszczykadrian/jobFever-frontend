@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Register from "./pages/Register";
-import WelcomePage from "./pages/WelcomePage";
+import Home from "./pages/Home";
 import Login from "../src/pages/Login";
 import About from "./pages/About";
 import NoPage from "./pages/NoPage";
@@ -16,7 +16,7 @@ function App() {
         <BrowserRouter>
             <Layout>
                 <Routes>
-                    <Route path="/" element={<WelcomePage />} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/about" element={<About />} />

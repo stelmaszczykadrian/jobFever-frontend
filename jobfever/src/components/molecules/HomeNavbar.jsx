@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import {StyledLink} from "../atoms/Link.styled";
+import {StyledLink} from "../atoms/Link.styles";
 
 const pages = [
     <StyledLink to='/jobs'>OFFERS</StyledLink>,
@@ -10,7 +10,7 @@ const pages = [
     <StyledLink to='/contact'>CONTACT</StyledLink>,
 ];
 
-function WelcomePageNavbar() {
+function HomeNavbar() {
     return (
     <Box sx={{ flexGrow: 1, display: {md: 'flex' }, justifyContent: 'space-between', margin: '0 50px' }}>
         {pages.map((page) => (
@@ -22,4 +22,4 @@ function WelcomePageNavbar() {
     )
 }
 
-export default WelcomePageNavbar;
+export default HomeNavbar;

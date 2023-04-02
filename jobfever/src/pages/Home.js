@@ -1,9 +1,10 @@
+import React from 'react';
+import HomeMainComponent from "../components/templates/HomePageMainComponent";
+
 function Home() {
     return (
-        <div>
-            <h1>This is the home page</h1>
-        </div>
-
-    )}
+        <HomeMainComponent page={"HOME"}/>
+    );
+}
 
 export default Home;

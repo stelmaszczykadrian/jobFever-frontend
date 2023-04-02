@@ -1,6 +1,6 @@
 import {styled} from "@mui/material";
 
-export const StyledSTextSideContainer = styled("div")`
+export const StyledHomeTextSideContainer = styled("div")`
     flex-basis: 50%;
     height: 100%;
     display: grid;
