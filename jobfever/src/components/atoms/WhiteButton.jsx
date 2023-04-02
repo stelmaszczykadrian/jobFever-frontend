@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@mui/joy/Button";
 
-function WhiteButtonMainPage(props) {
+function WhiteButton(props) {
     return (
         <Button sx={{ ':hover': {
             bgcolor: '#852222', color: 'white'},
@@ -14,4 +14,4 @@ function WhiteButtonMainPage(props) {
         </Button>
     )
 }
-export default WhiteButtonMainPage
+export default WhiteButton

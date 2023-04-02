@@ -16,9 +16,15 @@ import MenuItem from '@mui/material/MenuItem';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import {Link} from "react-router-dom";
+import {StyledLink} from "../atoms/Link.styles";
 
 
-const pages = ['Offers', 'About Us', 'More'];
+const pages = [
+    <StyledLink to='/jobs'>OFFERS</StyledLink>,
+    <StyledLink to='/about'>ABOUT US</StyledLink>,
+    <StyledLink to='/contact'>CONTACT</StyledLink>,
+];
 const settings = ['Profile', 'Account', 'Dashboard','Favourites', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -44,9 +50,11 @@ function ResponsiveAppBar() {
         <AppBar position="static" style={{ margin: 0, background: 'rgba(29, 25, 23, 0.7)'}}>
             <Container maxWidth="l">
                 <Toolbar disableGutters>
-                    <box href="/" sx= {{ m: 0 }}>
+                    <Link to='/'>
+                    <box sx= {{ m: 0 }}>
                             <img width="185" height="45" src={logo} margin="left"/>
                     </box>
+                    </Link>
                     <Typography
                         variant="h6"
                         noWrap

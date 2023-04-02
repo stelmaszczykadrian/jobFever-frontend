@@ -10,6 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import {Link} from "react-router-dom";
 
 
 const pages = [
@@ -34,9 +35,11 @@ function NavBarForNotLoggedUsers() {
         <AppBar position="static" style={{margin: 0, background: 'rgba(29, 25, 23, 0.7)'}}>
             <Container maxWidth="l">
                 <Toolbar disableGutters>
-                    <box href="/" sx={{m: 0}}>
+                    <Link to='/'>
+                    <box sx={{m: 0}}>
                         <img width="185" height="45" src={logo} margin="left"/>
                     </box>
+                    </Link>
                     <Typography
                         variant="h6"
                         noWrap
