@@ -4,7 +4,7 @@ import FormControl from "@mui/joy/FormControl";
 import {StyledLabel} from "../styled-components/StyledLabel";
 import {StyledUserInputValidation} from "../styled-components/StyledUserInputValidation";
 import RedButton from "../atoms/RedButton";
-import SocialmediaButtons from "../molecules/SocialmediaButtons";
+import SocialMediaButtons from "../molecules/SocialMediaButtons";
 import {useState} from "react";
 import {StyledRightContainer} from "./RightConatiner.styles";
 import Input from "@mui/joy/Input";
@@ -173,7 +173,7 @@ export default function RightContainer(props) {
                     </FormControl>
                 </form>
             </Sheet>
-            <SocialmediaButtons/>
+            <SocialMediaButtons/>
         </StyledRightContainer>
     )
 }
