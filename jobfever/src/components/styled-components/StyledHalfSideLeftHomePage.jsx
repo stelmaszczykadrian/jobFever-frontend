@@ -1,6 +1,6 @@
 import {styled} from "@mui/material";
 
-export const StyledHalfSideLeftWelcomePage = styled("div")`
+export const StyledHalfSideLeftHomePage = styled("div")`
     flex-basis: 50%;
     height: 100%;
     display: grid;
