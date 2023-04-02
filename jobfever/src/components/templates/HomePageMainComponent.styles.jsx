@@ -1,0 +1,10 @@
+import {styled} from "@mui/material";
+import img from "../../images/background_1.jpg"
+export const StyledHomeMainComponent = styled("div")`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background-image: url(${img});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;`

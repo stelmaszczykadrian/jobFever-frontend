@@ -1,5 +1,5 @@
 import {styled} from "@mui/material";
 
-export const StyledHeader = styled("div")`
+export const StyledHomeHeader = styled("div")`
     width: 90%;
     font-size: xxx-large;`
