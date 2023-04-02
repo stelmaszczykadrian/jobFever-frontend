@@ -8,6 +8,7 @@ function WhiteButtonMainPage(props) {
             width: 1/5,
             color: 'black',
             marginInline: 2,
+            textDecoration: 'none',
             backgroundColor: 'white'}}
         >
             {props.text}
