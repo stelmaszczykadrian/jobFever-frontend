@@ -26,7 +26,10 @@ const pages = [
     <StyledLink to='/contact'>CONTACT</StyledLink>,
 ];
 
-const settings = ['Profile', 'Account', 'Dashboard','Favourites', 'Logout'];
+const settings = [
+    <Link to='/candidate/candidate-id'>Profile</Link>,
+    'Account', 'Dashboard','Favourites', 'Logout'
+];
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
