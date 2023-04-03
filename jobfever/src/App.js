@@ -1,8 +1,10 @@
 import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Register from "./pages/Register";
+import CandidateLogin from "./pages/CandidateLogin";
+import CandidateRegister from "./pages/CandidateRegister";
+import EmployerLogin from "./pages/EmployersLogin";
+import EmployerRegister from "./pages/EmployersRegister";
 import Home from "./pages/Home";
-import Login from "../src/pages/Login";
 import About from "./pages/About";
 import NoPage from "./pages/NoPage";
 import Layout from "./pages/Layout";
@@ -17,8 +19,10 @@ function App() {
             <Layout>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/login" element={<Login />} />
+                    <Route path="/candidate/register" element={<CandidateRegister />} />
+                    <Route path="/candidate/login" element={<CandidateLogin />} />
+                    <Route path="/employer/login" element={<EmployerLogin />} />
+                    <Route path="/employer/register" element={<EmployerRegister />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/add-job" element={<JobOfferForm />} />
                     <Route path="/jobs" element={<JobsPage />} />

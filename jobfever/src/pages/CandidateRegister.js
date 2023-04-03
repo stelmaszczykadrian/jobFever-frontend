@@ -1,10 +1,9 @@
 import RegisterMainComponent from "../components/templates/RegisterPageMainComponent";
 
-function Register() {
-
+function CandidateRegister() {
     return (
             <RegisterMainComponent page={"REGISTER"}/>
     );
 }
 
-export default Register;
+export default CandidateRegister;

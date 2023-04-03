@@ -1,13 +1,30 @@
-import {StyledForEmployersMainContainer} from "./ForEmployersMainContainer.styles";
+import {
+    StyledForEmployersMainContainer,
+    StyledRegisterEmployerHeader
+} from "./ForEmployersMainContainer.styles";
 import RedButton from "../atoms/RedButton";
+import Container from "@mui/material/Container";
+import {StyledLink} from "../atoms/Link.styles";
+import React from "react";
 
 
-export default function ForEmployersMainContainer(){
-    return(
+export default function ForEmployersMainContainer() {
+    return (
         <StyledForEmployersMainContainer>
-            <span>Czy masz już konto pracodawcy na JobFever?</span>
-            <RedButton text={'Tak, przejdź do logowania'}></RedButton>
-            <RedButton text={'Nie, przejdź do rejestracji'}>></RedButton>
+            <StyledRegisterEmployerHeader>
+                Do you already have an employer account on JobFever?
+            </StyledRegisterEmployerHeader>
+            <Container>
+                <StyledLink to='/employer/login'>
+                    <RedButton text={'Yes, go to login.'}>></RedButton>
+                </StyledLink>
+            </Container>
+            <Container>
+                <StyledLink to='/employer/register'>
+                    <RedButton text={'No, go to registration.'}>></RedButton>
+                </StyledLink>
+            </Container>
         </StyledForEmployersMainContainer>
+
     );
 }
