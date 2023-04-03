@@ -2,19 +2,12 @@ import {styled} from "@mui/material";
 import Sheet from "@mui/joy/Sheet";
 
 export const StyledRightContainer = styled(Sheet)`
-      width: 1/2;
-      background: rgba(29, 25, 23, 0.7);
-      //float: right;
-      margin-right: auto;
-      margin-top: 0;
-      margin-bottom: 0;
-      padding-top: 3%;
-      padding-bottom: 0;
-      padding-left: 4%;
-      padding-right: 4%;
-      display: flex;
-      flex-direction: column;
       flex-basis: 50%;
-      gap: 2px;
-
-    `;
+      height: 100%;
+      display: grid;
+      align-items: flex-start;
+      justify-content: center;
+      background: rgba(29, 25, 23, 0.7);
+      grid-template-rows: 2fr 5fr 1fr;
+      grid-template-columns: 1fr;
+`;

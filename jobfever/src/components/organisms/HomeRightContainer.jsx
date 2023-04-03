@@ -1,5 +1,5 @@
 import {StyledHomeRightContainer} from "./HomeRightContainer.styles";
-import HomeNavbar from "../molecules/HomeNavbar";
+import RightNavbar from "../molecules/RightNavbar";
 import {StyledHomeTextSideContainer} from "../molecules/HomeTextSideContainer.styles";
 import HomeHeader from "../atoms/HomeHeader";
 import HomeSimpleText from "../atoms/HomeSimpleText";
@@ -12,7 +12,7 @@ import SocialMediaButtons from "../molecules/SocialMediaButtons";
 export default function HomeRightContainer() {
     return (
         <StyledHomeRightContainer>
-            <HomeNavbar/>
+            <RightNavbar/>
             <StyledHomeTextSideContainer>
                 <HomeHeader/>
                 <HomeSimpleText/>
