@@ -25,6 +25,7 @@ const pages = [
     <StyledLink to='/about'>ABOUT US</StyledLink>,
     <StyledLink to='/contact'>CONTACT</StyledLink>,
 ];
+
 const settings = ['Profile', 'Account', 'Dashboard','Favourites', 'Logout'];
 
 function ResponsiveAppBar() {
