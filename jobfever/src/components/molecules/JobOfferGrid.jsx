@@ -4,7 +4,8 @@ import Typography from "@mui/joy/Typography";
 import {Img, StyledPaper} from "./JobOfferGrid.styles";
 import img from "../../images/logo.png";
 
-export default function JobOfferGrid() {
+export default function JobOfferGrid({job}) {
+
     return (
         <StyledPaper>
             <Grid container spacing={2}>
@@ -17,7 +18,7 @@ export default function JobOfferGrid() {
                     <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
                             <Typography variant="h1" component="h1">
-                                Job offer title
+                                {job.title}
                             </Typography>
                             <Typography variant="body2" gutterBottom>
                                 Job's position
