@@ -21,16 +21,16 @@ export default function JobOfferGrid({job}) {
                                 {job.title}
                             </Typography>
                             <Typography variant="body2" gutterBottom>
-                                Job's position
+                                {job.job_type}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                                Location
+                                {job.location}
                             </Typography>
                         </Grid>
                     </Grid>
                     <Grid item>
                         <Typography variant="subtitle1" component="div">
-                            Salary
+                            {job.salaryFrom} - {job.salaryTo}
                         </Typography>
                     </Grid>
                 </Grid>
