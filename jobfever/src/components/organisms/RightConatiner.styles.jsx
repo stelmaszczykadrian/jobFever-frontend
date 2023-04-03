@@ -11,3 +11,19 @@ export const StyledRightContainer = styled(Sheet)`
       grid-template-rows: 2fr 5fr 1fr;
       grid-template-columns: 1fr;
 `;
+
+
+export const StyledLabel = styled("span")`
+  align-self: center;
+  color: white;
+  font-weight: bold;
+  font-size: medium;
+  margin-top: 2%;
+`
+
+export const StyledUserInputValidation = styled("div")`
+  border: 5px;
+  align-self: center;
+  color: black;
+  margin-top: 2%;
+`;
