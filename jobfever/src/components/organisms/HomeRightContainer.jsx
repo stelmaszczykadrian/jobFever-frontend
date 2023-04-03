@@ -18,10 +18,10 @@ export default function HomeRightContainer() {
                 <HomeSimpleText/>
             </StyledHomeTextSideContainer>
             <StyledLoginAndRegisterButtonsContainer>
-                <StyledLink to='/login'>
+                <StyledLink to='/candidate/login'>
                     <WhiteButton text={'LOGIN'}/>
                 </StyledLink>
-                <StyledLink to='/register'>
+                <StyledLink to='/candidate/register'>
                     <WhiteButton text={'REGISTER'}/>
                 </StyledLink>
             </StyledLoginAndRegisterButtonsContainer>
