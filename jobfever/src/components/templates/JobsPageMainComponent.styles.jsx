@@ -3,7 +3,6 @@ import img from "../../images/background_1.jpg";
 
 
 export const StyledJobsPageMainComponent = styled.div`
-  display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   width: 100%;

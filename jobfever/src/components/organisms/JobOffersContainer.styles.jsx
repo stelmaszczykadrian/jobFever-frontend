@@ -2,12 +2,13 @@ import {styled} from "@mui/material";
 
 
 export const StyledJobOffersContainer = styled("div")`
-  flex: content;
-  flex-direction: row;
-  flex-grow: 30;
-  width: 80%;
-  height: 50%;
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-bottom: 5%;
+  margin: auto;
+  align-items: center;
+  border: 1px solid red;
+  height: 70%;  
+  width: 75%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100vh;
+
 `
