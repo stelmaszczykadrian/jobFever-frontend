@@ -6,11 +6,13 @@ export const SortButton = styled(Button)(() => ({
     minHeight: '0',
     padding: '5px',
     marginTop: '10px',
-    marginRight: '5px',
-    backgroundColor: '#A9A9A9',
+    margin: 'auto',
+    alignSelf: 'auto',
+    backgroundColor: '#A9A9A0',
     color: 'black',
+    borderRadius: '20px',
     ':hover': {
         color: 'white',
-        backgroundColor: '#696969',
+        backgroundColor: '#696960',
     },
 }));
