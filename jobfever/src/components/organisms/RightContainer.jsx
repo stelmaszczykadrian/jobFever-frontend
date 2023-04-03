@@ -5,12 +5,13 @@ import {StyledLabel} from "../styled-components/StyledLabel";
 import {StyledUserInputValidation} from "../styled-components/StyledUserInputValidation";
 import RedButton from "../atoms/RedButton";
 import SocialMediaButtons from "../molecules/SocialMediaButtons";
-import {useState} from "react";
+import React, {useState} from "react";
 import {StyledRightContainer} from "./RightConatiner.styles";
 import Input from "@mui/joy/Input";
 import StyledText from "../atoms/StyledText";
 import WelcomeMessage from "../molecules/WelcomeMessage";
 import axiosPost from "../../api/axiosFetch";
+import RightNavbar from "../molecules/RightNavbar";
 
 
 export default function RightContainer(props) {
@@ -115,9 +116,9 @@ export default function RightContainer(props) {
 
     return (
         <StyledRightContainer>
+            <RightNavbar/>
             <Sheet style={{backgroundColor: 'transparent'}}>
                 <div>
-                    <LogoIcon/>
                     <WelcomeMessage
                         page={props.page}>
                     </WelcomeMessage>
