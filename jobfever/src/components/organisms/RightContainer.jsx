@@ -1,12 +1,9 @@
 import Sheet from "@mui/joy/Sheet";
-import LogoIcon from "../atoms/LogoIcon";
 import FormControl from "@mui/joy/FormControl";
-import {StyledLabel} from "../styled-components/StyledLabel";
-import {StyledUserInputValidation} from "../styled-components/StyledUserInputValidation";
 import RedButton from "../atoms/RedButton";
 import SocialMediaButtons from "../molecules/SocialMediaButtons";
 import React, {useState} from "react";
-import {StyledRightContainer} from "./RightConatiner.styles";
+import {StyledLabel, StyledRightContainer, StyledUserInputValidation} from "./RightConatiner.styles";
 import Input from "@mui/joy/Input";
 import StyledText from "../atoms/StyledText";
 import WelcomeMessage from "../molecules/WelcomeMessage";
