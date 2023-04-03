@@ -17,7 +17,6 @@ import Dotnet from "../../languages/dotnet.svg";
 import PowerShell from "../../languages/powershell.svg";
 import Data from "../../languages/data.svg";
 import SQL from "../../languages/sql.svg";
-import StyledText from "../atoms/StyledText";
 
 export default function ButtonBox(){
 
