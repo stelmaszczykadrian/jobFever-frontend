@@ -2,6 +2,7 @@ import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import CandidateLogin from "./pages/CandidateLogin";
 import CandidateRegister from "./pages/CandidateRegister";
+import CandidateProfile from "./pages/CandidateProfile";
 import EmployerLogin from "./pages/EmployersLogin";
 import EmployerRegister from "./pages/EmployersRegister";
 import Home from "./pages/Home";
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/candidate/register" element={<CandidateRegister />} />
                     <Route path="/candidate/login" element={<CandidateLogin />} />
+                    <Route path="/candidate/candidate-id" element={<CandidateProfile/>} />
                     <Route path="/employer/login" element={<EmployerLogin />} />
                     <Route path="/employer/register" element={<EmployerRegister />} />
                     <Route path="/about" element={<About />} />
@@ -32,7 +34,6 @@ function App() {
                 </Routes>
             </Layout>
         </BrowserRouter>
-
   );
 }
 
