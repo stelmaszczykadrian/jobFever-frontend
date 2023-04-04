@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Box, Grid} from '@mui/material';
 import {
-    StyledIconAndTitleBox,
+    StyledIconAndTitleBox, StyledInput,
     StyledLeftBox,
     StyledProfilePaper,
     StyledRightBox
@@ -22,7 +22,6 @@ function EditableInput({isEdit, value, onChange, placeholder}) {
 }
 
 export default function CandidateProfilePersonalInformation() {
-
 
     const [isEdit, setIsEdit] = useState(false);
     const [name, setName] = useState('Name Surname');
@@ -75,6 +74,7 @@ export default function CandidateProfilePersonalInformation() {
                 </StyledLeftBox>
 
                 <StyledRightBox>
+                    <h3>Social Links</h3>
                     <Box mb={1}>
                         <EditableInput
                             isEdit={isEdit}
@@ -83,7 +83,7 @@ export default function CandidateProfilePersonalInformation() {
                             placeholder="LinkedIn profile link"
                         />
                     </Box>
-                    <Box mb={1}>
+                    <Box mb={2}>
                         <EditableInput
                             isEdit={isEdit}
                             value={github}
@@ -91,10 +91,11 @@ export default function CandidateProfilePersonalInformation() {
                             placeholder="GitHub profile link"
                         />
                     </Box>
-                    <Box mb={1}>
-                        <span>CV: </span>
-                        <br/>
-                        <input type="file" accept=".pdf,.doc,.docx"/>
+                    <Box mb={4}>
+                        <h3>CV file</h3>
+                        <StyledInput>
+                            <input type="file" accept=".pdf,.doc,.docx"/>
+                        </StyledInput>
                     </Box>
                     <Box>
                         {/* Edit button */}

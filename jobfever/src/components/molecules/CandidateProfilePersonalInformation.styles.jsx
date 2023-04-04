@@ -25,3 +25,7 @@ export const StyledLeftBox = styled(Box)`
 export const StyledIconAndTitleBox = styled(Box)`
   display: flex;
 `;
+
+export const StyledInput = styled("div")`
+  text-align-last: end;
+`;
