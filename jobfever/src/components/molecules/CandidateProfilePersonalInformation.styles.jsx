@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 export const StyledProfilePaper = styled(Paper)`
   padding: 2rem;
   background-color: #ffffff;
+  margin-top: inherit;
 `;
 
 export const StyledRightBox = styled(Box)`
