@@ -19,7 +19,7 @@ export default function axiosPost(userData, url) {
         });
 }
 
-export function useAxiosPagination(pageNumber) {
+export function useAxiosPagination(pageNumber, sortBy, field) {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [jobs, setJobs] = useState([])
@@ -32,7 +32,7 @@ export function useAxiosPagination(pageNumber) {
         axios({
             method: 'GET',
             url: 'http://localhost:8080/api/jobs/',
-            params: {page: pageNumber - 1},
+            params: {page: pageNumber - 1, sortBy: sortBy, field: field},
             cancelToken: new axios.CancelToken(c => cancel = c)
         }).then(res => {
             setJobs(prevJobs => {

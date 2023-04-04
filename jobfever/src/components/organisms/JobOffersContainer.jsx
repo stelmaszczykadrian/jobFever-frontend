@@ -6,13 +6,15 @@ import {useAxiosPagination} from "../../api/axiosFetch";
 
 export default function JobOffersContainer() {
     const [pageNumber, setPageNumber] = useState(1)
+    const [field, setField] = useState("")
+    const [sortBy, setSortBy] = useState("postingDate")
 
     const {
         jobs,
         hasMore,
         loading,
         error
-    } = useAxiosPagination(pageNumber)
+    } = useAxiosPagination(pageNumber, sortBy, field)
 
     const observer = useRef()
     let lastJobElementRef = useCallback(node => {
