@@ -5,6 +5,5 @@ import {styled} from "@mui/material";
 
 export const StyledAddIcon = styled(MUIAddIcon)(() => ({
     fontSize: '2em',
-    color: '#666',
-    marginRight: '1rem'
+    color: 'rgb(183, 4, 11)',
 }))
