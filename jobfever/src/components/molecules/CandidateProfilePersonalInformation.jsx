@@ -6,12 +6,12 @@ import {
     StyledProfilePaper,
     StyledRightBox
 } from "./CandidateProfilePersonalInformation.styles";
-import ProfilePersonIcon from "../atoms/ProfilePersonIcon";
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
 import ProfilePhoto from "../atoms/ProfilePhoto";
 import IconButton from "@mui/material/IconButton";
-import ProfileEditIcon from "../atoms/ProfileEditIcon";
-import ProfileCheckIcon from "../atoms/ProfileCheckIcon";
+import {StyledEditIcon} from "../atoms/StyledEditIcon";
+import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
+import {StyledPersonIcon} from "../atoms/StyledPersonIcon";
 
 function EditableInput({isEdit, value, onChange, placeholder}) {
     if (isEdit) {
@@ -42,7 +42,7 @@ export default function CandidateProfilePersonalInformation() {
             <Grid container>
                 <StyledLeftBox>
                     <StyledIconAndTitleBox>
-                        <ProfilePersonIcon/>
+                        <StyledPersonIcon/>
                         <ProfileContainerTitle text={'Personal information'}/>
                     </StyledIconAndTitleBox>
                     {/* Photo */}
@@ -101,11 +101,11 @@ export default function CandidateProfilePersonalInformation() {
                         {/* Edit button */}
                         {isEdit ? (
                             <IconButton onClick={handleSaveClick}>
-                                <ProfileCheckIcon/>
+                                <StyledCheckIcon/>
                             </IconButton>
                         ) : (
                             <IconButton onClick={handleEditClick}>
-                                <ProfileEditIcon/>
+                                <StyledEditIcon/>
                             </IconButton>
                         )}
                     </Box>
