@@ -20,7 +20,6 @@ export default function JobOffersContainer() {
     let lastJobElementRef = useCallback(node => {
         if (loading) return
         if (observer.current) {
-            console.log("dupa")
             observer.current.disconnect()
         }
         observer.current = new IntersectionObserver(entries => {

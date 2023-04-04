@@ -5,7 +5,6 @@ import {Img, StyledPaper} from "./JobOfferGrid.styles";
 import img from "../../images/logo.png";
 
 export default function JobOfferGrid({job}) {
-    console.log(job)
 
     return (
         <StyledPaper>

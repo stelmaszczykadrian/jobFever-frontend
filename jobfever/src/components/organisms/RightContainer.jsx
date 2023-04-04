@@ -74,7 +74,6 @@ export default function RightContainer(props) {
             password: input.password,
             repeatPassword: input.confirmPassword
         };
-        console.log(props.page.toLowerCase())
         if(props.page === "REGISTER"){
             if (input.password === input.confirmPassword) {
                 axiosPost(userData, "http://localhost:8080/api/candidates/" + props.page.toLowerCase());
