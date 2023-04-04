@@ -1,10 +1,10 @@
 
+import EmployersRegisterMainComponent from "../components/templates/EmployersRegisterMainComponent";
 
 
 export default function employersRegister(){
     return(
-        <div>
-            Employers register.
-        </div>
+        // <EmployersRegisterMainComponent page={"Test"}/>
+        <EmployersRegisterMainComponent/>
     )
 }
