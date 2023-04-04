@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {Box, Grid} from '@mui/material';
 import {
-    StyledIconAndTitleBox, StyledInput,
+    StyledTopBox, StyledInput,
     StyledLeftBox,
     StyledProfilePaper,
-    StyledRightBox
-} from "./CandidateProfilePersonalInformation.styles";
+    StyledRightBox, StyledBottomBoxPersonalInfo
+} from "./CandidateProfile.styles";
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
 import ProfilePhoto from "../atoms/ProfilePhoto";
 import IconButton from "@mui/material/IconButton";
@@ -39,12 +39,12 @@ export default function CandidateProfilePersonalInformation() {
 
     return (
         <StyledProfilePaper>
-            <Grid container>
+            <StyledTopBox>
+                <StyledPersonIcon/>
+                <ProfileContainerTitle text={'Personal information'}/>
+            </StyledTopBox>
+            <StyledBottomBoxPersonalInfo>
                 <StyledLeftBox>
-                    <StyledIconAndTitleBox>
-                        <StyledPersonIcon/>
-                        <ProfileContainerTitle text={'Personal information'}/>
-                    </StyledIconAndTitleBox>
                     {/* Photo */}
                     <Box mb={2}>
                         <ProfilePhoto/>
@@ -110,7 +110,7 @@ export default function CandidateProfilePersonalInformation() {
                         )}
                     </Box>
                 </StyledRightBox>
-            </Grid>
+            </StyledBottomBoxPersonalInfo>
         </StyledProfilePaper>
     );
 };
