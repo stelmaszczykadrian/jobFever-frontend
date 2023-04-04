@@ -9,8 +9,8 @@ import IconButton from "@mui/material/IconButton";
 import React, {useState} from "react";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
-import {StyledWorkIcon} from "../atoms/StyledWorkIcon";
 import {StyledAddIcon} from "../atoms/StyledAddIcon";
+import {StyledSchoolIcon} from "../atoms/StyledSchoolIcon";
 
 export default function CandidateProfileEducation() {
 
@@ -35,7 +35,7 @@ export default function CandidateProfileEducation() {
     return (
         <StyledProfilePaper>
             <StyledTopBox>
-                <StyledWorkIcon/>
+                <StyledSchoolIcon/>
                 <ProfileContainerTitle text={'Education'}/>
                 <StyledIconBox>
                     {/* Add button */}
