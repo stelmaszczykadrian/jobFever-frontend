@@ -30,8 +30,6 @@ export default function JobOffersContainer() {
     }, [loading, hasMore])
 
 
-
-
     return (
         <StyledJobOffersContainer>
             {
@@ -44,9 +42,9 @@ export default function JobOffersContainer() {
                 })
             }
 
-                <div>{loading && 'loading'}<div></div><div></div><div></div></div>
-                <div>{error && 'error when loading jobs'}</div>
+            <div>{loading && 'loading'}</div>
+            <div>{error && 'error when loading jobs'}</div>
 
-                </StyledJobOffersContainer>
-                )
-            }
+        </StyledJobOffersContainer>
+    )
+}

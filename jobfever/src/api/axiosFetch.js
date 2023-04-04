@@ -18,9 +18,10 @@ export default function axiosPost(userData, url) {
             }
         });
 }
-export function useAxiosPagination(pageNumber){
-   const [loading, setLoading] = useState(true)
-   const [error, setError] = useState(false)
+
+export function useAxiosPagination(pageNumber) {
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
     const [jobs, setJobs] = useState([])
     const [hasMore, setHasMore] = useState(false)
 
@@ -31,7 +32,7 @@ export function useAxiosPagination(pageNumber){
         axios({
             method: 'GET',
             url: 'http://localhost:8080/api/jobs/',
-            params: { page: pageNumber -1},
+            params: {page: pageNumber - 1},
             cancelToken: new axios.CancelToken(c => cancel = c)
         }).then(res => {
             setJobs(prevJobs => {
@@ -45,5 +46,5 @@ export function useAxiosPagination(pageNumber){
         })
         return () => cancel()
     }, [pageNumber])
-        return {loading,error,jobs,hasMore}
+    return {loading, error, jobs, hasMore}
 }
