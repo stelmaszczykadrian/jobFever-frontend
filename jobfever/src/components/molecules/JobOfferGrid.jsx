@@ -5,6 +5,7 @@ import {Img, StyledPaper} from "./JobOfferGrid.styles";
 import img from "../../images/logo.png";
 
 export default function JobOfferGrid({job}) {
+    console.log(job)
 
     return (
         <StyledPaper>
@@ -21,7 +22,7 @@ export default function JobOfferGrid({job}) {
                                 {job.title}
                             </Typography>
                             <Typography variant="body2" gutterBottom>
-                                {job.job_type}
+                                {job.jobType}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
                                 {job.location}

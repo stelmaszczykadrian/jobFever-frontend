@@ -41,7 +41,6 @@ export default function JobOffersContainer() {
             {
                 jobs.content?.map((job, index) => {
                     if (jobs.content.length === index + 1) {
-                        console.log("jestem")
                         return (<div key={index} ><JobOfferGrid job={job}/></div>)
                     } else {
                         return (<JobOfferGrid job={job} key={index}/>)
