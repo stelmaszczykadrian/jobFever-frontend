@@ -36,9 +36,9 @@ function NavBarForNotLoggedUsers() {
             <Container maxWidth="l">
                 <Toolbar disableGutters>
                     <Link to='/'>
-                    <box sx={{m: 0}}>
+                    <Box sx={{m: 0}}>
                         <img width="185" height="45" src={logo} margin="left"/>
-                    </box>
+                    </Box>
                     </Link>
                     <Typography
                         variant="h6"

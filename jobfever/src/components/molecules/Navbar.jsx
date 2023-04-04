@@ -55,9 +55,9 @@ function ResponsiveAppBar() {
             <Container maxWidth="l">
                 <Toolbar disableGutters>
                     <Link to='/'>
-                    <box sx= {{ m: 0 }}>
+                    <Box sx= {{ m: 0 }}>
                             <img width="185" height="45" src={logo} margin="left"/>
-                    </box>
+                    </Box>
                     </Link>
                     <Typography
                         variant="h6"
@@ -107,8 +107,8 @@ function ResponsiveAppBar() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                            {pages.map((page,index) => (
+                                <MenuItem key={index} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center" >{page}</Typography>
                                 </MenuItem>
                             ))}
@@ -135,9 +135,9 @@ function ResponsiveAppBar() {
 
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
+                        {pages.map((page,index) => (
                             <Button
-                                key={page}
+                                key={index}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >

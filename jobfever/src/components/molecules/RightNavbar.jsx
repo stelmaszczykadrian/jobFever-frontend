@@ -13,8 +13,8 @@ const pages = [
 function RightNavbar() {
     return (
     <Box sx={{ flexGrow: 1, display: {md: 'flex' }, justifyContent: 'space-between', margin: '0 50px' }}>
-        {pages.map((page) => (
-            <Button key={page}>
+        {pages.map((page,index) => (
+            <Button key={index}>
                 {page}
             </Button>
         ))}
