@@ -12,19 +12,33 @@ export const StyledRightBox = styled(Box)`
   flex-direction: column;
   justify-content: flex-end;
   text-align: right;
-  width: 50%;
+  flex-grow: 1;
 `;
 
 export const StyledLeftBox = styled(Box)`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 50%;
+  flex-grow: 1;
   text-align: left;
 `;
 
-export const StyledIconAndTitleBox = styled(Box)`
+export const StyledBottomBox = styled(Box)`
   display: flex;
+  flex-direction: column;
+  width: 100%;
+
+`;
+
+export const StyledIconBox = styled(Box)`
+  text-align: right;
+  flex-grow: 1;
+`;
+
+export const StyledTopBox = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
 `;
 
 export const StyledInput = styled("div")`
