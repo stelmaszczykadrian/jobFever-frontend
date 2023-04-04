@@ -13,66 +13,81 @@ import Container from "@mui/material/Container";
 import {Form} from "react-bootstrap";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-
-
+import StyledText from "../atoms/StyledText";
 
 export default function EmployerRegisterRightContainer() {
 
     const [employerMessage, setEmployerMessage] = useState('');
     const navigate = useNavigate();
-
-    const [input, setInput] = useState({
+    const [formData, setFormData] = useState({
         companyName: '',
         nameAndSurname: '',
         phoneNumber: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        errors: {
+            companyName: '',
+            nameAndSurname: '',
+            phoneNumber: '',
+            email: '',
+            password: '',
+            confirmPassword: ''
+        }
     });
 
-    const onInputChange = e => {
+    const onInputChange = (e) => {
         const {name, value} = e.target;
-        setInput(prev => ({
-            ...prev,
-            [name]: value
+        const error = validateInput(name, value);
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value,
+            errors: {...prevFormData.errors, [name]: error}
         }));
-
-        // validateInput(e);
-    }
+    };
 
 
+    const validateInput = (name, value) => {
+        switch (name) {
+            case 'companyName':
+                return value.length < 3 ? 'Company name should be at least 3 characters long' : '';
+            case 'nameAndSurname':
+                return value.length < 2 ? 'Name should be at least 2 characters long' : '';
+            case 'phoneNumber':
+                return /^\d{9}$/.test(value) ? '' : 'Phone number should be 9 digits long';
+            case 'email':
+                return value !== '' ? '' : 'Email field cannot be empty';
+            case 'password':
+                return value.length < 6 ? 'Password should be at least 6 characters long' : '';
+            case 'confirmPassword':
+                return value !== formData.password ? 'Passwords do not match' : '';
+            default:
+                return '';
+        }
+    };
 
-
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // console.log(input);
-
-        const userData = {
-            companyName: input.companyName,
-            nameAndSurname: input.nameAndSurname,
-            phoneNumber: input.phoneNumber,
-            email: input.email,
-            password: input.password,
-            confirmPassword: input.confirmPassword
-        };
-
-        console.log(userData)
-
-        axios
-            .post('http://localhost:8080/api/employers', userData)
-            .then((response) => {
+        if(formData.password === formData.confirmPassword){
+            const userData = {
+                companyName: formData.companyName,
+                nameAndSurname: formData.nameAndSurname,
+                phoneNumber: formData.phoneNumber,
+                email: formData.email,
+                password: formData.password,
+            };
+            try {
+                const response = await axios.post('http://localhost:8080/api/employers', userData);
                 console.log(response);
                 setEmployerMessage('Employer added successfully.');
-                setTimeout(() =>{
+                setTimeout(() => {
                     navigate('/employer/login');
-                },2000)
-            })
-            .catch((error) => {
+                }, 2000);
+            } catch (error) {
                 if (error.response) {
-                    if(error.response.data === "Employer already exists."){
-                        // setEmployerExists(true);
+                    if (error.response.data === "Employer already exists.") {
                         setEmployerMessage("Employer already exists.")
-                    }else{
+                    } else {
                         console.log(error.response);
                         console.log("server responded");
                     }
@@ -81,15 +96,13 @@ export default function EmployerRegisterRightContainer() {
                 } else {
                     console.log(error);
                 }
-            });
-    };
-
-
+            }
+        }
+    }
     return (<StyledRightContainer>
         <RightNavbar/>
         <Form onSubmit={handleSubmit}>
             <Sheet style={{backgroundColor: 'transparent'}}>
-
                 <Container>
                     <EmployerRegisterRightContainerColumn>
                         <FormControl width="40">
@@ -99,17 +112,16 @@ export default function EmployerRegisterRightContainer() {
                                     type="text"
                                     name="companyName"
                                     placeholder='ex. job Fever'
-                                    value={input.companyName}
+                                    value={formData.companyName}
                                     onChange={onInputChange}
-                                    // onBlur={validateInput}
+                                    onBlur={validateInput}
                                 />
                             </StyledUserInputValidation>
-                            {/*{error.username &&*/}
-                            {/*    <StyledText*/}
-                            {/*        tag="span"*/}
-                            {/*        color="rgba(171, 36, 36)"*/}
-                            {/*        text={error.username}*/}
-                            {/*    />}*/}
+                            {formData.errors.companyName && <StyledText
+                                tag="span"
+                                color="red"
+                                text={formData.errors.companyName}
+                            />}
                         </FormControl>
                         <FormControl width="40">
                             <StyledLabel>Name and surname</StyledLabel>
@@ -118,17 +130,17 @@ export default function EmployerRegisterRightContainer() {
                                     type="text"
                                     name="nameAndSurname"
                                     placeholder='ex. Jan Kowalski'
-                                    value={input.nameAndSurname}
+                                    value={formData.nameAndSurname}
                                     onChange={onInputChange}
-                                    // onBlur={validateInput}
+                                    onBlur={validateInput}
                                 />
                             </StyledUserInputValidation>
-                            {/*{error.username &&*/}
-                            {/*    <StyledText*/}
-                            {/*        tag="span"*/}
-                            {/*        color="rgba(171, 36, 36)"*/}
-                            {/*        text={error.username}*/}
-                            {/*    />}*/}
+                            {formData.errors.nameAndSurname &&
+                                <StyledText
+                                    tag="span"
+                                    color="red"
+                                    text={formData.errors.nameAndSurname}
+                                />}
                         </FormControl>
                         <FormControl width="40">
                             <StyledLabel>Phone number</StyledLabel>
@@ -137,17 +149,17 @@ export default function EmployerRegisterRightContainer() {
                                     type="number"
                                     name="phoneNumber"
                                     placeholder='ex. 505438212'
-                                    value={input.phoneNumber}
+                                    value={formData.phoneNumber}
                                     onChange={onInputChange}
-                                    // onBlur={validateInput}
+                                    onBlur={validateInput}
                                 />
                             </StyledUserInputValidation>
-                            {/*{error.username &&*/}
-                            {/*    <StyledText*/}
-                            {/*        tag="span"*/}
-                            {/*        color="rgba(171, 36, 36)"*/}
-                            {/*        text={error.username}*/}
-                            {/*    />}*/}
+                            {formData.errors.phoneNumber &&
+                                <StyledText
+                                    tag="span"
+                                    color="red"
+                                    text={formData.errors.phoneNumber}
+                                />}
                         </FormControl>
                     </EmployerRegisterRightContainerColumn>
                     <EmployerRegisterRightContainerColumn>
@@ -158,17 +170,17 @@ export default function EmployerRegisterRightContainer() {
                                     type="text"
                                     name="email"
                                     placeholder='ex. jobFever@email.com'
-                                    value={input.email}
+                                    value={formData.email}
                                     onChange={onInputChange}
-                                    // onBlur={validateInput}
+                                    onBlur={validateInput}
                                 />
                             </StyledUserInputValidation>
-                            {/*{error.username &&*/}
-                            {/*    <StyledText*/}
-                            {/*        tag="span"*/}
-                            {/*        color="rgba(171, 36, 36)"*/}
-                            {/*        text={error.username}*/}
-                            {/*    />}*/}
+                            {formData.errors.email &&
+                                <StyledText
+                                    tag="span"
+                                    color="red"
+                                    text={formData.errors.email}
+                                />}
                         </FormControl>
                         <FormControl>
                             <StyledLabel>
@@ -178,18 +190,17 @@ export default function EmployerRegisterRightContainer() {
                                 <Input
                                     type="password"
                                     name={'password'}
-                                    // placeholder='Enter Password'
-                                    value={input.password}
+                                    value={formData.password}
                                     onChange={onInputChange}
-                                    // onBlur={validateInput}
+                                    onBlur={validateInput}
                                 />
                             </StyledUserInputValidation>
-                            {/*{error.password &&*/}
-                            {/*    <StyledText*/}
-                            {/*        tag="span"*/}
-                            {/*        color="rgba(171, 36, 36)"*/}
-                            {/*        text={error.password}*/}
-                            {/*/>}*/}
+                            {formData.errors.password &&
+                                <StyledText
+                                    tag="span"
+                                    color="red"
+                                    text={formData.errors.password}
+                                />}
                         </FormControl>
                         <FormControl>
                             <StyledLabel>
@@ -199,32 +210,30 @@ export default function EmployerRegisterRightContainer() {
                                 <Input
                                     type="password"
                                     name={'confirmPassword'}
-                                    // placeholder='Confirm password'
-                                    value={input.confirmPassword}
+                                    value={formData.confirmPassword}
                                     onChange={onInputChange}
-                                    // onBlur={validateInput}
+                                    onBlur={validateInput}
                                 />
                             </StyledUserInputValidation>
-                            {/*{error.confirmPassword &&*/}
-                            {/*    <StyledText*/}
-                            {/*        tag="span"*/}
-                            {/*        color="rgba(171, 36, 36)"*/}
-                            {/*        text={error.username}*/}
-                            {/*    />}*/}
+                            {formData.errors.confirmPassword &&
+                                <StyledText
+                                    tag="span"
+                                    color="red"
+                                    text={formData.errors.confirmPassword}
+                                />}
                         </FormControl>
                     </EmployerRegisterRightContainerColumn>
                 </Container>
             </Sheet>
-            {/*</Sheet>*/}
-            {employerMessage  && <EmployerRegisterTextEmployerExist>{employerMessage}</EmployerRegisterTextEmployerExist>}
+            {employerMessage &&
+                <EmployerRegisterTextEmployerExist>{employerMessage}</EmployerRegisterTextEmployerExist>}
             <StyleEmployerRegisterSubmitButton>
                 <RedButton
                     text={"REGISTER"}>
                 </RedButton>
             </StyleEmployerRegisterSubmitButton>
+
         </Form>
-
         <SocialMediaButtons/>
-
     </StyledRightContainer>);
 }
