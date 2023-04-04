@@ -62,7 +62,6 @@ export default function JobOfferFormContainer() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // console.log(input);
 
         const userData = {
             title: input.title,
