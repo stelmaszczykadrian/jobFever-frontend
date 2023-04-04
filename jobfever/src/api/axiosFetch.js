@@ -35,7 +35,7 @@ export function useAxiosPagination(pageNumber){
             cancelToken: new axios.CancelToken(c => cancel = c)
         }).then(res => {
             setJobs(prevJobs => {
-                return res.data
+                return [...new Set([...prevJobs, ...res.data.content])]
             })
             setHasMore(res.data.content.length > 0)
             setLoading(false)
