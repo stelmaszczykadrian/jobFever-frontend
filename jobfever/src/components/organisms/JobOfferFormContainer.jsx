@@ -14,6 +14,9 @@ import {Radio, RadioGroup} from "@mui/joy";
 import RedButton from "../atoms/RedButton";
 import {Form} from "react-bootstrap";
 import axiosPost from "../../api/axiosFetch";
+import ButtonBox from "../molecules/ButtonBox";
+import button from "bootstrap/js/src/button";
+import {SortButton} from "../atoms/SortButton";
 
 
 const jobType = [
@@ -79,6 +82,12 @@ export default function JobOfferFormContainer() {
         axiosPost(userData,'http://localhost:8080/api/jobs')
     };
 
+    // let buttons = document.getElementById("buttonBoxId");
+    //
+    // buttons.addEventListener('click', (event) => {
+    //     console.log(event.target);
+    // })
+
     const onInputChange = e => {
         const {name, value} = e.target;
         setInput(prev => ({
@@ -128,12 +137,18 @@ export default function JobOfferFormContainer() {
                         onChange={onInputChange}
                     />
                     <StyledInputLabel>Technical requirements:</StyledInputLabel>
-                    <StyledTextarea
+                    <ButtonBox
                         placeholder="Enter technical requirements"
                         name="technicalRequirements"
                         value={input.technicalRequirements}
-                        onChange={onInputChange}
+                        //onChange={onClickButton}
                     />
+                    {/*<StyledTextarea*/}
+                    {/*    placeholder="Enter technical requirements"*/}
+                    {/*    name="technicalRequirements"*/}
+                    {/*    value={input.technicalRequirements}*/}
+                    {/*    onChange={onInputChange}*/}
+                    {/*/>*/}
                     <StyledInputLabel>Responsibilities:</StyledInputLabel>
                     <StyledTextarea
                         placeholder="Enter responsibilities"

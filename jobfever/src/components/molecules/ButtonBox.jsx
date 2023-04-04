@@ -41,10 +41,10 @@ const languageLabels = ['Python', 'Ruby', 'JS', 'C++', 'C#', 'PHP', 'Kotlin', 'J
 export default function ButtonBox(){
 
     return (
-        <StyledBox style={{background: 'transparent'}}>
+        <StyledBox id="buttonBoxId" style={{background: 'transparent'}}>
             {languageIcons.map((icon, value) =>
                     (<div>
-                        <SortButton key={icon}>{icon}</SortButton>
+                        <SortButton id={value} value={languageLabels[value]} key={icon}>{icon}</SortButton>
                         <div>{languageLabels[value]}</div>
                     </div>
                     ))}
