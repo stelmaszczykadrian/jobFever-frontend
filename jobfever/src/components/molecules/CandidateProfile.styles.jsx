@@ -23,11 +23,17 @@ export const StyledLeftBox = styled(Box)`
   text-align: left;
 `;
 
+export const StyledBottomBoxPersonalInfo = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-flow: nowrap;
+`;
+
 export const StyledBottomBox = styled(Box)`
   display: flex;
   flex-direction: column;
   width: 100%;
-
 `;
 
 export const StyledIconBox = styled(Box)`

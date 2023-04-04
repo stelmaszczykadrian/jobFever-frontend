@@ -3,7 +3,7 @@ import {
     StyledProfilePaper,
     StyledBottomBox, StyledIconBox
 } from "./CandidateProfile.styles";
-import {Box, Grid} from "@mui/material";
+import {Box} from "@mui/material";
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
 import IconButton from "@mui/material/IconButton";
 import React, {useState} from "react";
@@ -34,57 +34,54 @@ export default function CandidateProfileExperience() {
 
     return (
         <StyledProfilePaper>
-            <Grid container>
-                <StyledTopBox>
-                    <StyledWorkIcon/>
-                    <ProfileContainerTitle text={'Experience'}/>
+            <StyledTopBox>
+                <StyledWorkIcon/>
+                <ProfileContainerTitle text={'Experience'}/>
+                <StyledIconBox>
+                    {/* Add button */}
+                    {isAdd ? (
+                        <IconButton onClick={handleSaveAddClick}>
+                            <StyledCheckIcon/>
+                        </IconButton>
+                    ) : (
+                        <IconButton onClick={handleAddClick}>
+                            <StyledAddIcon/>
+                        </IconButton>
+                    )}
+                </StyledIconBox>
+            </StyledTopBox>
+            <StyledBottomBox>
+                <Box>
+                    <span>Experience 1</span>
                     <StyledIconBox>
-                        {/* Add button */}
-                        {isAdd ? (
-                            <IconButton onClick={handleSaveAddClick}>
+                        {/* Edit button */}
+                        {isEdit ? (
+                            <IconButton onClick={handleSaveEditClick}>
                                 <StyledCheckIcon/>
                             </IconButton>
                         ) : (
-                            <IconButton onClick={handleAddClick}>
-                                <StyledAddIcon/>
+                            <IconButton onClick={handleEditClick}>
+                                <StyledEditIcon/>
                             </IconButton>
                         )}
                     </StyledIconBox>
-                </StyledTopBox>
-                <StyledBottomBox>
-                    <Box>
-                        <span>Experience 1</span>
-                        <StyledIconBox>
-                            {/* Edit button */}
-                            {isEdit ? (
-                                <IconButton onClick={handleSaveEditClick}>
-                                    <StyledCheckIcon/>
-                                </IconButton>
-                            ) : (
-                                <IconButton onClick={handleEditClick}>
-                                    <StyledEditIcon/>
-                                </IconButton>
-                            )}
-                        </StyledIconBox>
-                    </Box>
-                    <Box>
-                        <span>Experience 2</span>
-                        <StyledIconBox>
-                            {/* Edit button */}
-                            {isEdit ? (
-                                <IconButton onClick={handleSaveEditClick}>
-                                    <StyledCheckIcon/>
-                                </IconButton>
-                            ) : (
-                                <IconButton onClick={handleEditClick}>
-                                    <StyledEditIcon/>
-                                </IconButton>
-                            )}
-                        </StyledIconBox>
-                    </Box>
-                </StyledBottomBox>
-
-            </Grid>
+                </Box>
+                <Box>
+                    <span>Experience 2</span>
+                    <StyledIconBox>
+                        {/* Edit button */}
+                        {isEdit ? (
+                            <IconButton onClick={handleSaveEditClick}>
+                                <StyledCheckIcon/>
+                            </IconButton>
+                        ) : (
+                            <IconButton onClick={handleEditClick}>
+                                <StyledEditIcon/>
+                            </IconButton>
+                        )}
+                    </StyledIconBox>
+                </Box>
+            </StyledBottomBox>
         </StyledProfilePaper>
     );
 }
