@@ -14,6 +14,7 @@ import JobOfferForm from "./pages/JobOfferForm";
 import ForEmployers from "./pages/ForEmployers";
 import Contact from "./pages/Contact";
 import SingleOfferPage from "./pages/SingleOfferPage";
+import EmployerProfile from "./pages/EmployerProfile";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
                     <Route path="/candidate/candidate-id" element={<CandidateProfile/>} />
                     <Route path="/employer/login" element={<EmployerLogin />} />
                     <Route path="/employer/register" element={<EmployerRegister />} />
+                    <Route path="/employer/:id" element={<EmployerProfile />}  />
                     <Route path="/about" element={<About />} />
                     <Route path="/add-job" element={<JobOfferForm />} />
                     <Route path="/jobs" element={<JobsPage />} />
