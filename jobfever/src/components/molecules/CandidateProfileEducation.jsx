@@ -5,15 +5,12 @@ import IconButton from "@mui/material/IconButton";
 import React, {useState} from "react";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
-import {StyledAddIcon} from "../atoms/StyledAddIcon";
 import {StyledSchoolIcon} from "../atoms/StyledSchoolIcon";
 import ResponsiveDialog from "./CandidateEducationModal";
-
 
 export default function CandidateProfileEducation() {
 
     const [isEdit, setIsEdit] = useState(false);
-    const [open, setOpen] = useState(false);
     const handleEditClick = () => {
         setIsEdit(true);
     };

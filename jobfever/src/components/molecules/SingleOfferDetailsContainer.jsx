@@ -16,8 +16,6 @@ function SingleOfferDetailsContainer() {
             <p>Krakow</p>
             <p>ul. Jana Kowalskiego 1</p>
         </StyledSingleOfferDetailsContainer>
-
-
     );
 }
 export default SingleOfferDetailsContainer;

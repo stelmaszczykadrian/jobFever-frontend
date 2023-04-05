@@ -5,15 +5,11 @@ export const StyledJobOfferCreationContainer = styled('div')`
   justify-content: space-between;
   width: 40%;
   margin: 0 auto;
-  
-
 `;
 
 export const StyledInputJobOfferContainer = styled('div')`
   width: 100%;
-  
 `
-
 
 export const StyledTextarea = styled("textarea")`
   width: 97%;
@@ -35,9 +31,7 @@ export const StyledGridContainer = styled("div")`
 `
 export const StyledGridItem = styled("div")`
   text-align: center;
-  
 `
-
 
 export const StyledSelectJobType = styled("select")`
   font-size: 1.2rem;
@@ -45,7 +39,6 @@ export const StyledSelectJobType = styled("select")`
   border-radius: 0.5rem;
   margin-bottom: 20px;
   margin-top: 20px;
-  
 `
 
 export const StyledCurrencyType = styled("select")`
@@ -54,9 +47,7 @@ export const StyledCurrencyType = styled("select")`
   border-radius: 0.5rem;
   margin-bottom: 10px;
   margin-top: 10px;
-  
 `
-
 
 export const StyledInputLabel = styled("div")`
   font-size: 20px;

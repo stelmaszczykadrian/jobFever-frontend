@@ -5,6 +5,5 @@ export default function ForEmployersMainComponent() {
         <StyledForEmployersMainComponent>
             <ForEmployersMainContainer/>
         </StyledForEmployersMainComponent>
-
     );
 }

@@ -15,7 +15,6 @@ import {
     StyledRightContainer
 } from "./CandidateRegisterRightContainer.styles";
 
-
 export default function CandidateRegisterRightContainer() {
 
     const [candidateMessage, setCandidateMessage] = useState('');

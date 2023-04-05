@@ -14,7 +14,6 @@ import IconButton from "@mui/material/IconButton";
 
 export default function ResponsiveDialog() {
     const [open, setOpen] = React.useState(false);
-    const fullWidth = React.useState('lg');
     const [input, setInput] = useState({
         school: '',
         degree: '',

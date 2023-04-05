@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import img from "../../images/background_1.jpg";
 
-
 export const StyledJobsPageMainComponent = styled.div`
   flex-direction: column;
   flex-wrap: wrap;

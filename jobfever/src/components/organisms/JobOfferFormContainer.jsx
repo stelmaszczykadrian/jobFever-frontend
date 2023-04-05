@@ -15,9 +15,6 @@ import RedButton from "../atoms/RedButton";
 import {Form} from "react-bootstrap";
 import axiosPost from "../../api/axiosFetch";
 import ButtonBox from "../molecules/ButtonBox";
-import button from "bootstrap/js/src/button";
-import {SortButton} from "../atoms/SortButton";
-
 
 const jobType = [
     {value: 'full-time', label: 'Full-time'},
@@ -28,20 +25,17 @@ const jobType = [
     {value: 'temporary', label: 'Temporary'},
 ];
 
-
 const currencyType = [
     {value: 'pln', label: 'PLN'},
     {value: 'euro', label: 'EURO'},
     {value: 'dollar', label: 'DOLLAR'},
 ];
 
-
 const workOptions = [
     {label: 'Remote', value: 'remote'},
     {label: 'On-site', value: 'on-site'},
     {label: 'Hybrid', value: 'hybrid'}
 ];
-
 
 export default function JobOfferFormContainer() {
 

@@ -1,6 +1,5 @@
 import {styled} from "@mui/material";
 
-
 export const StyledJobOffersContainer = styled("div")`
   margin: auto;
   align-items: center;

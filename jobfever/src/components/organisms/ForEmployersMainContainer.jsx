@@ -7,7 +7,6 @@ import Container from "@mui/material/Container";
 import {StyledLink} from "../atoms/Link.styles";
 import React from "react";
 
-
 export default function ForEmployersMainContainer() {
     return (
         <StyledForEmployersMainContainer>
