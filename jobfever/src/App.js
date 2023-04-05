@@ -13,6 +13,7 @@ import JobsPage from "./pages/JobsPage";
 import JobOfferForm from "./pages/JobOfferForm";
 import ForEmployers from "./pages/ForEmployers";
 import Contact from "./pages/Contact";
+import SingleOfferPage from "./pages/SingleOfferPage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
                     <Route path="/jobs" element={<JobsPage />} />
                     <Route path="/for-employers" element={<ForEmployers />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/jobs/job-id" element={<SingleOfferPage />} />
                     <Route path="*" element={<NoPage/>}></Route>
                 </Routes>
             </Layout>
