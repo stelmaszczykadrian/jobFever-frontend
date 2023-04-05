@@ -51,44 +51,6 @@ export default function LoginContainer(props) {
         }
     };
 
-
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
-    //
-    //     const userData = {
-    //         email: formData.email,
-    //         password: formData.password,
-    //     };
-    //
-    //     axios
-    //         .post(`${apiUrl}`, userData)
-    //         .then((response) => {
-    //             console.log(response);
-    //             setLoginMessage("Login successful.");
-    //             setTimeout(() => {
-    //                 navigate('/jobs');
-    //             }, 2000);
-    //         })
-    //         .catch((error) => {
-    //             if (error.response) {
-    //                 if (error.response.data === "Invalid email or password.") {
-    //                     setLoginMessage("Invalid email or password.")
-    //                 } else {
-    //                     console.log(error.response);
-    //                     console.log("server responded");
-    //                 }
-    //             } else if (error.request) {
-    //                 console.log("network error");
-    //             } else {
-    //                 console.log(error);
-    //             }
-    //         });
-    //
-    //
-    //
-    //
-    // }
-
     const handleSubmit = async (event) => {
         try {
             event.preventDefault();
