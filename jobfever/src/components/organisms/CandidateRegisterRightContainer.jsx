@@ -92,9 +92,6 @@ export default function CandidateRegisterRightContainer() {
         <StyledRightContainer>
             <RightNavbar/>
             <Sheet style={{backgroundColor: 'transparent'}}>
-                <div>
-                    Welcome
-                </div>
                 <StyledText
                     color="rgba(171, 36, 36)"
                     tag={"h2"}
