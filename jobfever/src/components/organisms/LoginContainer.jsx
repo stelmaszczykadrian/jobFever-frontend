@@ -91,7 +91,7 @@ export default function LoginContainer(props) {
                 <StyledText
                     color="white"
                     tag={"h2"}
-                    text={"Login to employer profile"}
+                    text={"Login to your profile"}
                 />
                 <form onSubmit={handleSubmit}>
                     <FormControl width="40">
