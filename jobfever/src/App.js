@@ -3,7 +3,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import CandidateLogin from "./pages/CandidateLogin";
 import CandidateRegister from "./pages/CandidateRegister";
 import CandidateProfile from "./pages/CandidateProfile";
-import EmployerLogin from "./pages/EmployersLogin";
+import EmployerLogin from "./pages/EmployerLogin";
 import EmployerRegister from "./pages/EmployersRegister";
 import Home from "./pages/Home";
 import About from "./pages/About";
