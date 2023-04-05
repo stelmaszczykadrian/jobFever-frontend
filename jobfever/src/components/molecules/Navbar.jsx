@@ -108,7 +108,7 @@ function ResponsiveAppBar() {
                             }}
                         >
                             {pages.map((page,index) => (
-                                <MenuItem key={index} onClick={handleCloseNavMenu}>
+                                <MenuItem key={`Navbar_${index}`} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center" >{page}</Typography>
                                 </MenuItem>
                             ))}
@@ -137,7 +137,7 @@ function ResponsiveAppBar() {
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page,index) => (
                             <Button
-                                key={index}
+                                key={`Navbar_${index}`}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
