@@ -1,8 +1,9 @@
+import CandidateLoginMainComponent from "../components/templates/CandidateLoginMainComponent";
 
 
 export default function CandidateLogin() {
     return (
-        <div>Candidate login form.</div>
+        <CandidateLoginMainComponent apiUrl="http://localhost:8080/api/candidates/login"/>
     );
 }
 
