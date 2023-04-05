@@ -27,10 +27,7 @@ export default function CandidateProfileEducation() {
                 <StyledSchoolIcon/>
                 <ProfileContainerTitle text={'Education'}/>
                 <StyledIconBox>
-                        <IconButton onClick={() => {setOpen(true)}}>
-                            <StyledAddIcon/>
-                        </IconButton>
-                    {open && <ResponsiveDialog />}
+                    <ResponsiveDialog/>
                 </StyledIconBox>
             </StyledTopBox>
             <StyledBottomBox>

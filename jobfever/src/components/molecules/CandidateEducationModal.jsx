@@ -9,6 +9,8 @@ import {useState} from "react";
 import {StyledGridItem} from "../organisms/JobOfferFormContainer.styles";
 import {RedButtonStyled} from "../atoms/RedButton.styles";
 import CalendarForm from "../organisms/CalendarForm";
+import {StyledAddIcon} from "../atoms/StyledAddIcon";
+import IconButton from "@mui/material/IconButton";
 
 export default function ResponsiveDialog() {
     const [open, setOpen] = React.useState(false);
@@ -30,15 +32,27 @@ export default function ResponsiveDialog() {
         }));
     }
 
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
     const handleClose = () => {
         setOpen(false);
     };
 
+    const handleSave = () => {
+        setOpen(false);
+        // przesłanie danych z formularza na backend
+    };
+
     return (
         <div>
+            <IconButton onClick={handleClickOpen}>
+                <StyledAddIcon/>
+            </IconButton>
             <Dialog
                 fullWidth={fullWidth}
-                open={true}
+                open={open}
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
             >
@@ -106,10 +120,10 @@ export default function ResponsiveDialog() {
                     </StyledGridItem>
                 </DialogContent>
                 <DialogActions>
-                    <RedButtonStyled onClick={() => {setOpen(false)}}>
+                    <RedButtonStyled onClick={handleClose}>
                         Discard
                     </RedButtonStyled>
-                    <RedButtonStyled onClick={() => {setOpen(false)}}>
+                    <RedButtonStyled onClick={handleSave}>
                         Save
                     </RedButtonStyled>
                 </DialogActions>
