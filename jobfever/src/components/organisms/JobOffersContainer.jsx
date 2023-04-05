@@ -3,7 +3,6 @@ import React, {useState, useRef, useCallback} from "react";
 import {StyledJobOffersContainer} from "./JobOffersContainer.styles";
 import {useAxiosPagination} from "../../api/axiosFetch";
 
-
 export default function JobOffersContainer() {
     const [pageNumber, setPageNumber] = useState(1)
     const [field, setField] = useState("")
@@ -30,7 +29,6 @@ export default function JobOffersContainer() {
         if (node) observer.current.observe(node)
     }, [loading, hasMore])
 
-
     return (
         <StyledJobOffersContainer>
             {
@@ -42,10 +40,8 @@ export default function JobOffersContainer() {
                     }
                 })
             }
-
             <div>{loading && 'loading'}</div>
             <div>{error && 'error when loading jobs'}</div>
-
         </StyledJobOffersContainer>
     )
 }

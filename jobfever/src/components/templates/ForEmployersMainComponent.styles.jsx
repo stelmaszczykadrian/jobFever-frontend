@@ -1,7 +1,6 @@
 import {styled} from "@mui/material";
 import img from "../../images/background_5.jpg";
 
-
 export const StyledForEmployersMainComponent = styled("div")`
   display: flex;
   width: 100%;

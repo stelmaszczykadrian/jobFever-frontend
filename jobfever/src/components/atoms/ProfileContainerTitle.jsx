@@ -1,4 +1,3 @@
-import Button from "@mui/joy/Button";
 import React from "react";
 import {StyledProfileContainerTitle} from "./ProfileContainerTitle.styles";
 

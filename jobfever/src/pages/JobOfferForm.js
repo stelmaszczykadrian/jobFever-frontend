@@ -6,6 +6,5 @@ function JobOfferForm() {
     );
 }
 
-
 export default JobOfferForm;
 

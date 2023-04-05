@@ -46,7 +46,6 @@ export default function EmployerRegisterRightContainer() {
         }));
     };
 
-
     const validateInput = (name, value) => {
         switch (name) {
             case 'companyName':
@@ -99,6 +98,7 @@ export default function EmployerRegisterRightContainer() {
             }
         }
     }
+
     return (<StyledRightContainer>
         <RightNavbar/>
         <Form onSubmit={handleSubmit}>

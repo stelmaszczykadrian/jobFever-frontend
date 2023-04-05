@@ -2,7 +2,6 @@ import {StyledEmployerRegisterMainComponent} from "./EmployersRegisterMainCompon
 import LeftContainer from "../organisms/LeftContainer";
 import LoginContainer from "../organisms/LoginContainer";
 
-
 export default function EmployerLoginMainComponent({ apiUrl }){
     return(
         <StyledEmployerRegisterMainComponent>

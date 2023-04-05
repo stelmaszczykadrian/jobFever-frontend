@@ -8,8 +8,7 @@ export const Img = styled('img')({
     maxHeight: '100%',
 });
 export const StyledPaper = styled(Paper)`
-    padding: 2px;
-    margin: auto;
-    margin-bottom: 10px;
-    flex-grow: 1;
+  padding: 2px;
+  margin: auto auto 10px;
+  flex-grow: 1;
 `;

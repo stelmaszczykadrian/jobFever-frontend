@@ -1,6 +1,5 @@
 import {styled} from "@mui/material";
 
-
 export default function StyledText(props){
     const Text = styled(props.tag)`
   font-weight: bold;

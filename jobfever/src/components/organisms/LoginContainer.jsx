@@ -14,7 +14,6 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import RedButton from "../atoms/RedButton";
 
-
 export default function LoginContainer(props) {
 
     const [loginMessage, setLoginMessage] = useState('');
@@ -38,7 +37,6 @@ export default function LoginContainer(props) {
             errors: {...prevFormData.errors, [name]: error}
         }));
     };
-
 
     const validateInput = (name, value) => {
         switch (name) {
@@ -82,7 +80,6 @@ export default function LoginContainer(props) {
             }
         }
     };
-
 
     return (
         <StyledRightContainer>

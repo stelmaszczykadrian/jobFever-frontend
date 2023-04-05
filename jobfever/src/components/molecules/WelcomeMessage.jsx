@@ -1,6 +1,5 @@
 import StyledText from "../atoms/StyledText";
 
-
 export default function WelcomeMessage(props) {
     let createAccountMessage =
         <StyledText

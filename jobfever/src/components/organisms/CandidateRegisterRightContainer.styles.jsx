@@ -1,8 +1,6 @@
 import {styled} from "@mui/material";
 import Sheet from "@mui/joy/Sheet";
 
-
-
 export const StyledRightContainer = styled(Sheet)`
   flex-basis: 50%;
   height: 100%;
@@ -14,7 +12,6 @@ export const StyledRightContainer = styled(Sheet)`
   grid-template-columns: 1fr;
 `
 
-
 export const CandidateRegisterTextCandidateExist = styled('div')`
   color: whitesmoke;
   text-align: center;
@@ -22,15 +19,12 @@ export const CandidateRegisterTextCandidateExist = styled('div')`
   font-size: large;
 `
 
-
-
 export const StyledUserInputValidation = styled("div")`
   border: 5px;
   align-self: center;
   color: black;
   margin-top: 2%;
 `;
-
 
 export const StyledLabel = styled("span")`
   align-self: center;

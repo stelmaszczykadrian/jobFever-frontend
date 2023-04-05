@@ -6,12 +6,10 @@ const titles = ['Description', "Technical Requirements", "Responsibilities", "Wh
 
 function SingleOfferLeftContainer() {
     return (
-
         <StyledSingleOfferLeftContainer>
             {titles.map((title) =>
                 (<SingleOfferField title={title} text="Some Offer Information"/>))}
         </StyledSingleOfferLeftContainer>
-
     );
 }
 export default SingleOfferLeftContainer;
