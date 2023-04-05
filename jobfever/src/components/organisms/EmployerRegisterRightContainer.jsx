@@ -14,6 +14,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import StyledText from "../atoms/StyledText";
 import {StyledUserInputValidation,StyledLabel,StyledRightContainer} from "./CandidateRegisterRightContainer.styles";
+import {createEmployer} from "../../api/EmployersApi";
 
 export default function EmployerRegisterRightContainer() {
 
@@ -76,7 +77,7 @@ export default function EmployerRegisterRightContainer() {
                 password: formData.password,
             };
             try {
-                const response = await axios.post('http://localhost:8080/api/employers', userData);
+                const response = await createEmployer(userData);
                 console.log(response);
                 setEmployerMessage('Employer added successfully.');
                 setTimeout(() => {

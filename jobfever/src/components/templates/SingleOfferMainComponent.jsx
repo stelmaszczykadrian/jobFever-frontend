@@ -8,8 +8,12 @@ function SingleOfferMainComponent() {
     return (
         <StyledSingleOfferMainComponent>
             <Navbar />
-            <SingleOfferLeftContainer />
-            <SingleOfferRightContainer />
+            <div style={{display:"flex", flexDirection:"row"}}>
+                <SingleOfferLeftContainer />
+                <SingleOfferRightContainer />
+            </div>
+            {/*<SingleOfferLeftContainer />*/}
+            {/*<SingleOfferRightContainer />*/}
         </StyledSingleOfferMainComponent>
     );
 }
