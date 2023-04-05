@@ -1,8 +1,8 @@
-import CandidateProfileMainComponent from "../components/templates/CandidateProfileMainComponent";
+import ProfileMainComponent from "../components/templates/ProfileMainComponent";
 
 function CandidateProfile() {
     return (
-        <CandidateProfileMainComponent />
+        <ProfileMainComponent type={"candidate"}/>
     );
 }
 export default CandidateProfile;
