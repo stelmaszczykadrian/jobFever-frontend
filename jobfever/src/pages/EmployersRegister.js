@@ -4,7 +4,7 @@ import EmployersRegisterMainComponent from "../components/templates/EmployersReg
 
 export default function employersRegister(){
     return(
-        // <EmployersRegisterMainComponent page={"Test"}/>
+
         <EmployersRegisterMainComponent/>
     )
 }
