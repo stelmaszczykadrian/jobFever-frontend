@@ -81,7 +81,8 @@ export default function JobOfferFormContainer() {
         axiosPost(userData,'http://localhost:8080/api/jobs')
     };
 
-    // let buttons = document.getElementById("buttonBoxId");
+    let buttons = document.getElementById('6');
+    //console.log(buttons);
     //
     // buttons.addEventListener('click', (event) => {
     //     console.log(event.target);
@@ -248,7 +249,7 @@ export default function JobOfferFormContainer() {
                         </StyledGridContainer>
                     </StyledGridContainer>
                     <StyledButtonCenter>
-                        <RedButton text={'SUBMIT'}>></RedButton>
+                        <RedButton text={'SUBMIT'}></RedButton>
                     </StyledButtonCenter>
                 </StyledInputJobOfferContainer>
             </StyledJobOfferCreationContainer>
