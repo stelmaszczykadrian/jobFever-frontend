@@ -1,8 +1,9 @@
 import RegisterMainComponent from "../components/templates/RegisterPageMainComponent";
 
-function LoginSheet() {
+export default function CandidateLogin() {
     return (
-        <RegisterMainComponent page ={"LOGIN"}/>
+        // <RegisterMainComponent page ={"LOGIN"}/>
+        <div>Candidate login form.</div>
     );
 }
-export default LoginSheet;
+
