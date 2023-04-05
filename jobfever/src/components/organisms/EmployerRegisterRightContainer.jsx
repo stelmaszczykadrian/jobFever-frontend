@@ -1,4 +1,3 @@
-import {StyledLabel, StyledRightContainer, StyledUserInputValidation} from "./RightConatiner.styles";
 import RightNavbar from "../molecules/RightNavbar";
 import Sheet from "@mui/joy/Sheet";
 import Input from "@mui/joy/Input";
@@ -14,6 +13,7 @@ import {Form} from "react-bootstrap";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import StyledText from "../atoms/StyledText";
+import {StyledUserInputValidation,StyledLabel,StyledRightContainer} from "./CandidateRegisterRightContainer.styles";
 
 export default function EmployerRegisterRightContainer() {
 
