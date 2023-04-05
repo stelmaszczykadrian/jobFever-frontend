@@ -4,43 +4,23 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useTheme } from '@mui/material/styles';
-import {Fab} from "@mui/material";
-import {StyledCurrencyType, StyledGridItem } from "../components/organisms/JobOfferFormContainer.styles";
 import Input from "@mui/joy/Input";
 import {useState} from "react";
-import CalendarForm from "../components/organisms/CalendarForm";
-import {RedButtonStyled} from "../components/atoms/RedButton.styles";
-
+import {StyledGridItem} from "../organisms/JobOfferFormContainer.styles";
+import {RedButtonStyled} from "../atoms/RedButton.styles";
+import CalendarForm from "../organisms/CalendarForm";
 
 export default function ResponsiveDialog() {
     const [open, setOpen] = React.useState(false);
-
     const fullWidth = React.useState('lg');
-
     const [input, setInput] = useState({
         school: '',
         degree: '',
         filedOfStudy: '',
         startDate: '',
         endDate: '',
-        activities: '',
+        description: '',
     });
-
-    const currencyMonth = [
-        {value: 'january', label: 'January'},
-        {value: 'february', label: 'February'},
-        {value: 'march', label: 'March'},
-        {value: 'april', label: 'April'},
-        {value: 'may', label: 'May'},
-        {value: 'june', label: 'June'},
-        {value: 'july', label: 'July'},
-        {value: 'august', label: 'August'},
-        {value: 'september', label: 'September'},
-        {value: 'october', label: 'October'},
-        {value: 'november', label: 'November'},
-        {value: 'december', label: 'December'},
-    ];
 
     const onInputChange = e => {
         const {name, value} = e.target;
@@ -50,20 +30,15 @@ export default function ResponsiveDialog() {
         }));
     }
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
     const handleClose = () => {
         setOpen(false);
     };
 
     return (
         <div>
-            <RedButtonStyled onClick={handleClickOpen}/> //guzik do podpięcia
             <Dialog
                 fullWidth={fullWidth}
-                open={open}
+                open={true}
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
             >
@@ -71,22 +46,18 @@ export default function ResponsiveDialog() {
                     {"Add education"}
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        School
-                    </DialogContentText>
+                    <DialogContentText>School</DialogContentText>
                     <StyledGridItem>
-                            <StyledGridItem>
-                                <Input
-                                    placeholder="Ex. Boston University"
-                                    name="school"
-                                    value={input.school}
-                                    onChange={onInputChange}
-                                />
-                            </StyledGridItem>
+                        <StyledGridItem>
+                            <Input
+                                placeholder="Ex. Boston University"
+                                name="school"
+                                value={input.school}
+                                onChange={onInputChange}
+                            />
+                        </StyledGridItem>
                     </StyledGridItem>
-                    <DialogContentText>
-                        Degree
-                    </DialogContentText>
+                    <DialogContentText>Degree</DialogContentText>
                     <StyledGridItem>
                         <Input
                             placeholder="Ex. Bechelor's"
@@ -95,9 +66,7 @@ export default function ResponsiveDialog() {
                             onChange={onInputChange}
                         />
                     </StyledGridItem>
-                    <DialogContentText>
-                        Filed of study
-                    </DialogContentText>
+                    <DialogContentText>Filed of study</DialogContentText>
                     <StyledGridItem>
                         <Input
                             placeholder="Ex. Economy"
@@ -116,13 +85,13 @@ export default function ResponsiveDialog() {
                     </StyledGridItem>
                     <StyledGridItem>
                         <CalendarForm
-                        name="startDate"
-                        value={input.startDate}
-                        onChange={onInputChange}/>
+                            name="startDate"
+                            value={input.startDate}
+                            onChange={onInputChange}/>
                         <CalendarForm
-                        name="endDate"
-                        value={input.endDate}
-                        onChange={onInputChange}/>
+                            name="endDate"
+                            value={input.endDate}
+                            onChange={onInputChange}/>
                     </StyledGridItem>
                     <DialogContentText>
                         Description
@@ -137,9 +106,10 @@ export default function ResponsiveDialog() {
                     </StyledGridItem>
                 </DialogContent>
                 <DialogActions>
-                    <RedButtonStyled autoFocus onClick={handleClose}>
-                        Discard </RedButtonStyled>
-                    <RedButtonStyled onClick={handleClose} autoFocus>
+                    <RedButtonStyled onClick={() => {setOpen(false)}}>
+                        Discard
+                    </RedButtonStyled>
+                    <RedButtonStyled onClick={() => {setOpen(false)}}>
                         Save
                     </RedButtonStyled>
                 </DialogActions>

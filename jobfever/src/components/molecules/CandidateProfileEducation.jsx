@@ -1,8 +1,4 @@
-import {
-    StyledTopBox,
-    StyledProfilePaper,
-    StyledBottomBox, StyledIconBox
-} from "./CandidateProfile.styles";
+import {StyledTopBox, StyledProfilePaper, StyledBottomBox, StyledIconBox} from "./CandidateProfile.styles";
 import {Box} from "@mui/material";
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
 import IconButton from "@mui/material/IconButton";
@@ -11,20 +7,13 @@ import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
 import {StyledAddIcon} from "../atoms/StyledAddIcon";
 import {StyledSchoolIcon} from "../atoms/StyledSchoolIcon";
+import ResponsiveDialog from "./CandidateEducationModal";
+
 
 export default function CandidateProfileEducation() {
 
     const [isEdit, setIsEdit] = useState(false);
-    const [isAdd, setIsAdd] = useState(false);
-
-    const handleAddClick = () => {
-        setIsAdd(true);
-    };
-
-    const handleSaveAddClick = () => {
-        setIsAdd(false);
-    };
-
+    const [open, setOpen] = useState(false);
     const handleEditClick = () => {
         setIsEdit(true);
     };
@@ -38,16 +27,10 @@ export default function CandidateProfileEducation() {
                 <StyledSchoolIcon/>
                 <ProfileContainerTitle text={'Education'}/>
                 <StyledIconBox>
-                    {/* Add button */}
-                    {isAdd ? (
-                        <IconButton onClick={handleSaveAddClick}>
-                            <StyledCheckIcon/>
-                        </IconButton>
-                    ) : (
-                        <IconButton onClick={handleAddClick}>
+                        <IconButton onClick={() => {setOpen(true)}}>
                             <StyledAddIcon/>
                         </IconButton>
-                    )}
+                    {open && <ResponsiveDialog />}
                 </StyledIconBox>
             </StyledTopBox>
             <StyledBottomBox>
@@ -63,6 +46,7 @@ export default function CandidateProfileEducation() {
                             <IconButton onClick={handleEditClick}>
                                 <StyledEditIcon/>
                             </IconButton>
+
                         )}
                     </StyledIconBox>
                 </Box>
