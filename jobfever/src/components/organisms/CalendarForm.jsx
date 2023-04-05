@@ -7,8 +7,10 @@ export default function CalendarForm() {
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-                slotProps={{
-                    textField: 'MM / DD / YYYY'
+                TextFieldProps={{
+                    label: 'Date',
+                    variant: 'outlined',
+                    format: 'MM/DD/YYYY',
                 }}
             />
         </LocalizationProvider>

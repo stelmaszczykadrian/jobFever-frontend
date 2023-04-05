@@ -51,7 +51,6 @@ export default function ResponsiveDialog() {
                 <StyledAddIcon/>
             </IconButton>
             <Dialog
-                fullWidth={fullWidth}
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
