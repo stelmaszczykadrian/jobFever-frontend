@@ -1,7 +1,7 @@
 import JobOfferGrid from "../molecules/JobOfferGrid";
 import React, {useState, useRef, useCallback} from "react";
 import {StyledJobOffersContainer} from "./JobOffersContainer.styles";
-import {useAxiosPagination} from "../../api/axiosFetch";
+import {useJobsPagination} from "../../api/apiJobs";
 
 export default function JobOffersContainer() {
     const [pageNumber, setPageNumber] = useState(1)
@@ -13,7 +13,7 @@ export default function JobOffersContainer() {
         hasMore,
         loading,
         error
-    } = useAxiosPagination(pageNumber, sortBy, field)
+    } = useJobsPagination(pageNumber, sortBy, field)
 
     const observer = useRef()
     let lastJobElementRef = useCallback(node => {

@@ -1,13 +1,13 @@
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
 import {StyledProfilePaper} from "./CandidateProfile.styles";
 import React from "react";
-import {useFetchData} from "../../api/axiosFetch";
 import JobOfferGrid from "./JobOfferGrid";
+import {useJobsByName} from "../../api/apiJobs";
 
 
 export default function EmployerJobs(props) {
 
-    const {data, loading} = useFetchData("http://localhost:8080/api/jobs/by-employer", props.id)
+    const {data, loading} = useJobsByName("http://localhost:8080/api/jobs/by-employer", props.id)
 
     if (!loading) {
         console.log(data)
