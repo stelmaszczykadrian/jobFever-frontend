@@ -1,8 +1,6 @@
-import {StyledHomeRightContainer} from "./HomeRightContainer.styles";
+import {StyledHomeHeader, StyledHomeRightContainer, StyledHomeSimpleText} from "./HomeRightContainer.styles";
 import RightNavbar from "../molecules/RightNavbar";
 import {StyledHomeTextSideContainer} from "../molecules/HomeTextSideContainer.styles";
-import HomeHeader from "../atoms/HomeHeader";
-import HomeSimpleText from "../atoms/HomeSimpleText";
 import {StyledLoginAndRegisterButtonsContainer} from "../molecules/LoginAndRegisterButtonsContainer.styles";
 import {StyledLink} from "../atoms/Link.styles";
 import WhiteButton from "../atoms/WhiteButton";
@@ -14,8 +12,15 @@ export default function HomeRightContainer() {
         <StyledHomeRightContainer>
             <RightNavbar/>
             <StyledHomeTextSideContainer>
-                <HomeHeader/>
-                <HomeSimpleText/>
+                <StyledHomeHeader>
+                    Welcome
+                </StyledHomeHeader>
+                <StyledHomeSimpleText>
+                    Our website is dedicated to providing programmers like you with the latest
+                    and greatest job  opportunity in the industry. Whether you're a seasoned
+                    developer or just starting out in your career, we're here to connect you with
+                    employers who are looking for talented programmers just like you.
+                </StyledHomeSimpleText>
             </StyledHomeTextSideContainer>
             <StyledLoginAndRegisterButtonsContainer>
                 <StyledLink to='/candidate/login'>
