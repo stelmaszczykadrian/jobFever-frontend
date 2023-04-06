@@ -91,7 +91,7 @@ export default function CandidateProfilePersonalInformation(props) {
                                 isEdit={isEdit}
                                 value={linkedin}
                                 onChange={(e) => setLinkedIn(e.target.value)}
-                                placeholder="LinkedIn profile link"
+                                placeholder="https://www.linkedin.com/"
                             />
                         </Box>
                         <Box mb={2}>
@@ -99,7 +99,7 @@ export default function CandidateProfilePersonalInformation(props) {
                                 isEdit={isEdit}
                                 value={github}
                                 onChange={(e) => setGitHub(e.target.value)}
-                                placeholder="GitHub profile link"
+                                placeholder="https://github.com/"
                             />
                         </Box>
                         <Box mb={4}>
