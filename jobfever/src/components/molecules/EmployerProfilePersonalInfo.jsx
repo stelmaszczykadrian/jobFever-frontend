@@ -11,41 +11,41 @@ import ProfilePhoto from "../atoms/ProfilePhoto";
 import IconButton from "@mui/material/IconButton";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
-import {StyledPersonIcon} from "../atoms/StyledPersonIcon";
-import {useEmployerById} from "../../api/EmployersApi";
+import {editEmployer, useEmployerById} from "../../api/EmployersApi";
+import {EditableInput} from "./CandidateProfilePersonalInformation";
 
-export function EditableInput({isEdit, value, onChange, placeholder}) {
-    if (isEdit) {
-        return <input type="text" placeholder={placeholder} value={value} onChange={onChange}/>;
-    } else {
-        return <span>{value.toString()}</span>;
-    }
-}
+
 export default function EmployerProfilePersonalInfo(props){
     const {data, loading} = useEmployerById(props.id)
     const [isEdit, setIsEdit] = useState(false);
-    const [name, setName] = useState("asd");
-    const [city, setCity] = useState('City');
+    const [companyName, setCompanyName] = useState("asd");
+    const [nameAndSurname, setNameAndSurname] = useState('City');
     const [email, setEmail] = useState('email@example.com');
     const [linkedin, setLinkedIn] = useState('https://www.linkedin.com/');
     const [github, setGitHub] = useState('https://github.com/');
-    const [cv, setCv] = useState(null);
+    const [phoneNumber, setPhoneNumber] = useState(123456789);
 
     const handleEditClick = () => {
         setIsEdit(true);
     };
     const handleSaveClick = () => {
         setIsEdit(false);
+        editEmployer(props.id, companyName, nameAndSurname, phoneNumber)
     };
+    React.useEffect(() => {
+        if (!loading) {
+            setCompanyName(data.companyName);
+            setNameAndSurname(data.nameAndSurname)
+            setEmail(data.email)
+            setPhoneNumber(data.phoneNumber)
+        }
+    }, [data]);
     if (!loading) {
         console.log(data)
-
-        // setName(employer.companyName)
         return (
             <StyledProfilePaper>
                 <StyledTopBox>
-                    <StyledPersonIcon/>
-                    <ProfileContainerTitle text={'Personal information'}/>
+                    <ProfileContainerTitle text={companyName}/>
                 </StyledTopBox>
                 <StyledBottomBoxPersonalInfo>
                     <StyledLeftBox>
@@ -53,31 +53,38 @@ export default function EmployerProfilePersonalInfo(props){
                         <Box mb={2}>
                             <ProfilePhoto/>
                         </Box>
-                        {/* CompanyName */}
-                        <Box mb={1}>
-                            <EditableInput
-                                isEdit={isEdit}
-                                value={data.companyName}
-                                onChange={(e) => setName(e.target.value)}
-                                placeholder="Name Surname"
-                            />
-                        </Box>
                         {/* Name */}
+                        <h4>Owner</h4>
                         <Box mb={1}>
                             <EditableInput
                                 isEdit={isEdit}
-                                value={data.nameAndSurname}
-                                onChange={(e) => setCity(e.target.value)}
-                                placeholder="City"
+                                value={nameAndSurname}
+                                onChange={(e) => setNameAndSurname(e.target.value)}
+                                placeholder="nameAndSurname"
                             />
                         </Box>
                         {/* Email */}
+                        <h4>Email</h4>
                         <Box mb={1}>
-                            {data.email}
+                            <EditableInput
+                                isEdit={isEdit}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="email"
+                            />
                         </Box>
                     </StyledLeftBox>
 
                     <StyledRightBox>
+                        <h3>Phone number</h3>
+                        <Box mb={1}>
+                            <EditableInput
+                                isEdit={isEdit}
+                                value={phoneNumber}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                placeholder="phone number"
+                            />
+                        </Box>
                         <h3>Social Links</h3>
                         <Box mb={1}>
                             <EditableInput
