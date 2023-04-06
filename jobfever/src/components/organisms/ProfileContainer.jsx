@@ -23,7 +23,7 @@ export default function ProfileContainer (props) {
         return(
         <StyledProfileContainer>
             <EmployerProfilePersonalInfo id={id}/>
-            <EmployerAboutUs />
+            <EmployerAboutUs id={id}/>
             <EmployerJobs id={id}/>
         </StyledProfileContainer>
         )}
