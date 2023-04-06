@@ -1,6 +1,9 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-
+const urls = [
+    "http://localhost:8080/api/jobs/by-employer",
+    "http://localhost:8080/api/jobs/"
+]
 export function useJobsPagination(pageNumber, sortBy, field) {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
@@ -30,14 +33,16 @@ export function useJobsPagination(pageNumber, sortBy, field) {
     }, [pageNumber])
     return {loading, error, jobs, hasMore}
 }
-export const useJobsByName = (url, id) => {
+
+
+export const useJobsByName = (id) => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data: response } = await axios.get(url, {params:{id:id}});
+                const { data: response } = await axios.get(urls[0], {params:{id:id}});
                 setData(response.content);
             } catch (error) {
                 console.error(error)
@@ -53,3 +58,4 @@ export const useJobsByName = (url, id) => {
         loading,
     };
 };
+

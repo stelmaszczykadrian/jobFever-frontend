@@ -1,7 +1,7 @@
 import JobOfferGrid from "../molecules/JobOfferGrid";
 import React, {useState, useRef, useCallback} from "react";
 import {StyledJobOffersContainer} from "./JobOffersContainer.styles";
-import {useJobsPagination} from "../../api/apiJobs";
+import {useJobsPagination} from "../../api/JobsApi";
 
 export default function JobOffersContainer() {
     const [pageNumber, setPageNumber] = useState(1)
