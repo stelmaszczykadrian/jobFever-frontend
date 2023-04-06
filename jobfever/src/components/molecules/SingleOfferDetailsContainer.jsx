@@ -1,20 +1,25 @@
 import React from "react";
 import {StyledSingleOfferDetailsContainer} from "./SingleOfferDetailsContainer.styles";
 import RedButton from "../atoms/RedButton";
+import {useGetJobOfferById} from "../../api/JobsApi";
 
 function SingleOfferDetailsContainer() {
+
+    const offerDetails = useGetJobOfferById();
+    console.log(offerDetails);
+
     return (
         <StyledSingleOfferDetailsContainer>
             <RedButton text="Apply" />
             <h3>Salary</h3>
-            <p>10 000 PLN</p>
+            <p>{offerDetails.salaryFrom}-{offerDetails.salaryTo} {offerDetails.currencyType}</p>
             <h3>Valid</h3>
-            <p>31.12.2023</p>
+            <p>{offerDetails.postingDate}</p>
             <h3>Contract Type</h3>
-            <p>Full-Time</p>
+            <p>{offerDetails.jobType}</p>
             <h3>Location</h3>
-            <p>Krakow</p>
-            <p>ul. Jana Kowalskiego 1</p>
+            <p>{offerDetails.location}</p>
+
         </StyledSingleOfferDetailsContainer>
     );
 }
