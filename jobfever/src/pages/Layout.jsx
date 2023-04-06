@@ -1,5 +1,5 @@
 import React from "react";
-import Footer from "../components/molecules/footer";
+import Footer from "../components/molecules/Footer";
 
 function Layout(props) {
     return (
