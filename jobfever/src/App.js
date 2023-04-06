@@ -33,7 +33,7 @@ function App() {
                     <Route path="/jobs" element={<JobsPage />} />
                     <Route path="/for-employers" element={<ForEmployers />} />
                     <Route path="/contact" element={<Contact />} />
-                    <Route path="/jobs/job-id" element={<SingleOfferPage />} />
+                    <Route path="/jobs/:id" element={<SingleOfferPage />} />
                     <Route path="*" element={<NoPage/>}></Route>
                 </Routes>
             </Layout>
