@@ -1,8 +1,8 @@
-function About() {
-    return (
-        <div>
-            <h1>This is the about page</h1>
-        </div>
-    )}
+import * as React from "react";
 
-export default About;
+
+export default function About(){
+    return(
+        <div>About site.</div>
+    );
+}

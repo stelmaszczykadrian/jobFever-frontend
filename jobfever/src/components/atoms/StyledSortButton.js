@@ -1,17 +1,17 @@
 import Button from "@mui/joy/Button";
 import {styled} from "@mui/material";
+export const StyledSortButton = styled(Button)`
+  background-color: ${props => props.color || 'A9A9A0'};
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px;
+  transition: all 0.3s ease;
+  color: white;
 
-export const StyledSortButton = styled(Button)(() => ({
-    minHeight: '0',
-    padding: '5px',
-    marginTop: '10px',
-    margin: 'auto',
-    alignSelf: 'auto',
-    backgroundColor: '#A9A9A0',
-    color: 'black',
-    borderRadius: '20px',
-    ':hover': {
-        color: 'white',
-        backgroundColor: '#696960',
-    },
-}));
+  &:hover {
+    color: white;
+    background-color: #696960;
+  }
+`;
