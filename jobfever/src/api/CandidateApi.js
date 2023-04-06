@@ -3,10 +3,6 @@ import {useEffect, useState} from "react";
 
 const url = "http://localhost:8080/api/candidates/";
 
-export const createCandidate = async(userData) =>{
-    return await axios.post(url, userData);
-}
-
 export const useCandidateById = (id) => {
     const [candidate, setCandidate] = useState({});
     const [loading, setLoading] = useState(true);
@@ -31,3 +27,15 @@ export const useCandidateById = (id) => {
         loading,
     };
 };
+
+export async function editCandidate(id, updatedCandidateData) {
+    await axios.put(url, {
+            name: updatedCandidateData.name,
+            city: updatedCandidateData.city,
+            linkedin: updatedCandidateData.linkedin,
+            github: updatedCandidateData.github
+        },
+        {
+            params:{id:id}
+        });
+}
