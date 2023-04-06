@@ -7,13 +7,17 @@ import {
     StyledGridItem,
     StyledSelectJobType,
     StyledCurrencyType,
-    StyledButtonCenter, StyledInputLabel
+    StyledButtonCenter, StyledInputLabel, StyledJobOfferContainer
 } from "./JobOfferFormContainer.styles";
 import {useState} from "react";
 import {Radio, RadioGroup} from "@mui/joy";
 import RedButton from "../atoms/RedButton";
 import {Form} from "react-bootstrap";
 import axiosPost from "../../api/axiosFetch";
+import ButtonBox from "../molecules/ButtonBox";
+import Navbar from "../molecules/Navbar";
+import StyledText from "../atoms/StyledText";
+import DialogContentText from "@mui/material/DialogContentText";
 
 import TechnicalRequirementsContainer from "../molecules/TechnicalRequirementsContainer";
 
@@ -116,41 +120,49 @@ export default function JobOfferFormContainer() {
     };
 
     return (
+        <StyledJobOfferContainer>
+         <Navbar/>
         <Form onSubmit={handleSubmit}>
+            <StyledText tag="h1"
+                        color="white"
+                        text={"Post a job offer"}/>
             <StyledJobOfferCreationContainer>
                 <StyledInputJobOfferContainer>
-                    <StyledInputLabel>Title: </StyledInputLabel>
+                    <DialogContentText sx={{color: 'white'}}>Title: </DialogContentText>
                     <Input
                         type="text"
-                        placeholder="Enter title"
+                        placeholder="Ex. Junior java developer"
                         name="title"
                         value={input.title}
                         onChange={onInputChange}
                     />
-                    <StyledInputLabel>Project description:</StyledInputLabel>
+                    <p>
+                    <DialogContentText sx={{color: 'white'}}>Project description:</DialogContentText>
                     <StyledTextarea
                         placeholder="Enter description"
                         name="description"
                         value={input.description}
                         onChange={onInputChange}
-                    />
-                    <StyledInputLabel>Technical requirements:</StyledInputLabel>
-                    <TechnicalRequirementsContainer pressedButtons={pressedButtons} setPressedButtons={setPressedButtons} input={input} setInput={setInput} />
-                    <StyledInputLabel>Responsibilities:</StyledInputLabel>
+                    /></p>
+                    <DialogContentText sx={{color: 'white'}}>Technical requirements:</DialogContentText>
+                    <p>
+                        <TechnicalRequirementsContainer pressedButtons={pressedButtons} setPressedButtons={setPressedButtons} input={input} setInput={setInput} />
+                    </p>
+                    <DialogContentText sx={{color: 'white'}}>Responsibilities:</DialogContentText>
                     <StyledTextarea
                         placeholder="Enter responsibilities"
                         name="responsibilities"
                         value={input.responsibilities}
                         onChange={onInputChange}
                     />
-                    <StyledInputLabel>Who we are looking for:</StyledInputLabel>
+                    <DialogContentText sx={{color: 'white'}}>Who we are looking for: </DialogContentText>
                     <StyledTextarea
                         placeholder="Enter who we are looking for"
                         name="whoWeAreLookingFor"
                         value={input.whoWeAreLookingFor}
                         onChange={onInputChange}
                     />
-                    <StyledInputLabel>Benefits:</StyledInputLabel>
+                    <DialogContentText sx={{color: 'white'}}>Benefits:</DialogContentText>
                     <StyledTextarea
                         placeholder="Enter benefits"
                         name="benefits"
@@ -159,7 +171,7 @@ export default function JobOfferFormContainer() {
                     />
                     <StyledGridContainer>
                         <StyledGridItem>
-                            <StyledInputLabel>Salary:</StyledInputLabel>
+                            <DialogContentText sx={{color: 'white'}}>Salary:</DialogContentText>
                             <StyledGridItem>
                                 <StyledGridContainer>
                                     <StyledGridItem>
@@ -183,7 +195,7 @@ export default function JobOfferFormContainer() {
                         </StyledGridItem>
                         <StyledGridItem>
                             <StyledGridItem>
-                                <StyledInputLabel>Currency: </StyledInputLabel>
+                                <DialogContentText sx={{color: 'white'}}>Currency: </DialogContentText>
                             </StyledGridItem>
                             <StyledGridItem>
                                 <StyledCurrencyType
@@ -199,17 +211,19 @@ export default function JobOfferFormContainer() {
                             </StyledGridItem>
                         </StyledGridItem>
                     </StyledGridContainer>
-                    <StyledInputLabel>Location:</StyledInputLabel>
+                    <p>
+                    <DialogContentText sx={{color: 'white'}}>Location:</DialogContentText>
                     <Input
                         placeholder="Enter location"
                         name="location"
                         value={input.location}
                         onChange={onInputChange}
-                    />
+                    /></p>
                     <StyledGridContainer>
                         <StyledGridItem>
+                            <p>
                             <StyledGridItem>
-                                <StyledInputLabel>Types of jobs:</StyledInputLabel>
+                                <DialogContentText sx={{color: 'white'}}>Types of jobs:</DialogContentText>
                             </StyledGridItem>
                             <StyledGridItem>
                                 <StyledSelectJobType
@@ -221,11 +235,12 @@ export default function JobOfferFormContainer() {
                                     ))}
                                 </StyledSelectJobType>
                             </StyledGridItem>
+                            </p>
                         </StyledGridItem>
                         <StyledGridContainer>
                             <RadioGroup value={input.workOptions} onChange={onOptionRadioTypeChange}>
                                 {workOptions.map((work) => (
-                                    <Radio
+                                    <Radio sx={{color: 'white'}}
                                         key={work.value}
                                         color="danger"
                                         size="lg"
@@ -239,10 +254,12 @@ export default function JobOfferFormContainer() {
                     </StyledGridContainer>
                     <StyledButtonCenter>
                         <RedButton text={'SUBMIT'}></RedButton>
+                        <p></p>
                     </StyledButtonCenter>
                 </StyledInputJobOfferContainer>
             </StyledJobOfferCreationContainer>
         </Form>
+        </StyledJobOfferContainer>
     );
 
 }

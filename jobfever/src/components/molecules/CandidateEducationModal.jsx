@@ -9,10 +9,7 @@ import {useState} from "react";
 import {StyledGridContainer, StyledGridItem} from "../organisms/JobOfferFormContainer.styles";
 import {RedButtonStyled} from "../atoms/RedButton.styles";
 import CalendarForm from "../organisms/CalendarForm";
-import {StyledAddIcon} from "../atoms/StyledAddIcon";
 import IconButton from "@mui/material/IconButton";
-import {StyledLeftContainer} from "../organisms/LeftContainer.styles";
-import {__esModule as props} from "bootstrap/js/dist/util";
 
 export default function CandidateEducationModal(props) {
     const [open, setOpen] = React.useState(false);
