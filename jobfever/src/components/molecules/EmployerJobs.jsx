@@ -2,15 +2,14 @@ import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
 import {StyledProfilePaper} from "./CandidateProfile.styles";
 import React from "react";
 import JobOfferGrid from "./JobOfferGrid";
-import {useJobsByName} from "../../api/apiJobs";
+import {useJobsByName} from "../../api/JobsApi";
 
 
 export default function EmployerJobs(props) {
 
-    const {data, loading} = useJobsByName("http://localhost:8080/api/jobs/by-employer", props.id)
+    const {data, loading} = useJobsByName(props.id)
 
     if (!loading) {
-        console.log(data)
         return(
         <div>
             <StyledProfilePaper>
