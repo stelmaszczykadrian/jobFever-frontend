@@ -12,7 +12,7 @@ export default function ProfileContainer (props) {
     if (props.type === "candidate") {
         return (
             <StyledProfileContainer>
-                <CandidateProfilePersonalInformation/>
+                <CandidateProfilePersonalInformation id={id}/>
                 <CandidateProfileExperience/>
                 <CandidateProfileEducation/>
             </StyledProfileContainer>
