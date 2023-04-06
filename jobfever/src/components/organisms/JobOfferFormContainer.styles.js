@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import img from "../../images/797828694.png"
+import img from "../../images/addjobbackround.png"
 
 export const StyledJobOfferCreationContainer = styled('div')`
   display: flex;

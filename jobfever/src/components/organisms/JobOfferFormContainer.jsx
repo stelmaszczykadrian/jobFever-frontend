@@ -7,14 +7,12 @@ import {
     StyledGridItem,
     StyledSelectJobType,
     StyledCurrencyType,
-    StyledButtonCenter, StyledInputLabel, StyledJobOfferContainer
+    StyledButtonCenter, StyledJobOfferContainer
 } from "./JobOfferFormContainer.styles";
 import {useState} from "react";
 import {Radio, RadioGroup} from "@mui/joy";
 import RedButton from "../atoms/RedButton";
 import {Form} from "react-bootstrap";
-import axiosPost from "../../api/axiosFetch";
-import ButtonBox from "../molecules/ButtonBox";
 import Navbar from "../molecules/Navbar";
 import StyledText from "../atoms/StyledText";
 import DialogContentText from "@mui/material/DialogContentText";
