@@ -1,7 +1,7 @@
 import Button from "@mui/joy/Button";
 import {styled} from "@mui/material";
 
-export const SortButton = styled(Button)(() => ({
+export const StyledSortButton = styled(Button)(() => ({
     minHeight: '0',
     padding: '5px',
     marginTop: '10px',

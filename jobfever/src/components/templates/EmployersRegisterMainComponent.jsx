@@ -2,13 +2,10 @@ import LeftContainer from "../organisms/LeftContainer";
 import EmployerRegisterRightContainer from "../organisms/EmployerRegisterRightContainer";
 import {StyledEmployerRegisterMainComponent} from "./EmployersRegisterMainComponent.styles";
 
-export default function EmployersRegisterMainComponent(props){
+export default function EmployersRegisterMainComponent(){
     return (
         <StyledEmployerRegisterMainComponent>
             <LeftContainer/>
-            {/*<RightContainer page={props.page}/>*/}
-
-
             <EmployerRegisterRightContainer/>
         </StyledEmployerRegisterMainComponent>
 

@@ -1,6 +1,6 @@
 import {StyledBox} from "./ButtonBox.styles";
 import * as React from "react";
-import {SortButton} from "../atoms/SortButton";
+import {StyledSortButton} from "../atoms/StyledSortButton";
 
 import Python from "../../languages/python.svg";
 import Ruby from "../../languages/ruby.svg";
@@ -44,7 +44,7 @@ export default function ButtonBox(){
         <StyledBox style={{background: 'transparent'}}>
             {languageIcons.map((icon, value) =>
                     (<div>
-                        <SortButton id={value} value={languageLabels[value]} key={icon}>{icon}</SortButton>
+                        <StyledSortButton id={value} value={languageLabels[value]} key={icon}>{icon}</StyledSortButton>
                         <div>{languageLabels[value]}</div>
                     </div>
                     ))}
