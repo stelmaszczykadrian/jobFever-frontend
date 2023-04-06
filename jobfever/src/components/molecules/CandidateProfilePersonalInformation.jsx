@@ -12,21 +12,23 @@ import IconButton from "@mui/material/IconButton";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
 import {StyledPersonIcon} from "../atoms/StyledPersonIcon";
+import {useCandidateById} from "../../api/CandidateApi";
 
 function EditableInput({isEdit, value, onChange, placeholder}) {
     if (isEdit) {
         return <input type="text" placeholder={placeholder} value={value} onChange={onChange}/>;
     } else {
-        return <span>{value.toString()}</span>;
+        return <span>{value}</span>;
     }
 }
 
-export default function CandidateProfilePersonalInformation() {
+export default function CandidateProfilePersonalInformation(props) {
 
+    const {data, loading} = useCandidateById(props.id)
     const [isEdit, setIsEdit] = useState(false);
     const [name, setName] = useState('Name Surname');
     const [city, setCity] = useState('City');
-    const [email, setEmail] = useState('email@example.com');
+    const [email, setEmail] = useState('');
     const [linkedin, setLinkedIn] = useState('https://www.linkedin.com/');
     const [github, setGitHub] = useState('https://github.com/');
     const [cv, setCv] = useState(null);
@@ -37,81 +39,85 @@ export default function CandidateProfilePersonalInformation() {
         setIsEdit(false);
     };
 
-    return (
-        <StyledProfilePaper>
-            <StyledTopBox>
-                <StyledPersonIcon/>
-                <ProfileContainerTitle text={'Personal information'}/>
-            </StyledTopBox>
-            <StyledBottomBoxPersonalInfo>
-                <StyledLeftBox>
-                    {/* Photo */}
-                    <Box mb={2}>
-                        <ProfilePhoto/>
-                    </Box>
-                    {/* Name */}
-                    <Box mb={1}>
-                        <EditableInput
-                            isEdit={isEdit}
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            placeholder="Name Surname"
-                        />
-                    </Box>
-                    {/* City */}
-                    <Box mb={1}>
-                        <EditableInput
-                            isEdit={isEdit}
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}
-                            placeholder="City"
-                        />
-                    </Box>
-                    {/* Email */}
-                    <Box mb={1}>
-                        {email}
-                    </Box>
-                </StyledLeftBox>
+    if (!loading) {
+        console.log(data)
+        return (
+            <StyledProfilePaper>
+                <StyledTopBox>
+                    <StyledPersonIcon/>
+                    <ProfileContainerTitle text={'Personal information'}/>
+                </StyledTopBox>
+                <StyledBottomBoxPersonalInfo>
+                    <StyledLeftBox>
+                        {/* Photo */}
+                        <Box mb={2}>
+                            <ProfilePhoto/>
+                        </Box>
+                        {/* Name */}
+                        <Box mb={1}>
+                            <EditableInput
+                                isEdit={isEdit}
+                                value={data.name}
+                                onChange={(e) => setName(e.target.value)}
+                                placeholder="Name Surname"
+                            />
+                        </Box>
+                        {/* City */}
+                        <Box mb={1}>
+                            <EditableInput
+                                isEdit={isEdit}
+                                value={data.city}
+                                onChange={(e) => setCity(e.target.value)}
+                                placeholder="City"
+                            />
+                        </Box>
+                        {/* Email */}
+                        <Box mb={1}>
+                            {data.email}
+                        </Box>
+                    </StyledLeftBox>
 
-                <StyledRightBox>
-                    <h3>Social Links</h3>
-                    <Box mb={1}>
-                        <EditableInput
-                            isEdit={isEdit}
-                            value={linkedin}
-                            onChange={(e) => setLinkedIn(e.target.value)}
-                            placeholder="LinkedIn profile link"
-                        />
-                    </Box>
-                    <Box mb={2}>
-                        <EditableInput
-                            isEdit={isEdit}
-                            value={github}
-                            onChange={(e) => setGitHub(e.target.value)}
-                            placeholder="GitHub profile link"
-                        />
-                    </Box>
-                    <Box mb={4}>
-                        <h3>CV file</h3>
-                        <StyledInput>
-                            <input type="file" accept=".pdf,.doc,.docx"/>
-                        </StyledInput>
-                    </Box>
-                    <Box>
-                        {/* Edit button */}
-                        {isEdit ? (
-                            <IconButton onClick={handleSaveClick}>
-                                <StyledCheckIcon/>
-                            </IconButton>
-                        ) : (
-                            <IconButton onClick={handleEditClick}>
-                                <StyledEditIcon/>
-                            </IconButton>
-                        )}
-                    </Box>
-                </StyledRightBox>
-            </StyledBottomBoxPersonalInfo>
-        </StyledProfilePaper>
-    );
-};
+                    <StyledRightBox>
+                        <h3>Social Links</h3>
+                        <Box mb={1}>
+                            <EditableInput
+                                isEdit={isEdit}
+                                value={data.linkedin}
+                                onChange={(e) => setLinkedIn(e.target.value)}
+                                placeholder="LinkedIn profile link"
+                            />
+                        </Box>
+                        <Box mb={2}>
+                            <EditableInput
+                                isEdit={isEdit}
+                                value={data.github}
+                                onChange={(e) => setGitHub(e.target.value)}
+                                placeholder="GitHub profile link"
+                            />
+                        </Box>
+                        <Box mb={4}>
+                            <h3>CV file</h3>
+                            <StyledInput>
+                                <input type="file" accept=".pdf,.doc,.docx"/>
+                            </StyledInput>
+                        </Box>
+                        <Box>
+                            {/* Edit button */}
+                            {isEdit ? (
+                                <IconButton onClick={handleSaveClick}>
+                                    <StyledCheckIcon/>
+                                </IconButton>
+                            ) : (
+                                <IconButton onClick={handleEditClick}>
+                                    <StyledEditIcon/>
+                                </IconButton>
+                            )}
+                        </Box>
+                    </StyledRightBox>
+                </StyledBottomBoxPersonalInfo>
+            </StyledProfilePaper>
+        );
+    }
+    return <span>Loading</span>
+}
 
