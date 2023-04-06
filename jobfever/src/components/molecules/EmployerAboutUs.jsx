@@ -6,7 +6,7 @@ import {Box} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
-import {EditableInput} from "./EmployerProfilePersonalInfo";
+import {EditableInput} from "./CandidateProfilePersonalInformation";
 
 export default function EmployerAboutUs(){
     const [isEdit, setIsEdit] = useState(false);
