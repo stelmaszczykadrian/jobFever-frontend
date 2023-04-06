@@ -6,7 +6,6 @@ import {useGetJobOfferById} from "../../api/JobsApi";
 function SingleOfferDetailsContainer() {
 
     const offerDetails = useGetJobOfferById();
-    console.log(offerDetails);
 
     return (
         <StyledSingleOfferDetailsContainer>
