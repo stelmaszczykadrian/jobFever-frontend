@@ -13,15 +13,8 @@ import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
 import {StyledPersonIcon} from "../atoms/StyledPersonIcon";
 import {editCandidate, useCandidateById} from "../../api/CandidateApi";
-import Input from "@mui/joy/Input";
+import EditableInput from "../atoms/EditableInput";
 
-function EditableInput({isEdit, value, onChange, placeholder}) {
-    if (isEdit) {
-        return <Input type="text" placeholder={placeholder} value={value} onChange={onChange}/>;
-    } else {
-        return <span>{value}</span>;
-    }
-}
 
 export default function CandidateProfilePersonalInformation(props) {
 
