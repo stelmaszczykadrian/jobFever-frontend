@@ -23,6 +23,7 @@ export default function EmployerProfilePersonalInfo(props){
     const [email, setEmail] = useState('email@example.com');
     const [linkedin, setLinkedIn] = useState('https://www.linkedin.com/');
     const [github, setGitHub] = useState('https://github.com/');
+    const [localization, setLocalization] = useState('Pcim');
     const [phoneNumber, setPhoneNumber] = useState(123456789);
 
     const handleEditClick = () => {
@@ -30,7 +31,7 @@ export default function EmployerProfilePersonalInfo(props){
     };
     const handleSaveClick = () => {
         setIsEdit(false);
-        editEmployer(props.id, companyName, nameAndSurname, phoneNumber)
+        editEmployer(props.id, companyName, nameAndSurname, phoneNumber, localization)
     };
     React.useEffect(() => {
         if (!loading) {
@@ -38,6 +39,7 @@ export default function EmployerProfilePersonalInfo(props){
             setNameAndSurname(data.nameAndSurname)
             setEmail(data.email)
             setPhoneNumber(data.phoneNumber)
+            setLocalization(data.localization)
         }
     }, [data]);
     if (!loading) {
@@ -76,6 +78,15 @@ export default function EmployerProfilePersonalInfo(props){
                     </StyledLeftBox>
 
                     <StyledRightBox>
+                        <h3>Localization</h3>
+                        <Box mb={1}>
+                            <EditableInput
+                                isEdit={isEdit}
+                                value={localization}
+                                onChange={(e) => setLocalization(e.target.value)}
+                                placeholder="localization"
+                            />
+                        </Box>
                         <h3>Phone number</h3>
                         <Box mb={1}>
                             <EditableInput

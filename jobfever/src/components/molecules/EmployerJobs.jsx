@@ -10,6 +10,7 @@ export default function EmployerJobs(props) {
     const {data, loading} = useJobsByName(props.id)
 
     if (!loading) {
+        console.log(data)
         return(
         <div>
             <StyledProfilePaper>

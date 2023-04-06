@@ -31,11 +31,12 @@ return {
     loading,
 };
 };
-export async function editEmployer(id, companyName, nameAndSurname, phoneNumber) {
+export async function editEmployer(id, companyName, nameAndSurname, phoneNumber, localization) {
     await axios.put(url, {
         companyName: companyName,
         nameAndSurname: nameAndSurname,
-        phoneNumber: parseInt(phoneNumber)
+        phoneNumber: parseInt(phoneNumber),
+        localization: localization
     },
         {
             params:{id:id}
