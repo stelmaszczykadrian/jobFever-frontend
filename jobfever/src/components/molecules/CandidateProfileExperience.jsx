@@ -11,6 +11,7 @@ import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
 import {StyledWorkIcon} from "../atoms/StyledWorkIcon";
 import {StyledAddIcon} from "../atoms/StyledAddIcon";
+import CandidateExperienceModal from "./CandidateExperienceModal";
 
 export default function CandidateProfileExperience() {
 
@@ -38,47 +39,20 @@ export default function CandidateProfileExperience() {
                 <StyledWorkIcon/>
                 <ProfileContainerTitle text={'Experience'}/>
                 <StyledIconBox>
-                    {/* Add button */}
-                    {isAdd ? (
-                        <IconButton onClick={handleSaveAddClick}>
-                            <StyledCheckIcon/>
-                        </IconButton>
-                    ) : (
-                        <IconButton onClick={handleAddClick}>
-                            <StyledAddIcon/>
-                        </IconButton>
-                    )}
+                    <CandidateExperienceModal text={'Add experience'} tag={<StyledAddIcon/>}/>
                 </StyledIconBox>
             </StyledTopBox>
             <StyledBottomBox>
                 <Box>
                     <span>Experience 1</span>
                     <StyledIconBox>
-                        {/* Edit button */}
-                        {isEdit ? (
-                            <IconButton onClick={handleSaveEditClick}>
-                                <StyledCheckIcon/>
-                            </IconButton>
-                        ) : (
-                            <IconButton onClick={handleEditClick}>
-                                <StyledEditIcon/>
-                            </IconButton>
-                        )}
+                        <CandidateExperienceModal text={'Edit experience'} tag={<StyledEditIcon/>}/>
                     </StyledIconBox>
                 </Box>
                 <Box>
                     <span>Experience 2</span>
                     <StyledIconBox>
-                        {/* Edit button */}
-                        {isEdit ? (
-                            <IconButton onClick={handleSaveEditClick}>
-                                <StyledCheckIcon/>
-                            </IconButton>
-                        ) : (
-                            <IconButton onClick={handleEditClick}>
-                                <StyledEditIcon/>
-                            </IconButton>
-                        )}
+                        <CandidateExperienceModal text={'Edit experience'} tag={<StyledEditIcon/>}/>
                     </StyledIconBox>
                 </Box>
             </StyledBottomBox>

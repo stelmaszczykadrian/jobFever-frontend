@@ -9,21 +9,20 @@ import {useState} from "react";
 import {StyledGridContainer, StyledGridItem} from "../organisms/JobOfferFormContainer.styles";
 import {RedButtonStyled} from "../atoms/RedButton.styles";
 import CalendarForm from "../organisms/CalendarForm";
-import {StyledAddIcon} from "../atoms/StyledAddIcon";
 import IconButton from "@mui/material/IconButton";
-import {StyledLeftContainer} from "../organisms/LeftContainer.styles";
-import {__esModule as props} from "bootstrap/js/dist/util";
 
-export default function CandidateEducationModal(props) {
+export default function CandidateExperienceModal(props) {
+
     const [open, setOpen] = React.useState(false);
     const [fullWidth, setFullWidth] = React.useState(true);
     const [maxWidth, setMaxWidth] = React.useState('sm');
     const [input, setInput] = useState({
-        school: '',
-        degree: '',
-        filedOfStudy: '',
+        position: '',
+        companyName: '',
+        location: '',
         startDate: '',
         endDate: '',
+        industry: '',
         description: '',
     });
 
@@ -64,70 +63,83 @@ export default function CandidateEducationModal(props) {
                     {props.text}
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText>School</DialogContentText>
+                    <DialogContentText>Position</DialogContentText>
                     <StyledGridItem>
                         <StyledGridItem>
                             <Input
-                                placeholder="Ex. Boston University"
-                                name="school"
-                                value={input.school}
+                                placeholder="Ex. Frontend developer"
+                                name="position"
+                                value={input.position}
                                 onChange={onInputChange}
                             />
                         </StyledGridItem>
                     </StyledGridItem>
                     <p>
-                    <DialogContentText>Degree</DialogContentText>
-                    <StyledGridItem>
-                        <Input
-                            placeholder="Ex. Bechelor's"
-                            name="degree"
-                            value={input.degree}
-                            onChange={onInputChange}
-                        />
-                    </StyledGridItem>
+                        <DialogContentText>Company name</DialogContentText>
+                        <StyledGridItem>
+                            <Input
+                                placeholder="Ex. jobFever"
+                                name="companyName"
+                                value={input.companyName}
+                                onChange={onInputChange}
+                            />
+                        </StyledGridItem>
                     </p>
-                    <DialogContentText>Filed of study</DialogContentText>
+                    <DialogContentText>location</DialogContentText>
                     <StyledGridItem>
                         <Input
-                            placeholder="Ex. Economy"
-                            name="filedOfStudy"
+                            placeholder="Ex. London"
+                            name="location"
                             value={input.filedOfStudy}
                             onChange={onInputChange}
                         />
                     </StyledGridItem>
                     <p>
-                    <StyledGridContainer>
-                        <StyledGridItem>
-                        <DialogContentText>
-                            Start date
-                        </DialogContentText>
-                            <CalendarForm
-                                name="startDate"
-                                value={input.startDate}
-                                onChange={onInputChange}/>
-                        </StyledGridItem>
-                        <StyledGridItem>
-                        <DialogContentText>
-                            End date
-                        </DialogContentText>
-                        <CalendarForm
-                            name="endDate"
-                            value={input.endDate}
-                            onChange={onInputChange}/>
-                        </StyledGridItem>
-                    </StyledGridContainer>
+                        <StyledGridContainer>
+                            <StyledGridItem>
+                                <DialogContentText>
+                                    Start date
+                                </DialogContentText>
+                                <CalendarForm
+                                    name="startDate"
+                                    value={input.startDate}
+                                    onChange={onInputChange}/>
+                            </StyledGridItem>
+                            <StyledGridItem>
+                                <DialogContentText>
+                                    End date
+                                </DialogContentText>
+                                <CalendarForm
+                                    name="endDate"
+                                    value={input.endDate}
+                                    onChange={onInputChange}/>
+                            </StyledGridItem>
+                        </StyledGridContainer>
                     </p>
+                    <DialogContentText>
+                        Industry
+                    </DialogContentText>
+                    <StyledGridItem>
+                        <Input
+                            placeholder="Ex. Gaming, Software, Hardware, IT consultant"
+                            name="industry"
+                            value={input.industry}
+                            onChange={onInputChange}
+                        />
+                    </StyledGridItem>
+                    <p>
                     <DialogContentText>
                         Description
                     </DialogContentText>
                     <StyledGridItem>
                         <Input
-                            placeholder="Ex. Activity clubs, extra achievements"
+                            placeholder="Ex. Work responsibilities"
                             name="description"
                             value={input.description}
                             onChange={onInputChange}
                         />
                     </StyledGridItem>
+                    </p>
                 </DialogContent>
                 <DialogActions>
                     <RedButtonStyled onClick={handleClose}>
