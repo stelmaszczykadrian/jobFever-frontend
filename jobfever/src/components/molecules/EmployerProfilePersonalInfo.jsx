@@ -12,7 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
 import {editEmployer, useEmployerById} from "../../api/EmployersApi";
-import {EditableInput} from "./CandidateProfilePersonalInformation";
+import EditableInput from "../atoms/EditableInput";
 
 
 export default function EmployerProfilePersonalInfo(props){
