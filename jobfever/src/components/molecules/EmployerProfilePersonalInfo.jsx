@@ -14,7 +14,7 @@ import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
 import {StyledPersonIcon} from "../atoms/StyledPersonIcon";
 import {useEmployerById} from "../../api/EmployersApi";
 
-function EditableInput({isEdit, value, onChange, placeholder}) {
+export function EditableInput({isEdit, value, onChange, placeholder}) {
     if (isEdit) {
         return <input type="text" placeholder={placeholder} value={value} onChange={onChange}/>;
     } else {
