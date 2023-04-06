@@ -4,21 +4,20 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Input from "@mui/joy/Input";
 import {useState} from "react";
-import {StyledGridContainer, StyledGridItem, StyledTextarea} from "../organisms/JobOfferFormContainer.styles";
+import {StyledGridItem, StyledTextarea} from "../organisms/JobOfferFormContainer.styles";
 import {RedButtonStyled} from "../atoms/RedButton.styles";
-import CalendarForm from "../organisms/CalendarForm";
 import IconButton from "@mui/material/IconButton";
-import {Textarea} from "@mui/joy";
+import {editEmployer} from "../../api/EmployersApi";
 
-export default function CandidateAboutMeModal(props) {
+export default function EmployerAboutusModal(props) {
     const [open, setOpen] = React.useState(false);
     const [fullWidth, setFullWidth] = React.useState(true);
     const [maxWidth, setMaxWidth] = React.useState('sm');
     const [input, setInput] = useState({
         aboutMe: '',
     });
+    const[data, setData] = React.useState('sm');
 
     const onInputChange = e => {
         const {name, value} = e.target;
@@ -32,13 +31,15 @@ export default function CandidateAboutMeModal(props) {
         setOpen(true);
     };
 
+
     const handleClose = () => {
         setOpen(false);
     };
 
     const handleSave = () => {
         setOpen(false);
-        // przesłanie danych z formularza na backend
+
+        editEmployer(props.id,null,null,null,data)
     };
 
     return (

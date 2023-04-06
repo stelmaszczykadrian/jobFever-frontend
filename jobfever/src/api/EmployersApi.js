@@ -31,7 +31,8 @@ return {
     loading,
 };
 };
-export async function editEmployer(id, companyName, nameAndSurname, phoneNumber, localization) {
+export async function editEmployer(id, companyName, nameAndSurname, phoneNumber, localization, aboutUs) {
+    if (!aboutUs){
     await axios.put(url, {
         companyName: companyName,
         nameAndSurname: nameAndSurname,
@@ -40,5 +41,14 @@ export async function editEmployer(id, companyName, nameAndSurname, phoneNumber,
     },
         {
             params:{id:id}
-        });
+        });}
+    else{
+        await axios.put(url, {
+            aboutUs: aboutUs
+            },
+            {
+                params:{id:id}
+            });
+    }
+
 }

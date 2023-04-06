@@ -31,7 +31,7 @@ export default function EmployerProfilePersonalInfo(props){
     };
     const handleSaveClick = () => {
         setIsEdit(false);
-        editEmployer(props.id, companyName, nameAndSurname, phoneNumber, localization)
+        editEmployer(props.id, companyName, nameAndSurname, phoneNumber, localization, null)
     };
     React.useEffect(() => {
         if (!loading) {
