@@ -14,7 +14,8 @@ import {Radio, RadioGroup} from "@mui/joy";
 import RedButton from "../atoms/RedButton";
 import {Form} from "react-bootstrap";
 import axiosPost from "../../api/axiosFetch";
-import ButtonBox from "../molecules/ButtonBox";
+
+import TechnicalRequirementsContainer from "../molecules/TechnicalRequirementsContainer";
 
 const jobType = [
     {value: 'full-time', label: 'Full-time'},
@@ -39,10 +40,13 @@ const workOptions = [
 
 export default function JobOfferFormContainer() {
 
+    const [activeButtonIndex, setActiveButtonIndex] = useState();
+    const [pressedButtons, setPressedButtons] = useState([]);
+
     const [input, setInput] = useState({
         title: '',
         description: '',
-        technicalRequirements: '',
+        technicalRequirements: [],
         responsibilities: '',
         whoWeAreLookingFor: '',
         benefits: '',
@@ -72,15 +76,15 @@ export default function JobOfferFormContainer() {
             workOptions: input.workOptions
         };
 
-        axiosPost(userData,'http://localhost:8080/api/jobs')
+        console.log(userData)
+        // axiosPost(userData,'http://localhost:8080/api/jobs')
     };
 
-    let buttons = document.getElementById('6');
-    //console.log(buttons);
-    //
-    // buttons.addEventListener('click', (event) => {
-    //     console.log(event.target);
-    // })
+
+
+
+
+
 
     const onInputChange = e => {
         const {name, value} = e.target;
@@ -131,18 +135,7 @@ export default function JobOfferFormContainer() {
                         onChange={onInputChange}
                     />
                     <StyledInputLabel>Technical requirements:</StyledInputLabel>
-                    <ButtonBox
-                        placeholder="Enter technical requirements"
-                        name="technicalRequirements"
-                        value={input.technicalRequirements}
-                        //onChange={onClickButton}
-                    />
-                    {/*<StyledTextarea*/}
-                    {/*    placeholder="Enter technical requirements"*/}
-                    {/*    name="technicalRequirements"*/}
-                    {/*    value={input.technicalRequirements}*/}
-                    {/*    onChange={onInputChange}*/}
-                    {/*/>*/}
+                    <TechnicalRequirementsContainer pressedButtons={pressedButtons} setPressedButtons={setPressedButtons} input={input} setInput={setInput} />
                     <StyledInputLabel>Responsibilities:</StyledInputLabel>
                     <StyledTextarea
                         placeholder="Enter responsibilities"
@@ -198,7 +191,9 @@ export default function JobOfferFormContainer() {
                                     onChange={onCurrencyTypeChange}
                                 >
                                     {currencyType.map((option) => (
-                                        <option value={option.value}>{option.label}</option>
+                                        <option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </option>
                                     ))}
                                 </StyledCurrencyType>
                             </StyledGridItem>
@@ -222,7 +217,7 @@ export default function JobOfferFormContainer() {
                                     onChange={onJobTypeChange}
                                 >
                                     {jobType.map((option) => (
-                                        <option value={option.value}>{option.label}</option>
+                                        <option key={option.value} value={option.value}>{option.label}</option>
                                     ))}
                                 </StyledSelectJobType>
                             </StyledGridItem>

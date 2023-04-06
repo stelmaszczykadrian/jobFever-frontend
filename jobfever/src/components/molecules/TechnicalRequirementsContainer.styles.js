@@ -1,6 +1,7 @@
 import {styled} from "@mui/material";
 
-export const StyledBox = styled('box')`
+
+export const StyledContainer = styled('div')`
     display: flex;
     flex: content;
     border-radius: 20px;
@@ -9,4 +10,4 @@ export const StyledBox = styled('box')`
     grid-column-gap: 5px;
     justify-content: space-around;
     flex-direction: row;
-    font-family: 'monospace';`;
+    font-family: 'monospace'`;

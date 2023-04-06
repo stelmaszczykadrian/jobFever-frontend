@@ -1,9 +1,19 @@
 import JobOfferGrid from "../molecules/JobOfferGrid";
 import React, {useState, useRef, useCallback} from "react";
 import {StyledJobOffersContainer} from "./JobOffersContainer.styles";
+import {useJobsPagination} from "../../api/apiJobs";
+import TechnicalRequirementsContainer from "../molecules/TechnicalRequirementsContainer";
 import {useJobsPagination} from "../../api/JobsApi";
 
 export default function JobOffersContainer() {
+    const [activeButtonIndex, setActiveButtonIndex] = useState();
+    const [pressedButtons, setPressedButtons] = useState([]);
+
+    const [input, setInput] = useState({
+        technicalRequirements: [],
+    });
+
+
     const [pageNumber, setPageNumber] = useState(1)
     const [field, setField] = useState("")
     const [sortBy, setSortBy] = useState("postingDate")
@@ -31,6 +41,7 @@ export default function JobOffersContainer() {
 
     return (
         <StyledJobOffersContainer>
+            <TechnicalRequirementsContainer pressedButtons={pressedButtons} setPressedButtons={setPressedButtons} input={input} setInput={setInput} />
             {
                 jobs.map((job, index) => {
                     if (jobs.length === index + 1) {
