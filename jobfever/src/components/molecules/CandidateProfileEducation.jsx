@@ -1,7 +1,7 @@
 import {StyledTopBox, StyledProfilePaper, StyledBottomBox, StyledIconBox} from "./CandidateProfile.styles";
 import {Box} from "@mui/material";
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
-import React, {useState} from "react";
+import React from "react";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledAddIcon} from "../atoms/StyledAddIcon";
 import {StyledSchoolIcon} from "../atoms/StyledSchoolIcon";
@@ -12,8 +12,6 @@ import {useCandidateById} from "../../api/CandidateApi";
 export default function CandidateProfileEducation(props) {
 
     const {data, loading} = useCandidateById(props.id);
-    console.log(data)
-    console.log("TestData " + JSON.stringify(data.candidateEducations));
 
     if (!data || !data.candidateEducations) {
         return <div>Loading...</div>;
@@ -24,7 +22,7 @@ export default function CandidateProfileEducation(props) {
                 <StyledSchoolIcon/>
                 <ProfileContainerTitle text={'Education'}/>
                 <StyledIconBox>
-                    <ResponsiveDialog id={props.id} text={'Add education'} tag={<StyledAddIcon/>}/>
+                    <ResponsiveDialog candidate = {props} isNew={true} tag={<StyledAddIcon/>}/>
                 </StyledIconBox>
             </StyledTopBox>
             <StyledBottomBox>
@@ -32,7 +30,7 @@ export default function CandidateProfileEducation(props) {
                     <Box key={education.id}>
                         <span>{`Education ${education.id}: ${education.school}`}</span>
                         <StyledIconBox>
-                            <ResponsiveDialog id={props.id} text={'Edit education'} tag={<StyledEditIcon/>}/>
+                            <ResponsiveDialog candidate={props} education={education} isNew={false} tag={<StyledEditIcon/>}/>
                         </StyledIconBox>
                     </Box>
                 ))}

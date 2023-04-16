@@ -10,27 +10,30 @@ import {StyledGridContainer, StyledGridItem} from "../organisms/JobOfferFormCont
 import {RedButtonStyled} from "../atoms/RedButton.styles";
 import CalendarForm from "../organisms/CalendarForm";
 import IconButton from "@mui/material/IconButton";
+import {editCandidateEducation, addCandidateEducation} from "../../api/CandidateApi";
 
 export default function CandidateEducationModal(props) {
+    const title = (props.isNew ? "Add Education" : "Edit education");
+    const education = (props.isNew ? {
+        degree: '',
+        school: '',
+        fieldOfStudy: '',
+        startDate: '',
+        endDate: '',
+        description: ''
+    } : props.education);
+    const candidate = props.candidate;
+
     const [open, setOpen] = React.useState(false);
     const [fullWidth, setFullWidth] = React.useState(true);
     const [maxWidth, setMaxWidth] = React.useState('sm');
-    const [input, setInput] = useState({
-        school: '',
-        degree: '',
-        filedOfStudy: '',
-        startDate: '',
-        endDate: '',
-        description: '',
-    });
 
-    const onInputChange = e => {
-        const {name, value} = e.target;
-        setInput(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    }
+    const [school, setSchool] = useState(education.school);
+    const [degree, setDegree] = useState(education.degree);
+    const [fieldOfStudy, setFieldOfStudy] = useState(education.fieldOfStudy);
+    const [startDate, setStartDate] = useState(education.startDate);
+    const [endDate, setEndDate] = useState(education.endDate);
+    const [description, setDescription] = useState(education.description);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -40,9 +43,22 @@ export default function CandidateEducationModal(props) {
         setOpen(false);
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         setOpen(false);
-        // przesłanie danych z formularza na backend
+        const updatedEducationData = {
+            degree: degree,
+            description: description,
+            endDate: endDate,
+            fieldOfStudy: fieldOfStudy,
+            school: school,
+            startDate: startDate,
+        };
+
+        if (props.isNew) {
+            await addCandidateEducation(candidate.id, updatedEducationData)
+        } else {
+            await editCandidateEducation(candidate.id, education.id, updatedEducationData)
+        }
     };
 
     return (
@@ -58,7 +74,7 @@ export default function CandidateEducationModal(props) {
                 aria-labelledby="responsive-dialog-title"
             >
                 <DialogTitle id="responsive-dialog-title">
-                    {props.text}
+                    {title}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>School</DialogContentText>
@@ -67,52 +83,54 @@ export default function CandidateEducationModal(props) {
                             <Input
                                 placeholder="Ex. Boston University"
                                 name="school"
-                                value={input.school}
-                                onChange={onInputChange}
+                                value={school}
+                                onChange={(e) => setSchool(e.target.value)}
                             />
                         </StyledGridItem>
                     </StyledGridItem>
                     <p>
-                    <DialogContentText>Degree</DialogContentText>
-                    <StyledGridItem>
-                        <Input
-                            placeholder="Ex. Bechelor's"
-                            name="degree"
-                            value={input.degree}
-                            onChange={onInputChange}
-                        />
-                    </StyledGridItem>
+                        <DialogContentText>Degree</DialogContentText>
+                        <StyledGridItem>
+                            <Input
+                                placeholder="Ex. Bechelor's"
+                                name="degree"
+                                value={degree}
+                                onChange={(e) => setDegree(e.target.value)}
+                            />
+                        </StyledGridItem>
                     </p>
                     <DialogContentText>Filed of study</DialogContentText>
                     <StyledGridItem>
                         <Input
                             placeholder="Ex. Economy"
-                            name="filedOfStudy"
-                            value={input.filedOfStudy}
-                            onChange={onInputChange}
+                            name="fieldOfStudy"
+                            value={fieldOfStudy}
+                            onChange={(e) => setFieldOfStudy(e.target.value)}
                         />
                     </StyledGridItem>
                     <p>
-                    <StyledGridContainer>
-                        <StyledGridItem>
-                        <DialogContentText>
-                            Start date
-                        </DialogContentText>
-                            <CalendarForm
-                                name="startDate"
-                                value={input.startDate}
-                                onChange={onInputChange}/>
-                        </StyledGridItem>
-                        <StyledGridItem>
-                        <DialogContentText>
-                            End date
-                        </DialogContentText>
-                        <CalendarForm
-                            name="endDate"
-                            value={input.endDate}
-                            onChange={onInputChange}/>
-                        </StyledGridItem>
-                    </StyledGridContainer>
+                        <StyledGridContainer>
+                            <StyledGridItem>
+                                <DialogContentText>
+                                    Start date
+                                </DialogContentText>
+                                <CalendarForm
+                                    name="startDate"
+                                    value={startDate}
+                                    onChange={(e) => setStartDate(e.target.value)}
+                                />
+                            </StyledGridItem>
+                            <StyledGridItem>
+                                <DialogContentText>
+                                    End date
+                                </DialogContentText>
+                                <CalendarForm
+                                    name="endDate"
+                                    value={endDate}
+                                    onChange={(e) => setEndDate(e.target.value)}
+                                />
+                            </StyledGridItem>
+                        </StyledGridContainer>
                     </p>
                     <DialogContentText>
                         Description
@@ -121,8 +139,8 @@ export default function CandidateEducationModal(props) {
                         <Input
                             placeholder="Ex. Activity clubs, extra achievements"
                             name="description"
-                            value={input.description}
-                            onChange={onInputChange}
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
                         />
                     </StyledGridItem>
                 </DialogContent>

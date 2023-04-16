@@ -14,8 +14,8 @@ export default function ProfileContainer (props) {
         return (
             <StyledProfileContainer>
                 <CandidateProfilePersonalInformation id={id}/>
-                <CandidateProfileExperience/>
-                <CandidateProfileEducation/>
+                <CandidateProfileExperience id={id}/>
+                <CandidateProfileEducation id={id}/>
             </StyledProfileContainer>
         );
     }else{
