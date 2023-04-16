@@ -10,7 +10,6 @@ import RedButton from "../atoms/RedButton";
 import SocialMediaButtons from "../molecules/SocialMediaButtons";
 import Container from "@mui/material/Container";
 import {Form} from "react-bootstrap";
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import StyledText from "../atoms/StyledText";
 import {StyledUserInputValidation,StyledLabel,StyledRightContainer} from "./CandidateRegisterRightContainer.styles";
