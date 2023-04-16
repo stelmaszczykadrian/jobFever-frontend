@@ -18,31 +18,36 @@ import StyledText from "../atoms/StyledText";
 import DialogContentText from "@mui/material/DialogContentText";
 
 import TechnicalRequirementsContainer from "../molecules/TechnicalRequirementsContainer";
+import axios from "axios";
+import {createEmployer} from "../../api/EmployersApi";
+import {useNavigate} from "react-router-dom";
+import {createJobOffer} from "../../api/JobsApi";
+import axiosPost from "../../api/axiosFetch";
 
 const jobType = [
-    {value: 'full-time', label: 'Full-time'},
-    {value: 'part-time', label: 'Part-time'},
-    {value: 'contract', label: 'Contract'},
-    {value: 'freelance', label: 'Freelance'},
-    {value: 'internship', label: 'Internship'},
-    {value: 'temporary', label: 'Temporary'},
+    {value: 'FULLTIME', label: 'Full-time'},
+    {value: 'PART_TIME', label: 'Part-time'},
+    {value: 'CONTRACT', label: 'Contract'},
+    {value: 'FREELANCE', label: 'Freelance'},
+    {value: 'INTERNSHIP', label: 'Internship'},
+    {value: 'TEMPORARY', label: 'Temporary'},
 ];
 
 const currencyType = [
-    {value: 'pln', label: 'PLN'},
-    {value: 'euro', label: 'EURO'},
-    {value: 'dollar', label: 'DOLLAR'},
+    {value: 'PLN', label: 'PLN'},
+    {value: 'EURO', label: 'EURO'},
+    {value: 'DOLLAR', label: 'DOLLAR'},
 ];
 
-const workOptions = [
-    {label: 'Remote', value: 'remote'},
-    {label: 'On-site', value: 'on-site'},
-    {label: 'Hybrid', value: 'hybrid'}
+const workType = [
+    {value: 'REMOTE', label: 'remote'},
+    {value: 'ONSITE', label: 'on-site'},
+    {value: 'HYBRID', label: 'hybrid'},
 ];
 
 export default function JobOfferFormContainer() {
-
-    const [activeButtonIndex, setActiveButtonIndex] = useState();
+    const navigate = useNavigate();
+    // const [activeButtonIndex, setActiveButtonIndex] = useState();
     const [pressedButtons, setPressedButtons] = useState([]);
 
     const [input, setInput] = useState({
@@ -57,10 +62,10 @@ export default function JobOfferFormContainer() {
         salaryTo: '',
         jobType: '',
         currencyType: '',
-        workOptions: ''
+        workType: ''
     });
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         const userData = {
@@ -75,11 +80,33 @@ export default function JobOfferFormContainer() {
             salaryTo: input.salaryTo,
             jobType: input.jobType,
             currencyType: input.currencyType,
-            workOptions: input.workOptions
+            workType: input.workType
         };
 
         console.log(userData)
-        // axiosPost(userData,'http://localhost:8080/api/jobs')
+
+        try {
+
+            const response = await createJobOffer(userData);
+            console.log(response);
+            setTimeout(() => {
+                navigate('/jobs');
+            }, 2000);
+        } catch (error) {
+            if (error.response) {
+                if (error.response.data === "Employer already exists.") {
+                    console.log("TEst")
+                } else {
+                    console.log(error.response);
+                    console.log("server responded");
+                }
+            } else if (error.request) {
+                console.log("network error");
+            } else {
+                console.log(error);
+            }
+        }
+
     };
 
 
@@ -113,7 +140,7 @@ export default function JobOfferFormContainer() {
     const onOptionRadioTypeChange = (e) => {
         setInput((prev) => ({
             ...prev,
-            workOptions: e.target.value,
+            workType: e.target.value,
         }));
     };
 
@@ -236,8 +263,8 @@ export default function JobOfferFormContainer() {
                             </p>
                         </StyledGridItem>
                         <StyledGridContainer>
-                            <RadioGroup value={input.workOptions} onChange={onOptionRadioTypeChange}>
-                                {workOptions.map((work) => (
+                            <RadioGroup value={input.workType} onChange={onOptionRadioTypeChange}>
+                                {workType.map((work) => (
                                     <Radio sx={{color: 'white'}}
                                         key={work.value}
                                         color="danger"

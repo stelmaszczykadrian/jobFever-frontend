@@ -68,3 +68,9 @@ export const getJobOfferById = async (id) => await axios.get(`http://localhost:8
 
 
 
+
+
+export const createJobOffer = async(userData) =>{
+    return await axios.post(urls[1],userData);
+}
+
