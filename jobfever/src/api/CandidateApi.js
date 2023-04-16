@@ -6,7 +6,6 @@ const url = "http://localhost:8080/api/candidates/";
 export const useCandidateById = (id) => {
     const [candidate, setCandidate] = useState({});
     const [loading, setLoading] = useState(true);
-    console.log(id)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,5 +36,31 @@ export async function editCandidate(id, updatedCandidateData) {
         },
         {
             params:{id:id}
+        });
+}
+
+export async function editCandidateEducation(candidateId, educationId, updatedCandidateEducationData) {
+    await axios.put(`http://localhost:8080/api/candidates/${candidateId}/education/${educationId}`, {
+            degree: updatedCandidateEducationData.degree,
+            description: updatedCandidateEducationData.description,
+            endDate: updatedCandidateEducationData.endDate,
+            fieldOfStudy: updatedCandidateEducationData.fieldOfStudy,
+            school: updatedCandidateEducationData.school,
+            startDate: updatedCandidateEducationData.startDate
+        },
+        {
+        });
+}
+
+export async function addCandidateEducation(candidateId, updatedCandidateEducationData) {
+    await axios.post(`http://localhost:8080/api/candidates/${candidateId}/education`, {
+            degree: updatedCandidateEducationData.degree,
+            description: updatedCandidateEducationData.description,
+            endDate: updatedCandidateEducationData.endDate,
+            fieldOfStudy: updatedCandidateEducationData.fieldOfStudy,
+            school: updatedCandidateEducationData.school,
+            startDate: updatedCandidateEducationData.startDate
+        },
+        {
         });
 }
