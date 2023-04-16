@@ -6,41 +6,36 @@ import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledAddIcon} from "../atoms/StyledAddIcon";
 import {StyledSchoolIcon} from "../atoms/StyledSchoolIcon";
 import ResponsiveDialog from "./CandidateEducationModal";
+import {useCandidateById} from "../../api/CandidateApi";
 
 
-export default function CandidateProfileEducation() {
+export default function CandidateProfileEducation(props) {
 
-    const [isEdit, setIsEdit] = useState(false);
+    const {data, loading} = useCandidateById(props.id);
+    console.log(data)
+    console.log("TestData " + JSON.stringify(data.candidateEducations));
 
-    const handleEditClick = () => {
-        setIsEdit(true);
-    };
-    const handleSaveEditClick = () => {
-        setIsEdit(false);
-    };
-
+    if (!data || !data.candidateEducations) {
+        return <div>Loading...</div>;
+    }
     return (
         <StyledProfilePaper>
             <StyledTopBox>
                 <StyledSchoolIcon/>
                 <ProfileContainerTitle text={'Education'}/>
                 <StyledIconBox>
-                    <ResponsiveDialog text={'Add education'} tag={<StyledAddIcon/>}/>
+                    <ResponsiveDialog id={props.id} text={'Add education'} tag={<StyledAddIcon/>}/>
                 </StyledIconBox>
             </StyledTopBox>
             <StyledBottomBox>
-                <Box>
-                    <span>Education 1</span>
-                    <StyledIconBox>
-                        <ResponsiveDialog text={'Edit education'} tag={<StyledEditIcon/>}/>
-                    </StyledIconBox>
-                </Box>
-                <Box>
-                    <span>Education 2</span>
-                    <StyledIconBox>
-                        <ResponsiveDialog text={'Edit education'} tag={<StyledEditIcon/>}/>
-                    </StyledIconBox>
-                </Box>
+                {data.candidateEducations.map((education) => (
+                    <Box key={education.id}>
+                        <span>{`Education ${education.id}: ${education.school}`}</span>
+                        <StyledIconBox>
+                            <ResponsiveDialog id={props.id} text={'Edit education'} tag={<StyledEditIcon/>}/>
+                        </StyledIconBox>
+                    </Box>
+                ))}
             </StyledBottomBox>
         </StyledProfilePaper>
     );
