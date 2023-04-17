@@ -1,57 +1,70 @@
 import JobOfferGrid from "../molecules/JobOfferGrid";
 import React, {useState, useRef, useCallback} from "react";
 import {StyledJobOffersContainer} from "./JobOffersContainer.styles";
-import TechnicalRequirementsContainer from "../molecules/TechnicalRequirementsContainer";
 import {useJobsPagination} from "../../api/JobsApi";
 import JobsPageSortComponent from "../molecules/JobsPageSortComponent";
+import {useNavigate} from "react-router-dom";
+
+
 
 export default function JobOffersContainer() {
-    const [pressedButtons, setPressedButtons] = useState([]);
+    const navigate = useNavigate();
 
-    const [input, setInput] = useState({
-        technicalRequirements: [],
-    });
+    const handleJobClick = (jobId) => {
+        console.log(jobId)
+        navigate(`/job/${jobId}`);
+    };
 
-
-    const [pageNumber, setPageNumber] = useState(1)
-    const [field, setField] = useState("")
-    const [sortBy, setSortBy] = useState("postingDate")
+    const [pageNumber, setPageNumber] = useState(1);
+    const [field, setField] = useState("");
+    const [sortBy, setSortBy] = useState("postingDate");
 
     const {
         jobs,
         hasMore,
         loading,
-        error
-    } = useJobsPagination(pageNumber, sortBy, field)
+        error,
+    } = useJobsPagination(pageNumber, sortBy, field);
 
-    const observer = useRef()
-    let lastJobElementRef = useCallback(node => {
-        if (loading) return
-        if (observer.current) {
-            observer.current.disconnect()
-        }
-        observer.current = new IntersectionObserver(entries => {
-            if (entries[0].isIntersecting && hasMore) {
-                setPageNumber(prevPageNumber => prevPageNumber + 1)
-            }
-        })
-        if (node) observer.current.observe(node)
-    }, [loading, hasMore])
+    const lastJobElementRef = useCallback(
+        (node) => {
+            if (loading) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && hasMore) {
+                    setPageNumber((prevPageNumber) => prevPageNumber + 1);
+                }
+            });
+
+            if (node) observer.observe(node);
+
+            return () => observer.disconnect();
+        },
+        [loading, hasMore]
+    );
 
     return (
         <StyledJobOffersContainer>
-            <JobsPageSortComponent/>
-            {
-                jobs.map((job, index) => {
-                    if (jobs.length === index + 1) {
-                        return (<div key={index} ref={lastJobElementRef}><JobOfferGrid job={job}/></div>)
-                    } else {
-                        return (<JobOfferGrid job={job} key={index}/>)
-                    }
-                })
-            }
-            <div>{loading && 'loading'}</div>
-            <div>{error && 'error when loading jobs'}</div>
+            <JobsPageSortComponent />
+            {jobs.map((job, index) => {
+                if (jobs.length === index + 1) {
+                    return (
+                        <div key={job.id} ref={lastJobElementRef}>
+                            <JobOfferGrid job={job} onClick={() => handleJobClick(job.jobId)} />
+                        </div>
+                    );
+                } else {
+                    return (
+                        <JobOfferGrid
+                            job={job}
+                            onClick={() => handleJobClick(job.jobId)}
+                            key={job.id}
+                        />
+                    );
+                }
+            })}
+            {loading && <div>loading</div>}
+            {error && <div>error when loading jobs</div>}
         </StyledJobOffersContainer>
-    )
+    );
 }
