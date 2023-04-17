@@ -4,10 +4,12 @@ import Typography from "@mui/joy/Typography";
 import {Img, StyledPaper} from "./JobOfferGrid.styles";
 import img from "../../images/logo.png";
 
-export default function JobOfferGrid({job}) {
-
+export default function JobOfferGrid({job, onClick}) {
+    const handleJobClick = () => {
+        onClick(job.jobId);
+    };
     return (
-        <StyledPaper>
+        <StyledPaper onClick={() => handleJobClick()}>
             <Grid container spacing={2}>
                 <Grid item>
                     <ButtonBase sx={{ width: 128, height: 128 }}>
