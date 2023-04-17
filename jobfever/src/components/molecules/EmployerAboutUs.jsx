@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import {StyledBottomBox, StyledIconBox, StyledProfilePaper, StyledTopBox} from "./CandidateProfile.styles";
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
-import ResponsiveDialog from "./CandidateEducationModal";
 import {Box} from "@mui/material";
 import EmployerAboutusModal from "./EmployerAboutusModal";
 import {StyledAddIcon} from "../atoms/StyledAddIcon";
+import {StyledEditIcon} from "../atoms/StyledEditIcon";
 
 export default function EmployerAboutUs(props) {
     const [isEdit, setIsEdit] = useState(false);
@@ -22,15 +22,15 @@ export default function EmployerAboutUs(props) {
             <StyledTopBox>
                 <ProfileContainerTitle text={'About Us'}/>
                 <StyledIconBox>
-                    <ResponsiveDialog/>
+                    {/* Add button */}
+                    <EmployerAboutusModal id={props.id} text={'About Us..'} tag={<StyledAddIcon/>}/>
                 </StyledIconBox>
             </StyledTopBox>
             <StyledBottomBox>
                 <Box>
-
                     <StyledIconBox>
                         {/* Edit button */}
-                        <EmployerAboutusModal id={props.id} text={'About Us..'} tag={<StyledAddIcon/>}/>
+                        <EmployerAboutusModal id={props.id} text={'About Us..'} tag={<StyledEditIcon/>}/>
                     </StyledIconBox>
                 </Box>
             </StyledBottomBox>
