@@ -3,9 +3,9 @@ import React, {useState, useRef, useCallback} from "react";
 import {StyledJobOffersContainer} from "./JobOffersContainer.styles";
 import TechnicalRequirementsContainer from "../molecules/TechnicalRequirementsContainer";
 import {useJobsPagination} from "../../api/JobsApi";
+import JobsPageSortComponent from "../molecules/JobsPageSortComponent";
 
 export default function JobOffersContainer() {
-    const [activeButtonIndex, setActiveButtonIndex] = useState();
     const [pressedButtons, setPressedButtons] = useState([]);
 
     const [input, setInput] = useState({
@@ -40,7 +40,7 @@ export default function JobOffersContainer() {
 
     return (
         <StyledJobOffersContainer>
-            <TechnicalRequirementsContainer pressedButtons={pressedButtons} setPressedButtons={setPressedButtons} input={input} setInput={setInput} />
+            <JobsPageSortComponent/>
             {
                 jobs.map((job, index) => {
                     if (jobs.length === index + 1) {
