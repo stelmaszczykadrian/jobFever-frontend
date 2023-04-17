@@ -1,20 +1,33 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {StyledSingleOfferMainComponent} from "./SingleOfferMainComponent.styles";
 import SingleOfferLeftContainer from "../organisms/SingleOfferLeftContainer";
 import SingleOfferRightContainer from "../organisms/SingleOfferRightContainer";
 import Navbar from "../molecules/Navbar";
+import {useParams} from "react-router-dom";
+import {getJobOfferById} from "../../api/JobsApi";
 
 function SingleOfferMainComponent() {
-    return (
+
+    const {id} = useParams();
+    const [jobDetails, setJobDetails] = useState();
+
+    useEffect(() => {
+        const fetchOffer = async () => {
+            const {data} = await getJobOfferById(id);
+            setJobDetails(data)
+            console.log(data)
+        };
+        fetchOffer()
+    }, [id]);
+
+    return jobDetails ? (
         <StyledSingleOfferMainComponent>
             <Navbar />
             <div style={{display:"flex", flexDirection:"row"}}>
-                <SingleOfferLeftContainer />
-                <SingleOfferRightContainer />
+                <SingleOfferLeftContainer offerDetails={jobDetails}/>
+                <SingleOfferRightContainer offerDetails={jobDetails}/>
             </div>
-            {/*<SingleOfferLeftContainer />*/}
-            {/*<SingleOfferRightContainer />*/}
         </StyledSingleOfferMainComponent>
-    );
+    ): <div>Loading</div>;
 }
 export default SingleOfferMainComponent;

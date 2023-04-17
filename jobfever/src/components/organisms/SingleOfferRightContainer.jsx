@@ -2,10 +2,10 @@ import React from "react";
 import {StyledSingleOfferRightContainer} from "./SingleOfferRightContainer.styles";
 import SingleOfferDetailsContainer from "../molecules/SingleOfferDetailsContainer";
 
-function SingleOfferRightContainer() {
+function SingleOfferRightContainer(props) {
     return (
         <StyledSingleOfferRightContainer>
-            <SingleOfferDetailsContainer />
+            <SingleOfferDetailsContainer {...props}/>
         </StyledSingleOfferRightContainer>
     );
 }
