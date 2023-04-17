@@ -60,19 +60,11 @@ export const useJobsByName = (id) => {
     };
 };
 
-export const useGetJobOfferById = () => {
+export const getJobOfferById = async (id) => await axios.get(`http://localhost:8080/api/jobs/${id}`);
 
-    const {id} = useParams();
-    const [jobDetails, setJobDetails] = useState({});
 
-    useEffect(() => {
-        const fetchOffer = async () => {
-            const {data} = await axios.get(`http://localhost:8080/api/jobs/${id}`);
-            setJobDetails(data)
-        };
-        fetchOffer()
-    }, [id]);
 
-    return jobDetails;
 
-}
+
+
+

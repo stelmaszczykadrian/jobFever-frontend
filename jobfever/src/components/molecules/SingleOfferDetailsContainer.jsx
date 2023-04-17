@@ -1,11 +1,10 @@
 import React from "react";
 import {StyledSingleOfferDetailsContainer} from "./SingleOfferDetailsContainer.styles";
 import RedButton from "../atoms/RedButton";
-import {useGetJobOfferById} from "../../api/JobsApi";
 
-function SingleOfferDetailsContainer() {
+function SingleOfferDetailsContainer(props) {
 
-    const offerDetails = useGetJobOfferById();
+    const {offerDetails} = props;
 
     return (
         <StyledSingleOfferDetailsContainer>
