@@ -63,3 +63,28 @@ export const getJobOfferById = async (id) => await axios.get(`http://localhost:8
 
 
 
+
+
+export const createJob = (userData, onSuccess, onError) => {
+    const url = "http://localhost:8080/api/jobs";
+    axios.post(url, userData)
+        .then((response) => {
+            console.log(response);
+            if (response.status === 200 && response.data === "Job added successfully.") {
+                onSuccess();
+            }
+        })
+        .catch((error) => {
+            if (error.response) {
+                const errorMessages = error.response.data.split(". ");
+                onError(errorMessages);
+                console.log(error.response);
+                console.log("server responded");
+            } else if (error.request) {
+                console.log("network error");
+            } else {
+                console.log(error);
+            }
+        });
+};
+
