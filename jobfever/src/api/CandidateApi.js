@@ -66,3 +66,32 @@ export async function addCandidateEducation(candidateId, updatedCandidateEducati
             return error
         })
 }
+
+export async function editCandidateExperience(candidateId, experienceId, updatedCandidateExperienceData) {
+    return await axios.put(`http://localhost:8080/api/candidates/${candidateId}/experience/${experienceId}`, {
+        position: updatedCandidateExperienceData.position,
+        companyName: updatedCandidateExperienceData.companyName,
+        location: updatedCandidateExperienceData.location,
+        startDate: updatedCandidateExperienceData.startDate,
+        endDate: updatedCandidateExperienceData.endDate,
+        industry: updatedCandidateExperienceData.industry,
+        description: updatedCandidateExperienceData.description
+    }).catch(error => {
+        return error
+    })
+}
+
+export async function addCandidateExperience(candidateId, updatedCandidateExperienceData) {
+    return await axios.post(`http://localhost:8080/api/candidates/${candidateId}/experience`, {
+        position: updatedCandidateExperienceData.position,
+        companyName: updatedCandidateExperienceData.companyName,
+        location: updatedCandidateExperienceData.location,
+        startDate: updatedCandidateExperienceData.startDate,
+        endDate: updatedCandidateExperienceData.endDate,
+        industry: updatedCandidateExperienceData.industry,
+        description: updatedCandidateExperienceData.description
+    })
+        .catch(error => {
+            return error
+        })
+}
