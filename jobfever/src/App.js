@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import CandidateLogin from "./pages/CandidateLogin";
 import CandidateRegister from "./pages/CandidateRegister";
@@ -8,46 +8,44 @@ import EmployerRegister from "./pages/EmployersRegister";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import NoPage from "./pages/NoPage";
-import Layout from "./pages/Layout";
 import JobsPage from "./pages/JobsPage";
 import JobOfferForm from "./pages/JobOfferForm";
 import ForEmployers from "./pages/ForEmployers";
 import Contact from "./pages/Contact";
 import SingleOfferPage from "./pages/SingleOfferPage";
 import EmployerProfile from "./pages/EmployerProfile";
-import Cookies from "js-cookie"
-import {useUser} from "./userProvider/UserProvider";
-import AuthProvider from "./pages/PrivateRouter/PrivateRouter";
+import AuthProvider from "./pages/AuthProvider/AuthProvider";
+import Layout from "./pages/Layout";
 
 function App() {
-  return (
-      <AuthProvider> <BrowserRouter>
-            {/*<Layout>*/}
-                <Routes>
+    return (
+        <AuthProvider>
+            <BrowserRouter>
+                <Layout>
+                    {/*<Layout>*/}
+                    <Routes>
 
-                    <Route path="/" element={<Home />} />
-                    <Route path="/candidate/register" element={<CandidateRegister />} />
-                    <Route path="/candidate/login" element={<CandidateLogin />} />
-                    <Route path="/candidate/:id" element={<CandidateProfile/>} />
-                    <Route path="/employer/login" element={<EmployerLogin />} />
-                    <Route path="/employer/register" element={<EmployerRegister />} />
-                    <Route path="/employer/:id" element={<EmployerProfile />}  />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/add-job" element={<JobOfferForm />} />
-                    <Route path="/jobs" element=
-                        {
-                        <JobsPage />
-                    } />
-                    <Route path="/for-employers" element={<ForEmployers />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/job/:id" element={<SingleOfferPage />} />
-                    <Route path="*" element={<NoPage/>}></Route>
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="/candidate/register" element={<CandidateRegister/>}/>
+                        <Route path="/candidate/login" element={<CandidateLogin/>}/>
+                        <Route path="/candidate/:id" element={<CandidateProfile/>}/>
+                        <Route path="/employer/login" element={<EmployerLogin/>}/>
+                        <Route path="/employer/register" element={<EmployerRegister/>}/>
+                        <Route path="/employer/:id" element={<EmployerProfile/>}/>
+                        <Route path="/about" element={<About/>}/>
+                        <Route path="/add-job" element={<JobOfferForm/>}/>
+                        <Route path="/jobs" element={<JobsPage/>}/>
+                        <Route path="/for-employers" element={<ForEmployers/>}/>
+                        <Route path="/contact" element={<Contact/>}/>
+                        <Route path="/job/:id" element={<SingleOfferPage/>}/>
+                        <Route path="*" element={<NoPage/>}></Route>
 
-                </Routes>
-
+                    </Routes>
+                </Layout>
                 {/*</Layout>*/}
-        </BrowserRouter></AuthProvider>
-  );
+            </BrowserRouter>
+        </AuthProvider>
+    );
 }
 
 export default App;
