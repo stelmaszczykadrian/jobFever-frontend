@@ -1,10 +1,12 @@
 import axios from "axios";
 
 export default function axiosPost(userData, url) {
+
     axios
         .post(url, userData)
         .then((response) => {
             console.log(response);
+                return response
         })
         .catch((error) => {
             if (error.response) {

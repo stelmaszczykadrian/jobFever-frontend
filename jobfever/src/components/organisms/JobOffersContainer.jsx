@@ -4,11 +4,13 @@ import {StyledJobOffersContainer} from "./JobOffersContainer.styles";
 import {useJobsPagination} from "../../api/JobsApi";
 import JobsPageSortComponent from "../molecules/JobsPageSortComponent";
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "../../pages/PrivateRouter/PrivateRouter";
 
 
 
 export default function JobOffersContainer() {
     const navigate = useNavigate();
+    console.log(useAuth())
 
     const handleJobClick = (jobId) => {
         console.log(jobId)
