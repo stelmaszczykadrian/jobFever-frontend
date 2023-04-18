@@ -55,21 +55,9 @@ export const StyledCurrencyType = styled("select")`
  
 `
 
-export const StyledInputLabel = styled("div")`
-  font-size: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  text-color: white;
-`
-
 export const StyledButtonCenter = styled("div")`
   text-align: center;
 `
-
-
-// export const StyledRedButtonModalButton = styled("button")`
-//
-// `
 
 export const StyledRedButtonModalButton = styled(Button)(() => ({
     alignSelf: 'center',
