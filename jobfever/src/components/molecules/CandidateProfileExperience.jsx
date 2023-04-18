@@ -5,57 +5,57 @@ import {
 } from "./CandidateProfile.styles";
 import {Box} from "@mui/material";
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
-import IconButton from "@mui/material/IconButton";
 import React, {useState} from "react";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
-import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
 import {StyledWorkIcon} from "../atoms/StyledWorkIcon";
 import {StyledAddIcon} from "../atoms/StyledAddIcon";
 import CandidateExperienceModal from "./CandidateExperienceModal";
+import {useCandidateById} from "../../api/CandidateApi";
 
-export default function CandidateProfileExperience() {
+export default function CandidateProfileExperience(props) {
 
-    const [isEdit, setIsEdit] = useState(false);
-    const [isAdd, setIsAdd] = useState(false);
+    const {data, loading} = useCandidateById(props.id);
+    const [experiences, setExperiences] = useState([]);
 
-    const handleAddClick = () => {
-        setIsAdd(true);
-    };
+    React.useEffect(() => {
+        if (data.candidateExperiences) {
+            setExperiences(data.candidateExperiences);
+        }
+    }, [data.candidateExperiences]);
 
-    const handleSaveAddClick = () => {
-        setIsAdd(false);
-    };
-
-    const handleEditClick = () => {
-        setIsEdit(true);
-    };
-    const handleSaveEditClick = () => {
-        setIsEdit(false);
-    };
-
-    return (
-        <StyledProfilePaper>
-            <StyledTopBox>
-                <StyledWorkIcon/>
-                <ProfileContainerTitle text={'Experience'}/>
-                <StyledIconBox>
-                    <CandidateExperienceModal text={'Add experience'} tag={<StyledAddIcon/>}/>
-                </StyledIconBox>
-            </StyledTopBox>
-            <StyledBottomBox>
-                <Box>
-                    <span>Experience 1</span>
+    if (!data || !data.candidateExperiences) {
+        return <div>Loading...</div>;
+    } else {
+        return (
+            <StyledProfilePaper>
+                <StyledTopBox>
+                    <StyledWorkIcon/>
+                    <ProfileContainerTitle text={'Experience'}/>
                     <StyledIconBox>
-                        <CandidateExperienceModal text={'Edit experience'} tag={<StyledEditIcon/>}/>
+                        <CandidateExperienceModal
+                            candidate={props}
+                            isNew={true}
+                            setExperiences={setExperiences}
+                            tag={<StyledAddIcon/>}/>
                     </StyledIconBox>
-                </Box>
-                <Box>
-                    <span>Experience 2</span>
-                    <StyledIconBox>
-                        <CandidateExperienceModal text={'Edit experience'} tag={<StyledEditIcon/>}/>
-                    </StyledIconBox>
-                </Box>
-            </StyledBottomBox>
-        </StyledProfilePaper>
-    );
+                </StyledTopBox>
+                <StyledBottomBox>
+                    {experiences.sort((a,b) => a.id - b.id).map((experience) => (
+                        <Box key={experience.id}>
+                            <span>{`Experience ${experience.id}: ${experience.position}`}</span>
+                            <StyledIconBox>
+                            <CandidateExperienceModal
+                                candidate={props}
+                                experience={experience}
+                                setExperiences={setExperiences}
+                                isNew={false}
+                                tag={<StyledEditIcon/>}
+                            />
+                        </StyledIconBox>
+                    </Box>
+                    ))}
+                </StyledBottomBox>
+            </StyledProfilePaper>
+        );
+    }
 }

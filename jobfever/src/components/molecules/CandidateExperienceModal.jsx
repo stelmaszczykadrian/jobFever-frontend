@@ -10,29 +10,37 @@ import {StyledGridContainer, StyledGridItem} from "../organisms/JobOfferFormCont
 import {RedButtonStyled} from "../atoms/RedButton.styles";
 import CalendarForm from "../organisms/CalendarForm";
 import IconButton from "@mui/material/IconButton";
+import {
+    addCandidateEducation,
+    addCandidateExperience,
+    editCandidateEducation,
+    editCandidateExperience
+} from "../../api/CandidateApi";
 
 export default function CandidateExperienceModal(props) {
-
-    const [open, setOpen] = React.useState(false);
-    const [fullWidth, setFullWidth] = React.useState(true);
-    const [maxWidth, setMaxWidth] = React.useState('sm');
-    const [input, setInput] = useState({
+    const title = (props.isNew ? "Add Education" : "Edit education");
+    const experience = (props.isNew ? {
         position: '',
         companyName: '',
         location: '',
         startDate: '',
         endDate: '',
         industry: '',
-        description: '',
-    });
+        description: ''
+    } : props.experience);
+    const candidate = props.candidate;
 
-    const onInputChange = e => {
-        const {name, value} = e.target;
-        setInput(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    }
+    const [open, setOpen] = React.useState(false);
+    const [fullWidth, setFullWidth] = React.useState(true);
+    const [maxWidth, setMaxWidth] = React.useState('sm');
+
+    const [position, setPosition] = useState(experience.position);
+    const [companyName, setCompanyName] = useState(experience.companyName);
+    const [location, setLocation] = useState(experience.location);
+    const [startDate, setStartDate] = useState(experience.startDate);
+    const [endDate, setEndDate] = useState(experience.endDate);
+    const [industry, setIndustry] = useState(experience.industry);
+    const [description, setDescription] = useState(experience.description);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -42,9 +50,61 @@ export default function CandidateExperienceModal(props) {
         setOpen(false);
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         setOpen(false);
-        // przesłanie danych z formularza na backend
+        const updatedExperienceData = {
+            position: position,
+            companyName: companyName,
+            location: location,
+            startDate: startDate,
+            endDate: endDate,
+            industry: industry,
+            description: description,
+        }
+
+        let expBeforeChange = props.experience;
+
+        if (props.isNew) {
+            const temp_id = "temp-" + crypto.randomUUID();
+            props.setExperiences((experiences) => {
+                experiences.push({...updatedExperienceData, id: temp_id});
+                return [...experiences];
+            });
+            await addCandidateExperience(candidate.id, updatedExperienceData)
+                .then(res => {
+                        if (res.status != 200) {
+                            props.setExperiences((experiences) => {
+                                experiences.pop();
+                                return [...experiences];
+                            });
+                        } else {
+                            props.setExperiences((experiences) => {
+                                let expIdx = experiences.findIndex((exp => exp.id == temp_id));
+                                experiences[expIdx] = {...experiences[expIdx], id: res.data};
+                                return [...experiences];
+                            })
+                        }
+                    }
+                )
+
+        } else {
+            props.setExperiences((experiences) => {
+                const expIdx = experiences.findIndex((exp => exp.id == experience.id));
+                experiences[expIdx] = {...experiences[expIdx], ...updatedExperienceData};
+                return [...experiences];
+            });
+            await editCandidateExperience(candidate.id, experience.id, updatedExperienceData)
+                .then(res => {
+                        if (res.status != 200) {
+                            props.setExperiences((experiences) => {
+                                const expIdx = experiences.findIndex((exp => exp.id == experience.id));
+                                experiences[expIdx] = {...experiences[expIdx], ...expBeforeChange};
+                                return [...experiences];
+                            });
+                        }
+                    }
+                )
+        }
     };
 
     return (
@@ -60,7 +120,7 @@ export default function CandidateExperienceModal(props) {
                 aria-labelledby="responsive-dialog-title"
             >
                 <DialogTitle id="responsive-dialog-title">
-                    {props.text}
+                    {title}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>Position</DialogContentText>
@@ -69,8 +129,8 @@ export default function CandidateExperienceModal(props) {
                             <Input
                                 placeholder="Ex. Frontend developer"
                                 name="position"
-                                value={input.position}
-                                onChange={onInputChange}
+                                value={position}
+                                onChange={(e) => setPosition(e.target.value)}
                             />
                         </StyledGridItem>
                     </StyledGridItem>
@@ -80,8 +140,8 @@ export default function CandidateExperienceModal(props) {
                             <Input
                                 placeholder="Ex. jobFever"
                                 name="companyName"
-                                value={input.companyName}
-                                onChange={onInputChange}
+                                value={companyName}
+                                onChange={(e) => setCompanyName(e.target.value)}
                             />
                         </StyledGridItem>
                     </p>
@@ -90,8 +150,8 @@ export default function CandidateExperienceModal(props) {
                         <Input
                             placeholder="Ex. London"
                             name="location"
-                            value={input.filedOfStudy}
-                            onChange={onInputChange}
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
                         />
                     </StyledGridItem>
                     <p>
@@ -102,8 +162,8 @@ export default function CandidateExperienceModal(props) {
                                 </DialogContentText>
                                 <CalendarForm
                                     name="startDate"
-                                    value={input.startDate}
-                                    onChange={onInputChange}/>
+                                    value={startDate}
+                                    onChange={(e) => setStartDate(e.target.value)}/>
                             </StyledGridItem>
                             <StyledGridItem>
                                 <DialogContentText>
@@ -111,8 +171,8 @@ export default function CandidateExperienceModal(props) {
                                 </DialogContentText>
                                 <CalendarForm
                                     name="endDate"
-                                    value={input.endDate}
-                                    onChange={onInputChange}/>
+                                    value={endDate}
+                                    onChange={(e) => setEndDate(e.target.value)}/>
                             </StyledGridItem>
                         </StyledGridContainer>
                     </p>
@@ -123,8 +183,8 @@ export default function CandidateExperienceModal(props) {
                         <Input
                             placeholder="Ex. Gaming, Software, Hardware, IT consultant"
                             name="industry"
-                            value={input.industry}
-                            onChange={onInputChange}
+                            value={industry}
+                            onChange={(e) => setIndustry(e.target.value)}
                         />
                     </StyledGridItem>
                     <p>
@@ -135,8 +195,8 @@ export default function CandidateExperienceModal(props) {
                         <Input
                             placeholder="Ex. Work responsibilities"
                             name="description"
-                            value={input.description}
-                            onChange={onInputChange}
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
                         />
                     </StyledGridItem>
                     </p>
