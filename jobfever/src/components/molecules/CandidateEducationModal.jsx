@@ -54,10 +54,51 @@ export default function CandidateEducationModal(props) {
             startDate: startDate,
         };
 
+        let eduBeforeChange = props.education;
+
         if (props.isNew) {
+            const temp_id = "temp-" + crypto.randomUUID();
+
+            props.setEducations((educations) => {
+                educations.push({...updatedEducationData, id: temp_id});
+
+                return [...educations];
+            });
             await addCandidateEducation(candidate.id, updatedEducationData)
+                .then(res => {
+                    console.log("response: ", res.data);
+                        if (res.status != 200) {
+                            props.setEducations((educations) => {
+                                educations.pop();
+                                return [...educations];
+                            });
+                        } else {
+                            props.setEducations((educations) => {
+                                let eduIdx = educations.findIndex((edu => edu.id == temp_id));
+                                educations[eduIdx] = {...educations[eduIdx], id: res.data};
+                                return [...educations];
+                            })
+                        }
+                    }
+                )
+
         } else {
+            props.setEducations((educations) => {
+                const eduIdx = educations.findIndex((edu => edu.id == education.id));
+                educations[eduIdx] = {...educations[eduIdx], ...updatedEducationData};
+                return [...educations];
+            });
             await editCandidateEducation(candidate.id, education.id, updatedEducationData)
+                .then(res => {
+                        if (res.status != 200) {
+                            props.setEducations((educations) => {
+                                const eduIdx = educations.findIndex((edu => edu.id == education.id));
+                                educations[eduIdx] = {...educations[eduIdx], ...eduBeforeChange};
+                                return [...educations];
+                            });
+                        }
+                    }
+                )
         }
     };
 

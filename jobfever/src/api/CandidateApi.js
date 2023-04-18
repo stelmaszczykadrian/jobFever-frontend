@@ -1,5 +1,6 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
+import * as React from "react";
 
 const url = "http://localhost:8080/api/candidates/";
 
@@ -10,7 +11,7 @@ export const useCandidateById = (id) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data: response } = await axios.get(url, {params:{id:id}});
+                const {data: response} = await axios.get(url, {params: {id: id}});
                 setCandidate(response);
             } catch (error) {
                 console.error(error)
@@ -35,32 +36,33 @@ export async function editCandidate(id, updatedCandidateData) {
             github: updatedCandidateData.github
         },
         {
-            params:{id:id}
+            params: {id: id}
         });
 }
 
 export async function editCandidateEducation(candidateId, educationId, updatedCandidateEducationData) {
-    await axios.put(`http://localhost:8080/api/candidates/${candidateId}/education/${educationId}`, {
-            degree: updatedCandidateEducationData.degree,
-            description: updatedCandidateEducationData.description,
-            endDate: updatedCandidateEducationData.endDate,
-            fieldOfStudy: updatedCandidateEducationData.fieldOfStudy,
-            school: updatedCandidateEducationData.school,
-            startDate: updatedCandidateEducationData.startDate
-        },
-        {
-        });
+    return await axios.put(`http://localhost:8080/api/candidates/${candidateId}/education/${educationId}`, {
+        degree: updatedCandidateEducationData.degree,
+        description: updatedCandidateEducationData.description,
+        endDate: updatedCandidateEducationData.endDate,
+        fieldOfStudy: updatedCandidateEducationData.fieldOfStudy,
+        school: updatedCandidateEducationData.school,
+        startDate: updatedCandidateEducationData.startDate
+    }).catch(error => {
+        return error
+    })
 }
 
 export async function addCandidateEducation(candidateId, updatedCandidateEducationData) {
-    await axios.post(`http://localhost:8080/api/candidates/${candidateId}/education`, {
-            degree: updatedCandidateEducationData.degree,
-            description: updatedCandidateEducationData.description,
-            endDate: updatedCandidateEducationData.endDate,
-            fieldOfStudy: updatedCandidateEducationData.fieldOfStudy,
-            school: updatedCandidateEducationData.school,
-            startDate: updatedCandidateEducationData.startDate
-        },
-        {
-        });
+    return await axios.post(`http://localhost:8080/api/candidates/${candidateId}/education`, {
+        degree: updatedCandidateEducationData.degree,
+        description: updatedCandidateEducationData.description,
+        endDate: updatedCandidateEducationData.endDate,
+        fieldOfStudy: updatedCandidateEducationData.fieldOfStudy,
+        school: updatedCandidateEducationData.school,
+        startDate: updatedCandidateEducationData.startDate
+    })
+        .catch(error => {
+            return error
+        })
 }
