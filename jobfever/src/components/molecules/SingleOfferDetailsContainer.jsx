@@ -1,6 +1,7 @@
 import React from "react";
 import {StyledSingleOfferDetailsContainer} from "./SingleOfferDetailsContainer.styles";
 import RedButton from "../atoms/RedButton";
+import JobOfferApplyModal from "./JobOfferApplyModal";
 
 function SingleOfferDetailsContainer(props) {
 
@@ -8,7 +9,7 @@ function SingleOfferDetailsContainer(props) {
 
     return (
         <StyledSingleOfferDetailsContainer>
-            <RedButton text="Apply" />
+            <JobOfferApplyModal />
             <h3>Salary</h3>
             <p>{offerDetails.salaryFrom}-{offerDetails.salaryTo} {offerDetails.currencyType}</p>
             <h3>Valid</h3>

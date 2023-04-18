@@ -135,7 +135,7 @@ export default function LoginContainer(props) {
                         <CandidateRegisterTextCandidateExist>{loginMessage}</CandidateRegisterTextCandidateExist>}
                     <FormControl sx={{justifyContent: 'center'}}>
                         <RedButton
-                            text="LOGIN">
+                            text="LOG IN">
                         </RedButton>
                     </FormControl>
                 </form>
