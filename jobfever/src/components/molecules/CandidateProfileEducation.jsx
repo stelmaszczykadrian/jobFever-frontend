@@ -24,7 +24,6 @@ export default function CandidateProfileEducation(props) {
     if (!data || !data.candidateEducations) {
         return <div>Loading...</div>;
     } else {
-        console.log("educations: ", educations);
         return (
             <StyledProfilePaper>
                 <StyledTopBox>
