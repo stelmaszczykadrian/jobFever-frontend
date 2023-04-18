@@ -14,7 +14,7 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import RedButton from "../atoms/RedButton";
 import Cookies from 'js-cookie';
-import {useAuth} from "../../pages/PrivateRouter/PrivateRouter";
+import {useAuth} from "../../pages/AuthProvider/AuthProvider";
 
 
 export default function LoginContainer(props) {
