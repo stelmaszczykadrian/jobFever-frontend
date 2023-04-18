@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import CandidateLogin from "./pages/CandidateLogin";
 import CandidateRegister from "./pages/CandidateRegister";
@@ -15,12 +15,16 @@ import ForEmployers from "./pages/ForEmployers";
 import Contact from "./pages/Contact";
 import SingleOfferPage from "./pages/SingleOfferPage";
 import EmployerProfile from "./pages/EmployerProfile";
+import Cookies from "js-cookie"
+import {useUser} from "./userProvider/UserProvider";
+import AuthProvider from "./pages/PrivateRouter/PrivateRouter";
 
 function App() {
   return (
-        <BrowserRouter>
-            <Layout>
+      <AuthProvider> <BrowserRouter>
+            {/*<Layout>*/}
                 <Routes>
+
                     <Route path="/" element={<Home />} />
                     <Route path="/candidate/register" element={<CandidateRegister />} />
                     <Route path="/candidate/login" element={<CandidateLogin />} />
@@ -30,14 +34,19 @@ function App() {
                     <Route path="/employer/:id" element={<EmployerProfile />}  />
                     <Route path="/about" element={<About />} />
                     <Route path="/add-job" element={<JobOfferForm />} />
-                    <Route path="/jobs" element={<JobsPage />} />
+                    <Route path="/jobs" element=
+                        {
+                        <JobsPage />
+                    } />
                     <Route path="/for-employers" element={<ForEmployers />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/job/:id" element={<SingleOfferPage />} />
                     <Route path="*" element={<NoPage/>}></Route>
+
                 </Routes>
-            </Layout>
-        </BrowserRouter>
+
+                {/*</Layout>*/}
+        </BrowserRouter></AuthProvider>
   );
 }
 
