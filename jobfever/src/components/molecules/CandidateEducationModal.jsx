@@ -57,8 +57,6 @@ export default function CandidateEducationModal(props) {
         let eduBeforeChange = props.education;
 
         if (props.isNew) {
-            const temp_id = "temp-" + crypto.randomUUID();
-
             props.setEducations((educations) => {
                 educations.push({...updatedEducationData, id: temp_id});
 
@@ -66,7 +64,6 @@ export default function CandidateEducationModal(props) {
             });
             await addCandidateEducation(candidate.id, updatedEducationData)
                 .then(res => {
-                    console.log("response: ", res.data);
                         if (res.status != 200) {
                             props.setEducations((educations) => {
                                 educations.pop();
