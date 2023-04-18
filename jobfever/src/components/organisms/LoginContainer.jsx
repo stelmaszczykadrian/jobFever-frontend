@@ -14,13 +14,9 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import RedButton from "../atoms/RedButton";
 import Cookies from 'js-cookie';
-import {useAuth} from "../../pages/AuthProvider/AuthProvider";
 
 
 export default function LoginContainer(props) {
-    const auth = useAuth();
-    // const [role, setRole] = useState("");
-    // const [email, setEmail] = useState("");
     const [loginMessage, setLoginMessage] = useState('');
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -64,11 +60,6 @@ export default function LoginContainer(props) {
             };
 
             const response = await axios.post(`${props.apiUrl}`, userData);
-            console.log(response.data.name);
-            // setRole(response.data.role);
-            // setEmail(response.data.email);
-            auth.login(response.data.name, response.data.role);
-            // localStorage.setItem("user", );
             Cookies.set("jwt", JSON.stringify(response.data), { expires: 7 })
             setLoginMessage("Login successful.");
 
