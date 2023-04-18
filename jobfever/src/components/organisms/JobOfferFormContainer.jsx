@@ -19,10 +19,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 
 import TechnicalRequirementsContainer from "../molecules/TechnicalRequirementsContainer";
 import axios from "axios";
-import {createEmployer} from "../../api/EmployersApi";
 import {useNavigate} from "react-router-dom";
-import {createJobOffer} from "../../api/JobsApi";
-import axiosPost from "../../api/axiosFetch";
 
 const jobType = [
     {value: 'FULLTIME', label: 'Full-time'},
@@ -85,27 +82,25 @@ export default function JobOfferFormContainer() {
 
         console.log(userData)
 
-        try {
 
-            const response = await createJobOffer(userData);
-            console.log(response);
-            setTimeout(() => {
-                navigate('/jobs');
-            }, 2000);
-        } catch (error) {
-            if (error.response) {
-                if (error.response.data === "Employer already exists.") {
-                    console.log("TEst")
-                } else {
+        const url = "http://localhost:8080/api/jobs"
+        axios
+            .post(url, userData)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                if (error.response) {
                     console.log(error.response);
                     console.log("server responded");
+                } else if (error.request) {
+                    console.log("network error");
+                } else {
+                    console.log(error);
                 }
-            } else if (error.request) {
-                console.log("network error");
-            } else {
-                console.log(error);
-            }
-        }
+            });
+
+
 
     };
 
