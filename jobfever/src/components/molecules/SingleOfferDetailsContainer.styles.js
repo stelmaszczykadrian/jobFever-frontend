@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const StyledSingleOfferDetailsContainer = styled("div")`
-      margin: auto;
-      padding: 1%;
-      width: 70%;
-      text-align: center;
-      color: black;
-      background-color: lightgray;
-      border-radius: 0.5rem;
-    `;
+  margin: 1rem auto auto;
+  padding: 1%;
+  width: 50%;
+  text-align: center;
+  color: black;
+  background-color: white;
+  border-radius: 0.5rem;
+`;
 
