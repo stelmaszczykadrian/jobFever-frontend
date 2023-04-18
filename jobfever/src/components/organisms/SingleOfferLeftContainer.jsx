@@ -12,7 +12,7 @@ function SingleOfferLeftContainer(props) {
 
     return (
         <StyledSingleOfferLeftContainer>
-            <SingleOfferField title={offerDetails.employer.companyName} text={offerDetails.title} />
+            {/*<SingleOfferField title={offerDetails.employer.companyName} text={offerDetails.title} />*/}
             <SingleOfferField title="Offer Title" text={offerDetails.title} />
             <SingleOfferField title="Description" text={offerDetails.description} />
             <SingleOfferField title="Technical Requirements" text={offerDetails.technicalRequirements} />

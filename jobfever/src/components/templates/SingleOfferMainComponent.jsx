@@ -23,10 +23,10 @@ function SingleOfferMainComponent() {
     return jobDetails ? (
         <StyledSingleOfferMainComponent>
             <Navbar />
-            <div style={{display:"flex", flexDirection:"row"}}>
-                <SingleOfferLeftContainer offerDetails={jobDetails}/>
-                <SingleOfferRightContainer offerDetails={jobDetails}/>
-            </div>
+        <div style={{display:"flex", flexDirection:"row", maxHeight:"100vh", overflowY:"auto", height:"80%", marginTop:"2%"}}>
+            <SingleOfferLeftContainer offerDetails={jobDetails}/>
+            <SingleOfferRightContainer offerDetails={jobDetails}/>
+        </div>
         </StyledSingleOfferMainComponent>
     ): <div>Loading</div>;
 }
