@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import img from "../../images/addjobbackround.png"
+import Button from "@mui/joy/Button";
 
 export const StyledJobOfferCreationContainer = styled('div')`
   display: flex;
@@ -64,3 +65,18 @@ export const StyledInputLabel = styled("div")`
 export const StyledButtonCenter = styled("div")`
   text-align: center;
 `
+
+
+// export const StyledRedButtonModalButton = styled("button")`
+//
+// `
+
+export const StyledRedButtonModalButton = styled(Button)(() => ({
+    alignSelf: 'center',
+    mt: 5,
+    backgroundColor: 'rgba(171, 36, 36)',
+    ':hover': {
+        backgroundColor: '#852222',
+        color: 'white'
+    },
+}));

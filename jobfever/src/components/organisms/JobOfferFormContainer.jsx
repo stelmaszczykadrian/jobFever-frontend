@@ -7,7 +7,7 @@ import {
     StyledGridItem,
     StyledSelectJobType,
     StyledCurrencyType,
-    StyledButtonCenter, StyledJobOfferContainer
+    StyledButtonCenter, StyledJobOfferContainer, StyledRedButtonModalButton
 } from "./JobOfferFormContainer.styles";
 import {useState} from "react";
 import {Radio, RadioGroup} from "@mui/joy";
@@ -18,8 +18,10 @@ import StyledText from "../atoms/StyledText";
 import DialogContentText from "@mui/material/DialogContentText";
 
 import TechnicalRequirementsContainer from "../molecules/TechnicalRequirementsContainer";
+import JobOfferFormula from "../molecules/JobOfferFormulaModal";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import Button from "@mui/joy/Button";
 
 const jobType = [
     {value: 'FULLTIME', label: 'Full-time'},
@@ -31,6 +33,7 @@ const jobType = [
 ];
 
 const currencyType = [
+    { value: "", label: "Currency", disabled: true },
     {value: 'PLN', label: 'PLN'},
     {value: 'EURO', label: 'EURO'},
     {value: 'DOLLAR', label: 'DOLLAR'},
@@ -44,7 +47,6 @@ const workType = [
 
 export default function JobOfferFormContainer() {
     const navigate = useNavigate();
-    // const [activeButtonIndex, setActiveButtonIndex] = useState();
     const [pressedButtons, setPressedButtons] = useState([]);
 
     const [input, setInput] = useState({
@@ -88,9 +90,18 @@ export default function JobOfferFormContainer() {
             .post(url, userData)
             .then((response) => {
                 console.log(response);
+                if (response.status === 200 && response.data === "Job added successfully.") {
+                    setShowModal(true);
+                    setErrorMessage(null);
+                    setTimeout(() => {
+                        navigate('/jobs');
+                    }, 2000);
+                }
             })
             .catch((error) => {
                 if (error.response) {
+                    const errorMessages = error.response.data.split(". ");
+                    setErrorMessage(errorMessages);
                     console.log(error.response);
                     console.log("server responded");
                 } else if (error.request) {
@@ -100,8 +111,18 @@ export default function JobOfferFormContainer() {
                 }
             });
 
+    };
 
 
+    const [showModal, setShowModal] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
+
+    const handleClick = () => {
+        setShowModal(true);
+    };
+
+    const handleClose = () => {
+        setShowModal(false);
     };
 
 
@@ -223,7 +244,11 @@ export default function JobOfferFormContainer() {
                                     onChange={onCurrencyTypeChange}
                                 >
                                     {currencyType.map((option) => (
-                                        <option key={option.value} value={option.value}>
+                                        <option
+                                            key={option.value}
+                                            value={option.value}
+                                            disabled={option.disabled}
+                                        >
                                             {option.label}
                                         </option>
                                     ))}
@@ -273,12 +298,23 @@ export default function JobOfferFormContainer() {
                         </StyledGridContainer>
                     </StyledGridContainer>
                     <StyledButtonCenter>
-                        <RedButton text={'SUBMIT'}></RedButton>
+                            <StyledRedButtonModalButton sx={{
+                                ':hover': {
+                                    bgcolor: '#852222',
+                                    color: 'white'
+                                },
+                                width: 1 / 4,
+                                alignSelf: 'center',
+                                mt: 5,
+                                backgroundColor: 'rgba(171, 36, 36)'
+                            }} type='submit' onClick={handleClick}>SUBMIT</StyledRedButtonModalButton>
+                        <JobOfferFormula open={showModal} handleClose={handleClose} errorMessage={errorMessage}/>
                         <p></p>
                     </StyledButtonCenter>
                 </StyledInputJobOfferContainer>
             </StyledJobOfferCreationContainer>
         </Form>
+
         </StyledJobOfferContainer>
     );
 
