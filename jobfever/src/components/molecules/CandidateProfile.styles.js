@@ -39,6 +39,7 @@ export const StyledBottomBox = styled(Box)`
 export const StyledIconBox = styled(Box)`
   text-align: right;
   flex-grow: 1;
+  align-self: self-end;
 `;
 
 export const StyledTopBox = styled(Box)`
