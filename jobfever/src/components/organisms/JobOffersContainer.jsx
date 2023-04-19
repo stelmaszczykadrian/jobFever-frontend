@@ -4,6 +4,8 @@ import {StyledJobOffersContainer} from "./JobOffersContainer.styles";
 import {useJobsPagination} from "../../api/JobsApi";
 import JobsPageSortComponent from "../molecules/JobsPageSortComponent";
 import {useNavigate} from "react-router-dom";
+import {InputBase} from "@mui/material";
+import { styled, alpha } from '@mui/material/styles';
 
 
 
