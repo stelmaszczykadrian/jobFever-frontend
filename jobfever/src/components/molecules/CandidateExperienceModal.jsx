@@ -2,7 +2,6 @@ import * as React from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Input from "@mui/joy/Input";
 import {useState} from "react";
@@ -11,11 +10,12 @@ import {RedButtonStyled} from "../atoms/RedButton.styles";
 import CalendarForm from "../organisms/CalendarForm";
 import IconButton from "@mui/material/IconButton";
 import {
-    addCandidateEducation,
     addCandidateExperience,
-    editCandidateEducation,
     editCandidateExperience
 } from "../../api/CandidateApi";
+import {TextField} from "@mui/material";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 export default function CandidateExperienceModal(props) {
     const title = (props.isNew ? "Add Experience" : "Edit experience");
@@ -119,79 +119,81 @@ export default function CandidateExperienceModal(props) {
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
             >
-                <DialogTitle id="responsive-dialog-title">
+                <DialogTitle id="responsive-dialog-title" mt={2} ml={1}>
                     {title}
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText>Position</DialogContentText>
                     <StyledGridItem>
-                        <StyledGridItem>
-                            <Input
+                            <TextField
+                                required
+                                color="error"
                                 placeholder="Ex. Frontend developer"
-                                name="position"
+                                label="Position"
                                 value={position}
                                 onChange={(e) => setPosition(e.target.value)}
+                                fullWidth
                             />
-                        </StyledGridItem>
                     </StyledGridItem>
-                        <DialogContentText>Company name</DialogContentText>
                         <StyledGridItem>
-                            <Input
+                            <TextField
+                                required
+                                color="error"
                                 placeholder="Ex. jobFever"
-                                name="companyName"
+                                label="Company name"
                                 value={companyName}
                                 onChange={(e) => setCompanyName(e.target.value)}
+                                fullWidth
                             />
                         </StyledGridItem>
-                    <DialogContentText>location</DialogContentText>
                     <StyledGridItem>
-                        <Input
+                        <TextField
+                            required
+                            color="error"
                             placeholder="Ex. London"
-                            name="location"
+                            label="Location"
                             value={location}
                             onChange={(e) => setLocation(e.target.value)}
+                            fullWidth
                         />
                     </StyledGridItem>
                         <StyledGridContainer>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <StyledGridItem>
-                                <DialogContentText>
-                                    Start date
-                                </DialogContentText>
                                 <CalendarForm
-                                    name="startDate"
-                                    value={startDate}
-                                    onChange={(e) => setStartDate(e.target.value)}/>
+                                    name="Start date"
+                                    date={startDate}
+                                    setDate={setStartDate}
+                                />
                             </StyledGridItem>
                             <StyledGridItem>
-                                <DialogContentText>
-                                    End date
-                                </DialogContentText>
                                 <CalendarForm
-                                    name="endDate"
-                                    value={endDate}
-                                    onChange={(e) => setEndDate(e.target.value)}/>
+                                    name="End Date"
+                                    date={endDate}
+                                    setDate={setEndDate}
+                                />
                             </StyledGridItem>
+                            </LocalizationProvider>
                         </StyledGridContainer>
-                    <DialogContentText>
-                        Industry
-                    </DialogContentText>
                     <StyledGridItem>
-                        <Input
+                        <TextField
+                            required
+                            color="error"
                             placeholder="Ex. Gaming, Software, Hardware, IT consultant"
-                            name="industry"
+                            label="Industry"
                             value={industry}
                             onChange={(e) => setIndustry(e.target.value)}
+                            fullWidth
                         />
                     </StyledGridItem>
-                    <DialogContentText>
-                        Description
-                    </DialogContentText>
                     <StyledGridItem>
-                        <Input
+                        <TextField
+                            required
+                            color="error"
                             placeholder="Ex. Work responsibilities"
-                            name="description"
+                            label="Description"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
+                            fullWidth
                         />
                     </StyledGridItem>
                 </DialogContent>
