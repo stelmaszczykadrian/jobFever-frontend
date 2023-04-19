@@ -18,7 +18,7 @@ import {
 } from "../../api/CandidateApi";
 
 export default function CandidateExperienceModal(props) {
-    const title = (props.isNew ? "Add Education" : "Edit education");
+    const title = (props.isNew ? "Add Experience" : "Edit experience");
     const experience = (props.isNew ? {
         position: '',
         companyName: '',
@@ -134,7 +134,6 @@ export default function CandidateExperienceModal(props) {
                             />
                         </StyledGridItem>
                     </StyledGridItem>
-                    <p>
                         <DialogContentText>Company name</DialogContentText>
                         <StyledGridItem>
                             <Input
@@ -144,7 +143,6 @@ export default function CandidateExperienceModal(props) {
                                 onChange={(e) => setCompanyName(e.target.value)}
                             />
                         </StyledGridItem>
-                    </p>
                     <DialogContentText>location</DialogContentText>
                     <StyledGridItem>
                         <Input
@@ -154,7 +152,6 @@ export default function CandidateExperienceModal(props) {
                             onChange={(e) => setLocation(e.target.value)}
                         />
                     </StyledGridItem>
-                    <p>
                         <StyledGridContainer>
                             <StyledGridItem>
                                 <DialogContentText>
@@ -175,7 +172,6 @@ export default function CandidateExperienceModal(props) {
                                     onChange={(e) => setEndDate(e.target.value)}/>
                             </StyledGridItem>
                         </StyledGridContainer>
-                    </p>
                     <DialogContentText>
                         Industry
                     </DialogContentText>
@@ -187,7 +183,6 @@ export default function CandidateExperienceModal(props) {
                             onChange={(e) => setIndustry(e.target.value)}
                         />
                     </StyledGridItem>
-                    <p>
                     <DialogContentText>
                         Description
                     </DialogContentText>
@@ -199,7 +194,6 @@ export default function CandidateExperienceModal(props) {
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </StyledGridItem>
-                    </p>
                 </DialogContent>
                 <DialogActions>
                     <RedButtonStyled onClick={handleClose}>

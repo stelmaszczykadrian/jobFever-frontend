@@ -37,7 +37,7 @@ export const StyledGridContainer = styled("div")`
 `
 export const StyledGridItem = styled("div")`
   text-align: center;
-  margin: 0 5px;
+  margin: 5px 0px;
 `
 
 export const StyledSelectJobType = styled("select")`

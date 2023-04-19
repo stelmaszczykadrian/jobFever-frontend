@@ -126,7 +126,6 @@ export default function CandidateEducationModal(props) {
                             />
                         </StyledGridItem>
                     </StyledGridItem>
-                    <p>
                         <DialogContentText>Degree</DialogContentText>
                         <StyledGridItem>
                             <Input
@@ -136,7 +135,6 @@ export default function CandidateEducationModal(props) {
                                 onChange={(e) => setDegree(e.target.value)}
                             />
                         </StyledGridItem>
-                    </p>
                     <DialogContentText>Filed of study</DialogContentText>
                     <StyledGridItem>
                         <Input
@@ -146,7 +144,6 @@ export default function CandidateEducationModal(props) {
                             onChange={(e) => setFieldOfStudy(e.target.value)}
                         />
                     </StyledGridItem>
-                    <p>
                         <StyledGridContainer>
                             <StyledGridItem>
                                 <DialogContentText>
@@ -169,7 +166,6 @@ export default function CandidateEducationModal(props) {
                                 />
                             </StyledGridItem>
                         </StyledGridContainer>
-                    </p>
                     <DialogContentText>
                         Description
                     </DialogContentText>
