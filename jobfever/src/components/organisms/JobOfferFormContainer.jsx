@@ -10,6 +10,8 @@ import {
     StyledButtonCenter, StyledJobOfferContainer, StyledRedButtonModalButton
 } from "./JobOfferFormContainer.styles";
 import React, {useState} from "react";
+import {useEffect, useState} from "react";
+import {Radio, RadioGroup} from "@mui/joy";
 import {Form} from "react-bootstrap";
 import Navbar from "../molecules/Navbar";
 import StyledText from "../atoms/StyledText";
@@ -21,6 +23,7 @@ import {createJob} from "../../api/JobsApi";
 import {useAuth} from "../../pages/AuthProvider/AuthProvider";
 import Cookies from "js-cookie";
 import Typography from "@mui/joy/Typography";
+import {languageLabels} from "../../constants/constans";
 
 const jobType = [
     {value: "", label: "Job type", disabled: true},
@@ -57,38 +60,38 @@ export default function JobOfferFormContainer() {
 
     //Sprawdzić jaka rola jest w tokenie, jeżeli rola
 
+export default function JobOfferFormContainer(props) {
     const navigate = useNavigate();
-    const [pressedButtons, setPressedButtons] = useState([]);
+    const [pressedButtons, setPressedButtons] = useState(getInitialButtons())
     const [showModal, setShowModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
+    const getInitialButtons = () => {
+        if (!props.technicalRequirements) {
+            return [];
+        }
+        const result = [];
+        props.technicalRequirements.forEach(x => {
+            const index = languageLabels.findIndex(e =>e.toLowerCase()===x.toLowerCase()) ;
+            if (index > -1) {
+                result.push(index)
+            }
+        })
+        return result
+    }
 
     const [input, setInput] = useState({
-        title: '',
-        description: '',
-        technicalRequirements: [],
-        responsibilities: '',
-        whoWeAreLookingFor: '',
-        benefits: '',
-        location: '',
-        salaryFrom: '',
-        salaryTo: '',
-        jobType: '',
-        currencyType: '',
-        workType: '',
-        errors: {
-            title: '',
-            description: '',
-            technicalRequirements: [],
-            responsibilities: '',
-            whoWeAreLookingFor: '',
-            benefits: '',
-            location: '',
-            salaryFrom: '',
-            salaryTo: '',
-            jobType: '',
-            currencyType: '',
-            workType: '',
-        }
+        title: props.title,
+        description: props.description,
+        technicalRequirements: props.technicalRequirements,
+        responsibilities: props.responsibilities,
+        whoWeAreLookingFor: props.whoWeAreLookingFor,
+        benefits: props.benefits,
+        location: props.location,
+        salaryFrom: props.salaryFrom,
+        salaryTo: props.salaryTo,
+        jobType: props.jobType,
+        currencyType: props.currencyType,
+        workType: props.workType
     });
 
 
@@ -275,6 +278,7 @@ export default function JobOfferFormContainer() {
                                 text={input.errors.description}
                             />}
                         <DialogContentText sx={{color: 'white'}}>Technical requirements:</DialogContentText>
+
                         <TechnicalRequirementsContainer pressedButtons={pressedButtons}
                                                         setPressedButtons={setPressedButtons} input={input}
                                                         setInput={setInput}/>
