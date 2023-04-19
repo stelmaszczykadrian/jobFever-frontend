@@ -1,18 +1,20 @@
 import * as React from 'react';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from "dayjs";
 
-export default function CalendarForm() {
+export default function CalendarForm({name, date, setDate}) {
+    let required=true;
     return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-                TextFieldProps={{
-                    label: 'Date',
-                    variant: 'outlined',
-                    format: 'MM/DD/YYYY',
+                slotProps={{
+                    textField: { error: false, color: "error", required}
                 }}
-            />
-        </LocalizationProvider>
+                value={dayjs(date)}
+                format="DD-MM-YYYY"
+                label={name}
+                onChange={(e) => {
+                    setDate(e)
+                }}
+                />
     );
 }
