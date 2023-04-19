@@ -2,15 +2,16 @@ import * as React from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Input from "@mui/joy/Input";
 import {useState} from "react";
 import {StyledGridContainer, StyledGridItem} from "../organisms/JobOfferFormContainer.styles";
 import {RedButtonStyled} from "../atoms/RedButton.styles";
 import CalendarForm from "../organisms/CalendarForm";
 import IconButton from "@mui/material/IconButton";
 import {editCandidateEducation, addCandidateEducation} from "../../api/CandidateApi";
+import {TextField} from "@mui/material";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 export default function CandidateEducationModal(props) {
     const title = (props.isNew ? "Add Education" : "Edit education");
@@ -111,70 +112,71 @@ export default function CandidateEducationModal(props) {
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
             >
-                <DialogTitle id="responsive-dialog-title">
+                <DialogTitle id="responsive-dialog-title" mt={2} ml={1}>
                     {title}
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText>School</DialogContentText>
                     <StyledGridItem>
-                        <StyledGridItem>
-                            <Input
+                            <TextField
+                                required
+                                color="error"
                                 placeholder="Ex. Boston University"
-                                name="school"
+                                label="School"
                                 value={school}
                                 onChange={(e) => setSchool(e.target.value)}
+                                fullWidth
                             />
-                        </StyledGridItem>
                     </StyledGridItem>
-                        <DialogContentText>Degree</DialogContentText>
                         <StyledGridItem>
-                            <Input
+                            <TextField
+                                required
+                                color="error"
                                 placeholder="Ex. Bechelor's"
-                                name="degree"
+                                label="Degree"
                                 value={degree}
                                 onChange={(e) => setDegree(e.target.value)}
+                                fullWidth
                             />
                         </StyledGridItem>
-                    <DialogContentText>Filed of study</DialogContentText>
                     <StyledGridItem>
-                        <Input
+                        <TextField
+                            required
+                            color="error"
                             placeholder="Ex. Economy"
-                            name="fieldOfStudy"
+                            label="Field of study"
                             value={fieldOfStudy}
                             onChange={(e) => setFieldOfStudy(e.target.value)}
+                            fullWidth
                         />
                     </StyledGridItem>
                         <StyledGridContainer>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <StyledGridItem>
-                                <DialogContentText>
-                                    Start date
-                                </DialogContentText>
                                 <CalendarForm
-                                    name="startDate"
-                                    value={startDate}
-                                    onChange={(e) => setStartDate(e.target.value)}
+                                    name="Start date"
+                                    date={startDate}
+                                    setDate={setStartDate}
                                 />
                             </StyledGridItem>
                             <StyledGridItem>
-                                <DialogContentText>
-                                    End date
-                                </DialogContentText>
                                 <CalendarForm
-                                    name="endDate"
-                                    value={endDate}
-                                    onChange={(e) => setEndDate(e.target.value)}
+                                    name="End date"
+                                    date={endDate}
+                                    setDate={setEndDate}
                                 />
                             </StyledGridItem>
+                                </LocalizationProvider>
+
                         </StyledGridContainer>
-                    <DialogContentText>
-                        Description
-                    </DialogContentText>
                     <StyledGridItem>
-                        <Input
+                        <TextField
+                            required
+                            color="error"
                             placeholder="Ex. Activity clubs, extra achievements"
-                            name="description"
+                            label="Description"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
+                            fullWidth
                         />
                     </StyledGridItem>
                 </DialogContent>
