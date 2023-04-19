@@ -63,7 +63,7 @@ export default function CandidateRegisterRightContainer() {
                 password: formData.password,
             };
             try {
-                const response = await axios.post('http://localhost:8080/api/candidates', userData);
+                const response = await axios.post('http://localhost:8080/api/candidates/register', userData);
                 console.log(response);
                 setCandidateMessage('Candidate added successfully.');
                 setTimeout(() => {

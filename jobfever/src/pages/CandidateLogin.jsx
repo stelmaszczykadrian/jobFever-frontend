@@ -2,7 +2,7 @@ import CandidateLoginMainComponent from "../components/templates/CandidateLoginM
 
 export default function CandidateLogin() {
     return (
-        <CandidateLoginMainComponent apiUrl="http://localhost:8080/api/candidates/login"/>
+        <CandidateLoginMainComponent apiUrl="http://localhost:8080/api/authenticate"/>
     );
 }
 
