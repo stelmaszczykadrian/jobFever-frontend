@@ -9,7 +9,6 @@ export const StyledSortButton = styled(Button)`
   padding: 5px;
   transition: all 0.3s ease;
   color: white;
-
   &:hover {
     color: white;
     background-color: #696960;
