@@ -16,7 +16,7 @@ import SingleOfferPage from "./pages/SingleOfferPage";
 import EmployerProfile from "./pages/EmployerProfile";
 import AuthProvider from "./pages/AuthProvider/AuthProvider";
 import Layout from "./pages/Layout";
-
+import EditJobOffer from "./pages/EditJobOffer";
 function App() {
     return (
 
@@ -38,6 +38,7 @@ function App() {
                         <Route path="/for-employers" element={<ForEmployers/>}/>
                         <Route path="/contact" element={<Contact/>}/>
                         <Route path="/job/:id" element={<SingleOfferPage/>}/>
+                        <Route path="/job/:id/edit" element={<EditJobOffer/>}></Route>
                         <Route path="*" element={<NoPage/>}></Route>
 
                     </Routes>
