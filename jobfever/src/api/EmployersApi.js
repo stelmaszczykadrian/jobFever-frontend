@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 const url = "http://localhost:8080/api/employers/";
 
 export const createEmployer = async(userData) =>{
-    return await axios.post(url + "register", userData);
+    return await axios.post( "http://localhost:8080/api/authentication/employers/register", userData);
 }
 
 export const useEmployerById = (id) => {
