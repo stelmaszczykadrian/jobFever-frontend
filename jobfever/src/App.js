@@ -19,7 +19,7 @@ import Layout from "./pages/Layout";
 
 function App() {
     return (
-        //<AuthProvider>
+
             <BrowserRouter>
                 <Layout>
                     {/*<Layout>*/}
@@ -44,7 +44,7 @@ function App() {
                 </Layout>
                 {/*</Layout>*/}
             </BrowserRouter>
-        //</AuthProvider>
+
     );
 }
 
