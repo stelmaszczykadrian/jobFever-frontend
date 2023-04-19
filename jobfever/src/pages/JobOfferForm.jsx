@@ -2,7 +2,18 @@ import JobOfferFormContainer from "../components/organisms/JobOfferFormContainer
 
 function JobOfferForm() {
     return (
-        <JobOfferFormContainer/>
+        <JobOfferFormContainer title=''
+                               description=''
+                               technicalRequirements={[]}
+                               responsibilities=''
+                               whoWeAreLookingFor=''
+                               benefits=''
+                               location=''
+                               salaryFrom=''
+                               salaryTo=''
+                               jobType=''
+                               currencyType=''
+                               workType=''/>
     );
 }
 
