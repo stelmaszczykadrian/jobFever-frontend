@@ -9,17 +9,18 @@ import {
     StyledCurrencyType,
     StyledButtonCenter, StyledJobOfferContainer, StyledRedButtonModalButton
 } from "./JobOfferFormContainer.styles";
-import {useState} from "react";
-import {Radio, RadioGroup} from "@mui/joy";
+import React, {useState} from "react";
 import {Form} from "react-bootstrap";
 import Navbar from "../molecules/Navbar";
 import StyledText from "../atoms/StyledText";
 import DialogContentText from "@mui/material/DialogContentText";
 import TechnicalRequirementsContainer from "../molecules/TechnicalRequirementsContainer";
 import JobOfferFormula from "../molecules/JobOfferFormulaModal";
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {createJob} from "../../api/JobsApi";
+import {useAuth} from "../../pages/AuthProvider/AuthProvider";
+import Cookies from "js-cookie";
+import Typography from "@mui/joy/Typography";
 
 const jobType = [
     {value: "", label: "Job type", disabled: true},
@@ -39,12 +40,23 @@ const currencyType = [
 ];
 
 const workType = [
+    {value: "", label: "Work type", disabled: true},
     {value: 'REMOTE', label: 'remote'},
     {value: 'ONSITE', label: 'on-site'},
     {value: 'HYBRID', label: 'hybrid'},
 ];
 
+
 export default function JobOfferFormContainer() {
+    //TOKEN
+    // useAuth();
+    // console.log(useAuth())
+    //
+    // console.log(JSON.parse(Cookies.get('jwt')).role);
+    // console.log(JSON.parse(Cookies.get('jwt')));
+
+    //Sprawdzić jaka rola jest w tokenie, jeżeli rola
+
     const navigate = useNavigate();
     const [pressedButtons, setPressedButtons] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -62,41 +74,113 @@ export default function JobOfferFormContainer() {
         salaryTo: '',
         jobType: '',
         currencyType: '',
-        workType: ''
+        workType: '',
+        errors: {
+            title: '',
+            description: '',
+            technicalRequirements: [],
+            responsibilities: '',
+            whoWeAreLookingFor: '',
+            benefits: '',
+            location: '',
+            salaryFrom: '',
+            salaryTo: '',
+            jobType: '',
+            currencyType: '',
+            workType: '',
+        }
     });
+
+
+    const validateInput = (name, value) => {
+        switch (name) {
+            case 'title':
+                return value !== '' ? '' : 'Title field cannot be empty.';
+            case 'description':
+                return value !== '' ? '' : 'Description field cannot be empty.';
+            case 'responsibilities':
+                return value !== '' ? '' : 'Responsibilities field cannot be empty.';
+            case 'whoWeAreLookingFor':
+                return value !== '' ? '' : 'Who we are looking for field cannot be empty.';
+            case 'technicalRequirements':
+                return value.length > 0 ? '' : 'At least one technical requirement must be specified.';
+            case 'benefits':
+                return value !== '' ? '' : 'Benefits field cannot be empty.';
+            case 'location':
+                return value !== '' ? '' : 'Location field cannot be empty.';
+            case 'salaryFrom':
+                return value !== '' ? '' : 'Salary from field cannot be empty.';
+            case 'salaryTo':
+                return value !== '' ? '' : 'Salary to field cannot be empty.';
+            case "jobType":
+                return value !== "" ? "" : "Job type field cannot be empty.";
+            case 'currencyType':
+                return value !== '' ? '' : 'Currency type field cannot be empty.';
+            case 'workType':
+                return value !== '' ? '' : 'Work type field cannot be empty.';
+            default:
+                return '';
+        }
+    };
+
+
+    const [formSubmitted, setFormSubmitted] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const userData = {
-            title: input.title,
-            description: input.description,
-            technicalRequirements: input.technicalRequirements,
-            responsibilities: input.responsibilities,
-            whoWeAreLookingFor: input.whoWeAreLookingFor,
-            benefits: input.benefits,
-            location: input.location,
-            salaryFrom: input.salaryFrom,
-            salaryTo: input.salaryTo,
-            jobType: input.jobType,
-            currencyType: input.currencyType,
-            workType: input.workType
-        };
 
-        createJob(userData, () => {
-            setShowModal(true);
-            setErrorMessage(null);
-            setTimeout(() => {
-                navigate('/jobs');
-            }, 2000);
-        }, (errorMessages) => {
-            setErrorMessage(errorMessages);
-        });
+        const errors = {...input.errors};
+        let formIsValid = true;
 
-    };
+        // walidacja inputów
+        for (const [key, value] of Object.entries(input)) {
+            const errorMessage = validateInput(key, value);
+            errors[key] = errorMessage;
+            if (errorMessage) {
+                formIsValid = false;
+            }
+        }
 
-    const handleClick = () => {
-        setShowModal(true);
+        // sprawdzenie, czy formularz jest poprawnie wypełniony
+        if (formIsValid) {
+            // dodaj tutaj kod, który wyśle formularz
+
+            const userData = {
+                title: input.title,
+                description: input.description,
+                technicalRequirements: input.technicalRequirements,
+                responsibilities: input.responsibilities,
+                whoWeAreLookingFor: input.whoWeAreLookingFor,
+                benefits: input.benefits,
+                location: input.location,
+                salaryFrom: input.salaryFrom,
+                salaryTo: input.salaryTo,
+                jobType: input.jobType,
+                currencyType: input.currencyType,
+                workType: input.workType
+            };
+
+            createJob(userData, () => {
+                setShowModal(true);
+                setFormSubmitted(true);
+                setErrorMessage(null);
+                setTimeout(() => {
+                    navigate('/jobs');
+                }, 2000);
+            }, (errorMessages) => {
+                setErrorMessage(errorMessages);
+            });
+
+
+        } else {
+            setInput((prev) => ({...prev, errors}));
+        }
+
+        //sprawdzić czy wszystkie pola są poprawnie wypełnione
+        //jeżeli nie jest wypełnione to robię return
+
+
     };
 
     const handleClose = () => {
@@ -106,16 +190,29 @@ export default function JobOfferFormContainer() {
 
     const onInputChange = e => {
         const {name, value} = e.target;
-        setInput(prev => ({
-            ...prev,
-            [name]: value
+        let error = '';
+        if (name === 'technicalRequirements') {
+            error = value.length > 0 ? '' : 'At least one technical requirement must be specified.';
+        } else {
+            error = validateInput(name, value);
+        }
+        setInput((prevFormData) => ({
+            ...prevFormData,
+            [name]: value,
+            errors: {...prevFormData.errors, [name]: error}
         }));
+
+
     }
 
     const onJobTypeChange = (e) => {
         setInput((prev) => ({
             ...prev,
             jobType: e.target.value,
+            errors: {
+                ...prev.errors,
+                jobType: ''
+            }
         }));
     };
 
@@ -123,13 +220,21 @@ export default function JobOfferFormContainer() {
         setInput((prev) => ({
             ...prev,
             currencyType: e.target.value,
+            errors: {
+                ...prev.errors,
+                currencyType: ''
+            }
         }));
     };
 
-    const onOptionRadioTypeChange = (e) => {
+    const onWorkTypeChange = (e) => {
         setInput((prev) => ({
             ...prev,
             workType: e.target.value,
+            errors: {
+                ...prev.errors,
+                workType: ''
+            }
         }));
     };
 
@@ -150,7 +255,12 @@ export default function JobOfferFormContainer() {
                             value={input.title}
                             onChange={onInputChange}
                         />
-
+                        {input.errors.title &&
+                            <StyledText
+                                tag="span"
+                                color="red"
+                                text={input.errors.title}
+                            />}
                         <DialogContentText sx={{color: 'white'}}>Project description:</DialogContentText>
                         <StyledTextarea
                             placeholder="Enter description"
@@ -158,12 +268,22 @@ export default function JobOfferFormContainer() {
                             value={input.description}
                             onChange={onInputChange}
                         />
+                        {input.errors.description &&
+                            <StyledText
+                                tag="span"
+                                color="red"
+                                text={input.errors.description}
+                            />}
                         <DialogContentText sx={{color: 'white'}}>Technical requirements:</DialogContentText>
-
                         <TechnicalRequirementsContainer pressedButtons={pressedButtons}
                                                         setPressedButtons={setPressedButtons} input={input}
                                                         setInput={setInput}/>
-
+                        {input.errors.technicalRequirements && input.technicalRequirements.length === 0 &&
+                            <StyledText
+                                tag="span"
+                                color="red"
+                                text={input.errors.technicalRequirements}
+                            />}
                         <DialogContentText sx={{color: 'white'}}>Responsibilities:</DialogContentText>
                         <StyledTextarea
                             placeholder="Enter responsibilities"
@@ -171,6 +291,12 @@ export default function JobOfferFormContainer() {
                             value={input.responsibilities}
                             onChange={onInputChange}
                         />
+                        {input.errors.responsibilities &&
+                            <StyledText
+                                tag="span"
+                                color="red"
+                                text={input.errors.responsibilities}
+                            />}
                         <DialogContentText sx={{color: 'white'}}>Who we are looking for: </DialogContentText>
                         <StyledTextarea
                             placeholder="Enter who we are looking for"
@@ -178,6 +304,12 @@ export default function JobOfferFormContainer() {
                             value={input.whoWeAreLookingFor}
                             onChange={onInputChange}
                         />
+                        {input.errors.whoWeAreLookingFor &&
+                            <StyledText
+                                tag="span"
+                                color="red"
+                                text={input.errors.whoWeAreLookingFor}
+                            />}
                         <DialogContentText sx={{color: 'white'}}>Benefits:</DialogContentText>
                         <StyledTextarea
                             placeholder="Enter benefits"
@@ -185,6 +317,12 @@ export default function JobOfferFormContainer() {
                             value={input.benefits}
                             onChange={onInputChange}
                         />
+                        {input.errors.benefits &&
+                            <StyledText
+                                tag="span"
+                                color="red"
+                                text={input.errors.benefits}
+                            />}
                         <StyledGridContainer>
                             <StyledGridItem>
                                 <DialogContentText sx={{color: 'white'}}>Salary:</DialogContentText>
@@ -197,6 +335,12 @@ export default function JobOfferFormContainer() {
                                                 value={input.salaryFrom}
                                                 onChange={onInputChange}
                                             />
+                                            {input.errors.salaryFrom &&
+                                                <StyledText
+                                                    tag="span"
+                                                    color="red"
+                                                    text={input.errors.salaryFrom}
+                                                />}
                                         </StyledGridItem>
                                         <StyledGridItem>
                                             <Input
@@ -205,6 +349,12 @@ export default function JobOfferFormContainer() {
                                                 value={input.salaryTo}
                                                 onChange={onInputChange}
                                             />
+                                            {input.errors.salaryTo &&
+                                                <StyledText
+                                                    tag="span"
+                                                    color="red"
+                                                    text={input.errors.salaryTo}
+                                                />}
                                         </StyledGridItem>
                                     </StyledGridContainer>
                                 </StyledGridItem>
@@ -228,10 +378,15 @@ export default function JobOfferFormContainer() {
                                             </option>
                                         ))}
                                     </StyledCurrencyType>
+                                    {input.errors.currencyType &&
+                                        <Typography><StyledText
+                                            tag="span"
+                                            color="red"
+                                            text={input.errors.currencyType}
+                                        /></Typography>}
                                 </StyledGridItem>
                             </StyledGridItem>
                         </StyledGridContainer>
-
                         <DialogContentText sx={{color: 'white'}}>Location:</DialogContentText>
                         <Input
                             placeholder="Enter location"
@@ -239,9 +394,14 @@ export default function JobOfferFormContainer() {
                             value={input.location}
                             onChange={onInputChange}
                         />
+                        {input.errors.location &&
+                            <StyledText
+                                tag="span"
+                                color="red"
+                                text={input.errors.location}
+                            />}
                         <StyledGridContainer>
                             <StyledGridItem>
-
                                 <StyledGridItem>
                                     <DialogContentText sx={{color: 'white'}}>Types of jobs:</DialogContentText>
                                 </StyledGridItem>
@@ -255,23 +415,38 @@ export default function JobOfferFormContainer() {
                                                     disabled={option.disabled}>{option.label}</option>
                                         ))}
                                     </StyledSelectJobType>
+                                    {input.errors.jobType &&
+                                        <Typography><StyledText
+                                            tag="span"
+                                            color="red"
+                                            text={input.errors.jobType}
+                                        /></Typography>}
                                 </StyledGridItem>
-
                             </StyledGridItem>
-                            <StyledGridContainer>
-                                <RadioGroup value={input.workType} onChange={onOptionRadioTypeChange}>
-                                    {workType.map((work) => (
-                                        <Radio sx={{color: 'white'}}
-                                               key={work.value}
-                                               color="danger"
-                                               size="lg"
-                                               variant="solid"
-                                               label={work.label}
-                                               value={work.value}
-                                        />
-                                    ))}
-                                </RadioGroup>
-                            </StyledGridContainer>
+                            <StyledGridItem>
+                                <StyledGridItem>
+                                    <DialogContentText sx={{color: 'white'}}>Work types:</DialogContentText>
+                                </StyledGridItem>
+                                <StyledGridItem>
+                                    <StyledGridItem>
+                                        <StyledSelectJobType
+                                            value={input.workType}
+                                            onChange={onWorkTypeChange}
+                                        >
+                                            {workType.map((option) => (
+                                                <option key={option.value} value={option.value}
+                                                        disabled={option.disabled}>{option.label}</option>
+                                            ))}
+                                        </StyledSelectJobType>
+                                        {input.errors.workType &&
+                                            <Typography><StyledText
+                                                tag="span"
+                                                color="red"
+                                                text={input.errors.workType}
+                                            /></Typography>}
+                                    </StyledGridItem>
+                                </StyledGridItem>
+                            </StyledGridItem>
                         </StyledGridContainer>
                         <StyledButtonCenter>
                             <StyledRedButtonModalButton sx={{
@@ -283,7 +458,7 @@ export default function JobOfferFormContainer() {
                                 alignSelf: 'center',
                                 mt: 5,
                                 backgroundColor: 'rgba(171, 36, 36)'
-                            }} type='submit' onClick={handleClick}>SUBMIT</StyledRedButtonModalButton>
+                            }} type='submit'>SUBMIT</StyledRedButtonModalButton>
                             <JobOfferFormula open={showModal} handleClose={handleClose} errorMessage={errorMessage}/>
                         </StyledButtonCenter>
                     </StyledInputJobOfferContainer>
