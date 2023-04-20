@@ -71,7 +71,7 @@ export default function CandidateProfilePersonalInformation(props) {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 placeholder="Name Surname"
-                                isRequired={true}
+                                isRequired
                             />
                         </Box>
                         {/* City */}
@@ -82,7 +82,7 @@ export default function CandidateProfilePersonalInformation(props) {
                                 value={city}
                                 onChange={(e) => setCity(e.target.value)}
                                 placeholder="Localization"
-                                isRequired={true}
+                                isRequired
                             />
                         </Box>
                     </StyledLeftBox>

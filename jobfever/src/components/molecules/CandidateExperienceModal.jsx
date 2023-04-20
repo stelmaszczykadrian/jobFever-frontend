@@ -50,64 +50,58 @@ export default function CandidateExperienceModal(props) {
     };
 
     const handleSave = async () => {
-        if (position.trim() === '' || companyName.trim() === '' || location.trim() === '' || industry.trim() === '' || description.trim() === '' || endDate === '' || startDate === '') {
-            return
-        }
-        setOpen(false);
-        const updatedExperienceData = {
-            position: position,
-            companyName: companyName,
-            location: location,
-            startDate: startDate,
-            endDate: endDate,
-            industry: industry,
-            description: description,
-        }
+            if (position.trim() === '' || companyName.trim() === '' || location.trim() === '' || industry.trim() === '' || description.trim() === '' || endDate === '' || startDate === '') {
+                return
+            }
+            setOpen(false);
+            const updatedExperienceData = {
+                position: position,
+                companyName: companyName,
+                location: location,
+                startDate: startDate,
+                endDate: endDate,
+                industry: industry,
+                description: description,
+            }
 
-        let expBeforeChange = props.experience;
+            let expBeforeChange = props.experience;
 
-        if (props.isNew) {
-            const temp_id = "temp-" + crypto.randomUUID();
-            props.setExperiences((experiences) => {
-                experiences.push({...updatedExperienceData, id: temp_id});
-                return [...experiences];
-            });
-            await addCandidateExperience(candidate.id, updatedExperienceData)
-                .then(res => {
-                        if (res.status != 200) {
-                            props.setExperiences((experiences) => {
-                                experiences.pop();
-                                return [...experiences];
-                            });
-                        } else {
-                            props.setExperiences((experiences) => {
-                                let expIdx = experiences.findIndex((exp => exp.id == temp_id));
-                                experiences[expIdx] = {...experiences[expIdx], id: res.data};
-                                return [...experiences];
-                            })
-                        }
-                    }
-                )
-
-        } else {
-            props.setExperiences((experiences) => {
-                const expIdx = experiences.findIndex((exp => exp.id == experience.id));
-                experiences[expIdx] = {...experiences[expIdx], ...updatedExperienceData};
-                return [...experiences];
-            });
-            await editCandidateExperience(candidate.id, experience.id, updatedExperienceData)
-                .then(res => {
-                        if (res.status != 200) {
-                            props.setExperiences((experiences) => {
-                                const expIdx = experiences.findIndex((exp => exp.id == experience.id));
-                                experiences[expIdx] = {...experiences[expIdx], ...expBeforeChange};
-                                return [...experiences];
-                            });
-                        }
-                    }
-                )
+            if (props.isNew) {
+                const temp_id = "temp-" + crypto.randomUUID();
+                props.setExperiences((experiences) => {
+                    experiences.push({...updatedExperienceData, id: temp_id});
+                    return [...experiences];
+                });
+                const res = await addCandidateExperience(candidate.id, updatedExperienceData)
+                if (res.status !== 200) {
+                    props.setExperiences((experiences) => {
+                        experiences.pop();
+                        return [...experiences];
+                    });
+                    return
+                }
+                props.setExperiences((experiences) => {
+                    let expIdx = experiences.findIndex((exp => exp.id === temp_id));
+                    experiences[expIdx] = {...experiences[expIdx], id: res.data};
+                    return [...experiences];
+                });
+            } else {
+                props.setExperiences((experiences) => {
+                    const expIdx = experiences.findIndex((exp => exp.id === experience.id));
+                    experiences[expIdx] = {...experiences[expIdx], ...updatedExperienceData};
+                    return [...experiences];
+                });
+                const res = await editCandidateExperience(candidate.id, experience.id, updatedExperienceData)
+                if (res.status !== 200) {
+                    props.setExperiences((experiences) => {
+                        const expIdx = experiences.findIndex((exp => exp.id === experience.id));
+                        experiences[expIdx] = {...experiences[expIdx], ...expBeforeChange};
+                        return [...experiences];
+                    });
+                }
+            }
         }
-    };
+    ;
 
     return (
         <div>
@@ -131,8 +125,8 @@ export default function CandidateExperienceModal(props) {
                             label="Position"
                             value={position}
                             onChange={(e) => setPosition(e.target.value)}
-                            fullWidth={true}
-                            isRequired={true}
+                            fullWidth
+                            isRequired
                         />
                     </StyledGridItem>
                     <StyledGridItem>
@@ -141,8 +135,8 @@ export default function CandidateExperienceModal(props) {
                             label="Company name"
                             value={companyName}
                             onChange={(e) => setCompanyName(e.target.value)}
-                            fullWidth={true}
-                            isRequired={true}
+                            fullWidth
+                            isRequired
                         />
                     </StyledGridItem>
                     <StyledGridItem>
@@ -151,8 +145,8 @@ export default function CandidateExperienceModal(props) {
                             label="Location"
                             value={location}
                             onChange={(e) => setLocation(e.target.value)}
-                            fullWidth={true}
-                            isRequired={true}
+                            fullWidth
+                            isRequired
                         />
                     </StyledGridItem>
                     <StyledGridContainer>
@@ -179,8 +173,8 @@ export default function CandidateExperienceModal(props) {
                             label="Industry"
                             value={industry}
                             onChange={(e) => setIndustry(e.target.value)}
-                            fullWidth={true}
-                            isRequired={true}
+                            fullWidth
+                            isRequired
                         />
                     </StyledGridItem>
                     <StyledGridItem>
@@ -189,8 +183,8 @@ export default function CandidateExperienceModal(props) {
                             label="Description"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            fullWidth={true}
-                            isRequired={true}
+                            fullWidth
+                            isRequired
                         />
                     </StyledGridItem>
                 </DialogContent>
