@@ -128,3 +128,10 @@ export async function deleteCandidateExperience(candidateId, experienceId) {
         return error
     })
 }
+
+export async function deleteCandidateEducation(candidateId, educationId) {
+    return await axios.delete(`http://localhost:8080/api/candidates/${candidateId}/education/${educationId}`, {
+    }).catch(error => {
+        return error
+    })
+}
