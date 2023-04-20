@@ -1,17 +1,22 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 import * as React from "react";
+import Cookies from "js-cookie";
 
 const url = "http://localhost:8080/api/candidates/";
 
 export const useCandidateById = (id) => {
     const [candidate, setCandidate] = useState({});
     const [loading, setLoading] = useState(true);
-
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const {data: response} = await axios.get(url, {params: {id: id}});
+                const {data: response} = await axios.get(url, {
+                    params: {id: id},
+                    headers: {
+                        Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+                    }
+                });
                 setCandidate(response);
             } catch (error) {
                 console.error(error)
@@ -36,7 +41,10 @@ export async function editCandidate(id, updatedCandidateData) {
             github: updatedCandidateData.github
         },
         {
-            params: {id: id}
+            params: {id: id},
+            headers: {
+                Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+            }
         });
 }
 
@@ -48,7 +56,11 @@ export async function editCandidateEducation(candidateId, educationId, updatedCa
         fieldOfStudy: updatedCandidateEducationData.fieldOfStudy,
         school: updatedCandidateEducationData.school,
         startDate: updatedCandidateEducationData.startDate
-    }).catch(error => {
+    }({
+        headers: {
+            Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+        }
+    })).catch(error => {
         return error
     })
 }
@@ -61,7 +73,11 @@ export async function addCandidateEducation(candidateId, updatedCandidateEducati
         fieldOfStudy: updatedCandidateEducationData.fieldOfStudy,
         school: updatedCandidateEducationData.school,
         startDate: updatedCandidateEducationData.startDate
-    })
+    }({
+        headers: {
+            Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+        }
+    }))
         .catch(error => {
             return error
         })
@@ -76,7 +92,11 @@ export async function editCandidateExperience(candidateId, experienceId, updated
         endDate: updatedCandidateExperienceData.endDate,
         industry: updatedCandidateExperienceData.industry,
         description: updatedCandidateExperienceData.description
-    }).catch(error => {
+    }({
+        headers: {
+            Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+        }
+    })).catch(error => {
         return error
     })
 }
@@ -90,12 +110,15 @@ export async function addCandidateExperience(candidateId, updatedCandidateExperi
         endDate: updatedCandidateExperienceData.endDate,
         industry: updatedCandidateExperienceData.industry,
         description: updatedCandidateExperienceData.description
-    })
+    }({
+        headers: {
+            Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+        }
+    }))
         .catch(error => {
             return error
         })
 }
-
 
 
 export const registerCandidate = (userData, onSuccess, onError) => {
@@ -124,6 +147,9 @@ export const registerCandidate = (userData, onSuccess, onError) => {
 
 export async function deleteCandidateExperience(candidateId, experienceId) {
     return await axios.delete(`http://localhost:8080/api/candidates/${candidateId}/experience/${experienceId}`, {
+        headers: {
+            Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+        }
     }).catch(error => {
         return error
     })
@@ -131,6 +157,9 @@ export async function deleteCandidateExperience(candidateId, experienceId) {
 
 export async function deleteCandidateEducation(candidateId, educationId) {
     return await axios.delete(`http://localhost:8080/api/candidates/${candidateId}/education/${educationId}`, {
+        headers: {
+            Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+        }
     }).catch(error => {
         return error
     })
