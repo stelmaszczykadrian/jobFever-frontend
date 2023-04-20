@@ -29,10 +29,14 @@ export default function EmployerProfilePersonalInfo(props){
     const handleEditClick = () => {
         setIsEdit(true);
     };
-    const handleSaveClick = () => {
+    const handleSaveClick = async () => {
+        if (nameAndSurname === '' || localization === '' || phoneNumber === '') {
+            return
+        }
         setIsEdit(false);
-        editEmployer(props.id, companyName, nameAndSurname, phoneNumber, localization, null)
-    };
+    await editEmployer(props.id, companyName, nameAndSurname, phoneNumber, localization, null);
+};
+
     React.useEffect(() => {
         if (!loading) {
             setCompanyName(data.companyName);
@@ -43,7 +47,6 @@ export default function EmployerProfilePersonalInfo(props){
         }
     }, [data]);
     if (!loading) {
-        console.log(data)
         return (
             <StyledProfilePaper>
                 <StyledTopBox>
@@ -63,6 +66,7 @@ export default function EmployerProfilePersonalInfo(props){
                                 value={nameAndSurname}
                                 onChange={(e) => setNameAndSurname(e.target.value)}
                                 placeholder="Name Surname"
+                                isRequired={true}
                             />
                         </Box>
                         <h3>Localization</h3>
@@ -72,6 +76,7 @@ export default function EmployerProfilePersonalInfo(props){
                                 value={localization}
                                 onChange={(e) => setLocalization(e.target.value)}
                                 placeholder="Localization"
+                                isRequired={true}
                             />
                         </Box>
                         {/* Email */}
@@ -94,6 +99,7 @@ export default function EmployerProfilePersonalInfo(props){
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                                 placeholder="Phone number"
+                                isRequired={true}
                             />
                         </Box>
                         <h3>Social Links</h3>
@@ -103,6 +109,7 @@ export default function EmployerProfilePersonalInfo(props){
                                 value={linkedin}
                                 onChange={(e) => setLinkedIn(e.target.value)}
                                 placeholder="https://www.linkedin.com/"
+                                isRequired={false}
                             />
                         </Box>
                         <Box mb={8}>
@@ -111,6 +118,7 @@ export default function EmployerProfilePersonalInfo(props){
                                 value={github}
                                 onChange={(e) => setGitHub(e.target.value)}
                                 placeholder="https://github.com/"
+                                isRequired={false}
                             />
                         </Box>
                         <Box>
