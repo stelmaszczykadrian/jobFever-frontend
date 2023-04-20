@@ -13,6 +13,11 @@ import img from "../../images/logo.png";
 import Typography from "@mui/joy/Typography";
 import {StyledDeleteIcon} from "../atoms/StyledDeleteIcon";
 import IconButton from "@mui/material/IconButton";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import {RedButtonStyled} from "../atoms/RedButton.styles";
+import Dialog from "@mui/material/Dialog";
 
 
 export default function CandidateProfileEducation(props) {
@@ -26,16 +31,27 @@ export default function CandidateProfileEducation(props) {
         }
     }, [data.candidateEducations]);
 
-    const handleDeleteEducation = async (candidateId, educationId) => {
-        try {
-            const response = await deleteCandidateEducation(candidateId, educationId);
+    const [deleteEducationId, setDeleteEducationId] = useState(null);
+    const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
+
+    const handleDeleteEducation = (educationId) => {
+        setDeleteEducationId(educationId);
+        setIsDeleteConfirmationOpen(true);
+    };
+
+    const handleConfirmationDelete = async () => {
+        if (deleteEducationId) {
+            const response = await deleteCandidateEducation(props.id, deleteEducationId);
             if (response.status === 200) {
-                setEducations(prevEducations => prevEducations.filter(education => education.id !== educationId));
+                setEducations(educations.filter(e => e.id !== deleteEducationId));
             }
-        } catch (error) {
-            console.log(error);
         }
-    }
+        setIsDeleteConfirmationOpen(false);
+    };
+
+    const handleCancelDelete = () => {
+        setIsDeleteConfirmationOpen(false);
+    };
 
     if (!data || !data.candidateEducations) {
         return <div>Loading...</div>;
@@ -87,7 +103,7 @@ export default function CandidateProfileEducation(props) {
                                         isNew={false}
                                         tag={<StyledEditIcon/>}
                                     />
-                                    <IconButton onClick={() => handleDeleteEducation(props.id, education.id)}>
+                                    <IconButton onClick={() => handleDeleteEducation(education.id)}>
                                         <StyledDeleteIcon />
                                     </IconButton>
                                 </StyledIconBox>
@@ -95,6 +111,16 @@ export default function CandidateProfileEducation(props) {
                         </StyledPaper>
                     ))}
                 </StyledBottomBox>
+                <Dialog open={isDeleteConfirmationOpen} onClose={handleCancelDelete}>
+                    <DialogTitle>Confirm Delete</DialogTitle>
+                    <DialogContent>
+                        <Typography>Are you sure you want to delete this education?</Typography>
+                    </DialogContent>
+                    <DialogActions>
+                        <RedButtonStyled onClick={handleConfirmationDelete}>Delete</RedButtonStyled>
+                        <RedButtonStyled onClick={handleCancelDelete}>Cancel</RedButtonStyled>
+                    </DialogActions>
+                </Dialog>
             </StyledProfilePaper>
         );
     }
