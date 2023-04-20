@@ -9,9 +9,9 @@ import {RedButtonStyled} from "../atoms/RedButton.styles";
 import CalendarForm from "../organisms/CalendarForm";
 import IconButton from "@mui/material/IconButton";
 import {editCandidateEducation, addCandidateEducation} from "../../api/CandidateApi";
-import {TextField} from "@mui/material";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import EditableModalInput from "../atoms/EditableModalInput";
 
 export default function CandidateEducationModal(props) {
     const title = (props.isNew ? "Add Education" : "Edit education");
@@ -45,6 +45,9 @@ export default function CandidateEducationModal(props) {
     };
 
     const handleSave = async () => {
+        if (school.trim() === '' || degree.trim() === '' || description.trim() === '' || fieldOfStudy.trim() === '' || endDate === '' || startDate === '') {
+            return
+        }
         setOpen(false);
         const updatedEducationData = {
             degree: degree,
@@ -117,40 +120,37 @@ export default function CandidateEducationModal(props) {
                 </DialogTitle>
                 <DialogContent>
                     <StyledGridItem>
-                            <TextField
-                                required
-                                color="error"
-                                placeholder="Ex. Boston University"
-                                label="School"
-                                value={school}
-                                onChange={(e) => setSchool(e.target.value)}
-                                fullWidth
-                            />
+                        <EditableModalInput
+                            placeholder="Ex. Boston University"
+                            label="School"
+                            value={school}
+                            onChange={(e) => setSchool(e.target.value)}
+                            fullWidth={true}
+                            isRequired={true}
+                        />
                     </StyledGridItem>
-                        <StyledGridItem>
-                            <TextField
-                                required
-                                color="error"
-                                placeholder="Ex. Bechelor's"
-                                label="Degree"
-                                value={degree}
-                                onChange={(e) => setDegree(e.target.value)}
-                                fullWidth
-                            />
-                        </StyledGridItem>
                     <StyledGridItem>
-                        <TextField
-                            required
-                            color="error"
+                        <EditableModalInput
+                            placeholder="Ex. Bechelor's"
+                            label="Degree"
+                            value={degree}
+                            onChange={(e) => setDegree(e.target.value)}
+                            fullWidth={true}
+                            isRequired={true}
+                        />
+                    </StyledGridItem>
+                    <StyledGridItem>
+                        <EditableModalInput
                             placeholder="Ex. Economy"
                             label="Field of study"
                             value={fieldOfStudy}
                             onChange={(e) => setFieldOfStudy(e.target.value)}
-                            fullWidth
+                            fullWidth={true}
+                            isRequired={true}
                         />
                     </StyledGridItem>
-                        <StyledGridContainer>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <StyledGridContainer>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <StyledGridItem>
                                 <CalendarForm
                                     name="Start date"
@@ -165,18 +165,16 @@ export default function CandidateEducationModal(props) {
                                     setDate={setEndDate}
                                 />
                             </StyledGridItem>
-                                </LocalizationProvider>
-
-                        </StyledGridContainer>
+                        </LocalizationProvider>
+                    </StyledGridContainer>
                     <StyledGridItem>
-                        <TextField
-                            required
-                            color="error"
+                        <EditableModalInput
                             placeholder="Ex. Activity clubs, extra achievements"
                             label="Description"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            fullWidth
+                            fullWidth={true}
+                            isRequired={true}
                         />
                     </StyledGridItem>
                 </DialogContent>
