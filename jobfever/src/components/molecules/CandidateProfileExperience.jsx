@@ -10,11 +10,13 @@ import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledWorkIcon} from "../atoms/StyledWorkIcon";
 import {StyledAddIcon} from "../atoms/StyledAddIcon";
 import CandidateExperienceModal from "./CandidateExperienceModal";
-import {useCandidateById} from "../../api/CandidateApi";
+import {deleteCandidateExperience, useCandidateById} from "../../api/CandidateApi";
 import {Grid} from "@mui/joy";
 import {Img, StyledPaper} from "./JobOfferGrid.styles";
 import img from "../../images/logo.png";
 import Typography from "@mui/joy/Typography";
+import IconButton from "@mui/material/IconButton";
+import {StyledDeleteIcon} from "../atoms/StyledDeleteIcon";
 
 export default function CandidateProfileExperience(props) {
 
@@ -26,6 +28,17 @@ export default function CandidateProfileExperience(props) {
             setExperiences(data.candidateExperiences);
         }
     }, [data.candidateExperiences]);
+
+    const handleDeleteExperience = async (candidateId, experienceId) => {
+        try {
+            const response = await deleteCandidateExperience(candidateId, experienceId);
+            if (response.status === 200) {
+                setExperiences(prevExperiences => prevExperiences.filter(experience => experience.id !== experienceId));
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     if (!data || !data.candidateExperiences) {
         return <div>Loading...</div>;
@@ -79,6 +92,10 @@ export default function CandidateProfileExperience(props) {
                                         isNew={false}
                                         tag={<StyledEditIcon/>}
                                     />
+
+                                    <IconButton onClick={() => handleDeleteExperience(props.id, experience.id)}>
+                                        <StyledDeleteIcon />
+                                    </IconButton>
                                 </StyledIconBox>
                             </Grid>
                         </StyledPaper>

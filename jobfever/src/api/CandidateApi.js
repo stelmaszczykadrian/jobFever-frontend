@@ -95,3 +95,10 @@ export async function addCandidateExperience(candidateId, updatedCandidateExperi
             return error
         })
 }
+
+export async function deleteCandidateExperience(candidateId, experienceId) {
+    return await axios.delete(`http://localhost:8080/api/candidates/${candidateId}/experience/${experienceId}`, {
+    }).catch(error => {
+        return error
+    })
+}
