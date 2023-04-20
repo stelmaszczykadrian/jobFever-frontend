@@ -3,10 +3,6 @@ import {useEffect, useState} from "react";
 
 const url = "http://localhost:8080/api/employers/";
 
-export const createEmployer = async(userData) =>{
-    return await axios.post( "http://localhost:8080/api/authentication/employers/register", userData);
-}
-
 export const useEmployerById = (id) => {
     const [employer, setEmployer] = useState({});
     const [loading, setLoading] = useState(true);
@@ -52,3 +48,29 @@ export async function editEmployer(id, companyName, nameAndSurname, phoneNumber,
     }
 
 }
+
+
+export const registerEmployer = (userData, onSuccess, onError) => {
+    const url = "http://localhost:8080/api/authentication/employers/register";
+    axios.post(url, userData)
+        .then((response) => {
+            console.log(response);
+            if (response.status === 200 && response.data === "Employer added successfully.") {
+                onSuccess();
+            }
+        })
+        .catch((error) => {
+            if (error.response) {
+                const errorMessage = error.response.data;
+                onError(errorMessage);
+                console.log(error.response);
+                console.log("server responded");
+            } else if (error.request) {
+                console.log("network error");
+            } else {
+                console.log(error);
+            }
+        });
+};
+
+
