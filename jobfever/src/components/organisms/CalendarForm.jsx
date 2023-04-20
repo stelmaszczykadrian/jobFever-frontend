@@ -10,10 +10,10 @@ export default function CalendarForm({name, date, setDate}) {
                     textField: { error: false, color: "error", required}
                 }}
                 value={dayjs(date)}
-                format="DD-MM-YYYY"
+                format="YYYY-MM-DD"
                 label={name}
                 onChange={(e) => {
-                    setDate(e)
+                    setDate(e.format('YYYY-MM-DD'))
                 }}
                 />
     );
