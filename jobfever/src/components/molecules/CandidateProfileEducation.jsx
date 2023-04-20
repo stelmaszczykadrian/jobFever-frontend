@@ -6,11 +6,13 @@ import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledAddIcon} from "../atoms/StyledAddIcon";
 import {StyledSchoolIcon} from "../atoms/StyledSchoolIcon";
 import CandidateEducationModal from "./CandidateEducationModal";
-import {useCandidateById} from "../../api/CandidateApi";
+import {deleteCandidateEducation, useCandidateById} from "../../api/CandidateApi";
 import {Grid} from "@mui/joy";
 import {Img, StyledPaper} from "./JobOfferGrid.styles";
 import img from "../../images/logo.png";
 import Typography from "@mui/joy/Typography";
+import {StyledDeleteIcon} from "../atoms/StyledDeleteIcon";
+import IconButton from "@mui/material/IconButton";
 
 
 export default function CandidateProfileEducation(props) {
@@ -24,6 +26,16 @@ export default function CandidateProfileEducation(props) {
         }
     }, [data.candidateEducations]);
 
+    const handleDeleteEducation = async (candidateId, educationId) => {
+        try {
+            const response = await deleteCandidateEducation(candidateId, educationId);
+            if (response.status === 200) {
+                setEducations(prevEducations => prevEducations.filter(education => education.id !== educationId));
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     if (!data || !data.candidateEducations) {
         return <div>Loading...</div>;
@@ -75,11 +87,13 @@ export default function CandidateProfileEducation(props) {
                                         isNew={false}
                                         tag={<StyledEditIcon/>}
                                     />
+                                    <IconButton onClick={() => handleDeleteEducation(props.id, education.id)}>
+                                        <StyledDeleteIcon />
+                                    </IconButton>
                                 </StyledIconBox>
                             </Grid>
                         </StyledPaper>
                     ))}
-
                 </StyledBottomBox>
             </StyledProfilePaper>
         );
