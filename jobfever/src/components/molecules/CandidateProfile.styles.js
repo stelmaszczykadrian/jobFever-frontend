@@ -40,6 +40,9 @@ export const StyledIconBox = styled(Box)`
   text-align: right;
   flex-grow: 1;
   align-self: self-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 `;
 
 export const StyledTopBox = styled(Box)`
