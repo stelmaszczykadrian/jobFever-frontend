@@ -66,40 +66,34 @@ export default function CandidateEducationModal(props) {
                 educations.push({...updatedEducationData, id: temp_id});
                 return [...educations];
             });
-            await addCandidateEducation(candidate.id, updatedEducationData)
-                .then(res => {
-                        if (res.status != 200) {
-                            props.setEducations((educations) => {
-                                educations.pop();
-                                return [...educations];
-                            });
-                        } else {
-                            props.setEducations((educations) => {
-                                let eduIdx = educations.findIndex((edu => edu.id == temp_id));
-                                educations[eduIdx] = {...educations[eduIdx], id: res.data};
-                                return [...educations];
-                            })
-                        }
-                    }
-                )
+            const res = await addCandidateEducation(candidate.id, updatedEducationData)
+            if (res.status !== 200) {
+                props.setEducations((educations) => {
+                    educations.pop();
+                    return [...educations];
+                });
+                return
+            }
+            props.setEducations((educations) => {
+                let eduIdx = educations.findIndex((edu => edu.id === temp_id));
+                educations[eduIdx] = {...educations[eduIdx], id: res.data};
+                return [...educations];
+            });
 
         } else {
             props.setEducations((educations) => {
-                const eduIdx = educations.findIndex((edu => edu.id == education.id));
+                const eduIdx = educations.findIndex((edu => edu.id === education.id));
                 educations[eduIdx] = {...educations[eduIdx], ...updatedEducationData};
                 return [...educations];
             });
-            await editCandidateEducation(candidate.id, education.id, updatedEducationData)
-                .then(res => {
-                        if (res.status != 200) {
-                            props.setEducations((educations) => {
-                                const eduIdx = educations.findIndex((edu => edu.id == education.id));
-                                educations[eduIdx] = {...educations[eduIdx], ...eduBeforeChange};
-                                return [...educations];
-                            });
-                        }
-                    }
-                )
+            const res = await editCandidateEducation(candidate.id, education.id, updatedEducationData)
+            if (res.status !== 200) {
+                props.setEducations((educations) => {
+                    const eduIdx = educations.findIndex((edu => edu.id === education.id));
+                    educations[eduIdx] = {...educations[eduIdx], ...eduBeforeChange};
+                    return [...educations];
+                });
+            }
         }
     };
 
@@ -125,8 +119,8 @@ export default function CandidateEducationModal(props) {
                             label="School"
                             value={school}
                             onChange={(e) => setSchool(e.target.value)}
-                            fullWidth={true}
-                            isRequired={true}
+                            fullWidth
+                            isRequired
                         />
                     </StyledGridItem>
                     <StyledGridItem>
@@ -135,8 +129,8 @@ export default function CandidateEducationModal(props) {
                             label="Degree"
                             value={degree}
                             onChange={(e) => setDegree(e.target.value)}
-                            fullWidth={true}
-                            isRequired={true}
+                            fullWidth
+                            isRequired
                         />
                     </StyledGridItem>
                     <StyledGridItem>
@@ -145,8 +139,8 @@ export default function CandidateEducationModal(props) {
                             label="Field of study"
                             value={fieldOfStudy}
                             onChange={(e) => setFieldOfStudy(e.target.value)}
-                            fullWidth={true}
-                            isRequired={true}
+                            fullWidth
+                            isRequired
                         />
                     </StyledGridItem>
                     <StyledGridContainer>
@@ -173,8 +167,8 @@ export default function CandidateEducationModal(props) {
                             label="Description"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            fullWidth={true}
-                            isRequired={true}
+                            fullWidth
+                            isRequired
                         />
                     </StyledGridItem>
                 </DialogContent>

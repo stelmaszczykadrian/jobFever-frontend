@@ -67,7 +67,7 @@ export default function CandidateProfileExperience(props) {
                     <StyledIconBox>
                         <CandidateExperienceModal
                             candidate={props}
-                            isNew={true}
+                            isNew
                             setExperiences={setExperiences}
                             tag={<StyledAddIcon/>}/>
                     </StyledIconBox>
