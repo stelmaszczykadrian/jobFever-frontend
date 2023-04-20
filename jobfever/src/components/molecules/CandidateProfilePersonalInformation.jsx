@@ -28,6 +28,9 @@ export default function CandidateProfilePersonalInformation(props) {
         setIsEdit(true);
     };
     const handleSaveClick = async () => {
+        if (name.trim() === '' || city.trim() === '') {
+            return
+        }
         setIsEdit(false);
         const updatedCandidateData = {
             name: name,
@@ -68,6 +71,7 @@ export default function CandidateProfilePersonalInformation(props) {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 placeholder="Name Surname"
+                                isRequired={true}
                             />
                         </Box>
                         {/* City */}
@@ -78,14 +82,10 @@ export default function CandidateProfilePersonalInformation(props) {
                                 value={city}
                                 onChange={(e) => setCity(e.target.value)}
                                 placeholder="Localization"
+                                isRequired={true}
                             />
                         </Box>
-                        {/*/!* Email *!/*/}
-                        {/*<Box mb={1}>*/}
-                        {/*    {data.email}*/}
-                        {/*</Box>*/}
                     </StyledLeftBox>
-
                     <StyledRightBox>
                         <h3>Social Links</h3>
                         <Box mb={1}>
@@ -94,6 +94,7 @@ export default function CandidateProfilePersonalInformation(props) {
                                 value={linkedin}
                                 onChange={(e) => setLinkedIn(e.target.value)}
                                 placeholder="https://www.linkedin.com/"
+                                isRequired={false}
                             />
                         </Box>
                         <Box mb={6}>
@@ -102,6 +103,7 @@ export default function CandidateProfilePersonalInformation(props) {
                                 value={github}
                                 onChange={(e) => setGitHub(e.target.value)}
                                 placeholder="https://github.com/"
+                                isRequired={false}
                             />
                         </Box>
                         <Box mb={8}>
