@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 const urls = [
     "http://localhost:8080/api/jobs/by-employer",
     "http://localhost:8080/api/jobs/"
@@ -18,8 +19,13 @@ export function useJobsPagination(pageNumber, sortBy, field) {
             method: 'GET',
             url: 'http://localhost:8080/api/jobs/',
             params: {page: pageNumber - 1, sortBy: sortBy, field: field},
-            cancelToken: new axios.CancelToken(c => cancel = c)
-        }).then(res => {
+            cancelToken: new axios.CancelToken(c => cancel = c),
+            headers: {
+                "Authorization" : `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+            }
+
+        }
+        ).then(res => {
             setJobs(prevJobs => {
                 return [...new Set([...prevJobs, ...res.data.content])]
             })
@@ -67,7 +73,9 @@ export const getJobOfferById = async (id) => await axios.get(`http://localhost:8
 
 export const createJob = (userData, onSuccess, onError) => {
     const url = "http://localhost:8080/api/jobs";
-    axios.post(url, userData)
+    axios.post(url, userData, ({            headers: {
+            Authorization : `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+        }}))
         .then((response) => {
             console.log(response);
             if (response.status === 200 && response.data === "Job added successfully.") {
