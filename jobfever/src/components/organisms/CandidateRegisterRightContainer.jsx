@@ -6,7 +6,6 @@ import Input from "@mui/joy/Input";
 import RedButton from "../atoms/RedButton";
 import SocialMediaButtons from "../molecules/SocialMediaButtons";
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
 import StyledText from "../atoms/StyledText";
 import {
     CandidateRegisterTextCandidateExist,
@@ -14,13 +13,19 @@ import {
     StyledLabel,
     StyledRightContainer
 } from "./CandidateRegisterRightContainer.styles";
+import {
+    emailCannotBeEmptyMessage,
+    incorrectPasswordLengthMessage,
+    invalidEmailAddressMessage,
+    isValidEmail, minimumPasswordLength, passwordsDoNotMatchMessage
+} from "../../constants/ValidateRegisterForm";
+import {registerCandidate} from "../../api/CandidateApi";
+import {validateFormData} from "../../constants/ValidateUtil";
 
 export default function CandidateRegisterRightContainer() {
-
-    const [candidateMessage, setCandidateMessage] = useState('');
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState(null);
     const [formData, setFormData] = useState({
-
         email: '',
         password: '',
         confirmPassword: '',
@@ -44,49 +49,40 @@ export default function CandidateRegisterRightContainer() {
     const validateInput = (name, value) => {
         switch (name) {
             case 'email':
-                return value !== '' ? '' : 'Email field cannot be empty';
+                return value !== '' ? (isValidEmail(value) ? '' : invalidEmailAddressMessage) : emailCannotBeEmptyMessage;
             case 'password':
-                return value.length < 6 ? 'Password should be at least 6 characters long' : '';
+                return value.length < minimumPasswordLength ? incorrectPasswordLengthMessage : '';
             case 'confirmPassword':
-                return value !== formData.password ? 'Passwords do not match' : '';
+                return value !== formData.password ? passwordsDoNotMatchMessage : '';
             default:
                 return '';
         }
     };
 
-
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        const errors = validateFormData(formData, validateInput);
+        if (errors) {
+            setFormData((prevFormData) => ({...prevFormData, errors}));
+            return;
+        }
+
         if (formData.password === formData.confirmPassword) {
             const userData = {
                 email: formData.email,
                 password: formData.password,
             };
-            try {
-                const response = await axios.post('http://localhost:8080/api/authentication/candidates/register', userData);
-                console.log(response);
-                setCandidateMessage('Candidate added successfully.');
+            registerCandidate(userData, () => {
+                setErrorMessage('Candidate added successfully.');
                 setTimeout(() => {
                     navigate('/candidate/login');
                 }, 2000);
-            } catch (error) {
-                if (error.response) {
-                    if (error.response.data === "Candidate already exists.") {
-                        setCandidateMessage("Candidate already exists.")
-                    } else {
-                        console.log(error.response);
-                        console.log("server responded");
-                    }
-                } else if (error.request) {
-                    console.log("network error");
-                } else {
-                    console.log(error);
-                }
-            }
+            }, (errorMessage) => {
+                setErrorMessage(errorMessage);
+            });
         }
     }
-
-
     return (
         <StyledRightContainer>
             <RightNavbar/>
@@ -166,8 +162,8 @@ export default function CandidateRegisterRightContainer() {
                                 text={formData.errors.confirmPassword}
                             />}
                     </FormControl>;
-                    {candidateMessage &&
-                        <CandidateRegisterTextCandidateExist>{candidateMessage}</CandidateRegisterTextCandidateExist>}
+                    {errorMessage &&
+                        <CandidateRegisterTextCandidateExist>{errorMessage}</CandidateRegisterTextCandidateExist>}
                     <FormControl sx={{justifyContent: 'center'}}>
                         <RedButton
                             text="REGISTER">
