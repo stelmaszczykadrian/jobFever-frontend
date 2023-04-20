@@ -14,9 +14,9 @@ import {
     StyledRightContainer
 } from "./CandidateRegisterRightContainer.styles";
 import {
-    emailCannotBeEmptyMessage,
+    incorrectEmailEmptyMessage,
     incorrectPasswordLengthMessage,
-    invalidEmailAddressMessage,
+    incorrectEmailAddressMessage,
     isValidEmail, minimumPasswordLength, passwordsDoNotMatchMessage
 } from "../../constants/ValidateRegisterForm";
 import {registerCandidate} from "../../api/CandidateApi";
@@ -49,7 +49,7 @@ export default function CandidateRegisterRightContainer() {
     const validateInput = (name, value) => {
         switch (name) {
             case 'email':
-                return value !== '' ? (isValidEmail(value) ? '' : invalidEmailAddressMessage) : emailCannotBeEmptyMessage;
+                return value !== '' ? (isValidEmail(value) ? '' : incorrectEmailAddressMessage) : incorrectEmailEmptyMessage;
             case 'password':
                 return value.length < minimumPasswordLength ? incorrectPasswordLengthMessage : '';
             case 'confirmPassword':

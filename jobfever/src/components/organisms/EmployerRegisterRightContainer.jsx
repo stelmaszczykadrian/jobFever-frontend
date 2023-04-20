@@ -15,9 +15,9 @@ import StyledText from "../atoms/StyledText";
 import {StyledUserInputValidation,StyledLabel,StyledRightContainer} from "./CandidateRegisterRightContainer.styles";
 import {registerEmployer} from "../../api/EmployersApi";
 import {
-    emailCannotBeEmptyMessage, incorrectCompanyNameMessage, incorrectNameAndSurnameMessage,
-    incorrectPasswordLengthMessage, incorrectPhoneNumberMessage, invalidEmailAddressMessage,
-    isValidEmail, isValidPhoneNumber, minimumCompanyLength, minimumNameAndSurnameLength, minimumPasswordLength,
+    incorrectEmailEmptyMessage, incorrectCompanyNameMessage, incorrectNameMessage,
+    incorrectPasswordLengthMessage, incorrectPhoneNumberMessage, incorrectEmailAddressMessage,
+    isValidEmail, isValidPhoneNumber, minimumCompanyLength, minimumNameLengthMessage, minimumPasswordLength,
     passwordsDoNotMatchMessage
 } from "../../constants/ValidateRegisterForm";
 import {validateFormData} from "../../constants/ValidateUtil";
@@ -57,11 +57,11 @@ export default function EmployerRegisterRightContainer() {
             case 'companyName':
                 return value.length < minimumCompanyLength ? incorrectCompanyNameMessage : '';
             case 'nameAndSurname':
-                return value.length < minimumNameAndSurnameLength ? incorrectNameAndSurnameMessage : '';
+                return value.length < minimumNameLengthMessage ? incorrectNameMessage : '';
             case 'phoneNumber':
                 return isValidPhoneNumber(value) ? '' : incorrectPhoneNumberMessage;
             case 'email':
-                return value !== '' ? (isValidEmail(value) ? '' : invalidEmailAddressMessage) : emailCannotBeEmptyMessage;
+                return value !== '' ? (isValidEmail(value) ? '' : incorrectEmailAddressMessage) : incorrectEmailEmptyMessage;
             case 'password':
                 return value.length < minimumPasswordLength ? incorrectPasswordLengthMessage : '';
             case 'confirmPassword':
