@@ -13,11 +13,17 @@ import {Form} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import StyledText from "../atoms/StyledText";
 import {StyledUserInputValidation,StyledLabel,StyledRightContainer} from "./CandidateRegisterRightContainer.styles";
-import {createEmployer} from "../../api/EmployersApi";
+import {registerEmployer} from "../../api/EmployersApi";
+import {
+    emailCannotBeEmptyMessage, incorrectCompanyNameMessage, incorrectNameAndSurnameMessage,
+    incorrectPasswordLengthMessage, incorrectPhoneNumberMessage, invalidEmailAddressMessage,
+    isValidEmail, isValidPhoneNumber, minimumCompanyLength, minimumNameAndSurnameLength, minimumPasswordLength,
+    passwordsDoNotMatchMessage
+} from "../../constants/ValidateRegisterForm";
+import {validateFormData} from "../../constants/ValidateUtil";
 
 export default function EmployerRegisterRightContainer() {
-
-    const [employerMessage, setEmployerMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState(null);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         companyName: '',
@@ -49,17 +55,17 @@ export default function EmployerRegisterRightContainer() {
     const validateInput = (name, value) => {
         switch (name) {
             case 'companyName':
-                return value.length < 3 ? 'Company name should be at least 3 characters long' : '';
+                return value.length < minimumCompanyLength ? incorrectCompanyNameMessage : '';
             case 'nameAndSurname':
-                return value.length < 2 ? 'Name should be at least 2 characters long' : '';
+                return value.length < minimumNameAndSurnameLength ? incorrectNameAndSurnameMessage : '';
             case 'phoneNumber':
-                return /^\d{9}$/.test(value) ? '' : 'Phone number should be 9 digits long';
+                return isValidPhoneNumber(value) ? '' : incorrectPhoneNumberMessage;
             case 'email':
-                return value !== '' ? '' : 'Email field cannot be empty';
+                return value !== '' ? (isValidEmail(value) ? '' : invalidEmailAddressMessage) : emailCannotBeEmptyMessage;
             case 'password':
-                return value.length < 6 ? 'Password should be at least 6 characters long' : '';
+                return value.length < minimumPasswordLength ? incorrectPasswordLengthMessage : '';
             case 'confirmPassword':
-                return value !== formData.password ? 'Passwords do not match' : '';
+                return value !== formData.password ? passwordsDoNotMatchMessage : '';
             default:
                 return '';
         }
@@ -67,6 +73,13 @@ export default function EmployerRegisterRightContainer() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        const errors = validateFormData(formData, validateInput);
+        if (errors) {
+            setFormData((prevFormData) => ({...prevFormData, errors}));
+            return;
+        }
+
         if(formData.password === formData.confirmPassword){
             const userData = {
                 companyName: formData.companyName,
@@ -75,30 +88,19 @@ export default function EmployerRegisterRightContainer() {
                 email: formData.email,
                 password: formData.password,
             };
-            try {
-                const response = await createEmployer(userData);
-                console.log(response);
-                setEmployerMessage('Employer added successfully.');
-                setTimeout(() => {
-                    navigate('/employer/login');
-                }, 2000);
-            } catch (error) {
-                if (error.response) {
-                    if (error.response.data === "Employer already exists.") {
-                        setEmployerMessage("Employer already exists.")
-                    } else {
-                        console.log(error.response);
-                        console.log("server responded");
-                    }
-                } else if (error.request) {
-                    console.log("network error");
-                } else {
-                    console.log(error);
+            registerEmployer(userData,
+                () => {
+                    setErrorMessage('Employer added successfully.');
+                    setTimeout(() => {
+                        navigate('/employer/login');
+                    }, 2000);
+                },
+                (errorMessage) => {
+                    setErrorMessage(errorMessage);
                 }
-            }
+            );
         }
     }
-
     return (<StyledRightContainer>
         <RightNavbar/>
         <Form onSubmit={handleSubmit}>
@@ -225,8 +227,8 @@ export default function EmployerRegisterRightContainer() {
                     </EmployerRegisterRightContainerColumn>
                 </Container>
             </Sheet>
-            {employerMessage &&
-                <EmployerRegisterTextEmployerExist>{employerMessage}</EmployerRegisterTextEmployerExist>}
+            {errorMessage &&
+                <EmployerRegisterTextEmployerExist>{errorMessage}</EmployerRegisterTextEmployerExist>}
             <StyleEmployerRegisterSubmitButton>
                 <RedButton
                     text={"REGISTER"}>
