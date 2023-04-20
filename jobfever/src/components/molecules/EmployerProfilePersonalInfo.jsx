@@ -52,48 +52,48 @@ export default function EmployerProfilePersonalInfo(props){
                 <StyledBottomBoxPersonalInfo>
                     <StyledLeftBox>
                         {/* Photo */}
-                        <Box mb={2}>
+                        <Box mb={1}>
                             <ProfilePhoto/>
                         </Box>
                         {/* Name */}
-                        <h4>Owner</h4>
+                        <h3>Owner</h3>
                         <Box mb={1}>
                             <EditableInput
                                 isEdit={isEdit}
                                 value={nameAndSurname}
                                 onChange={(e) => setNameAndSurname(e.target.value)}
-                                placeholder="nameAndSurname"
+                                placeholder="Name Surname"
                             />
                         </Box>
-                        {/* Email */}
-                        <h4>Email</h4>
-                        <Box mb={1}>
-                            <EditableInput
-                                isEdit={isEdit}
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="email"
-                            />
-                        </Box>
-                    </StyledLeftBox>
-
-                    <StyledRightBox>
                         <h3>Localization</h3>
                         <Box mb={1}>
                             <EditableInput
                                 isEdit={isEdit}
                                 value={localization}
                                 onChange={(e) => setLocalization(e.target.value)}
-                                placeholder="localization"
+                                placeholder="Localization"
                             />
                         </Box>
+                        {/* Email */}
+                        {/*<h4>Email</h4>*/}
+                        {/*<Box mb={1}>*/}
+                        {/*    <EditableInput*/}
+                        {/*        isEdit={isEdit}*/}
+                        {/*        value={email}*/}
+                        {/*        onChange={(e) => setEmail(e.target.value)}*/}
+                        {/*        placeholder="email"*/}
+                        {/*    />*/}
+                        {/*</Box>*/}
+                    </StyledLeftBox>
+
+                    <StyledRightBox>
                         <h3>Phone number</h3>
-                        <Box mb={1}>
+                        <Box mb={4}>
                             <EditableInput
                                 isEdit={isEdit}
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
-                                placeholder="phone number"
+                                placeholder="Phone number"
                             />
                         </Box>
                         <h3>Social Links</h3>
@@ -102,15 +102,15 @@ export default function EmployerProfilePersonalInfo(props){
                                 isEdit={isEdit}
                                 value={linkedin}
                                 onChange={(e) => setLinkedIn(e.target.value)}
-                                placeholder="LinkedIn profile link"
+                                placeholder="https://www.linkedin.com/"
                             />
                         </Box>
-                        <Box mb={2}>
+                        <Box mb={8}>
                             <EditableInput
                                 isEdit={isEdit}
                                 value={github}
                                 onChange={(e) => setGitHub(e.target.value)}
-                                placeholder="GitHub profile link"
+                                placeholder="https://github.com/"
                             />
                         </Box>
                         <Box>

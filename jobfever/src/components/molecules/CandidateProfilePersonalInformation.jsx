@@ -57,10 +57,11 @@ export default function CandidateProfilePersonalInformation(props) {
                 <StyledBottomBoxPersonalInfo>
                     <StyledLeftBox>
                         {/* Photo */}
-                        <Box mb={2}>
+                        <Box mb={1}>
                             <ProfilePhoto/>
                         </Box>
                         {/* Name */}
+                        <h3>Name</h3>
                         <Box mb={1}>
                             <EditableInput
                                 isEdit={isEdit}
@@ -70,18 +71,19 @@ export default function CandidateProfilePersonalInformation(props) {
                             />
                         </Box>
                         {/* City */}
+                        <h3>Localization</h3>
                         <Box mb={1}>
                             <EditableInput
                                 isEdit={isEdit}
                                 value={city}
                                 onChange={(e) => setCity(e.target.value)}
-                                placeholder="City"
+                                placeholder="Localization"
                             />
                         </Box>
-                        {/* Email */}
-                        <Box mb={1}>
-                            {data.email}
-                        </Box>
+                        {/*/!* Email *!/*/}
+                        {/*<Box mb={1}>*/}
+                        {/*    {data.email}*/}
+                        {/*</Box>*/}
                     </StyledLeftBox>
 
                     <StyledRightBox>
@@ -94,7 +96,7 @@ export default function CandidateProfilePersonalInformation(props) {
                                 placeholder="https://www.linkedin.com/"
                             />
                         </Box>
-                        <Box mb={2}>
+                        <Box mb={6}>
                             <EditableInput
                                 isEdit={isEdit}
                                 value={github}
@@ -102,7 +104,7 @@ export default function CandidateProfilePersonalInformation(props) {
                                 placeholder="https://github.com/"
                             />
                         </Box>
-                        <Box mb={4}>
+                        <Box mb={8}>
                             <h3>CV file</h3>
                             <StyledInput>
                                 <input type="file" accept=".pdf,.doc,.docx"/>

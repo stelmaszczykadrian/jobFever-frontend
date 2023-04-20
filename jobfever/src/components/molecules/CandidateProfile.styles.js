@@ -10,7 +10,7 @@ export const StyledProfilePaper = styled(Paper)`
 export const StyledRightBox = styled(Box)`
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   text-align: right;
   flex-grow: 1;
 `;
