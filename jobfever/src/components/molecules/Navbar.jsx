@@ -29,13 +29,14 @@ const pages = [
 
 const settings = [
     <Link to='/candidate/candidate-id'>Profile</Link>,
-    'Account', 'Dashboard', 'Favourites', 'Logout'
+    'Account', 'Dashboard','Favourites'
 ];
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const navigate = useNavigate();
+
 
     let jwt = Cookies.get('jwt');
 
@@ -73,6 +74,10 @@ function ResponsiveAppBar() {
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
+    };
+    const logout = () => {
+        Cookies.remove('jwt');
+        navigate('/');
     };
 
     return (
@@ -206,6 +211,10 @@ function ResponsiveAppBar() {
                                     <Typography textAlign="center">{setting}</Typography>
                                 </MenuItem>
                             ))}
+                            <MenuItem key={"Logout"} onClick={logout}>
+                                <Typography textAlign="center">Logout</Typography>
+                            </MenuItem>
+
                         </Menu>
                     </Box>
                 </Toolbar>
@@ -213,5 +222,4 @@ function ResponsiveAppBar() {
         </AppBar>
     );
 }
-
 export default ResponsiveAppBar;
