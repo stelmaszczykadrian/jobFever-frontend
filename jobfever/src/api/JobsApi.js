@@ -19,11 +19,7 @@ export function useJobsPagination(pageNumber, sortBy, field) {
             method: 'GET',
             url: 'http://localhost:8080/api/jobs/',
             params: {page: pageNumber - 1, sortBy: sortBy, field: field},
-            cancelToken: new axios.CancelToken(c => cancel = c),
-            headers: {
-                "Authorization" : `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
-            }
-
+            cancelToken: new axios.CancelToken(c => cancel = c)
         }
         ).then(res => {
             setJobs(prevJobs => {
