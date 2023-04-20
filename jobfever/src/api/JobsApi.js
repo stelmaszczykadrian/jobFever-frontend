@@ -61,10 +61,7 @@ export const useJobsByName = (id) => {
     };
 };
 
-export const getJobOfferById = async (id) => await axios.get(`http://localhost:8080/api/jobs/${id}`, ({
-    headers: {
-        Authorization : `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
-    }}));
+export const getJobOfferById = async (id) => await axios.get(`http://localhost:8080/api/jobs/${id}`);
 
 
 export const createJob = (userData, onSuccess, onError) => {
