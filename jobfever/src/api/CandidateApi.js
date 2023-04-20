@@ -96,6 +96,32 @@ export async function addCandidateExperience(candidateId, updatedCandidateExperi
         })
 }
 
+
+
+export const registerCandidate = (userData, onSuccess, onError) => {
+    const url = "http://localhost:8080/api/authentication/candidates/register";
+    axios.post(url, userData)
+        .then((response) => {
+            console.log(response);
+            if (response.status === 200 && response.data === "Candidate added successfully.") {
+                onSuccess();
+            }
+        })
+        .catch((error) => {
+            if (error.response) {
+                const errorMessage = error.response.data;
+                onError(errorMessage);
+                console.log(error.response);
+                console.log("server responded");
+            } else if (error.request) {
+                console.log("network error");
+            } else {
+                console.log(error);
+            }
+        });
+};
+
+
 export async function deleteCandidateExperience(candidateId, experienceId) {
     return await axios.delete(`http://localhost:8080/api/candidates/${candidateId}/experience/${experienceId}`, {
     }).catch(error => {
