@@ -1,0 +1,26 @@
+export const minimumCompanyLength = 3;
+export const minimumNameAndSurnameLength = 2
+export const minimumPasswordLength = 6;
+export const invalidEmailAddressMessage = 'Invalid email address.';
+export const emailCannotBeEmptyMessage = 'Email field cannot be empty.';
+export const incorrectPasswordLengthMessage = 'Password should be at least 6 characters long.';
+export const passwordsDoNotMatchMessage = 'Passwords do not match.';
+export const incorrectNameAndSurnameMessage = 'Name should be at least 2 characters long';
+export const incorrectCompanyNameMessage = 'Company name should be at least 3 characters long'
+export const incorrectPhoneNumberMessage = 'Phone number should be 9 digits long';
+
+
+
+export const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+export const isValidPhoneNumber = (phoneNumber) => {
+    const phoneNumberRegex = /^\d{9}$/;
+    return phoneNumberRegex.test(phoneNumber);
+}
+
+
+
+
