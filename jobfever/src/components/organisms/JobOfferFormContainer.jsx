@@ -9,8 +9,7 @@ import {
     StyledCurrencyType,
     StyledButtonCenter, StyledJobOfferContainer, StyledRedButtonModalButton
 } from "./JobOfferFormContainer.styles";
-import React, {useState} from "react";
-import {useEffect, useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Radio, RadioGroup} from "@mui/joy";
 import {Form} from "react-bootstrap";
 import Navbar from "../molecules/Navbar";
@@ -50,7 +49,6 @@ const workType = [
 ];
 
 
-export default function JobOfferFormContainer() {
     //TOKEN
     // useAuth();
     // console.log(useAuth())
@@ -61,10 +59,7 @@ export default function JobOfferFormContainer() {
     //Sprawdzić jaka rola jest w tokenie, jeżeli rola
 
 export default function JobOfferFormContainer(props) {
-    const navigate = useNavigate();
-    const [pressedButtons, setPressedButtons] = useState(getInitialButtons())
-    const [showModal, setShowModal] = useState(false);
-    const [errorMessage, setErrorMessage] = useState(null);
+
     const getInitialButtons = () => {
         if (!props.technicalRequirements) {
             return [];
@@ -78,6 +73,11 @@ export default function JobOfferFormContainer(props) {
         })
         return result
     }
+    const navigate = useNavigate();
+    const [pressedButtons, setPressedButtons] = useState(getInitialButtons())
+    const [showModal, setShowModal] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
+
 
     const [input, setInput] = useState({
         title: props.title,
@@ -91,7 +91,21 @@ export default function JobOfferFormContainer(props) {
         salaryTo: props.salaryTo,
         jobType: props.jobType,
         currencyType: props.currencyType,
-        workType: props.workType
+        workType: props.workType,
+        errors: {
+            title: '',
+            description: '',
+            technicalRequirements: [],
+            responsibilities: '',
+            whoWeAreLookingFor: '',
+            benefits: '',
+            location: '',
+            salaryFrom: '',
+            salaryTo: '',
+            jobType: '',
+            currencyType: '',
+            workType: ''
+        }
     });
 
 
