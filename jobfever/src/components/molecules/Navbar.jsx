@@ -16,8 +16,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {StyledLink} from "../atoms/Link.styles";
+import Cookies from "js-cookie";
 
 
 const pages = [
@@ -28,12 +29,36 @@ const pages = [
 
 const settings = [
     <Link to='/candidate/candidate-id'>Profile</Link>,
-    'Account', 'Dashboard','Favourites', 'Logout'
+    'Account', 'Dashboard', 'Favourites', 'Logout'
 ];
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const navigate = useNavigate();
+
+    let jwt = Cookies.get('jwt');
+
+    function AddJobButton() {
+        if (!jwt) {
+            return null;
+        }
+
+        let jwtParsed = JSON.parse(jwt).role
+        if (jwtParsed === "EMPLOYER") {
+            return (
+                <Button
+                    onClick={() => {
+                        navigate('/add-job');
+                    }}
+                    sx={{ml: 2}}
+                >
+                    Post job
+                </Button>
+            );
+        }
+    }
+
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -51,13 +76,13 @@ function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="static" style={{ margin: 0, background: 'rgba(29, 25, 23, 0.7)'}}>
+        <AppBar position="static" style={{margin: 0, background: 'rgba(29, 25, 23, 0.7)'}}>
             <Container maxWidth="l">
                 <Toolbar disableGutters>
                     <Link to='/'>
-                    <Box sx= {{ m: 0 }}>
+                        <Box sx={{m: 0}}>
                             <img width="185" height="45" src={logo} margin="left"/>
-                    </Box>
+                        </Box>
                     </Link>
                     <Typography
                         variant="h6"
@@ -66,7 +91,7 @@ function ResponsiveAppBar() {
                         href="/"
                         sx={{
                             mr: 2,
-                            display: { xs: 'none', md: 'flex' },
+                            display: {xs: 'none', md: 'flex'},
                             fontFamily: 'monospace',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
@@ -74,11 +99,8 @@ function ResponsiveAppBar() {
                             textDecoration: 'none',
                         }}
                     >
-
                     </Typography>
-
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none'}}}>
-
+                    <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
@@ -87,7 +109,7 @@ function ResponsiveAppBar() {
                             onClick={handleOpenNavMenu}
                             color="inherit"
                         >
-                            <MenuIcon />
+                            <MenuIcon/>
                         </IconButton>
                         <Menu
                             id="menu-appbar"
@@ -104,18 +126,16 @@ function ResponsiveAppBar() {
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
                             sx={{
-                                display: { xs: 'block', md: 'none' },
+                                display: {xs: 'block', md: 'none'},
                             }}
                         >
-                            {pages.map((page,index) => (
+                            {pages.map((page, index) => (
                                 <MenuItem key={`Navbar_${index}`} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center" >{page}</Typography>
+                                    <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
-
                     </Box>
-
                     <Typography
                         variant="h5"
                         noWrap
@@ -123,7 +143,7 @@ function ResponsiveAppBar() {
                         href=""
                         sx={{
                             mr: 0,
-                            display: { xs: 'flex', md: 'none' },
+                            display: {xs: 'flex', md: 'none'},
                             flexGrow: 1,
                             fontFamily: 'monospace',
                             fontWeight: 700,
@@ -132,25 +152,23 @@ function ResponsiveAppBar() {
                             textDecoration: 'none',
                         }}
                     >
-
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page,index) => (
+                    <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
+                        {pages.map((page, index) => (
                             <Button
                                 key={`Navbar_${index}`}
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                sx={{my: 2, color: 'white', display: 'block'}}
                             >
                                 {page}
                             </Button>
                         ))}
-
                     </Box>
-
-                    <Box sx={{ flexGrow: 0 }}>
+                    <Box sx={{flexGrow: 0}}>
+                        <AddJobButton/>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={4} color="error">
-                                <MailIcon />
+                                <MailIcon/>
                             </Badge>
                         </IconButton>
                         <IconButton
@@ -159,16 +177,16 @@ function ResponsiveAppBar() {
                             color="inherit"
                         >
                             <Badge badgeContent={17} color="error">
-                                <NotificationsIcon />
+                                <NotificationsIcon/>
                             </Badge>
                         </IconButton>
                         <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 2 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                            <IconButton onClick={handleOpenUserMenu} sx={{p: 2}}>
+                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
                             </IconButton>
                         </Tooltip>
                         <Menu
-                            sx={{ mt: '45px' }}
+                            sx={{mt: '45px'}}
                             id="menu-appbar"
                             anchorEl={anchorElUser}
                             anchorOrigin={{
@@ -195,4 +213,5 @@ function ResponsiveAppBar() {
         </AppBar>
     );
 }
+
 export default ResponsiveAppBar;

@@ -17,10 +17,10 @@ import {
     incorrectEmailEmptyMessage,
     incorrectPasswordLengthMessage,
     incorrectEmailAddressMessage,
-    isValidEmail, minimumPasswordLength, passwordsDoNotMatchMessage
-} from "../../constants/ValidateRegisterForm";
+    minimumPasswordLength, passwordsDoNotMatchMessage
+} from "../../constants/RegisterFormValidationsMessages";
 import {registerCandidate} from "../../api/CandidateApi";
-import {validateFormData} from "../../constants/ValidateUtil";
+import {isValidEmail, validateFormData} from "../../utils/Validators";
 
 export default function CandidateRegisterRightContainer() {
     const navigate = useNavigate();

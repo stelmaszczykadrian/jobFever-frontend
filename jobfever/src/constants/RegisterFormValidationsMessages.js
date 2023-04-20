@@ -11,16 +11,4 @@ export const incorrectPhoneNumberMessage = 'Phone number should be 9 digits long
 
 
 
-export const isValidEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-export const isValidPhoneNumber = (phoneNumber) => {
-    const phoneNumberRegex = /^\d{9}$/;
-    return phoneNumberRegex.test(phoneNumber);
-}
-
-
-
 
