@@ -1,3 +1,16 @@
+export const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+export const isValidPhoneNumber = (phoneNumber) => {
+    const phoneNumberRegex = /^\d{9}$/;
+    return phoneNumberRegex.test(phoneNumber);
+}
+
+
+
+
 export const validateFormData = (formData, validateInput) => {
     const errors = {...formData.errors};
     let formIsValid = true;

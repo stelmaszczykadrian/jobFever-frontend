@@ -1,0 +1,1 @@
+// Tutaj bedą wiadomości z walidacją do formularza z ofertami

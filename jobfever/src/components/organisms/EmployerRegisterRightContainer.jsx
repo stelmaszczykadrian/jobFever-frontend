@@ -17,10 +17,11 @@ import {registerEmployer} from "../../api/EmployersApi";
 import {
     incorrectEmailEmptyMessage, incorrectCompanyNameMessage, incorrectNameMessage,
     incorrectPasswordLengthMessage, incorrectPhoneNumberMessage, incorrectEmailAddressMessage,
-    isValidEmail, isValidPhoneNumber, minimumCompanyLength, minimumNameLengthMessage, minimumPasswordLength,
+    minimumCompanyLength, minimumNameLengthMessage, minimumPasswordLength,
     passwordsDoNotMatchMessage
-} from "../../constants/ValidateRegisterForm";
-import {validateFormData} from "../../constants/ValidateUtil";
+} from "../../constants/RegisterFormValidationsMessages";
+import {isValidEmail, isValidPhoneNumber, validateFormData} from "../../utils/Validators";
+
 
 export default function EmployerRegisterRightContainer() {
     const [errorMessage, setErrorMessage] = useState(null);
