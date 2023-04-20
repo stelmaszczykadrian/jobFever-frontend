@@ -17,6 +17,11 @@ import img from "../../images/logo.png";
 import Typography from "@mui/joy/Typography";
 import IconButton from "@mui/material/IconButton";
 import {StyledDeleteIcon} from "../atoms/StyledDeleteIcon";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import Dialog from "@mui/material/Dialog";
+import {RedButtonStyled} from "../atoms/RedButton.styles";
 
 export default function CandidateProfileExperience(props) {
 
@@ -29,16 +34,27 @@ export default function CandidateProfileExperience(props) {
         }
     }, [data.candidateExperiences]);
 
-    const handleDeleteExperience = async (candidateId, experienceId) => {
-        try {
-            const response = await deleteCandidateExperience(candidateId, experienceId);
+    const [deleteExperienceId, setDeleteExperienceId] = useState(null);
+    const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
+
+    const handleDeleteExperience = (experienceId) => {
+        setDeleteExperienceId(experienceId);
+        setIsDeleteConfirmationOpen(true);
+    };
+
+    const handleConfirmationDelete = async () => {
+        if (deleteExperienceId) {
+            const response = await deleteCandidateExperience(props.id, deleteExperienceId);
             if (response.status === 200) {
-                setExperiences(prevExperiences => prevExperiences.filter(experience => experience.id !== experienceId));
+                setExperiences(experiences.filter(e => e.id !== deleteExperienceId));
             }
-        } catch (error) {
-            console.log(error);
         }
-    }
+        setIsDeleteConfirmationOpen(false);
+    };
+
+    const handleCancelDelete = () => {
+        setIsDeleteConfirmationOpen(false);
+    };
 
     if (!data || !data.candidateExperiences) {
         return <div>Loading...</div>;
@@ -92,7 +108,7 @@ export default function CandidateProfileExperience(props) {
                                         isNew={false}
                                         tag={<StyledEditIcon/>}
                                     />
-                                    <IconButton onClick={() => handleDeleteExperience(props.id, experience.id)}>
+                                    <IconButton onClick={() => handleDeleteExperience(experience.id)}>
                                         <StyledDeleteIcon />
                                     </IconButton>
                                 </StyledIconBox>
@@ -100,6 +116,16 @@ export default function CandidateProfileExperience(props) {
                         </StyledPaper>
                     ))}
                 </StyledBottomBox>
+                <Dialog open={isDeleteConfirmationOpen} onClose={handleCancelDelete}>
+                    <DialogTitle>Confirm Delete</DialogTitle>
+                    <DialogContent>
+                        <Typography>Are you sure you want to delete this experience?</Typography>
+                    </DialogContent>
+                    <DialogActions>
+                        <RedButtonStyled onClick={handleConfirmationDelete}>Delete</RedButtonStyled>
+                        <RedButtonStyled onClick={handleCancelDelete}>Cancel</RedButtonStyled>
+                    </DialogActions>
+                </Dialog>
             </StyledProfilePaper>
         );
     }
