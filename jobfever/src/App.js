@@ -36,9 +36,7 @@ function App() {
                         <Route path="/employer/login" element={<EmployerLogin/>}/>
                         <Route path="/employer/register" element={<EmployerRegister/>}/>
                         <Route path="/employer/:id" element={
-                            <ProtectedRoute role={"EMPLOYER"}>
                             <EmployerProfile/>
-                            </ProtectedRoute>
                         }/>
                         <Route path="/about" element={<About/>}/>
                         <Route path="/add-job" element={

@@ -1,10 +1,12 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+
 const urls = [
     "http://localhost:8080/api/jobs/by-employer",
     "http://localhost:8080/api/jobs/"
 ]
+
 export function useJobsPagination(pageNumber, sortBy, field) {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
@@ -16,11 +18,11 @@ export function useJobsPagination(pageNumber, sortBy, field) {
         setError(false)
         let cancel
         axios({
-            method: 'GET',
-            url: 'http://localhost:8080/api/jobs/',
-            params: {page: pageNumber - 1, sortBy: sortBy, field: field},
-            cancelToken: new axios.CancelToken(c => cancel = c)
-        }
+                method: 'GET',
+                url: 'http://localhost:8080/api/jobs/',
+                params: {page: pageNumber - 1, sortBy: sortBy, field: field},
+                cancelToken: new axios.CancelToken(c => cancel = c)
+            }
         ).then(res => {
             setJobs(prevJobs => {
                 return [...new Set([...prevJobs, ...res.data.content])]
@@ -40,11 +42,17 @@ export function useJobsPagination(pageNumber, sortBy, field) {
 export const useJobsByName = (id) => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
+    console.log("dupa" + id)
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data: response } = await axios.get(urls[0], {params:{id:id}});
+                const {data: response} = await axios.get(urls[0], {
+                    params: {id: id},
+                    headers: {
+                        Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+                    }
+                });
                 setData(response.content);
             } catch (error) {
                 console.error(error)
@@ -66,9 +74,12 @@ export const getJobOfferById = async (id) => await axios.get(`http://localhost:8
 
 export const createJob = (userData, onSuccess, onError) => {
     const url = "http://localhost:8080/api/jobs";
-    axios.post(url, userData, ({            headers: {
-            Authorization : `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
-        }}))
+    axios.post(url, userData, ({
+        params: {email: JSON.parse(Cookies.get("jwt")).name},
+        headers: {
+            Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+        }
+    }))
         .then((response) => {
             console.log(response);
             if (response.status === 200 && response.data === "Job added successfully.") {
