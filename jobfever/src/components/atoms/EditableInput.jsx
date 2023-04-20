@@ -1,10 +1,10 @@
-import Input from "@mui/joy/Input";
 import React from "react";
+import {TextField} from "@mui/material";
 
 
 export default function EditableInput({isEdit, value, onChange, placeholder}) {
     if (isEdit) {
-        return <Input type="text" placeholder={placeholder} value={value} onChange={onChange}/>;
+        return <TextField color="error" placeholder={placeholder} value={value} onChange={onChange} label={placeholder}/>;
     } else {
         return <span>{value}</span>;
     }
