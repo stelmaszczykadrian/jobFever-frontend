@@ -3,7 +3,6 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import Input from "@mui/joy/Input";
 import {useState} from "react";
 import {StyledGridContainer, StyledGridItem} from "../organisms/JobOfferFormContainer.styles";
 import {RedButtonStyled} from "../atoms/RedButton.styles";
@@ -13,9 +12,9 @@ import {
     addCandidateExperience,
     editCandidateExperience
 } from "../../api/CandidateApi";
-import {TextField} from "@mui/material";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import EditableModalInput from "../atoms/EditableModalInput";
 
 export default function CandidateExperienceModal(props) {
     const title = (props.isNew ? "Add Experience" : "Edit experience");
@@ -51,6 +50,9 @@ export default function CandidateExperienceModal(props) {
     };
 
     const handleSave = async () => {
+        if (position.trim() === '' || companyName.trim() === '' || location.trim() === '' || industry.trim() === '' || description.trim() === '' || endDate === '' || startDate === '') {
+            return
+        }
         setOpen(false);
         const updatedExperienceData = {
             position: position,
@@ -124,40 +126,37 @@ export default function CandidateExperienceModal(props) {
                 </DialogTitle>
                 <DialogContent>
                     <StyledGridItem>
-                            <TextField
-                                required
-                                color="error"
-                                placeholder="Ex. Frontend developer"
-                                label="Position"
-                                value={position}
-                                onChange={(e) => setPosition(e.target.value)}
-                                fullWidth
-                            />
+                        <EditableModalInput
+                            placeholder="Ex. Frontend developer"
+                            label="Position"
+                            value={position}
+                            onChange={(e) => setPosition(e.target.value)}
+                            fullWidth={true}
+                            isRequired={true}
+                        />
                     </StyledGridItem>
-                        <StyledGridItem>
-                            <TextField
-                                required
-                                color="error"
-                                placeholder="Ex. jobFever"
-                                label="Company name"
-                                value={companyName}
-                                onChange={(e) => setCompanyName(e.target.value)}
-                                fullWidth
-                            />
-                        </StyledGridItem>
                     <StyledGridItem>
-                        <TextField
-                            required
-                            color="error"
+                        <EditableModalInput
+                            placeholder="Ex. jobFever"
+                            label="Company name"
+                            value={companyName}
+                            onChange={(e) => setCompanyName(e.target.value)}
+                            fullWidth={true}
+                            isRequired={true}
+                        />
+                    </StyledGridItem>
+                    <StyledGridItem>
+                        <EditableModalInput
                             placeholder="Ex. London"
                             label="Location"
                             value={location}
                             onChange={(e) => setLocation(e.target.value)}
-                            fullWidth
+                            fullWidth={true}
+                            isRequired={true}
                         />
                     </StyledGridItem>
-                        <StyledGridContainer>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <StyledGridContainer>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <StyledGridItem>
                                 <CalendarForm
                                     name="Start date"
@@ -172,28 +171,26 @@ export default function CandidateExperienceModal(props) {
                                     setDate={setEndDate}
                                 />
                             </StyledGridItem>
-                            </LocalizationProvider>
-                        </StyledGridContainer>
+                        </LocalizationProvider>
+                    </StyledGridContainer>
                     <StyledGridItem>
-                        <TextField
-                            required
-                            color="error"
+                        <EditableModalInput
                             placeholder="Ex. Gaming, Software, Hardware, IT consultant"
                             label="Industry"
                             value={industry}
                             onChange={(e) => setIndustry(e.target.value)}
-                            fullWidth
+                            fullWidth={true}
+                            isRequired={true}
                         />
                     </StyledGridItem>
                     <StyledGridItem>
-                        <TextField
-                            required
-                            color="error"
+                        <EditableModalInput
                             placeholder="Ex. Work responsibilities"
                             label="Description"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            fullWidth
+                            fullWidth={true}
+                            isRequired={true}
                         />
                     </StyledGridItem>
                 </DialogContent>
