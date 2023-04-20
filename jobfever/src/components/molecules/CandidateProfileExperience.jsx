@@ -92,7 +92,6 @@ export default function CandidateProfileExperience(props) {
                                         isNew={false}
                                         tag={<StyledEditIcon/>}
                                     />
-
                                     <IconButton onClick={() => handleDeleteExperience(props.id, experience.id)}>
                                         <StyledDeleteIcon />
                                     </IconButton>
