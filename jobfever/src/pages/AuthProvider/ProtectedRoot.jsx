@@ -6,6 +6,15 @@ export const ProtectedRoute = (props) => {
     if (!jwt) {
         return <Navigate to={"/"} replace />;
     }
-
+    if (props.role === "CANDIDATE"){
+        if(JSON.parse(jwt).role !== "CANDIDATE"){
+            return <Navigate to={"/"} replace />;
+        }
+    }
+    if (props.role === "EMPLOYER"){
+        if(JSON.parse(jwt).role !== "EMPLOYER"){
+            return <Navigate to={"/"} replace />;
+        }
+    }
     return <>{props.children}</>;
 };

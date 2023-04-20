@@ -14,9 +14,9 @@ import ForEmployers from "./pages/ForEmployers";
 import Contact from "./pages/Contact";
 import SingleOfferPage from "./pages/SingleOfferPage";
 import EmployerProfile from "./pages/EmployerProfile";
-import AuthProvider from "./pages/AuthProvider/AuthProvider";
 import Layout from "./pages/Layout";
 import EditJobOffer from "./pages/EditJobOffer";
+import {ProtectedRoute} from "./pages/AuthProvider/ProtectedRoot";
 function App() {
     return (
 
@@ -28,17 +28,33 @@ function App() {
                         <Route path="/" element={<Home/>}/>
                         <Route path="/candidate/register" element={<CandidateRegister/>}/>
                         <Route path="/candidate/login" element={<CandidateLogin/>}/>
-                        <Route path="/candidate/:id" element={<CandidateProfile/>}/>
+                        <Route path="/candidate/:id" element={
+                            <ProtectedRoute role={"CANDIDATE"}>
+                            <CandidateProfile/>
+                            </ProtectedRoute>
+                        }/>
                         <Route path="/employer/login" element={<EmployerLogin/>}/>
                         <Route path="/employer/register" element={<EmployerRegister/>}/>
-                        <Route path="/employer/:id" element={<EmployerProfile/>}/>
+                        <Route path="/employer/:id" element={
+                            <ProtectedRoute role={"EMPLOYER"}>
+                            <EmployerProfile/>
+                            </ProtectedRoute>
+                        }/>
                         <Route path="/about" element={<About/>}/>
-                        <Route path="/add-job" element={<JobOfferForm/>}/>
+                        <Route path="/add-job" element={
+                            <ProtectedRoute role={"EMPLOYER"}>
+                            <JobOfferForm/>
+                            </ProtectedRoute>
+                        }/>
                         <Route path="/jobs" element={<JobsPage/>}/>
                         <Route path="/for-employers" element={<ForEmployers/>}/>
                         <Route path="/contact" element={<Contact/>}/>
                         <Route path="/job/:id" element={<SingleOfferPage/>}/>
-                        <Route path="/job/:id/edit" element={<EditJobOffer/>}></Route>
+                        <Route path="/job/:id/edit" element={
+                            <ProtectedRoute role={"EMPLOYER"}>
+                            <EditJobOffer/>
+                            </ProtectedRoute>
+                        }></Route>
                         <Route path="*" element={<NoPage/>}></Route>
 
                     </Routes>
