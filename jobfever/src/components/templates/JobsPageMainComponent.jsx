@@ -1,13 +1,13 @@
 import {StyledJobsPageMainComponent} from "./JobsPageMainComponent.styles";
-import JobOffersContainer from "../organisms/JobOffersContainer";
 import React from "react";
 import Navbar from "../molecules/Navbar";
+import JobsOfferContainer from "../organisms/JobsOfferContainer";
 
 export default function JobsPageMainComponent(){
     return(
         <StyledJobsPageMainComponent>
             <Navbar />
-            <JobOffersContainer/>
+            <JobsOfferContainer/>
         </StyledJobsPageMainComponent>
     )
 }
