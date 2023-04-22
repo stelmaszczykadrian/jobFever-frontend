@@ -13,6 +13,7 @@ import Dotnet from "../languages/dotnet.svg";
 import PowerShell from "../languages/powershell.svg";
 import Data from "../languages/data.svg";
 import SQL from "../languages/sql.svg";
+import All from "../languages/all.svg";
 import * as React from "react";
 
 
@@ -35,5 +36,27 @@ export const languageIcons = [
 ];
 
 
+export const languageIconsSortJobsPage = [
 
-export const languageLabels = ['Python', 'Ruby', 'JS', 'C++', 'C#', 'PHP', 'Kotlin', 'Java', 'Scala', 'Pascal', 'Swift', '.Net', 'PowerShell', 'Data', 'SQL'];
+    <img src={All} alt="my" width={"30px"}/>,
+    <img src={Python} alt="my" width={"30px"}/>,
+    <img src={Ruby} alt="my" width={"30px"}/>,
+    <img src={JS} alt="my" width={"30px"}/>,
+    <img src={C} alt="my" width={"30px"}/>,
+    <img src={CSharp} alt="my" width={"30px"}/>,
+    <img src={PHP} alt="my" width={"30px"}/>,
+    <img src={Kotlin} alt="my" width={"30px"}/>,
+    <img src={Java} alt="my" width={"30px"}/>,
+    <img src={Scala} alt="my" width={"30px"}/>,
+    <img src={Pascal} alt="my" width={"30px"}/>,
+    <img src={Swift} alt="my" width={"30px"}/>,
+    <img src={Dotnet} alt="my" width={"30px"}/>,
+    <img src={PowerShell} alt="my" width={"30px"}/>,
+    <img src={Data} alt="my" width={"30px"}/>,
+    <img src={SQL} alt="my" width={"30px"}/>,
+];
+
+
+
+export const languageLabels = ['Python', 'Ruby', 'JS', 'C', 'CSharp', 'PHP', 'Kotlin', 'Java', 'Scala', 'Pascal', 'Swift', '.Net', 'PowerShell', 'Data', 'SQL'];
+export const languageLabelsSortJobsPage = ['All', 'Python', 'Ruby', 'JS', 'C', 'CSharp', 'PHP', 'Kotlin', 'Java', 'Scala', 'Pascal', 'Swift', '.Net', 'PowerShell', 'Data', 'SQL'];
