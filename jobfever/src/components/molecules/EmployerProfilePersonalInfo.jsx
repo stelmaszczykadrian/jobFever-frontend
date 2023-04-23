@@ -13,6 +13,7 @@ import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
 import {editEmployer, useEmployerById} from "../../api/EmployersApi";
 import EditableInput from "../atoms/EditableInput";
+import Cookies from "js-cookie";
 
 
 export default function EmployerProfilePersonalInfo(props){
@@ -46,7 +47,24 @@ export default function EmployerProfilePersonalInfo(props){
             setLocalization(data.localization)
         }
     }, [data]);
+
     if (!loading) {
+        const RenderEditIcons = () => {
+            if (props.id === JSON.parse(Cookies.get("jwt")).employer_id.toString()){
+
+                return (
+                    isEdit ? (
+                            <IconButton onClick={handleSaveClick}>
+                                <StyledCheckIcon/>
+                            </IconButton>
+                        ) : (
+                            <IconButton onClick={handleEditClick}>
+                                <StyledEditIcon/>
+                            </IconButton>
+                        )
+                )
+            }
+        }
         return (
             <StyledProfilePaper>
                 <StyledTopBox>
@@ -123,15 +141,7 @@ export default function EmployerProfilePersonalInfo(props){
                         </Box>
                         <Box>
                             {/* Edit button */}
-                            {isEdit ? (
-                                <IconButton onClick={handleSaveClick}>
-                                    <StyledCheckIcon/>
-                                </IconButton>
-                            ) : (
-                                <IconButton onClick={handleEditClick}>
-                                    <StyledEditIcon/>
-                                </IconButton>
-                            )}
+                            <RenderEditIcons />
                         </Box>
                     </StyledRightBox>
                 </StyledBottomBoxPersonalInfo>

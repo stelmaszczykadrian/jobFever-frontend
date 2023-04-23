@@ -34,7 +34,6 @@ return {
 };
 };
 export async function editEmployer(id, companyName, nameAndSurname, phoneNumber, localization, aboutUs) {
-    console.log(aboutUs)
     if (!aboutUs){
     await axios.put(url, {
         companyName: companyName,
