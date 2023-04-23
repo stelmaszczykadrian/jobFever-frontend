@@ -13,12 +13,11 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import Badge from '@mui/material/Badge';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import {Link, useNavigate} from "react-router-dom";
 import {StyledLink} from "../atoms/Link.styles";
 import Cookies from "js-cookie";
+
+import {StyledPostJobButton} from "./Navbar.styles";
 
 
 const pages = [
@@ -29,15 +28,13 @@ const pages = [
 
 const settings = [
     <Link to='/candidate/candidate-id'>Profile</Link>,
-    'Account', 'Dashboard','Favourites'
+    'Account', 'Dashboard', 'Favourites'
 ];
 
-function ResponsiveAppBar() {
+export default function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const navigate = useNavigate();
-
-
     let jwt = Cookies.get('jwt');
 
     function AddJobButton() {
@@ -48,18 +45,16 @@ function ResponsiveAppBar() {
         let jwtParsed = JSON.parse(jwt).role
         if (jwtParsed === "EMPLOYER") {
             return (
-                <Button
+                <StyledPostJobButton
                     onClick={() => {
                         navigate('/add-job');
                     }}
-                    sx={{ml: 2}}
                 >
-                    Post job
-                </Button>
+                    POST JOB
+                </StyledPostJobButton>
             );
         }
     }
-
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -169,22 +164,10 @@ function ResponsiveAppBar() {
                             </Button>
                         ))}
                     </Box>
-                    <Box sx={{flexGrow: 0}}>
+                    <Box sx={{flexGrow: 0.1}}>
                         <AddJobButton/>
-                        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                            <Badge badgeContent={4} color="error">
-                                <MailIcon/>
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            aria-label="show 17 new notifications"
-                            color="inherit"
-                        >
-                            <Badge badgeContent={17} color="error">
-                                <NotificationsIcon/>
-                            </Badge>
-                        </IconButton>
+                    </Box>
+                    <Box sx={{flexGrow: 0}}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{p: 2}}>
                                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
@@ -214,7 +197,6 @@ function ResponsiveAppBar() {
                             <MenuItem key={"Logout"} onClick={logout}>
                                 <Typography textAlign="center">Logout</Typography>
                             </MenuItem>
-
                         </Menu>
                     </Box>
                 </Toolbar>
@@ -222,4 +204,3 @@ function ResponsiveAppBar() {
         </AppBar>
     );
 }
-export default ResponsiveAppBar;
