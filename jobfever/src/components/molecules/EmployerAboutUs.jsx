@@ -5,8 +5,10 @@ import {Box} from "@mui/material";
 import EmployerAboutusModal from "./EmployerAboutusModal";
 import {StyledAddIcon} from "../atoms/StyledAddIcon";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
+import {useEmployerById} from "../../api/EmployersApi";
 
 export default function EmployerAboutUs(props) {
+    const {data, loading} = useEmployerById(props.id)
     const [isEdit, setIsEdit] = useState(false);
     const [aboutUs, setAboutUs] = useState("");
 
@@ -16,25 +18,32 @@ export default function EmployerAboutUs(props) {
     const handleSaveEditClick = () => {
         setIsEdit(false);
     };
+    React.useEffect(() => {
+        if (!loading) {
+            setAboutUs(data.aboutUs)
+        }
+    }, [data]);
+    if (!loading) {
 
-    return (
-        <StyledProfilePaper>
-            <StyledTopBox>
-                <ProfileContainerTitle text={'About Us'}/>
-                <StyledIconBox>
-                    {/* Add button */}
-                    <EmployerAboutusModal id={props.id} text={'About Us..'} tag={<StyledAddIcon/>}/>
-                </StyledIconBox>
-            </StyledTopBox>
-            <StyledBottomBox>
-                <Box>
+        return (
+            <StyledProfilePaper>
+                <StyledTopBox>
+                    <ProfileContainerTitle text={'About Us'}/>
                     <StyledIconBox>
-                        {/* Edit button */}
-                        <EmployerAboutusModal id={props.id} text={'About Us..'} tag={<StyledEditIcon/>}/>
+                        {/* Add button */}
+                        <EmployerAboutusModal id={props.id} text={'About Us..'} tag={<StyledAddIcon/>}/>
                     </StyledIconBox>
-                </Box>
-            </StyledBottomBox>
-        </StyledProfilePaper>
-    );
-
+                </StyledTopBox>
+                <StyledBottomBox>
+                    {aboutUs}
+                    <Box>
+                        <StyledIconBox>
+                            {/* Edit button */}
+                            <EmployerAboutusModal id={props.id} text={'About Us..'} tag={<StyledEditIcon/>}/>
+                        </StyledIconBox>
+                    </Box>
+                </StyledBottomBox>
+            </StyledProfilePaper>
+        );
+    }
 }
