@@ -39,7 +39,7 @@ export default function EmployerAboutusModal(props) {
     const handleSave = () => {
         setOpen(false);
 
-        editEmployer(props.id,null,null,null,data)
+        editEmployer(props.id,null,null,null, null,input.aboutMe)
     };
 
     return (
