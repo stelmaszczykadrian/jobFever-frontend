@@ -1,17 +1,23 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
+import Cookies from "js-cookie";
 
 const url = "http://localhost:8080/api/employers/";
 
 export const useEmployerById = (id) => {
     const [employer, setEmployer] = useState({});
     const [loading, setLoading] = useState(true);
-    console.log(id)
 
     useEffect(() => {
     const fetchData = async () => {
         try {
-            const { data: response } = await axios.get(url, {params:{id:id}});
+            const { data: response } = await axios.get(url, {
+                params:{id:id},
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+
+                }
+            });
             setEmployer(response);
         } catch (error) {
             console.error(error)
@@ -28,6 +34,7 @@ return {
 };
 };
 export async function editEmployer(id, companyName, nameAndSurname, phoneNumber, localization, aboutUs) {
+    console.log(aboutUs)
     if (!aboutUs){
     await axios.put(url, {
         companyName: companyName,
@@ -36,14 +43,21 @@ export async function editEmployer(id, companyName, nameAndSurname, phoneNumber,
         localization: localization
     },
         {
-            params:{id:id}
+            params:{id:id},
+            headers: {
+                Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+
+            }
         });}
     else{
         await axios.put(url, {
             aboutUs: aboutUs
             },
             {
-                params:{id:id}
+                params:{id:id},
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+                }
             });
     }
 

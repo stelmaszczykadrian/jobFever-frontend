@@ -10,7 +10,6 @@ const urls = [
 export const useJobsByName = (id) => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
-    console.log("dupa" + id)
 
     useEffect(() => {
         const fetchData = async () => {
