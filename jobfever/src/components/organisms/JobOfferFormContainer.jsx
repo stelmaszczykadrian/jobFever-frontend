@@ -10,7 +10,6 @@ import {
     StyledButtonCenter, StyledJobOfferContainer, StyledRedButtonModalButton
 } from "./JobOfferFormContainer.styles";
 import React, {useState, useEffect} from "react";
-import {Radio, RadioGroup} from "@mui/joy";
 import {Form} from "react-bootstrap";
 import Navbar from "../molecules/Navbar";
 import StyledText from "../atoms/StyledText";
@@ -19,8 +18,6 @@ import TechnicalRequirementsContainer from "../molecules/TechnicalRequirementsCo
 import JobOfferFormula from "../molecules/JobOfferFormulaModal";
 import {useNavigate} from "react-router-dom";
 import {createJob} from "../../api/JobsApi";
-import {useAuth} from "../../pages/AuthProvider/AuthProvider";
-import Cookies from "js-cookie";
 import Typography from "@mui/joy/Typography";
 import {languageLabels} from "../../constants/constans";
 
@@ -47,16 +44,6 @@ const workType = [
     {value: 'ONSITE', label: 'on-site'},
     {value: 'HYBRID', label: 'hybrid'},
 ];
-
-
-    //TOKEN
-    // useAuth();
-    // console.log(useAuth())
-    //
-    // console.log(JSON.parse(Cookies.get('jwt')).role);
-    // console.log(JSON.parse(Cookies.get('jwt')));
-
-    //Sprawdzić jaka rola jest w tokenie, jeżeli rola
 
 export default function JobOfferFormContainer(props) {
 
@@ -108,27 +95,56 @@ export default function JobOfferFormContainer(props) {
         }
     });
 
-
     const validateInput = (name, value) => {
         switch (name) {
             case 'title':
-                return value !== '' ? '' : 'Title field cannot be empty.';
+                if (value === '') {
+                    return 'Title field cannot be empty.';
+                } else if (value.length > 30) {
+                    return 'Title field must be no longer than 30 characters.';
+                }
+                return '';
             case 'description':
-                return value !== '' ? '' : 'Description field cannot be empty.';
+                return value !== '' ? (value.length <= 2000 ? '' : 'Description field cannot exceed 2000 characters.') : 'Description field cannot be empty.';
             case 'responsibilities':
-                return value !== '' ? '' : 'Responsibilities field cannot be empty.';
+                return value.length <= 2000 ? '' : 'Responsibilities field cannot exceed 2000 characters.';
             case 'whoWeAreLookingFor':
-                return value !== '' ? '' : 'Who we are looking for field cannot be empty.';
+                return value.length <= 2000 ? '' : 'Who we are looking for field cannot exceed 2000 characters.';
             case 'technicalRequirements':
                 return value.length > 0 ? '' : 'At least one technical requirement must be specified.';
             case 'benefits':
-                return value !== '' ? '' : 'Benefits field cannot be empty.';
+                return value.length <= 2000 ? '' : 'Benefits field cannot be longer than 2000 characters.';
             case 'location':
-                return value !== '' ? '' : 'Location field cannot be empty.';
+                if (value === '') {
+                    return 'Location field cannot be empty.';
+                } else if (value.length > 20) {
+                    return 'Location field must be no longer than 20 characters.';
+                }
+                return '';
             case 'salaryFrom':
-                return value !== '' ? '' : 'Salary from field cannot be empty.';
+                if (value === '') {
+                    return 'Salary from field cannot be empty.';
+                }else if (isNaN(value)) {
+                    return 'Salary to field must be a number.';
+                }else if (value <= 0) {
+                    return 'Salary from field must be greater than 0.';
+                }else if (parseInt(value) > 9999) {
+                    return 'Salary from field must be less than 10000.';
+                } else {
+                    return '';
+                }
             case 'salaryTo':
-                return value !== '' ? '' : 'Salary to field cannot be empty.';
+                if (value === '') {
+                    return 'Salary to field cannot be empty.';
+                }else if (isNaN(value)) {
+                    return 'Salary to field must be a number.';
+                }else if (value <= 0) {
+                    return 'Salary to field must be greater than 0.';
+                }else if (parseInt(value) > 9999) {
+                    return 'Salary to field must be less than 10000.';
+                } else {
+                    return '';
+                }
             case "jobType":
                 return value !== "" ? "" : "Job type field cannot be empty.";
             case 'currencyType':
@@ -188,16 +204,9 @@ export default function JobOfferFormContainer(props) {
             }, (errorMessages) => {
                 setErrorMessage(errorMessages);
             });
-
-
         } else {
             setInput((prev) => ({...prev, errors}));
         }
-
-        //sprawdzić czy wszystkie pola są poprawnie wypełnione
-        //jeżeli nie jest wypełnione to robię return
-
-
     };
 
     const handleClose = () => {
