@@ -1,8 +1,9 @@
+import ContactPageMainComponent from "../components/templates/ContactPageMainComponent";
 
 export default function Contact() {
     return (
-        <div>Contact site.</div>
-
-    )};
+        <ContactPageMainComponent/>
+    )
+};
 
 
