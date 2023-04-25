@@ -7,7 +7,6 @@ import {
     StyledRightBox, StyledBottomBoxPersonalInfo
 } from "./CandidateProfile.styles";
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
-import ProfilePhoto from "../atoms/ProfilePhoto";
 import IconButton from "@mui/material/IconButton";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
@@ -15,6 +14,8 @@ import {editEmployer, saveEmployersImgFilename, useEmployerById} from "../../api
 import EditableInput from "../atoms/EditableInput";
 import Cookies from "js-cookie";
 import {uploadFile} from "../../api/FilesApi";
+import {StyledProfilePhoto} from "../atoms/ProfilePhoto.styles";
+import axios from "axios";
 
 
 
@@ -23,13 +24,28 @@ export default function EmployerProfilePersonalInfo(props){
     const [isEdit, setIsEdit] = useState(false);
     const [companyName, setCompanyName] = useState("asd");
     const [nameAndSurname, setNameAndSurname] = useState('City');
-    const [email, setEmail] = useState('email@example.com');
     const [linkedin, setLinkedIn] = useState('https://www.linkedin.com/');
     const [github, setGitHub] = useState('https://github.com/');
     const [localization, setLocalization] = useState('Pcim');
     const [phoneNumber, setPhoneNumber] = useState(123456789);
+    const [filename, setFilename] = useState("");
+    const [newPicture, setNewPicture] = useState();
+    const [previewPicture, setPreviewPicture] = useState(null);
     const [picture, setPicture] = useState();
 
+    const getFileByFilename = async () => {
+        try {
+            const {data: response} = await axios.get('http://localhost:8080/api/file/url', {
+                params: {filename: filename},
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+                }
+            });
+            setPicture(response);
+        } catch (error) {
+            console.error(error)
+        }
+    };
     const handleEditClick = () => {
         setIsEdit(true);
     };
@@ -39,30 +55,28 @@ export default function EmployerProfilePersonalInfo(props){
         }
         setIsEdit(false);
     await editEmployer(props.id, companyName, nameAndSurname, phoneNumber, localization, null);
+        uploadFile(newPicture)
+        saveEmployersImgFilename(JSON.parse(Cookies.get("jwt")).employer_id, newPicture.name)
 };
-
     React.useEffect(() => {
         if (!loading) {
             setCompanyName(data.companyName);
             setNameAndSurname(data.nameAndSurname)
-            setEmail(data.email)
             setPhoneNumber(data.phoneNumber)
             setLocalization(data.localization)
+            setFilename(data.imgFileName)
         }
+
+
     }, [data]);
-    const uploadPicture = (e) => {
-        setPicture(
-            // picturePreview: URL.createObjectURL(e.target.files[0]),
+    const savePreviewPicture = (e) => {
+        setPreviewPicture(URL.createObjectURL(e.target.files[0]))
+        setNewPicture(
             e.target.files[0]
         )
-        console.log(e.target.files[0].name)
-        console.log("nad tym zdjecie")
-        uploadFile(e.target.files[0])
-        saveEmployersImgFilename(JSON.parse(Cookies.get("jwt")).employer_id, e.target.files[0].name)
-
-
     }
     if (!loading) {
+        getFileByFilename()
         const RenderEditIcons = () => {
             if (props.id === JSON.parse(Cookies.get("jwt")).employer_id.toString()){
 
@@ -80,6 +94,29 @@ export default function EmployerProfilePersonalInfo(props){
                 )
             }
         }
+        const RenderChangePhotoButtons = () => {
+            if (props.id === JSON.parse(Cookies.get("jwt")).employer_id.toString()) {
+                return (
+                    isEdit ? (
+                        <form encType="multipart/form-data">
+                            <input type="file" name="file" onChange={savePreviewPicture}/>
+                        </form>
+                    ) : undefined
+                )
+            }
+        }
+        const RenderProfilePicture = () => {
+            if (previewPicture === null){
+                return(
+                    <StyledProfilePhoto src={picture} alt="Profile"/>
+                )
+            }else{
+                return (
+                    <StyledProfilePhoto src={previewPicture} alt="Profile"/>
+                )
+            }
+        }
+
         return (
             <StyledProfilePaper>
                 <StyledTopBox>
@@ -89,12 +126,9 @@ export default function EmployerProfilePersonalInfo(props){
                     <StyledLeftBox>
                         {/* Photo */}
                         <Box mb={1}>
-                            <ProfilePhoto/>
+                            <RenderProfilePicture />
                         </Box>
-                        <form encType="multipart/form-data">
-                            <input type="file" name="file" onChange={uploadPicture}/>
-                            {/*<button >Submit</button>*/}
-                        </form>
+                        <RenderChangePhotoButtons />
                         {/* Name */}
                         <h3>Owner</h3>
                         <Box mb={1}>
@@ -116,16 +150,6 @@ export default function EmployerProfilePersonalInfo(props){
                                 isRequired={true}
                             />
                         </Box>
-                        {/* Email */}
-                        {/*<h4>Email</h4>*/}
-                        {/*<Box mb={1}>*/}
-                        {/*    <EditableInput*/}
-                        {/*        isEdit={isEdit}*/}
-                        {/*        value={email}*/}
-                        {/*        onChange={(e) => setEmail(e.target.value)}*/}
-                        {/*        placeholder="email"*/}
-                        {/*    />*/}
-                        {/*</Box>*/}
                     </StyledLeftBox>
 
                     <StyledRightBox>

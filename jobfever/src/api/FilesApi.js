@@ -5,20 +5,7 @@ export async function uploadFile(file) {
     let formData = new FormData();
     formData.append("file", file)
     console.log(formData + "dupa")
-    return await
-    //     axios.post(`http://localhost:8080/api/file/upload`,file,
-    // ({
-    //     // file: file,
-    //     headers: {
-    //         'Content-Type': 'multipart/form-data',
-    //         Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
-    //     }
-    // }))
-    //     .catch(error => {
-    //         return error
-    //     })
-
-    axios.post('http://localhost:8080/api/file/upload', formData, {
+    return await axios.post('http://localhost:8080/api/file/upload', formData, {
         headers: {
             Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`,
             'Content-Type': 'multipart/form-data', // Set the content type header to multipart/form-data
@@ -30,3 +17,4 @@ export async function uploadFile(file) {
         console.error(error); // Handle error if any
     });
 }
+
