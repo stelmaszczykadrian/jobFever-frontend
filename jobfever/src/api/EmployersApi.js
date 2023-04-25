@@ -62,6 +62,24 @@ export async function editEmployer(id, companyName, nameAndSurname, phoneNumber,
 
 }
 
+export const saveEmployersImgFilename = async (id, filename) => {
+    try {
+        await axios.put("http://localhost:8080/api/employers/add-image", {
+        },{
+            params: {
+                id: id,
+                filename: filename
+            },
+            headers: {
+                Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+            }
+        });
+    } catch (error) {
+        console.error(error)
+    }
+
+}
+
 
 export const registerEmployer = (userData, onSuccess, onError) => {
     const url = "http://localhost:8080/api/authentication/employers/register";

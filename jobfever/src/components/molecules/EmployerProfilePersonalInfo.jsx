@@ -11,9 +11,11 @@ import ProfilePhoto from "../atoms/ProfilePhoto";
 import IconButton from "@mui/material/IconButton";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
-import {editEmployer, useEmployerById} from "../../api/EmployersApi";
+import {editEmployer, saveEmployersImgFilename, useEmployerById} from "../../api/EmployersApi";
 import EditableInput from "../atoms/EditableInput";
 import Cookies from "js-cookie";
+import {uploadFile} from "../../api/FilesApi";
+
 
 
 export default function EmployerProfilePersonalInfo(props){
@@ -26,6 +28,7 @@ export default function EmployerProfilePersonalInfo(props){
     const [github, setGitHub] = useState('https://github.com/');
     const [localization, setLocalization] = useState('Pcim');
     const [phoneNumber, setPhoneNumber] = useState(123456789);
+    const [picture, setPicture] = useState();
 
     const handleEditClick = () => {
         setIsEdit(true);
@@ -47,7 +50,18 @@ export default function EmployerProfilePersonalInfo(props){
             setLocalization(data.localization)
         }
     }, [data]);
+    const uploadPicture = (e) => {
+        setPicture(
+            // picturePreview: URL.createObjectURL(e.target.files[0]),
+            e.target.files[0]
+        )
+        console.log(e.target.files[0].name)
+        console.log("nad tym zdjecie")
+        uploadFile(e.target.files[0])
+        saveEmployersImgFilename(JSON.parse(Cookies.get("jwt")).employer_id, e.target.files[0].name)
 
+
+    }
     if (!loading) {
         const RenderEditIcons = () => {
             if (props.id === JSON.parse(Cookies.get("jwt")).employer_id.toString()){
@@ -58,6 +72,7 @@ export default function EmployerProfilePersonalInfo(props){
                                 <StyledCheckIcon/>
                             </IconButton>
                         ) : (
+
                             <IconButton onClick={handleEditClick}>
                                 <StyledEditIcon/>
                             </IconButton>
@@ -76,6 +91,10 @@ export default function EmployerProfilePersonalInfo(props){
                         <Box mb={1}>
                             <ProfilePhoto/>
                         </Box>
+                        <form encType="multipart/form-data">
+                            <input type="file" name="file" onChange={uploadPicture}/>
+                            {/*<button >Submit</button>*/}
+                        </form>
                         {/* Name */}
                         <h3>Owner</h3>
                         <Box mb={1}>
