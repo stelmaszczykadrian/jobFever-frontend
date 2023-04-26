@@ -1,11 +1,12 @@
 import {ButtonBase} from "@mui/material";
 import {Grid} from "@mui/joy";
 import Typography from "@mui/joy/Typography";
-import {Img, StyledPaper} from "./JobOfferGrid.styles";
+import {StyledPaper} from "./JobOfferGrid.styles";
 import SingleOfferField from "./SingleOfferField";
 import React, {useState} from "react";
 import {useEmployerById} from "../../api/EmployersApi";
 import axios from "axios";
+import {StyledJobImage} from "../atoms/JobImage.styles";
 
 
 export default function JobOfferGrid({job, onClick}) {
@@ -33,7 +34,7 @@ export default function JobOfferGrid({job, onClick}) {
                     <Grid item xs={4} container>
                         <Grid item>
                             <ButtonBase sx={{width: 128, height: 128}}>
-                                <Img alt="Employer logo" src={pictureUrl}></Img>
+                                <StyledJobImage alt="Employer logo" src={pictureUrl} />
                             </ButtonBase>
                         </Grid>
                         <Grid item>
