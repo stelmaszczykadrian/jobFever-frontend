@@ -10,14 +10,17 @@ import {
     StyledButtonCenter, StyledJobOfferContainer, StyledRedButtonModalButton
 } from "./JobOfferFormContainer.styles";
 import React, {useState, useEffect} from "react";
+import {Radio, RadioGroup} from "@mui/joy";
 import {Form} from "react-bootstrap";
 import Navbar from "../molecules/Navbar";
 import StyledText from "../atoms/StyledText";
 import DialogContentText from "@mui/material/DialogContentText";
 import TechnicalRequirementsContainer from "../molecules/TechnicalRequirementsContainer";
 import JobOfferFormula from "../molecules/JobOfferFormulaModal";
-import {useNavigate} from "react-router-dom";
-import {createJob} from "../../api/JobsApi";
+import {useNavigate, useParams} from "react-router-dom";
+import {createJob, updateJob} from "../../api/JobsApi";
+import {useAuth} from "../../pages/AuthProvider/AuthProvider";
+import Cookies from "js-cookie";
 import Typography from "@mui/joy/Typography";
 import {languageLabels} from "../../constants/constans";
 
@@ -60,6 +63,7 @@ export default function JobOfferFormContainer(props) {
         })
         return result
     }
+    const {id} = useParams();
     const navigate = useNavigate();
     const [pressedButtons, setPressedButtons] = useState(getInitialButtons())
     const [showModal, setShowModal] = useState(false);
@@ -179,6 +183,7 @@ export default function JobOfferFormContainer(props) {
         if (formIsValid) {
             // dodaj tutaj kod, który wyśle formularz
 
+
             const userData = {
                 title: input.title,
                 description: input.description,
@@ -194,16 +199,34 @@ export default function JobOfferFormContainer(props) {
                 workType: input.workType
             };
 
-            createJob(userData, () => {
-                setShowModal(true);
-                setFormSubmitted(true);
-                setErrorMessage(null);
-                setTimeout(() => {
-                    navigate('/jobs');
-                }, 2000);
-            }, (errorMessages) => {
-                setErrorMessage(errorMessages);
-            });
+            if (props.type === 'CREATE'){
+                createJob(userData, () => {
+                    setShowModal(true);
+                    setFormSubmitted(true);
+                    setErrorMessage(null);
+                    setTimeout(() => {
+                        navigate('/jobs');
+                    }, 2000);
+                }, (errorMessages) => {
+                    setErrorMessage(errorMessages);
+                });
+            }else {
+                console.log('update');
+                console.log(userData);
+                console.log(id);
+                updateJob(userData, () => {
+                    setShowModal(true);
+                    setFormSubmitted(true);
+                    setErrorMessage(null);
+                    setTimeout(() => {
+                        navigate('/jobs');
+                    }, 2000);
+                }, (errorMessages) => {
+                    setErrorMessage(errorMessages);
+                }, id);
+            }
+
+
         } else {
             setInput((prev) => ({...prev, errors}));
         }
