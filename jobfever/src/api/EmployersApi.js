@@ -13,11 +13,8 @@ export const useEmployerById = (id) => {
         try {
             const { data: response } = await axios.get(url, {
                 params:{id:id},
-                headers: {
-                    Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
-
-                }
             });
+            console.log(response)
             setEmployer(response);
         } catch (error) {
             console.error(error)
