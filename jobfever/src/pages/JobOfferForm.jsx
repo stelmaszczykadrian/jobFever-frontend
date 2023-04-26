@@ -13,7 +13,8 @@ function JobOfferForm() {
                                salaryTo=''
                                jobType=''
                                currencyType=''
-                               workType=''/>
+                               workType=''
+                               type='CREATE'/>
     );
 }
 
