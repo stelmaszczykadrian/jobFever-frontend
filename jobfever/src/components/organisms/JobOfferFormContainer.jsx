@@ -293,7 +293,7 @@ export default function JobOfferFormContainer(props) {
             <Form onSubmit={handleSubmit}>
                 <StyledText tag="h1"
                             color="white"
-                            text={"Post a job offer"}/>
+                            text={props.pageTitle}/>
                 <StyledJobOfferCreationContainer>
                     <StyledInputJobOfferContainer>
                         <DialogContentText sx={{color: 'white'}}>Title: </DialogContentText>

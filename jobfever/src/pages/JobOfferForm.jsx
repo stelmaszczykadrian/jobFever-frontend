@@ -14,7 +14,9 @@ function JobOfferForm() {
                                jobType=''
                                currencyType=''
                                workType=''
-                               type='CREATE'/>
+                               type='CREATE'
+                               pageTitle="Post a job offer"/>
+
     );
 }
 
