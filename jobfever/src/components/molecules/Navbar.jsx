@@ -42,13 +42,11 @@ export default function ResponsiveAppBar() {
         if (jwt) {
             if (!JSON.parse(jwt).employer_id) {
                 setSettings([
-                    <Link to={'/candidate/' + JSON.parse(jwt).candidate_id}>Profile</Link>,
-                    'Account', 'Dashboard', 'Favourites'
+                    'Dashboard', 'Favourites'
                 ])
             } else {
                 setSettings([
-                    <Link to={'/employer/' + JSON.parse(jwt).employer_id}>Profile</Link>,
-                    'Account', 'Dashboard', 'Favourites'
+                    'Dashboard', 'Favourites'
                 ])
             }
         }
@@ -69,6 +67,13 @@ export default function ResponsiveAppBar() {
     const logout = () => {
         Cookies.remove('jwt');
         navigate('/');
+    };
+    const navigateToProfile = () => {
+        if (!JSON.parse(jwt).employer_id) {
+            navigate('/candidate/' + JSON.parse(jwt).candidate_id);
+        }else{
+            navigate('/employer/' + JSON.parse(jwt).employer_id);
+        }
     };
     function AddJobButton() {
 
@@ -202,6 +207,9 @@ export default function ResponsiveAppBar() {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
+                                <MenuItem key={"Profile"} onClick={navigateToProfile}>
+                                    <Typography textAlign="center">Profile</Typography>
+                                </MenuItem>
                                 {settings.map((setting) => (
                                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
                                         <Typography textAlign="center">{setting}</Typography>
@@ -225,7 +233,7 @@ export default function ResponsiveAppBar() {
                     <Toolbar disableGutters>
                         <Link to='/'>
                             <Box sx={{m: 0}}>
-                                <img width="185" height="45" src={logo} margin="left"/>
+                                <img width="185" height="45" alt="logo" src={logo} margin="left"/>
                             </Box>
                         </Link>
                         <Typography
