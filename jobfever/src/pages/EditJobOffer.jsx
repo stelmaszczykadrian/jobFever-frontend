@@ -31,7 +31,8 @@ function EditJobOffer() {
                                salaryTo={jobDetails.salaryTo}
                                jobType={jobDetails.jobType}
                                currencyType={jobDetails.currencyType}
-                               workType={jobDetails.workType}/>
+                               workType={jobDetails.workType}
+                               pageTitle="Edit job offer"/>
         ): <div>Loading</div>;
 }
 
