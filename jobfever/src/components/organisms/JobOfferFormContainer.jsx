@@ -63,6 +63,7 @@ export default function JobOfferFormContainer(props) {
         })
         return result
     }
+    const [modalText, setModalText] = useState(" ")
     const {id} = useParams();
     const navigate = useNavigate();
     const [pressedButtons, setPressedButtons] = useState(getInitialButtons())
@@ -204,6 +205,7 @@ export default function JobOfferFormContainer(props) {
                     setShowModal(true);
                     setFormSubmitted(true);
                     setErrorMessage(null);
+                    setModalText("Job added successfully");
                     setTimeout(() => {
                         navigate('/jobs');
                     }, 2000);
@@ -218,6 +220,7 @@ export default function JobOfferFormContainer(props) {
                     setShowModal(true);
                     setFormSubmitted(true);
                     setErrorMessage(null);
+                    setModalText("Job edited successfully");
                     setTimeout(() => {
                         navigate('/jobs');
                     }, 2000);
@@ -509,7 +512,7 @@ export default function JobOfferFormContainer(props) {
                                 mt: 5,
                                 backgroundColor: 'rgba(171, 36, 36)'
                             }} type='submit'>SUBMIT</StyledRedButtonModalButton>
-                            <JobOfferFormula open={showModal} handleClose={handleClose} errorMessage={errorMessage}/>
+                            <JobOfferFormula open={showModal} handleClose={handleClose} errorMessage={errorMessage} text={modalText}/>
                         </StyledButtonCenter>
                     </StyledInputJobOfferContainer>
                 </StyledJobOfferCreationContainer>
