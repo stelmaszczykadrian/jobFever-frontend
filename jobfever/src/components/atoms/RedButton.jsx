@@ -5,6 +5,7 @@ function RedButton(props) {
     return (
         <Button
             type="submit"
+            onClick={props.onClick}
             sx={{
                 ':hover': {
                     bgcolor: '#852222',
