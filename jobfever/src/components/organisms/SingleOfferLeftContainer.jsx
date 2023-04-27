@@ -1,9 +1,6 @@
 import React from "react";
 import {StyledSingleOfferLeftContainer} from "./SingleOfferLeftContainer.styles";
 import SingleOfferField from "../molecules/SingleOfferField";
-import {useGetJobOfferById} from "../../api/JobsApi";
-
-
 
 
 function SingleOfferLeftContainer(props) {
