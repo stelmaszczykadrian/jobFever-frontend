@@ -11,32 +11,26 @@ export const useJobsByName = (id) => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const {data: response} = await axios.get(urls[0], {
-                    params: {id: id},
-                    headers: {
-                        Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
-                    }
-                });
-                setData(response.content);
-            } catch (error) {
-                console.error(error)
-            }
-            setLoading(false);
-        };
-
-        fetchData();
-    }, []);
-
-    return {
-        data,
-        loading,
+    const fetchData = async () => {
+        try {
+            const {data: response} = await axios.get(urls[0], {
+                params: {id: id},
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+                }
+            });
+            return response.content;
+        } catch (error) {
+            console.error(error)
+        }
+        setLoading(false);
     };
+    return fetchData;
 };
 
 export const getJobOfferById = async (id) => await axios.get(`http://localhost:8080/api/jobs/${id}`);
+
+export const deleteJobOfferById = async (id) => await axios.delete(`http://localhost:8080/api/jobs/${id}`);
 
 export const updateJob = (userData, onSuccess, onError, id) => {
     axios.put(`http://localhost:8080/api/jobs/${id}`, userData)
