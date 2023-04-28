@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import Pagination from "@mui/material/Pagination";
 import Typography from "@mui/joy/Typography";
@@ -9,6 +9,7 @@ import {StyledJobOffersContainer, StyledPaginationContainer} from "./JobOffersCo
 import JobsPageSortComponent from "../molecules/JobsPageSortComponent";
 import JobOfferGrid from "../molecules/JobOfferGrid";
 import axios from "axios";
+import SearchBar from "../molecules/SearchBar";
 
 
 const useStyles = makeStyles(() => ({
@@ -37,16 +38,20 @@ export default function JobsOfferContainer() {
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [selectedLanguage, setSelectedLanguage] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
         loadItems();
-    }, [currentPage, selectedLanguage]);
-
+    }, [currentPage, selectedLanguage, searchTerm]);
 
     function loadItems() {
-        const apiUrl = `http://localhost:8080/api/jobs?page=${currentPage}&size=10&language=${selectedLanguage}`;
-
+        let apiUrl = "";
+        if (searchTerm) {
+            apiUrl = `http://localhost:8080/api/jobs/search?searchTerm=${searchTerm}&page=${currentPage}&size=10`;
+        } else {
+            apiUrl = `http://localhost:8080/api/jobs?page=${currentPage}&size=10&language=${selectedLanguage}`;
+        }
         setLoading(true);
 
         axios.get(apiUrl)
@@ -56,6 +61,7 @@ export default function JobsOfferContainer() {
                 setLoading(false);
             })
             .catch(error => console.log(error));
+
     }
 
     function handlePageChange(event, value) {
@@ -64,27 +70,42 @@ export default function JobsOfferContainer() {
 
     const handleLanguageChange = (language) => {
         setSelectedLanguage(language);
+        setSearchTerm("");
         setCurrentPage(0);
     };
 
-    const handleJobClick = (jobId) => {
+
+    const navigateToJobPage = (jobId) => {
         navigate(`/job/${jobId}`);
     };
 
+    const handleJobClick = (jobId) => {
+        navigateToJobPage(jobId);
+    };
+
+    const handleSearch = (searchTerm) => {
+        setSearchTerm(searchTerm);
+        setSelectedLanguage("");
+        setCurrentPage(0);
+    };
+
     return (
-        <div>
             <StyledJobsPageMainComponent>
                 <StyledJobOffersContainer>
-                    <JobsPageSortComponent onLanguageChange={handleLanguageChange}/>
+                    <SearchBar onSearch={handleSearch} />
+                    <JobsPageSortComponent onLanguageChange={handleLanguageChange} />
                     {loading ? (
                         <Typography></Typography>
                     ) : (
                         <div>
                             {jobs.map((job, index) => (
                                 <div key={job.index}>
-                                    <JobOfferGrid job={job} key={index} onClick={() => handleJobClick(job.jobId)}/>
+                                    <JobOfferGrid
+                                        job={job}
+                                        key={index}
+                                        onClick={() => handleJobClick(job.jobId)}
+                                    />
                                 </div>
-
                             ))}
                         </div>
                     )}
@@ -94,14 +115,10 @@ export default function JobsOfferContainer() {
                         count={totalPages}
                         page={currentPage + 1}
                         onChange={handlePageChange}
-                        classes={{ul: classes.ul}}
+                        classes={{ ul: classes.ul }}
                     />
                 </StyledPaginationContainer>
             </StyledJobsPageMainComponent>
-        </div>
     );
 }
-
-
-
 
