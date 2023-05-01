@@ -50,76 +50,77 @@ export async function editCandidate(id, updatedCandidateData) {
 
 export async function editCandidateEducation(candidateId, educationId, updatedCandidateEducationData) {
     return await axios.put(`http://localhost:8080/api/candidates/${candidateId}/education/${educationId}`, {
-        degree: updatedCandidateEducationData.degree,
-        description: updatedCandidateEducationData.description,
-        endDate: updatedCandidateEducationData.endDate,
-        fieldOfStudy: updatedCandidateEducationData.fieldOfStudy,
-        school: updatedCandidateEducationData.school,
-        startDate: updatedCandidateEducationData.startDate
-    }({
-        headers: {
-            Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
-        }
-    })).catch(error => {
+            degree: updatedCandidateEducationData.degree,
+            description: updatedCandidateEducationData.description,
+            endDate: updatedCandidateEducationData.endDate,
+            fieldOfStudy: updatedCandidateEducationData.fieldOfStudy,
+            school: updatedCandidateEducationData.school,
+            startDate: updatedCandidateEducationData.startDate
+        },
+        ({
+            headers: {
+                Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+            }
+        })).catch(error => {
         return error
     })
 }
 
 export async function addCandidateEducation(candidateId, updatedCandidateEducationData) {
     return await axios.post(`http://localhost:8080/api/candidates/${candidateId}/education`, {
-        degree: updatedCandidateEducationData.degree,
-        description: updatedCandidateEducationData.description,
-        endDate: updatedCandidateEducationData.endDate,
-        fieldOfStudy: updatedCandidateEducationData.fieldOfStudy,
-        school: updatedCandidateEducationData.school,
-        startDate: updatedCandidateEducationData.startDate
-    }({
-        headers: {
-            Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
-        }
-    }))
-        .catch(error => {
-            return error
-        })
+            degree: updatedCandidateEducationData.degree,
+            description: updatedCandidateEducationData.description,
+            endDate: updatedCandidateEducationData.endDate,
+            fieldOfStudy: updatedCandidateEducationData.fieldOfStudy,
+            school: updatedCandidateEducationData.school,
+            startDate: updatedCandidateEducationData.startDate
+        },
+        ({
+            headers: {
+                Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+            }
+        })).catch(error => {
+        return error
+    })
 }
 
 export async function editCandidateExperience(candidateId, experienceId, updatedCandidateExperienceData) {
     return await axios.put(`http://localhost:8080/api/candidates/${candidateId}/experience/${experienceId}`, {
-        position: updatedCandidateExperienceData.position,
-        companyName: updatedCandidateExperienceData.companyName,
-        location: updatedCandidateExperienceData.location,
-        startDate: updatedCandidateExperienceData.startDate,
-        endDate: updatedCandidateExperienceData.endDate,
-        industry: updatedCandidateExperienceData.industry,
-        description: updatedCandidateExperienceData.description
-    }({
-        headers: {
-            Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
-        }
-    })).catch(error => {
+            position: updatedCandidateExperienceData.position,
+            companyName: updatedCandidateExperienceData.companyName,
+            location: updatedCandidateExperienceData.location,
+            startDate: updatedCandidateExperienceData.startDate,
+            endDate: updatedCandidateExperienceData.endDate,
+            industry: updatedCandidateExperienceData.industry,
+            description: updatedCandidateExperienceData.description
+        },
+        ({
+            headers: {
+                Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+            }
+        })).catch(error => {
         return error
     })
 }
 
 export async function addCandidateExperience(candidateId, updatedCandidateExperienceData) {
     return await axios.post(`http://localhost:8080/api/candidates/${candidateId}/experience`, {
-        position: updatedCandidateExperienceData.position,
-        companyName: updatedCandidateExperienceData.companyName,
-        location: updatedCandidateExperienceData.location,
-        startDate: updatedCandidateExperienceData.startDate,
-        endDate: updatedCandidateExperienceData.endDate,
-        industry: updatedCandidateExperienceData.industry,
-        description: updatedCandidateExperienceData.description
-    }({
-        headers: {
-            Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
-        }
-    }))
-        .catch(error => {
-            return error
-        })
+            position: updatedCandidateExperienceData.position,
+            companyName: updatedCandidateExperienceData.companyName,
+            location: updatedCandidateExperienceData.location,
+            startDate: updatedCandidateExperienceData.startDate,
+            endDate: updatedCandidateExperienceData.endDate,
+            industry: updatedCandidateExperienceData.industry,
+            description: updatedCandidateExperienceData.description
+        },
+        ({
+            headers: {
+                Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+            }
+        })).catch(error => {
+        return error
+    })
 }
-
 
 export const registerCandidate = (userData, onSuccess, onError) => {
     const url = "http://localhost:8080/api/authentication/candidates/register";
@@ -143,7 +144,6 @@ export const registerCandidate = (userData, onSuccess, onError) => {
             }
         });
 };
-
 
 export async function deleteCandidateExperience(candidateId, experienceId) {
     return await axios.delete(`http://localhost:8080/api/candidates/${candidateId}/experience/${experienceId}`, {
