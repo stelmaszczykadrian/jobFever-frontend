@@ -122,6 +122,23 @@ export async function addCandidateExperience(candidateId, updatedCandidateExperi
     })
 }
 
+export const saveCandidatesImgFilename = async (id, filename) => {
+    try {
+        await axios.put("http://localhost:8080/api/candidates/add-image", {
+        },{
+            params: {
+                id: id,
+                filename: filename
+            },
+            headers: {
+                Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+            }
+        });
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 export const registerCandidate = (userData, onSuccess, onError) => {
     const url = "http://localhost:8080/api/authentication/candidates/register";
     axios.post(url, userData)
