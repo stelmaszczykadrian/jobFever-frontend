@@ -50,7 +50,7 @@ export default function EmployerProfilePersonalInfo(props){
         setIsEdit(true);
     };
     const handleSaveClick = async () => {
-        if (nameAndSurname === '' || localization === '' || phoneNumber === '') {
+        if (nameAndSurname.trim() === '' || localization.trim() === '' || phoneNumber.toString().trim() === '') {
             return
         }
         setIsEdit(false);

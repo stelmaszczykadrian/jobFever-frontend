@@ -7,13 +7,16 @@ import {
     StyledRightBox, StyledBottomBoxPersonalInfo
 } from "./CandidateProfile.styles";
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
-import ProfilePhoto from "../atoms/ProfilePhoto";
 import IconButton from "@mui/material/IconButton";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
 import {StyledPersonIcon} from "../atoms/StyledPersonIcon";
-import {editCandidate, useCandidateById} from "../../api/CandidateApi";
+import {editCandidate, saveCandidatesImgFilename, useCandidateById} from "../../api/CandidateApi";
 import EditableInput from "../atoms/EditableInput";
+import Cookies from "js-cookie";
+import {uploadFile} from "../../api/FilesApi";
+import axios from "axios";
+import {StyledProfilePhoto} from "../atoms/ProfilePhoto.styles";
 
 
 export default function CandidateProfilePersonalInformation(props) {
@@ -24,6 +27,25 @@ export default function CandidateProfilePersonalInformation(props) {
     const [city, setCity] = useState('City');
     const [linkedin, setLinkedIn] = useState('https://www.linkedin.com/');
     const [github, setGitHub] = useState('https://github.com/');
+    const [filename, setFilename] = useState("");
+    const [newPicture, setNewPicture] = useState();
+    const [previewPicture, setPreviewPicture] = useState(null);
+    const [picture, setPicture] = useState();
+
+    const getFileByFilename = async () => {
+        try {
+            const {data: response} = await axios.get('http://localhost:8080/api/file/url', {
+                params: {filename: filename},
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+                }
+            });
+            setPicture(response);
+        } catch (error) {
+            console.error(error)
+        }
+    };
+
     const handleEditClick = () => {
         setIsEdit(true);
     };
@@ -39,6 +61,8 @@ export default function CandidateProfilePersonalInformation(props) {
             github: github
         };
         await editCandidate(props.id, updatedCandidateData);
+        uploadFile(newPicture)
+        saveCandidatesImgFilename(JSON.parse(Cookies.get("jwt")).candidate_id, newPicture.name)
     };
 
     React.useEffect(() => {
@@ -47,10 +71,56 @@ export default function CandidateProfilePersonalInformation(props) {
             setCity(data.city);
             setLinkedIn(data.linkedin);
             setGitHub(data.github);
+            setFilename(data.imgFileName)
         }
     }, [data]);
 
+    const savePreviewPicture = (e) => {
+        setPreviewPicture(URL.createObjectURL(e.target.files[0]))
+        setNewPicture(
+            e.target.files[0]
+        )
+    }
+
     if (!loading) {
+        getFileByFilename()
+        const RenderEditIcons = () => {
+            if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()){
+                return (
+                    isEdit ? (
+                        <IconButton onClick={handleSaveClick}>
+                            <StyledCheckIcon/>
+                        </IconButton>
+                    ) : (
+                        <IconButton onClick={handleEditClick}>
+                            <StyledEditIcon/>
+                        </IconButton>
+                    )
+                )
+            }
+        }
+        const RenderChangePhotoButtons = () => {
+            if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
+                return (
+                    isEdit ? (
+                        <form encType="multipart/form-data">
+                            <input type="file" name="file" onChange={savePreviewPicture}/>
+                        </form>
+                    ) : undefined
+                )
+            }
+        }
+        const RenderProfilePicture = () => {
+            if (previewPicture === null){
+                return(
+                    <StyledProfilePhoto src={picture} alt="Profile"/>
+                )
+            }else{
+                return (
+                    <StyledProfilePhoto src={previewPicture} alt="Profile"/>
+                )
+            }
+        }
         return (
             <StyledProfilePaper>
                 <StyledTopBox>
@@ -61,8 +131,9 @@ export default function CandidateProfilePersonalInformation(props) {
                     <StyledLeftBox>
                         {/* Photo */}
                         <Box mb={1}>
-                            <ProfilePhoto/>
+                            <RenderProfilePicture />
                         </Box>
+                        <RenderChangePhotoButtons />
                         {/* Name */}
                         <h3>Name</h3>
                         <Box mb={1}>
@@ -114,15 +185,7 @@ export default function CandidateProfilePersonalInformation(props) {
                         </Box>
                         <Box>
                             {/* Edit button */}
-                            {isEdit ? (
-                                <IconButton onClick={handleSaveClick}>
-                                    <StyledCheckIcon/>
-                                </IconButton>
-                            ) : (
-                                <IconButton onClick={handleEditClick}>
-                                    <StyledEditIcon/>
-                                </IconButton>
-                            )}
+                            <RenderEditIcons />
                         </Box>
                     </StyledRightBox>
                 </StyledBottomBoxPersonalInfo>
