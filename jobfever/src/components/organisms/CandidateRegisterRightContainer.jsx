@@ -96,7 +96,7 @@ export default function CandidateRegisterRightContainer() {
                 <StyledText
                     color="white"
                     tag={"h3"}
-                    text={"Create account"}>
+                    text={"Create candidate account."}>
                 </StyledText>;
                 <form onSubmit={handleSubmit}>
                     <FormControl width="40">
