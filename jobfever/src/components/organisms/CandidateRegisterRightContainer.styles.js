@@ -19,11 +19,23 @@ export const CandidateRegisterTextCandidateExist = styled('div')`
   font-size: large;
 `
 
-export const StyledUserInputValidation = styled("div")`
+export const StyledPasswordInputValidation = styled("div")`
   border: 5px;
   align-self: center;
   color: black;
   margin-top: 2%;
+  display: flex;
+  align-items: center;
+`;
+
+
+export const StyledEmailInputValidation = styled("div")`
+  border: 5px;
+  align-self: center;
+  color: black;
+  margin-top: 2%;
+  display: flex;
+  align-items: center;
 `;
 
 export const StyledLabel = styled("span")`
@@ -36,22 +48,3 @@ export const StyledLabel = styled("span")`
 
 
 
-export const StyledRegisterEmployerPageHeading = styled('h2')`
-  color: white;
-  position: relative;
-  padding: 0 0 10px;
-  text-align: center;
-  margin-bottom: 30px;
-
-  &:after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    height: 4px;
-    width: 50px;
-    border-radius: 2px;
-    background-color: red;
-  }
-`;

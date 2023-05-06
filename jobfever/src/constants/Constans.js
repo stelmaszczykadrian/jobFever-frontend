@@ -1,19 +1,19 @@
-import Python from "../languages/python.svg";
-import Ruby from "../languages/ruby.svg";
-import JS from "../languages/js.svg";
-import C from "../languages/cplusplus.svg";
-import CSharp from "../languages/csharp.svg";
-import PHP from "../languages/php.svg";
-import Kotlin from "../languages/kotlin.svg";
-import Java from "../languages/java.svg";
-import Scala from "../languages/scala.svg";
-import Pascal from "../languages/pascal.svg";
-import Swift from "../languages/swift.svg";
-import Dotnet from "../languages/dotnet.svg";
-import PowerShell from "../languages/powershell.svg";
-import Data from "../languages/data.svg";
-import SQL from "../languages/sql.svg";
-import All from "../languages/all.svg";
+import Python from "../images/languages/python.svg";
+import Ruby from "../images/languages/ruby.svg";
+import JS from "../images/languages/js.svg";
+import C from "../images/languages/cplusplus.svg";
+import CSharp from "../images/languages/csharp.svg";
+import PHP from "../images/languages/php.svg";
+import Kotlin from "../images/languages/kotlin.svg";
+import Java from "../images/languages/java.svg";
+import Scala from "../images/languages/scala.svg";
+import Pascal from "../images/languages/pascal.svg";
+import Swift from "../images/languages/swift.svg";
+import Dotnet from "../images/languages/dotnet.svg";
+import PowerShell from "../images/languages/powershell.svg";
+import Data from "../images/languages/data.svg";
+import SQL from "../images/languages/sql.svg";
+import All from "../images/languages/all.svg";
 import * as React from "react";
 
 

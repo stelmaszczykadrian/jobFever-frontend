@@ -9,7 +9,7 @@ import {useNavigate} from "react-router-dom";
 import StyledText from "../atoms/StyledText";
 import {
     CandidateRegisterTextCandidateExist,
-    StyledUserInputValidation,
+    StyledPasswordInputValidation,
     StyledLabel,
     StyledRightContainer
 } from "./CandidateRegisterRightContainer.styles";
@@ -103,7 +103,7 @@ export default function CandidateRegisterRightContainer() {
                         <StyledLabel>
                             E-mail
                         </StyledLabel>
-                        <StyledUserInputValidation>
+                        <StyledPasswordInputValidation>
                             <Input
                                 type="text"
                                 name="email"
@@ -112,7 +112,7 @@ export default function CandidateRegisterRightContainer() {
                                 onChange={onInputChange}
                                 onBlur={validateInput}
                             />
-                        </StyledUserInputValidation>
+                        </StyledPasswordInputValidation>
                         {formData.errors.email &&
                             <StyledText
                                 tag="span"
@@ -124,7 +124,7 @@ export default function CandidateRegisterRightContainer() {
                         <StyledLabel>
                             Password
                         </StyledLabel>
-                        <StyledUserInputValidation>
+                        <StyledPasswordInputValidation>
                             <Input
                                 type="password"
                                 name={'password'}
@@ -133,7 +133,7 @@ export default function CandidateRegisterRightContainer() {
                                 onChange={onInputChange}
                                 onBlur={validateInput}
                             />
-                        </StyledUserInputValidation>
+                        </StyledPasswordInputValidation>
                         {formData.errors.password &&
                             <StyledText
                                 tag="span"
@@ -145,7 +145,7 @@ export default function CandidateRegisterRightContainer() {
                         <StyledLabel>
                             Confirm Password
                         </StyledLabel>
-                        <StyledUserInputValidation>
+                        <StyledPasswordInputValidation>
                             <Input
                                 type="password"
                                 name={'confirmPassword'}
@@ -154,7 +154,7 @@ export default function CandidateRegisterRightContainer() {
                                 onChange={onInputChange}
                                 onBlur={validateInput}
                             />
-                        </StyledUserInputValidation>
+                        </StyledPasswordInputValidation>
                         {formData.errors.confirmPassword &&
                             <StyledText
                                 tag="span"

@@ -2,7 +2,7 @@ import {
     CandidateRegisterTextCandidateExist,
     StyledLabel,
     StyledRightContainer,
-    StyledUserInputValidation
+    StyledPasswordInputValidation, StyledEmailInputValidation
 } from "./CandidateRegisterRightContainer.styles";
 import RightNavbar from "../molecules/RightNavbar";
 import Sheet from "@mui/joy/Sheet";
@@ -19,11 +19,16 @@ import {
     incorrectEmailAddressMessage,
     incorrectEmailEmptyMessage, incorrectPasswordBlankMessage
 } from "../../constants/RegisterFormValidationsMessages";
+import IconButton from "@mui/material/IconButton";
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import { MailOutline } from '@material-ui/icons';
 
 
 export default function LoginContainer(props) {
     const [loginMessage, setLoginMessage] = useState('');
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -70,7 +75,7 @@ export default function LoginContainer(props) {
             };
 
             const response = await axios.post(`${props.apiUrl}`, userData);
-            Cookies.set("jwt", JSON.stringify(response.data), { expires: 7 })
+            Cookies.set("jwt", JSON.stringify(response.data), {expires: 7})
             setLoginMessage("Login successful.");
 
             setTimeout(() => {
@@ -101,9 +106,9 @@ export default function LoginContainer(props) {
                     text={props.text}
                 />
                 <form onSubmit={handleSubmit}>
-                    <FormControl width="40">
+                    <FormControl>
                         <StyledLabel>E-mail</StyledLabel>
-                        <StyledUserInputValidation>
+                        <StyledEmailInputValidation>
                             <Input
                                 type="text"
                                 name="email"
@@ -112,7 +117,10 @@ export default function LoginContainer(props) {
                                 onChange={onInputChange}
                                 onBlur={validateInput}
                             />
-                        </StyledUserInputValidation>
+                            <IconButton sx={{color: 'white'}}>
+                                <MailOutline/>
+                            </IconButton>
+                        </StyledEmailInputValidation>
                         {formData.errors.email &&
                             <StyledText
                                 tag="span"
@@ -124,15 +132,18 @@ export default function LoginContainer(props) {
                         <StyledLabel>
                             Password
                         </StyledLabel>
-                        <StyledUserInputValidation>
+                        <StyledPasswordInputValidation>
                             <Input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 name={'password'}
                                 value={formData.password}
                                 onChange={onInputChange}
                                 onBlur={validateInput}
                             />
-                        </StyledUserInputValidation>
+                            <IconButton sx={{color: 'white'}} onClick={() => setShowPassword(!showPassword)}>
+                                {showPassword ? <VisibilityOffIcon/> : <VisibilityIcon/>}
+                            </IconButton>
+                        </StyledPasswordInputValidation>
                         {formData.errors.password &&
                             <StyledText
                                 tag="span"
