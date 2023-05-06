@@ -78,7 +78,7 @@ export default function LoginContainer(props) {
             }, 2000);
         } catch (error) {
             if (error.response) {
-                if (error.response.data === "Invalid email or password.") {
+                if (error.response.status === 403) {
                     setLoginMessage("Invalid email or password.");
                 } else {
                     console.log(error.response);

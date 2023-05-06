@@ -16,7 +16,6 @@ import {
     StyledUserInputValidation,
     StyledLabel,
     StyledRightContainer,
-    StyledRegisterEmployerPageHeading
 } from "./CandidateRegisterRightContainer.styles";
 import {registerEmployer} from "../../api/EmployersApi";
 import {
@@ -26,8 +25,6 @@ import {
     passwordsDoNotMatchMessage
 } from "../../constants/RegisterFormValidationsMessages";
 import {isValidEmail, isValidPhoneNumber, validateFormData} from "../../utils/Validators";
-import {StyledContactPageHeading} from "./ContactPageContainer.styles";
-
 
 export default function EmployerRegisterRightContainer() {
     const [errorMessage, setErrorMessage] = useState(null);
