@@ -1,7 +1,7 @@
 import {StyledContainer} from "./TechnicalRequirementsContainer.styles";
 import * as React from "react";
 import {StyledSortButton} from "../atoms/StyledSortButton";
-import {languageIcons, languageLabels} from "../../constants/constans";
+import {languageIcons, languageLabels} from "../../constants/Constans";
 import DialogContentText from "@mui/material/DialogContentText";
 
 const TechnicalRequirementsContainer = ({pressedButtons, setPressedButtons, setInput}) => {

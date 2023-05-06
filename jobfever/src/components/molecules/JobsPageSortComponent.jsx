@@ -1,4 +1,4 @@
-import {languageIconsSortJobsPage, languageLabelsSortJobsPage} from "../../constants/constans";
+import {languageIconsSortJobsPage, languageLabelsSortJobsPage} from "../../constants/Constans";
 import {StyledSortButton} from "../atoms/StyledSortButton";
 import {StyledContainer} from "./TechnicalRequirementsContainer.styles";
 import React, {useState} from "react";

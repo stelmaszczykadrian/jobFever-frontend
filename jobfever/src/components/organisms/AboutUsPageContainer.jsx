@@ -13,8 +13,8 @@ import Karolina from "../../images/authors/Karolina.png"
 import Grzegorz from "../../images/authors/Grzegorz.jpg"
 import Piotr from "../../images/authors/Piotr.jpeg"
 
-import linkedin from "../../languages/icons8-linkedin.svg";
-import github from "../../languages/icons8-github.svg";
+import linkedin from "../../images/languages/icons8-linkedin.svg";
+import github from "../../images/languages/icons8-github.svg";
 import {StyledContactPageHeading} from "./ContactPageContainer.styles";
 
 export default function AboutUsPageContainer() {

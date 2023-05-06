@@ -19,7 +19,7 @@ import JobOfferFormula from "../molecules/JobOfferFormulaModal";
 import {useNavigate, useParams} from "react-router-dom";
 import {createJob, updateJob} from "../../api/JobsApi";
 import Typography from "@mui/joy/Typography";
-import {languageLabels} from "../../constants/constans";
+import {languageLabels} from "../../constants/Constans";
 import {
     incorrectBenefitsLengthMessage, incorrectCurrencyTypeBlankMessage,
     incorrectDescriptionBlankMessage,
