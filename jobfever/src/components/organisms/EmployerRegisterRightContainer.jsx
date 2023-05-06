@@ -12,7 +12,12 @@ import Container from "@mui/material/Container";
 import {Form} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import StyledText from "../atoms/StyledText";
-import {StyledUserInputValidation,StyledLabel,StyledRightContainer} from "./CandidateRegisterRightContainer.styles";
+import {
+    StyledUserInputValidation,
+    StyledLabel,
+    StyledRightContainer,
+    StyledRegisterEmployerPageHeading
+} from "./CandidateRegisterRightContainer.styles";
 import {registerEmployer} from "../../api/EmployersApi";
 import {
     incorrectEmailEmptyMessage, incorrectCompanyNameMessage, incorrectNameMessage,
@@ -21,6 +26,7 @@ import {
     passwordsDoNotMatchMessage
 } from "../../constants/RegisterFormValidationsMessages";
 import {isValidEmail, isValidPhoneNumber, validateFormData} from "../../utils/Validators";
+import {StyledContactPageHeading} from "./ContactPageContainer.styles";
 
 
 export default function EmployerRegisterRightContainer() {
@@ -81,7 +87,7 @@ export default function EmployerRegisterRightContainer() {
             return;
         }
 
-        if(formData.password === formData.confirmPassword){
+        if (formData.password === formData.confirmPassword) {
             const userData = {
                 companyName: formData.companyName,
                 nameAndSurname: formData.nameAndSurname,
@@ -105,6 +111,12 @@ export default function EmployerRegisterRightContainer() {
     return (<StyledRightContainer>
         <RightNavbar/>
         <Form onSubmit={handleSubmit}>
+            <StyledText
+                color="rgba(171, 36, 36)"
+                tag={"h2"}
+                text={"Welcome!"}
+            />
+            <StyledRegisterEmployerPageHeading>Create employer account!</StyledRegisterEmployerPageHeading>
             <Sheet style={{backgroundColor: 'transparent'}}>
                 <Container>
                     <EmployerRegisterRightContainerColumn>

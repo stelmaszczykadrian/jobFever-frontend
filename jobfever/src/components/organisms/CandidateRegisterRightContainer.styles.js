@@ -7,7 +7,7 @@ export const StyledRightContainer = styled(Sheet)`
   display: grid;
   align-items: flex-start;
   justify-content: center;
-  background: rgba(29, 25, 23, 0.7);
+  background: rgba(29, 25, 23, 0.8);
   grid-template-rows: 2fr 5fr 1fr;
   grid-template-columns: 1fr;
 `
@@ -33,3 +33,25 @@ export const StyledLabel = styled("span")`
   font-size: medium;
   margin-top: 2%;
 `
+
+
+
+export const StyledRegisterEmployerPageHeading = styled('h2')`
+  color: white;
+  position: relative;
+  padding: 0 0 10px;
+  text-align: center;
+  margin-bottom: 30px;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    height: 4px;
+    width: 50px;
+    border-radius: 2px;
+    background-color: red;
+  }
+`;
