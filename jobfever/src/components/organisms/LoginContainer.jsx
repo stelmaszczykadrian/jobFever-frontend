@@ -14,13 +14,17 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import RedButton from "../atoms/RedButton";
 import Cookies from 'js-cookie';
+import {isValidEmail, validateFormData} from "../../utils/Validators";
+import {
+    incorrectEmailAddressMessage,
+    incorrectEmailEmptyMessage, incorrectPasswordBlankMessage
+} from "../../constants/RegisterFormValidationsMessages";
 
 
 export default function LoginContainer(props) {
     const [loginMessage, setLoginMessage] = useState('');
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-
         email: '',
         password: '',
         errors: {
@@ -42,18 +46,24 @@ export default function LoginContainer(props) {
     const validateInput = (name, value) => {
         switch (name) {
             case 'email':
-                return value !== '' ? '' : 'Email field cannot be empty';
+                return value !== '' ? (isValidEmail(value) ? '' : incorrectEmailAddressMessage) : incorrectEmailEmptyMessage;
             case 'password':
-                return value.length < 6 ? 'Password should be at least 6 characters long' : '';
+                return value !== '' ? '' : incorrectPasswordBlankMessage;
             default:
                 return '';
         }
     };
 
     const handleSubmit = async (event) => {
-        try {
-            event.preventDefault();
+        event.preventDefault();
 
+        const errors = validateFormData(formData, validateInput);
+        if (errors) {
+            setFormData((prevFormData) => ({...prevFormData, errors}));
+            return;
+        }
+
+        try {
             const userData = {
                 email: formData.email,
                 password: formData.password,
@@ -72,7 +82,6 @@ export default function LoginContainer(props) {
                     setLoginMessage("Invalid email or password.");
                 } else {
                     console.log(error.response);
-                    console.log("server responded");
                 }
             } else if (error.request) {
                 console.log("network error");
@@ -89,7 +98,7 @@ export default function LoginContainer(props) {
                 <StyledText
                     color="white"
                     tag={"h2"}
-                    text={"Login to your profile"}
+                    text={props.text}
                 />
                 <form onSubmit={handleSubmit}>
                     <FormControl width="40">
