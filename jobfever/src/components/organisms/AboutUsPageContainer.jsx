@@ -34,7 +34,7 @@ export default function AboutUsPageContainer() {
                         </StyledAboutUsPageText>
                         <StyledAboutUsPageText>
                             <img src={github} alt="github"/>
-                            <a href="#">GitHub</a>
+                            <a href="https://github.com/karolinalodzinska">GitHub</a>
                         </StyledAboutUsPageText>
                     </StyledAuthorPersonalInfoContainer>
                 </StyledInfoRightContainer>
@@ -52,7 +52,7 @@ export default function AboutUsPageContainer() {
                         </StyledAboutUsPageText>
                         <StyledAboutUsPageText>
                             <img src={github} alt="github"/>
-                            <a href="#">GitHub</a>
+                            <a href="https://github.com/MonikaMarkulis">GitHub</a>
                         </StyledAboutUsPageText>
                     </StyledAuthorPersonalInfoContainer>
                 </StyledInfoRightContainer>
@@ -70,7 +70,7 @@ export default function AboutUsPageContainer() {
                         </StyledAboutUsPageText>
                         <StyledAboutUsPageText>
                             <img src={github} alt="github"/>
-                            <a href="#">GitHub</a>
+                            <a href="https://github.com/reizergrzegorz">GitHub</a>
                         </StyledAboutUsPageText>
                     </StyledAuthorPersonalInfoContainer>
                 </StyledInfoRightContainer>
@@ -84,11 +84,11 @@ export default function AboutUsPageContainer() {
                         <StyledContactPageHeading>Adrian Stelmaszczyk</StyledContactPageHeading>
                         <StyledAboutUsPageText>
                             <img src={linkedin} width="30px" height="30px" alt="linkedin"/>
-                            <a href="#">Linkedin</a>
+                            <a href="https://www.linkedin.com/in/adrian-stelmaszczyk-0b2b87160/">Linkedin</a>
                         </StyledAboutUsPageText>
                         <StyledAboutUsPageText>
                             <img src={github} alt="github"/>
-                            <a href="#">GitHub</a>
+                            <a href="https://github.com/stelmaszczykadrian">GitHub</a>
                         </StyledAboutUsPageText>
                     </StyledAuthorPersonalInfoContainer>
                 </StyledInfoRightContainer>
@@ -106,7 +106,7 @@ export default function AboutUsPageContainer() {
                         </StyledAboutUsPageText>
                         <StyledAboutUsPageText>
                             <img src={github} alt="github"/>
-                            <a href="#">GitHub</a>
+                            <a href="https://github.com/ppwxp">GitHub</a>
                         </StyledAboutUsPageText>
                     </StyledAuthorPersonalInfoContainer>
                 </StyledInfoRightContainer>
