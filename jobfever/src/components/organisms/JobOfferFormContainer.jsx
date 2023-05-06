@@ -10,7 +10,6 @@ import {
     StyledButtonCenter, StyledJobOfferContainer, StyledRedButtonModalButton
 } from "./JobOfferFormContainer.styles";
 import React, {useState, useEffect} from "react";
-import {Radio, RadioGroup} from "@mui/joy";
 import {Form} from "react-bootstrap";
 import Navbar from "../molecules/Navbar";
 import StyledText from "../atoms/StyledText";
@@ -19,10 +18,32 @@ import TechnicalRequirementsContainer from "../molecules/TechnicalRequirementsCo
 import JobOfferFormula from "../molecules/JobOfferFormulaModal";
 import {useNavigate, useParams} from "react-router-dom";
 import {createJob, updateJob} from "../../api/JobsApi";
-import {useAuth} from "../../pages/AuthProvider/AuthProvider";
-import Cookies from "js-cookie";
 import Typography from "@mui/joy/Typography";
 import {languageLabels} from "../../constants/constans";
+import {
+    incorrectBenefitsLengthMessage, incorrectCurrencyTypeBlankMessage,
+    incorrectDescriptionBlankMessage,
+    incorrectDescriptionLengthMessage, incorrectJobTypeBlankMessage,
+    incorrectLocationBlankMessage,
+    incorrectLocationLengthMessage,
+    incorrectResponsibilitiesLengthMessage, incorrectResponsibilitiesBlankMessage,
+    incorrectSalaryFromBlankMessage,
+    incorrectSalaryFromLengthMessage,
+    incorrectSalaryFromLessThanZeroMessage,
+    incorrectSalaryFromNotANumberMessage,
+    incorrectSalaryToBlankMessage, incorrectSalaryToLengthMessage,
+    incorrectSalaryToLessThanZeroMessage,
+    incorrectSalaryToNotANumberMessage,
+    incorrectTitleBlankMessage,
+    incorrectTitleLengthMessage,
+    incorrectWhoWeAreLookingLengthMessage, incorrectWorkTypeBlankMessage,
+    maximumValueLength,
+    maxLocationValueLength, maxSalaryValueLength,
+    maxTitleLengthValue,
+    minSalaryValueLength,
+    minTechnicalRequirementsValue,
+    missingTechnicalRequirementMessage, incorrectWhoWeAreLookingForBlankMessage, incorrectBenefitsBlankMessage
+} from "../../constants/JobOfferFormValidationsMessages";
 
 const jobType = [
     {value: "", label: "Job type", disabled: true},
@@ -69,6 +90,7 @@ export default function JobOfferFormContainer(props) {
     const [pressedButtons, setPressedButtons] = useState(getInitialButtons())
     const [showModal, setShowModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
+    const [formSubmitted, setFormSubmitted] = useState(false);
 
 
     const [input, setInput] = useState({
@@ -104,74 +126,70 @@ export default function JobOfferFormContainer(props) {
         switch (name) {
             case 'title':
                 if (value === '') {
-                    return 'Title field cannot be empty.';
-                } else if (value.length > 30) {
-                    return 'Title field must be no longer than 30 characters.';
+                    return incorrectTitleBlankMessage;
+                } else if (value.length > maxTitleLengthValue) {
+                    return incorrectTitleLengthMessage
                 }
                 return '';
             case 'description':
-                return value !== '' ? (value.length <= 2000 ? '' : 'Description field cannot exceed 2000 characters.') : 'Description field cannot be empty.';
+                return value !== '' ? (value.length <= maximumValueLength ? '' : incorrectDescriptionLengthMessage) : incorrectDescriptionBlankMessage;
             case 'responsibilities':
-                return value.length <= 2000 ? '' : 'Responsibilities field cannot exceed 2000 characters.';
+                return value!== '' ? (value.length <= maximumValueLength ? '' : incorrectResponsibilitiesLengthMessage) : incorrectResponsibilitiesBlankMessage;
             case 'whoWeAreLookingFor':
-                return value.length <= 2000 ? '' : 'Who we are looking for field cannot exceed 2000 characters.';
+                return value!== '' ? (value.length <= maximumValueLength ? '' : incorrectWhoWeAreLookingLengthMessage) : incorrectWhoWeAreLookingForBlankMessage;
             case 'technicalRequirements':
-                return value.length > 0 ? '' : 'At least one technical requirement must be specified.';
+                return value.length > minTechnicalRequirementsValue ? '' : missingTechnicalRequirementMessage;
             case 'benefits':
-                return value.length <= 2000 ? '' : 'Benefits field cannot be longer than 2000 characters.';
+                return value!== '' ? (value.length <= maximumValueLength ? '' : incorrectBenefitsLengthMessage) : incorrectBenefitsBlankMessage;
             case 'location':
                 if (value === '') {
-                    return 'Location field cannot be empty.';
-                } else if (value.length > 20) {
-                    return 'Location field must be no longer than 20 characters.';
+                    return incorrectLocationBlankMessage;
+                } else if (value.length > maxLocationValueLength) {
+                    return incorrectLocationLengthMessage;
                 }
                 return '';
             case 'salaryFrom':
                 if (value === '') {
-                    return 'Salary from field cannot be empty.';
+                    return incorrectSalaryFromBlankMessage;
                 }else if (isNaN(value)) {
-                    return 'Salary to field must be a number.';
-                }else if (value <= 0) {
-                    return 'Salary from field must be greater than 0.';
-                }else if (parseInt(value) > 9999) {
-                    return 'Salary from field must be less than 10000.';
+                    return incorrectSalaryFromNotANumberMessage;
+                }else if (value <= minSalaryValueLength) {
+                    return incorrectSalaryFromLessThanZeroMessage;
+                }else if (parseInt(value) > maxSalaryValueLength) {
+                    return incorrectSalaryFromLengthMessage;
                 } else {
                     return '';
                 }
             case 'salaryTo':
                 if (value === '') {
-                    return 'Salary to field cannot be empty.';
+                    return incorrectSalaryToBlankMessage;
                 }else if (isNaN(value)) {
-                    return 'Salary to field must be a number.';
-                }else if (value <= 0) {
-                    return 'Salary to field must be greater than 0.';
-                }else if (parseInt(value) > 9999) {
-                    return 'Salary to field must be less than 10000.';
+                    return incorrectSalaryToNotANumberMessage;
+                }else if (value <= minSalaryValueLength) {
+                    return incorrectSalaryToLessThanZeroMessage;
+                }else if (parseInt(value) > maxSalaryValueLength) {
+                    return incorrectSalaryToLengthMessage;
                 } else {
                     return '';
                 }
             case "jobType":
-                return value !== "" ? "" : "Job type field cannot be empty.";
+                return value !== "" ? "" : incorrectJobTypeBlankMessage;
             case 'currencyType':
-                return value !== '' ? '' : 'Currency type field cannot be empty.';
+                return value !== '' ? '' : incorrectCurrencyTypeBlankMessage;
             case 'workType':
-                return value !== '' ? '' : 'Work type field cannot be empty.';
+                return value !== '' ? '' : incorrectWorkTypeBlankMessage;
             default:
                 return '';
         }
     };
 
 
-    const [formSubmitted, setFormSubmitted] = useState(false);
-
     const handleSubmit = async (event) => {
         event.preventDefault();
-
 
         const errors = {...input.errors};
         let formIsValid = true;
 
-        // walidacja inputów
         for (const [key, value] of Object.entries(input)) {
             const errorMessage = validateInput(key, value);
             errors[key] = errorMessage;
@@ -179,12 +197,7 @@ export default function JobOfferFormContainer(props) {
                 formIsValid = false;
             }
         }
-
-        // sprawdzenie, czy formularz jest poprawnie wypełniony
         if (formIsValid) {
-            // dodaj tutaj kod, który wyśle formularz
-
-
             const userData = {
                 title: input.title,
                 description: input.description,
@@ -244,7 +257,7 @@ export default function JobOfferFormContainer(props) {
         const {name, value} = e.target;
         let error = '';
         if (name === 'technicalRequirements') {
-            error = value.length > 0 ? '' : 'At least one technical requirement must be specified.';
+            error = value.length > minTechnicalRequirementsValue ? '' : missingTechnicalRequirementMessage;
         } else {
             error = validateInput(name, value);
         }
@@ -308,11 +321,11 @@ export default function JobOfferFormContainer(props) {
                             onChange={onInputChange}
                         />
                         {input.errors.title &&
-                            <StyledText
+                            <Typography><StyledText
                                 tag="span"
                                 color="red"
                                 text={input.errors.title}
-                            />}
+                            /></Typography>}
                         <DialogContentText sx={{color: 'white'}}>Project description:</DialogContentText>
                         <StyledTextarea
                             placeholder="Enter description"
@@ -389,11 +402,11 @@ export default function JobOfferFormContainer(props) {
                                                 onChange={onInputChange}
                                             />
                                             {input.errors.salaryFrom &&
-                                                <StyledText
+                                                <Typography><StyledText
                                                     tag="span"
                                                     color="red"
                                                     text={input.errors.salaryFrom}
-                                                />}
+                                                /></Typography>}
                                         </StyledGridItem>
                                         <StyledGridItem>
                                             <Input
