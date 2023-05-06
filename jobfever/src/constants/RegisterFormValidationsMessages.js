@@ -8,6 +8,7 @@ export const passwordsDoNotMatchMessage = 'Passwords do not match.';
 export const incorrectNameMessage = 'Name should be at least 2 characters long';
 export const incorrectCompanyNameMessage = 'Company name should be at least 3 characters long'
 export const incorrectPhoneNumberMessage = 'Phone number should be 9 digits long';
+export const incorrectPasswordBlankMessage = 'Password field cannot be empty';
 
 
 
