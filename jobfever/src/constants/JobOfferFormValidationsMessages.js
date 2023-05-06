@@ -1,1 +1,31 @@
-// Tutaj bedą wiadomości z walidacją do formularza z ofertami
+export const incorrectTitleBlankMessage =  'Title field cannot be empty.';
+export const incorrectTitleLengthMessage = 'Title field must be no longer than 30 characters.';
+export const maxTitleLengthValue = 30;
+export const incorrectDescriptionLengthMessage = 'Description field cannot exceed 2000 characters.';
+export const incorrectDescriptionBlankMessage = 'Description field cannot be empty.';
+export const maximumValueLength = 2000;
+export const incorrectResponsibilitiesLengthMessage = 'Responsibilities field cannot exceed 2000 characters.';
+export const incorrectWhoWeAreLookingLengthMessage = 'Who we are looking for field cannot exceed 2000 characters.';
+export const missingTechnicalRequirementMessage = 'At least one technical requirement must be specified.';
+export const minTechnicalRequirementsValue = 0;
+export const incorrectBenefitsLengthMessage = 'Benefits field cannot be longer than 2000 characters.';
+export const incorrectLocationBlankMessage  = 'Location field cannot be empty.';
+export const incorrectSalaryFromBlankMessage = 'Salary from field cannot be empty.';
+export const incorrectSalaryToBlankMessage = 'Salary to field cannot be empty.';
+export const incorrectJobTypeBlankMessage = "Job type field cannot be empty.";
+export const incorrectCurrencyTypeBlankMessage = 'Currency type field cannot be empty.';
+export const incorrectWorkTypeBlankMessage = 'Work type field cannot be empty.';
+export const maxLocationValueLength = 20;
+export const incorrectLocationLengthMessage = 'Location field must be no longer than 20 characters.'
+export const incorrectSalaryFromNotANumberMessage = 'Salary from field must be a number.';
+export const incorrectSalaryFromLessThanZeroMessage = 'Salary from field must be greater than 0.';
+export const incorrectSalaryFromLengthMessage = 'Salary from field must be less than 100000.';
+export const maxSalaryValueLength = 99999;
+export const minSalaryValueLength = 0;
+export const incorrectSalaryToNotANumberMessage = 'Salary to field must be a number.';
+export const incorrectSalaryToLessThanZeroMessage = 'Salary to field must be greater than 0.';
+export const incorrectSalaryToLengthMessage = 'Salary to field must be less than 100000.';
+
+export const incorrectResponsibilitiesBlankMessage = 'Responsibilities field cannot be empty.';
+export const incorrectWhoWeAreLookingForBlankMessage = 'Who we are looking for field cannot be empty.';
+export const incorrectBenefitsBlankMessage = 'Benefits field cannot be empty.';
