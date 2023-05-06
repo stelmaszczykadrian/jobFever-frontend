@@ -116,7 +116,11 @@ export default function EmployerRegisterRightContainer() {
                 tag={"h2"}
                 text={"Welcome!"}
             />
-            <StyledRegisterEmployerPageHeading>Create employer account!</StyledRegisterEmployerPageHeading>
+            <StyledText
+                color="white"
+                tag={"h3"}
+                text={"Create employer account."}
+            />
             <Sheet style={{backgroundColor: 'transparent'}}>
                 <Container>
                     <EmployerRegisterRightContainerColumn>
