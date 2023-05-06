@@ -13,7 +13,7 @@ import {Form} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import StyledText from "../atoms/StyledText";
 import {
-    StyledUserInputValidation,
+    StyledPasswordInputValidation,
     StyledLabel,
     StyledRightContainer,
 } from "./CandidateRegisterRightContainer.styles";
@@ -123,7 +123,7 @@ export default function EmployerRegisterRightContainer() {
                     <EmployerRegisterRightContainerColumn>
                         <FormControl width="40">
                             <StyledLabel>Company name</StyledLabel>
-                            <StyledUserInputValidation>
+                            <StyledPasswordInputValidation>
                                 <Input
                                     type="text"
                                     name="companyName"
@@ -132,7 +132,7 @@ export default function EmployerRegisterRightContainer() {
                                     onChange={onInputChange}
                                     onBlur={validateInput}
                                 />
-                            </StyledUserInputValidation>
+                            </StyledPasswordInputValidation>
                             {formData.errors.companyName && <StyledText
                                 tag="span"
                                 color="red"
@@ -141,7 +141,7 @@ export default function EmployerRegisterRightContainer() {
                         </FormControl>
                         <FormControl width="40">
                             <StyledLabel>Name and surname</StyledLabel>
-                            <StyledUserInputValidation>
+                            <StyledPasswordInputValidation>
                                 <Input
                                     type="text"
                                     name="nameAndSurname"
@@ -150,7 +150,7 @@ export default function EmployerRegisterRightContainer() {
                                     onChange={onInputChange}
                                     onBlur={validateInput}
                                 />
-                            </StyledUserInputValidation>
+                            </StyledPasswordInputValidation>
                             {formData.errors.nameAndSurname &&
                                 <StyledText
                                     tag="span"
@@ -160,7 +160,7 @@ export default function EmployerRegisterRightContainer() {
                         </FormControl>
                         <FormControl width="40">
                             <StyledLabel>Phone number</StyledLabel>
-                            <StyledUserInputValidation>
+                            <StyledPasswordInputValidation>
                                 <Input
                                     type="number"
                                     name="phoneNumber"
@@ -169,7 +169,7 @@ export default function EmployerRegisterRightContainer() {
                                     onChange={onInputChange}
                                     onBlur={validateInput}
                                 />
-                            </StyledUserInputValidation>
+                            </StyledPasswordInputValidation>
                             {formData.errors.phoneNumber &&
                                 <StyledText
                                     tag="span"
@@ -181,7 +181,7 @@ export default function EmployerRegisterRightContainer() {
                     <EmployerRegisterRightContainerColumn>
                         <FormControl width="40">
                             <StyledLabel>E-mail</StyledLabel>
-                            <StyledUserInputValidation>
+                            <StyledPasswordInputValidation>
                                 <Input
                                     type="text"
                                     name="email"
@@ -190,7 +190,7 @@ export default function EmployerRegisterRightContainer() {
                                     onChange={onInputChange}
                                     onBlur={validateInput}
                                 />
-                            </StyledUserInputValidation>
+                            </StyledPasswordInputValidation>
                             {formData.errors.email &&
                                 <StyledText
                                     tag="span"
@@ -202,7 +202,7 @@ export default function EmployerRegisterRightContainer() {
                             <StyledLabel>
                                 Password
                             </StyledLabel>
-                            <StyledUserInputValidation>
+                            <StyledPasswordInputValidation>
                                 <Input
                                     type="password"
                                     name={'password'}
@@ -210,7 +210,7 @@ export default function EmployerRegisterRightContainer() {
                                     onChange={onInputChange}
                                     onBlur={validateInput}
                                 />
-                            </StyledUserInputValidation>
+                            </StyledPasswordInputValidation>
                             {formData.errors.password &&
                                 <StyledText
                                     tag="span"
@@ -222,7 +222,7 @@ export default function EmployerRegisterRightContainer() {
                             <StyledLabel>
                                 Confirm Password
                             </StyledLabel>
-                            <StyledUserInputValidation>
+                            <StyledPasswordInputValidation>
                                 <Input
                                     type="password"
                                     name={'confirmPassword'}
@@ -230,7 +230,7 @@ export default function EmployerRegisterRightContainer() {
                                     onChange={onInputChange}
                                     onBlur={validateInput}
                                 />
-                            </StyledUserInputValidation>
+                            </StyledPasswordInputValidation>
                             {formData.errors.confirmPassword &&
                                 <StyledText
                                     tag="span"
