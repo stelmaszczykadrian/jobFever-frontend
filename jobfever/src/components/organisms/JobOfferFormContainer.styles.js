@@ -49,7 +49,7 @@ export const StyledSelectJobType = styled("select")`
 `
 
 export const StyledCurrencyType = styled("select")`
-  font-size: 0.8rem;
+  font-size: 1rem;
   padding: 0.5rem;
   border-radius: 0.5rem;
  
@@ -68,6 +68,12 @@ export const StyledRedButtonModalButton = styled(Button)(() => ({
         color: 'white'
     },
 }));
+
+export const StyledInputLabel = styled.div`
+  color: rgba(171, 36, 36);
+  font-weight: bold;
+  margin: 15px 0;
+`;
 
 
 
