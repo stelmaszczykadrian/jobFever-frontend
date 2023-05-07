@@ -1,8 +1,7 @@
 import {ButtonBase} from "@mui/material";
 import {Grid} from "@mui/joy";
 import Typography from "@mui/joy/Typography";
-import {StyledPaper} from "./JobOfferGrid.styles";
-import SingleOfferField from "./SingleOfferField";
+import {Square, StyledPaper, Text, Wrapper} from "./JobOfferGrid.styles";
 import React, {useState} from "react";
 import {useEmployerById} from "../../api/EmployersApi";
 import axios from "axios";
@@ -31,16 +30,28 @@ export default function JobOfferGrid({job, onClick}) {
         return (
             <StyledPaper onClick={() => handleJobClick()}>
                 <Grid container spacing={2}>
-                    <Grid item xs={4} container>
+                    <Grid item xs={4} container >
                         <Grid item>
                             <ButtonBase sx={{width: 128, height: 128}}>
                                 <StyledJobImage alt="Employer logo" src={pictureUrl} />
                             </ButtonBase>
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={3} container>
                             <Grid container direction="column">
                                 <Grid item>
-                                    <Typography variant="h1" component="h1" style={{fontWeight: 'bold', color: "rgba(171, 36, 36)", fontSize: '25px'}}>
+                                    <Typography
+                                        variant="h1"
+                                        component="h1"
+                                        style={{
+                                            fontWeight: 'bold',
+                                            color: 'rgba(171, 36, 36)',
+                                            fontSize: '20px',
+                                            wordWrap: 'break-word',
+                                            overflow: 'hidden',
+                                            textOverflow: 'ellipsis',
+                                            maxWidth: '300px'
+                                        }}
+                                    >
                                         {job.title}
                                     </Typography>
                                 </Grid>
@@ -56,11 +67,16 @@ export default function JobOfferGrid({job, onClick}) {
                                 </Grid>
                             </Grid>
                         </Grid>
+
                     </Grid>
                     <Grid item xs={4} style={{ display: 'flex', alignItems: 'center' }}>
-                        <Typography variant="subtitle1" component="div" style={{ textAlign: 'center', fontWeight: 'bold', color: "black" }}>
-                            <SingleOfferField text={(job.technicalRequirements).join(", ")} />
-                        </Typography>
+                        <Wrapper style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', width: '100%' }}>
+                            {job.technicalRequirements.map(tech => (
+                                <Square key={tech}>
+                                    <Text>{tech}</Text>
+                                </Square>
+                            ))}
+                        </Wrapper>
                     </Grid>
                     <Grid item xs={3} container direction="column" justifyContent="center" alignItems="center">
                         <Grid item>
