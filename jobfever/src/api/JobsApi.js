@@ -98,3 +98,24 @@ export const createJob = (userData, onSuccess, onError) => {
         });
 };
 
+export const useJobsByCandidateId = (id) => {
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
+
+    const fetchData = async () => {
+        try {
+            const {data: response} = await axios.get("http://localhost:8080/api/jobs/applied-jobs", {
+                params: {id: id},
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+                }
+            });
+            return response.content;
+        } catch (error) {
+            console.error(error)
+        }
+        setLoading(false);
+    };
+    return fetchData;
+};
+
