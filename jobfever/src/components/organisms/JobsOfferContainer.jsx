@@ -99,10 +99,10 @@ export default function JobsOfferContainer() {
                     ) : (
                         <div>
                             {jobs.map((job, index) => (
-                                <div key={job.index}>
+                                <div key={`JobOffer_${index}`}>
                                     <JobOfferGrid
                                         job={job}
-                                        key={index}
+                                        key={`JobOffer_${index}`}
                                         onClick={() => handleJobClick(job.jobId)}
                                     />
                                 </div>
