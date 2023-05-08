@@ -18,8 +18,7 @@ import {StyledProfilePhoto} from "../atoms/ProfilePhoto.styles";
 import axios from "axios";
 
 
-
-export default function EmployerProfilePersonalInfo(props){
+export default function EmployerProfilePersonalInfo(props) {
     const {data, loading} = useEmployerById(props.id)
     const [isEdit, setIsEdit] = useState(false);
     const [companyName, setCompanyName] = useState("asd");
@@ -50,14 +49,15 @@ export default function EmployerProfilePersonalInfo(props){
         setIsEdit(true);
     };
     const handleSaveClick = async () => {
-        if (nameAndSurname.trim() === '' || localization.trim() === '' || phoneNumber.toString().trim() === '') {
-            return
+        if (nameAndSurname && nameAndSurname.trim() !== '' && localization && localization.trim() !== '' && phoneNumber.toString() && phoneNumber.toString().trim() !== '') {
+            setIsEdit(false);
+            await editEmployer(props.id, companyName, nameAndSurname, phoneNumber, localization, null);
+            if (newPicture) {
+                await uploadFile(newPicture)
+                await saveEmployersImgFilename(JSON.parse(Cookies.get("jwt")).employer_id, newPicture.name);
+            }
         }
-        setIsEdit(false);
-    await editEmployer(props.id, companyName, nameAndSurname, phoneNumber, localization, null);
-        uploadFile(newPicture)
-        saveEmployersImgFilename(JSON.parse(Cookies.get("jwt")).employer_id, newPicture.name)
-};
+    };
     React.useEffect(() => {
         if (!loading) {
             setCompanyName(data.companyName);
@@ -78,19 +78,19 @@ export default function EmployerProfilePersonalInfo(props){
     if (!loading) {
         getFileByFilename()
         const RenderEditIcons = () => {
-            if (props.id === JSON.parse(Cookies.get("jwt")).employer_id.toString()){
+            if (props.id === JSON.parse(Cookies.get("jwt")).employer_id.toString()) {
 
                 return (
                     isEdit ? (
-                            <IconButton onClick={handleSaveClick}>
-                                <StyledCheckIcon/>
-                            </IconButton>
-                        ) : (
+                        <IconButton onClick={handleSaveClick}>
+                            <StyledCheckIcon/>
+                        </IconButton>
+                    ) : (
 
-                            <IconButton onClick={handleEditClick}>
-                                <StyledEditIcon/>
-                            </IconButton>
-                        )
+                        <IconButton onClick={handleEditClick}>
+                            <StyledEditIcon/>
+                        </IconButton>
+                    )
                 )
             }
         }
@@ -106,11 +106,11 @@ export default function EmployerProfilePersonalInfo(props){
             }
         }
         const RenderProfilePicture = () => {
-            if (previewPicture === null){
-                return(
+            if (previewPicture === null) {
+                return (
                     <StyledProfilePhoto src={picture} alt="Profile"/>
                 )
-            }else{
+            } else {
                 return (
                     <StyledProfilePhoto src={previewPicture} alt="Profile"/>
                 )
@@ -126,9 +126,9 @@ export default function EmployerProfilePersonalInfo(props){
                     <StyledLeftBox>
                         {/* Photo */}
                         <Box mb={1}>
-                            <RenderProfilePicture />
+                            <RenderProfilePicture/>
                         </Box>
-                        <RenderChangePhotoButtons />
+                        <RenderChangePhotoButtons/>
                         {/* Name */}
                         <h3>Owner</h3>
                         <Box mb={1}>
@@ -184,13 +184,13 @@ export default function EmployerProfilePersonalInfo(props){
                         </Box>
                         <Box>
                             {/* Edit button */}
-                            <RenderEditIcons />
+                            <RenderEditIcons/>
                         </Box>
                     </StyledRightBox>
                 </StyledBottomBoxPersonalInfo>
             </StyledProfilePaper>
         );
     }
-    return  <span>Loading</span>
+    return <span>Loading</span>
 
 }
