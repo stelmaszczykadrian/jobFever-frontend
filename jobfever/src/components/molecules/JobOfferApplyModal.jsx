@@ -2,29 +2,22 @@ import * as React from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import axios from "axios";
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Input from "@mui/joy/Input";
-
-import {StyledGridContainer, StyledGridItem} from "../organisms/JobOfferFormContainer.styles";
+import {StyledGridItem} from "../organisms/JobOfferFormContainer.styles";
 import {RedButtonStyled} from "../atoms/RedButton.styles";
-import CalendarForm from "../organisms/CalendarForm";
-import IconButton from "@mui/material/IconButton";
-import {editCandidateEducation, addCandidateEducation} from "../../api/CandidateApi";
-import RedButton from "../atoms/RedButton";
 import {Checkbox} from "@mui/joy";
 import {FormControlLabel} from "@mui/material";
 import StyledText from "../atoms/StyledText";
+import Cookies from "js-cookie";
 
 export default function JobOfferApplyModal() {
 
     const title = "Are You sure that You wanna apply for this offer?";
-
+    let jwt = Cookies.get("jwt")
     const [open, setOpen] = React.useState(false);
     const [fullWidth, setFullWidth] = React.useState(true);
     const [maxWidth, setMaxWidth] = React.useState('sm');
-
     const [state, setState] = React.useState({
         r1: false,
         r2: false,
@@ -61,12 +54,20 @@ export default function JobOfferApplyModal() {
     const handleSave = async () => {
         setOpen(false);
         };
-
+    const RenderApplyButton = () => {
+        if (jwt){
+            if (JSON.parse(jwt).role === "CANDIDATE"){
+                return (
+                    <RedButtonStyled onClick={handleClickOpen}>
+                        Apply
+                    </RedButtonStyled>
+                )
+            }
+        }
+    }
     return (
         <div>
-            <RedButtonStyled onClick={handleClickOpen}>
-                Apply
-            </RedButtonStyled>
+            <RenderApplyButton />
             <Dialog
                 fullWidth={fullWidth}
                 maxWidth={maxWidth}
