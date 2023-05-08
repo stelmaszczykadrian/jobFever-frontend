@@ -2,6 +2,7 @@ import {Search, SearchIconWrapper, StyledInputBase} from "./SearchBar.styles";
 import SearchIcon from "@mui/icons-material/Search";
 import React, {useState} from "react";
 import Typography from "@mui/joy/Typography";
+import Container from "@mui/material/Container";
 
 export default function SearchBar({ onSearch }) {
     const [searchTerm, setSearchTerm] = useState('');
@@ -17,7 +18,7 @@ export default function SearchBar({ onSearch }) {
 
 
     return (
-        <Typography>
+        <div>
             <Search>
                 <form onSubmit={handleSubmit}>
                     <SearchIconWrapper>
@@ -31,6 +32,6 @@ export default function SearchBar({ onSearch }) {
                     />
                 </form>
             </Search>
-        </Typography>
+        </div>
     );
 }
