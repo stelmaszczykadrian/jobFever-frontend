@@ -49,43 +49,45 @@ export default function CandidateProfilePersonalInformation(props) {
     const handleEditClick = () => {
         setIsEdit(true);
     };
-    const handleSaveClick = async () => {
-        if (name.trim() === '' || city.trim() === '') {
-            return
-        }
-        setIsEdit(false);
-        const updatedCandidateData = {
-            name: name,
-            city: city,
-            linkedin: linkedin,
-            github: github
-        };
-        await editCandidate(props.id, updatedCandidateData);
-        uploadFile(newPicture)
-        saveCandidatesImgFilename(JSON.parse(Cookies.get("jwt")).candidate_id, newPicture.name)
-    };
 
+    const handleSaveClick = async () => {
+        if (name && name.trim() !== '' && city && city.trim() !== '') {
+            setIsEdit(false);
+            const updatedCandidateData = {
+                name: name,
+                city: city,
+                linkedin: linkedin,
+                github: github
+            };
+            await editCandidate(props.id, updatedCandidateData);
+            if (newPicture) {
+                await uploadFile(newPicture);
+                await saveCandidatesImgFilename(
+                    JSON.parse(Cookies.get('jwt')).candidate_id,
+                    newPicture.name
+                );
+            }
+        }
+    };
     React.useEffect(() => {
         if (data) {
             setName(data.name);
             setCity(data.city);
             setLinkedIn(data.linkedin);
             setGitHub(data.github);
-            setFilename(data.imgFileName)
+            setFilename(data.imgFileName);
         }
     }, [data]);
 
     const savePreviewPicture = (e) => {
-        setPreviewPicture(URL.createObjectURL(e.target.files[0]))
-        setNewPicture(
-            e.target.files[0]
-        )
-    }
+        setPreviewPicture(URL.createObjectURL(e.target.files[0]));
+        setNewPicture(e.target.files[0]);
+    };
 
     if (!loading) {
-        getFileByFilename()
+        getFileByFilename();
         const RenderEditIcons = () => {
-            if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()){
+            if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
                 return (
                     isEdit ? (
                         <IconButton onClick={handleSaveClick}>
@@ -98,7 +100,7 @@ export default function CandidateProfilePersonalInformation(props) {
                     )
                 )
             }
-        }
+        };
         const RenderChangePhotoButtons = () => {
             if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
                 return (
@@ -109,13 +111,13 @@ export default function CandidateProfilePersonalInformation(props) {
                     ) : undefined
                 )
             }
-        }
+        };
         const RenderProfilePicture = () => {
-            if (previewPicture === null){
-                return(
+            if (previewPicture === null) {
+                return (
                     <StyledProfilePhoto src={picture} alt="Profile"/>
                 )
-            }else{
+            } else {
                 return (
                     <StyledProfilePhoto src={previewPicture} alt="Profile"/>
                 )
@@ -131,9 +133,9 @@ export default function CandidateProfilePersonalInformation(props) {
                     <StyledLeftBox>
                         {/* Photo */}
                         <Box mb={1}>
-                            <RenderProfilePicture />
+                            <RenderProfilePicture/>
                         </Box>
-                        <RenderChangePhotoButtons />
+                        <RenderChangePhotoButtons/>
                         {/* Name */}
                         <h3>Name</h3>
                         <Box mb={1}>
@@ -185,7 +187,7 @@ export default function CandidateProfilePersonalInformation(props) {
                         </Box>
                         <Box>
                             {/* Edit button */}
-                            <RenderEditIcons />
+                            <RenderEditIcons/>
                         </Box>
                     </StyledRightBox>
                 </StyledBottomBoxPersonalInfo>
