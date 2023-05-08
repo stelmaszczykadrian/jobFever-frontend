@@ -10,18 +10,20 @@ import {Checkbox} from "@mui/joy";
 import {FormControlLabel} from "@mui/material";
 import StyledText from "../atoms/StyledText";
 import Cookies from "js-cookie";
+import {applyForJob} from "../../api/JobsApi";
+import {useState} from "react";
 
-export default function JobOfferApplyModal() {
-
+export default function JobOfferApplyModal(props) {
     const title = "Are You sure that You wanna apply for this offer?";
     let jwt = Cookies.get("jwt")
-    const [open, setOpen] = React.useState(false);
-    const [fullWidth, setFullWidth] = React.useState(true);
-    const [maxWidth, setMaxWidth] = React.useState('sm');
-    const [state, setState] = React.useState({
+    const [open, setOpen] = useState(false);
+    const [fullWidth, setFullWidth] = useState(true);
+    const [maxWidth, setMaxWidth] = useState('sm');
+    const [state, setState] = useState({
         r1: false,
         r2: false,
     });
+    const [appliedText, setAppliedText] = useState("");
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -50,10 +52,17 @@ export default function JobOfferApplyModal() {
     const handleClose = () => {
         setOpen(false);
     };
-
+    function timeout(delay) {
+        return new Promise( res => setTimeout(res, delay) );
+    }
     const handleSave = async () => {
+        const message = await applyForJob(props.jobId, JSON.parse(jwt).candidate_id)
+        console.log(message)
+        setAppliedText(message)
+        await timeout(2000);
         setOpen(false);
-        };
+        setAppliedText("")
+    };
     const RenderApplyButton = () => {
         if (jwt){
             if (JSON.parse(jwt).role === "CANDIDATE"){
@@ -102,6 +111,7 @@ export default function JobOfferApplyModal() {
                             text={state.r1.errors}
                         />}
                     </StyledGridItem>
+                    <StyledText tag={"h4"} color={"green"} text={appliedText} />
                 </DialogContent>
                 <DialogActions>
                     <RedButtonStyled onClick={handleClose}>
@@ -111,6 +121,7 @@ export default function JobOfferApplyModal() {
                         Apply
                     </RedButtonStyled>
                 </DialogActions>
+
             </Dialog>
         </div>
     );
