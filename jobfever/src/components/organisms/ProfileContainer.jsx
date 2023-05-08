@@ -6,6 +6,7 @@ import {useParams} from "react-router-dom";
 import EmployerProfilePersonalInfo from "../molecules/EmployerProfilePersonalInfo";
 import EmployerJobs from "../molecules/EmployerJobs";
 import EmployerAboutUs from "../molecules/EmployerAboutUs";
+import CandidateProfileAppliedJobsContainer from "./CandidateJobsContainer";
 
 
 export default function ProfileContainer (props) {
@@ -16,6 +17,7 @@ export default function ProfileContainer (props) {
                 <CandidateProfilePersonalInformation id={id}/>
                 <CandidateProfileExperience id={id}/>
                 <CandidateProfileEducation id={id}/>
+                <CandidateProfileAppliedJobsContainer id={id}/>
             </StyledProfileContainer>
         );
     }else{
