@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -54,6 +54,19 @@ export const updateJob = (userData, onSuccess, onError, id) => {
         });
 
 };
+export const applyForJob = async (jobId, candidateId) => {
+    const url = "http://localhost:8080/api/jobs/apply";
+    let res;
+    await axios.put(url, {}, {
+        params: {id: jobId, candidateId: candidateId},
+        headers: {
+            Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+        }
+    }).then((response) => {
+        res = response.data
+    })
+    return res
+}
 
 
 
