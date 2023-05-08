@@ -2,8 +2,11 @@ import styled from "styled-components";
 import img from "../../images/404.png";
 
 export const StyledNoPageMainContainer = styled('div')`
-  width: 55%;
-  margin: 0 auto;
+  margin-top: 2% !important;
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 0;
   text-align: center;
 `;
 
