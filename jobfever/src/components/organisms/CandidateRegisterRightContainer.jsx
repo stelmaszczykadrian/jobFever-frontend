@@ -21,10 +21,13 @@ import {
 } from "../../constants/RegisterFormValidationsMessages";
 import {registerCandidate} from "../../api/CandidateApi";
 import {isValidEmail, validateFormData} from "../../utils/Validators";
+import EmailInputField from "../molecules/EmailInputField";
+import PasswordInputField from "../molecules/PasswordInputField";
 
 export default function CandidateRegisterRightContainer() {
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState(null);
+    // const [showPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -99,69 +102,31 @@ export default function CandidateRegisterRightContainer() {
                     text={"Create candidate account."}>
                 </StyledText>;
                 <form onSubmit={handleSubmit}>
-                    <FormControl width="40">
-                        <StyledLabel>
-                            E-mail
-                        </StyledLabel>
-                        <StyledPasswordInputValidation>
-                            <Input
-                                type="text"
-                                name="email"
-                                placeholder='jobFever@email.com'
-                                value={formData.email}
-                                onChange={onInputChange}
-                                onBlur={validateInput}
-                            />
-                        </StyledPasswordInputValidation>
-                        {formData.errors.email &&
-                            <StyledText
-                                tag="span"
-                                color="red"
-                                text={formData.errors.email}
-                            />}
-                    </FormControl>
-                    <FormControl>
-                        <StyledLabel>
-                            Password
-                        </StyledLabel>
-                        <StyledPasswordInputValidation>
-                            <Input
-                                type="password"
-                                name={'password'}
-                                value={formData.password}
-                                placeholder='Enter Password'
-                                onChange={onInputChange}
-                                onBlur={validateInput}
-                            />
-                        </StyledPasswordInputValidation>
-                        {formData.errors.password &&
-                            <StyledText
-                                tag="span"
-                                color="red"
-                                text={formData.errors.password}
-                            />}
-                    </FormControl>
-                    <FormControl>
-                        <StyledLabel>
-                            Confirm Password
-                        </StyledLabel>
-                        <StyledPasswordInputValidation>
-                            <Input
-                                type="password"
-                                name={'confirmPassword'}
-                                value={formData.confirmPassword}
-                                placeholder='Confirm password'
-                                onChange={onInputChange}
-                                onBlur={validateInput}
-                            />
-                        </StyledPasswordInputValidation>
-                        {formData.errors.confirmPassword &&
-                            <StyledText
-                                tag="span"
-                                color="red"
-                                text={formData.errors.confirmPassword}
-                            />}
-                    </FormControl>;
+                    <EmailInputField
+                        formData={formData}
+                        onInputChange={onInputChange}
+                        validateInput={validateInput}
+                    />
+                    <PasswordInputField
+                        formData={formData}
+                        onInputChange={onInputChange}
+                        validateInput={validateInput}
+                        label="Password"
+                        inputName="password"
+                        inputPlaceholder="Enter Password"
+                        inputType="password"
+                        inputError={formData.errors.password}
+                    />
+                    <PasswordInputField
+                        formData={formData}
+                        onInputChange={onInputChange}
+                        validateInput={validateInput}
+                        label="Confirm Password"
+                        inputName="confirmPassword"
+                        inputPlaceholder="Confirm Password"
+                        inputType="password"
+                        inputError={formData.errors.confirmPassword}
+                    />
                     {errorMessage &&
                         <CandidateRegisterTextCandidateExist>{errorMessage}</CandidateRegisterTextCandidateExist>}
                     <FormControl sx={{justifyContent: 'center'}}>
