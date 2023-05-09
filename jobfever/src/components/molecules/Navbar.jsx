@@ -38,7 +38,6 @@ export default function ResponsiveAppBar() {
         setAnchorElNav(event.currentTarget);
     };
     function setProfileLink(){
-        console.log("jestem tutaj")
         if (jwt) {
             if (!JSON.parse(jwt).employer_id) {
                 setSettings([

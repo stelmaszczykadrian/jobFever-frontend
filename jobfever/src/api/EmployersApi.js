@@ -14,10 +14,8 @@ export const useEmployerById = (id) => {
             const { data: response } = await axios.get(url, {
                 params:{id:id},
             });
-            console.log(response)
             setEmployer(response);
         } catch (error) {
-            console.error(error)
         }
         setLoading(false);
     };
