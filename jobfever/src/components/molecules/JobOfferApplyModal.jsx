@@ -17,11 +17,11 @@ export default function JobOfferApplyModal(props) {
     const title = "Are You sure that You wanna apply for this offer?";
     let jwt = Cookies.get("jwt")
     const [open, setOpen] = useState(false);
-    const [fullWidth, setFullWidth] = useState(true);
-    const [maxWidth, setMaxWidth] = useState('sm');
+    const [fullWidth] = useState(true);
+    const [maxWidth] = useState('sm');
     const [appliedText, setAppliedText] = useState("");
     const [isFirstBoxChecked, setIsFirstBoxChecked] = useState(false)
-    const [isSecoundBoxChecked, setIsSecoundBoxChecked] = useState(false)
+    const [isSecondBoxChecked, setIsSecondBoxChecked] = useState(false)
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -35,7 +35,6 @@ export default function JobOfferApplyModal(props) {
     }
     const handleSave = async () => {
         const message = await applyForJob(props.jobId, JSON.parse(jwt).candidate_id)
-        console.log(message)
         setAppliedText(message)
         await timeout(2000);
         setOpen(false);
@@ -74,7 +73,6 @@ export default function JobOfferApplyModal(props) {
                             onChange={(e) => {
                                 setIsFirstBoxChecked(e.target.checked)
                         }}
-                            // onBlur={validateInput}
                             name = "r1"/>}
                          label="I hereby give consent for my personal data to be processed for the purpose of conducting recruitment for the position for which I am applying."/>
                     </StyledGridItem>
@@ -82,9 +80,8 @@ export default function JobOfferApplyModal(props) {
                     <StyledGridItem>
                         <FormControlLabel control={<Checkbox color="danger"
                              onChange={(e) => {
-                                 setIsSecoundBoxChecked(e.target.checked)
+                                 setIsSecondBoxChecked(e.target.checked)
                              }}
-                             // onBlur={validateInput}
                              name = "r2"/>}
                          label="I also consent to processing of my personal data for the purposes of any future recruitment processes."/>
                     </StyledGridItem>
@@ -94,7 +91,7 @@ export default function JobOfferApplyModal(props) {
                     <RedButtonStyled onClick={handleClose}>
                         Discard
                     </RedButtonStyled>
-                    {isFirstBoxChecked && isSecoundBoxChecked ? (
+                    {isFirstBoxChecked && isSecondBoxChecked ? (
                         <RedButtonStyled disabled={false} onClick={handleSave}>
                             Apply
                         </RedButtonStyled>) : (
@@ -104,7 +101,6 @@ export default function JobOfferApplyModal(props) {
                     )
                     }
                 </DialogActions>
-
             </Dialog>
         </div>
     );

@@ -2,15 +2,12 @@ import RightNavbar from "../molecules/RightNavbar";
 import React, {useState} from "react";
 import Sheet from "@mui/joy/Sheet";
 import FormControl from "@mui/joy/FormControl";
-import Input from "@mui/joy/Input";
 import RedButton from "../atoms/RedButton";
 import SocialMediaButtons from "../molecules/SocialMediaButtons";
 import {useNavigate} from "react-router-dom";
 import StyledText from "../atoms/StyledText";
 import {
     CandidateRegisterTextCandidateExist,
-    StyledPasswordInputValidation,
-    StyledLabel,
     StyledRightContainer
 } from "./CandidateRegisterRightContainer.styles";
 import {
@@ -27,7 +24,6 @@ import PasswordInputField from "../molecules/PasswordInputField";
 export default function CandidateRegisterRightContainer() {
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState(null);
-    // const [showPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
         password: '',

@@ -35,7 +35,6 @@ export const StyledInputBase = styled(InputBase)(({theme}) => ({
     color: 'black',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 12, 1, 0),
-        // vertical padding + font size from searchIcon
         paddingLeft: theme.spacing(6),
 
     },

@@ -25,7 +25,7 @@ import {RedButtonStyled} from "../atoms/RedButton.styles";
 
 export default function CandidateProfileExperience(props) {
 
-    const {data, loading} = useCandidateById(props.id);
+    const {data} = useCandidateById(props.id);
     const [experiences, setExperiences] = useState([]);
 
     React.useEffect(() => {

@@ -26,8 +26,8 @@ export default function CandidateEducationModal(props) {
     const candidate = props.candidate;
 
     const [open, setOpen] = React.useState(false);
-    const [fullWidth, setFullWidth] = React.useState(true);
-    const [maxWidth, setMaxWidth] = React.useState('sm');
+    const [fullWidth] = React.useState(true);
+    const [maxWidth] = React.useState('sm');
 
     const [school, setSchool] = useState(education.school);
     const [degree, setDegree] = useState(education.degree);
