@@ -7,6 +7,9 @@ import {useNavigate} from "react-router-dom"
 import {JobCard} from "./JobsCard";
 import CandidateModal from "./CandidateModal";
 import Typography from "@mui/joy/Typography";
+import IconButton from "@mui/material/IconButton";
+import {StyledEditIcon} from "../atoms/StyledEditIcon";
+import {StyledDeleteIcon} from "../atoms/StyledDeleteIcon";
 
 
 export default function EmployerJobs(props) {
@@ -68,11 +71,12 @@ export default function EmployerJobs(props) {
                     {data.map((job, index) => (
                         <div key={job.jobId}>
                             <JobCard job={job} handleJobClick={handleJobClick} />
-                            <RedButton
-                                text="Edit"
-                                onClick={() => navigate(`/job/${job.jobId}/edit`)}
-                            />
-                            <RedButton text="Delete" onClick={() => deleteOffer(job.jobId)} />
+                            <IconButton onClick={() => navigate(`/job/${job.jobId}/edit`)}>
+                                <StyledEditIcon/>
+                            </IconButton>
+                            <IconButton onClick={() => deleteOffer(job.jobId)}>
+                                <StyledDeleteIcon />
+                            </IconButton>
                             <RedButton
                                 text="Candidates"
                                 onClick={() => handleCandidatesClick(job.jobId, job.title)}
