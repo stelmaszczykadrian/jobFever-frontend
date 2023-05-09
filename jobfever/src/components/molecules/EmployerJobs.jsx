@@ -10,6 +10,7 @@ import Typography from "@mui/joy/Typography";
 import IconButton from "@mui/material/IconButton";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledDeleteIcon} from "../atoms/StyledDeleteIcon";
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
 
 export default function EmployerJobs(props) {
@@ -77,10 +78,9 @@ export default function EmployerJobs(props) {
                             <IconButton onClick={() => deleteOffer(job.jobId)}>
                                 <StyledDeleteIcon />
                             </IconButton>
-                            <RedButton
-                                text="Candidates"
-                                onClick={() => handleCandidatesClick(job.jobId, job.title)}
-                            />
+                            <IconButton onClick={() => handleCandidatesClick(job.jobId, job.title)}>
+                                <PeopleAltIcon style={{fill: "rgb(183, 4, 11)", fontSize: '1.4em'}}/>
+                            </IconButton>
                         </div>
                     ))}
                     <CandidateModal
