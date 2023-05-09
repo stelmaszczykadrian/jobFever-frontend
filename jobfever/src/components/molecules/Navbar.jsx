@@ -16,9 +16,10 @@ import MenuItem from '@mui/material/MenuItem';
 import {Link, useNavigate} from "react-router-dom";
 import {StyledLink} from "../atoms/Link.styles";
 import Cookies from "js-cookie";
-
 import {StyledPostJobButton} from "./Navbar.styles";
 import {useState} from "react";
+import {useCandidateById} from "../../api/CandidateApi";
+import axios from "axios";
 
 
 const pages = [
@@ -29,11 +30,15 @@ const pages = [
 
 
 export default function ResponsiveAppBar() {
+    let jwt = Cookies.get('jwt');
+    const {data, loading} = useCandidateById(JSON.parse(jwt).candidate_id);
+    const [pictureUrl, setPictureUrl] = useState("");
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [settings, setSettings] = useState([]);
+    const defaultFilename = "defaultlogo.png"
     const navigate = useNavigate();
-    let jwt = Cookies.get('jwt');
+
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -72,6 +77,16 @@ export default function ResponsiveAppBar() {
             navigate('/candidate/' + JSON.parse(jwt).candidate_id);
         }else{
             navigate('/employer/' + JSON.parse(jwt).employer_id);
+        }
+    };
+    const getFileByFilename = async (name) => {
+        try {
+            const {data: response} = await axios.get('http://localhost:8080/api/file/url', {
+                params: {filename: name},
+            });
+            setPictureUrl(response);
+        } catch (error) {
+            console.error(error)
         }
     };
     function AddJobButton() {
@@ -187,7 +202,7 @@ export default function ResponsiveAppBar() {
                         <Box sx={{flexGrow: 0}}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{p: 2}}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
+                                    <Avatar src={pictureUrl}/>
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -322,6 +337,15 @@ export default function ResponsiveAppBar() {
     if (!jwt) {
         return  LoggedOutNavbar()
     }else{
-        return LoggedInNavbar()
+        if (!loading) {
+            if (!data){
+                console.log("jestem")
+                getFileByFilename(defaultFilename)
+                return LoggedInNavbar()
+            }
+            const name = data.imgFileName
+            getFileByFilename(name)
+            return LoggedInNavbar()
+        }
     }
 }
