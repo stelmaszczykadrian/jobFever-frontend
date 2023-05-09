@@ -203,7 +203,7 @@ export default function CandidateProfilePersonalInformation(props) {
                         <Box mb={1}>
                             <EditableInput
                                 isEdit={isEdit}
-                                value={linkedin}
+                                value={linkedin || ""}
                                 onChange={(e) => setLinkedIn(e.target.value)}
                                 placeholder="https://www.linkedin.com/"
                                 isRequired={false}
@@ -212,7 +212,7 @@ export default function CandidateProfilePersonalInformation(props) {
                         <Box mb={6}>
                             <EditableInput
                                 isEdit={isEdit}
-                                value={github}
+                                value={github || ""}
                                 onChange={(e) => setGitHub(e.target.value)}
                                 placeholder="https://github.com/"
                                 isRequired={false}
