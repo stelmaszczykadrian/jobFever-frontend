@@ -32,6 +32,8 @@ export const getJobOfferById = async (id) => await axios.get(`http://localhost:8
 
 export const deleteJobOfferById = async (id) => await axios.delete(`http://localhost:8080/api/jobs/${id}`);
 
+export const getJobOfferCandidatesByJobId = async (id) => await axios.get(`http://localhost:8080/api/jobs/${id}/candidates`);
+
 export const updateJob = (userData, onSuccess, onError, id) => {
     axios.put(`http://localhost:8080/api/jobs/${id}`, userData)
         .then((r) => {
