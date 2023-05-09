@@ -2,7 +2,6 @@ import * as React from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import {useState} from "react";
 import {StyledGridItem, StyledTextarea} from "../organisms/JobOfferFormContainer.styles";
@@ -10,14 +9,11 @@ import {RedButtonStyled} from "../atoms/RedButton.styles";
 import IconButton from "@mui/material/IconButton";
 import {editEmployer} from "../../api/EmployersApi";
 
-export default function EmployerAboutusModal(props) {
+export default function EmployerAboutUsModal(props) {
     const [open, setOpen] = React.useState(false);
-    const [fullWidth, setFullWidth] = React.useState(true);
-    const [maxWidth, setMaxWidth] = React.useState('sm');
     const [input, setInput] = useState({
         aboutMe: '',
     });
-    const[data, setData] = React.useState('sm');
 
     const onInputChange = e => {
         const {name, value} = e.target;
@@ -48,21 +44,20 @@ export default function EmployerAboutusModal(props) {
                 {props.tag}
             </IconButton>
             <Dialog
-                fullWidth={fullWidth}
-                maxWidth={maxWidth}
+                fullWidth
+                maxWidth="sm"
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
             >
-                <DialogTitle id="responsive-dialog-title">
-                    {props.text}
+                <DialogTitle sx={{textAlign: "center", fontWeight: 'bold'}} id="responsive-dialog-title">
+                    About Us
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText>About me</DialogContentText>
                     <StyledGridItem>
                         <StyledGridItem>
                             <StyledTextarea
-                                placeholder="Ex. Hobby, Activities, Soft skills"
+                                placeholder="Write some information about your company"
                                 name="aboutMe"
                                 value={input.aboutMe}
                                 onChange={onInputChange}

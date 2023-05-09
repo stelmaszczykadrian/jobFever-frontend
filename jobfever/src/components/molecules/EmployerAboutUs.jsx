@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {StyledBottomBox, StyledIconBox, StyledProfilePaper, StyledTopBox} from "./CandidateProfile.styles";
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
 import {Box} from "@mui/material";
-import EmployerAboutusModal from "./EmployerAboutusModal";
+import EmployerAboutUsModal from "./EmployerAboutUsModal";
 import {StyledAddIcon} from "../atoms/StyledAddIcon";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {useEmployerById} from "../../api/EmployersApi";
@@ -31,7 +31,7 @@ export default function EmployerAboutUs(props) {
                     <ProfileContainerTitle text={'About Us'}/>
                     <StyledIconBox>
                         {/* Add button */}
-                        <EmployerAboutusModal id={props.id} text={'About Us..'} tag={<StyledAddIcon/>}/>
+                        <EmployerAboutUsModal id={props.id} text={'About Us..'} tag={<StyledAddIcon/>}/>
                     </StyledIconBox>
                 </StyledTopBox>
                 <StyledBottomBox>
@@ -39,7 +39,7 @@ export default function EmployerAboutUs(props) {
                     <Box>
                         <StyledIconBox>
                             {/* Edit button */}
-                            <EmployerAboutusModal id={props.id} text={'About Us..'} tag={<StyledEditIcon/>}/>
+                            <EmployerAboutUsModal id={props.id} text={'About Us..'} tag={<StyledEditIcon/>}/>
                         </StyledIconBox>
                     </Box>
                 </StyledBottomBox>
