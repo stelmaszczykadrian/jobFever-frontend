@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import img from "../../images/addjobbackround.png"
+import img from "../../images/backgrounds/addjobbackround.png"
 
 export const StyledSingleOfferMainComponent = styled.div`
   

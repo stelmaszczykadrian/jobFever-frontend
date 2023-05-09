@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import img from "../../images/background_1.jpg"
+import img from "../../images/backgrounds/background_1.jpg"
 
 export const StyledContactPageContainer = styled("div")`
   width: 100%;
