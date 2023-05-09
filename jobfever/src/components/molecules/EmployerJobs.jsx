@@ -6,6 +6,7 @@ import RedButton from "../atoms/RedButton";
 import {useNavigate} from "react-router-dom"
 import {JobCard} from "./JobsCard";
 import CandidateModal from "./CandidateModal";
+import Typography from "@mui/joy/Typography";
 
 
 export default function EmployerJobs(props) {
@@ -59,31 +60,37 @@ export default function EmployerJobs(props) {
     const handleModalClose = () => {
         setShowModal(false);
     };
-
     return (
-        <>
-            {data.length > 0 && (
-                <StyledProfilePaper>
-                    <ProfileContainerTitle text={"Our Jobs"}/>
+        <StyledProfilePaper>
+            <ProfileContainerTitle text={"Our Jobs"} />
+            {data.length > 0 ? (
+                <>
                     {data.map((job, index) => (
                         <div key={job.jobId}>
-                            <JobCard job={job} handleJobClick={handleJobClick}/>
+                            <JobCard job={job} handleJobClick={handleJobClick} />
                             <RedButton
                                 text="Edit"
                                 onClick={() => navigate(`/job/${job.jobId}/edit`)}
                             />
-                            <RedButton text="Delete" onClick={() => deleteOffer(job.jobId)}/>
-                            <RedButton text="Candidates" onClick={() => handleCandidatesClick(job.jobId, job.title)}/>
+                            <RedButton text="Delete" onClick={() => deleteOffer(job.jobId)} />
+                            <RedButton
+                                text="Candidates"
+                                onClick={() => handleCandidatesClick(job.jobId, job.title)}
+                            />
                         </div>
                     ))}
-                </StyledProfilePaper>
+                    <CandidateModal
+                        jobTitle={jobTitle}
+                        showModal={showModal}
+                        handleModalClose={handleModalClose}
+                        candidateData={candidateData}
+                    />
+                </>
+            ) : (
+                <Typography sx={{ my: 2, fontWeight: 'bold', marginTop: '20px', fontSize: '1.2em', textAlign: 'center', color: 'gray' }}>
+                    There are no jobs already.
+                </Typography>
             )}
-            <CandidateModal
-                jobTitle={jobTitle}
-                showModal={showModal}
-                handleModalClose={handleModalClose}
-                candidateData={candidateData}
-            />
-        </>
+        </StyledProfilePaper>
     );
 }
