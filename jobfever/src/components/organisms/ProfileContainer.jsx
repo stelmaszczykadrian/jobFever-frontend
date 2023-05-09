@@ -21,7 +21,6 @@ export default function ProfileContainer (props) {
             </StyledProfileContainer>
         );
     }else{
-        console.log(id)
         return(
         <StyledProfileContainer>
             <EmployerProfilePersonalInfo id={id}/>
