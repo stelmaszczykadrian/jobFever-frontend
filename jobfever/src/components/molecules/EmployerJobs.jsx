@@ -5,13 +5,7 @@ import {deleteJobOfferById, getJobOfferCandidatesByJobId, useJobsByName} from ".
 import RedButton from "../atoms/RedButton";
 import {useNavigate} from "react-router-dom"
 import {JobCard} from "./JobsCard";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogActions from "@mui/material/DialogActions";
-import Dialog from "@mui/material/Dialog";
-import Button from "@mui/joy/Button";
-import {JobTitleOnJobsCard, StyledPaperJobsCard} from "./JobsCard.styles";
+import CandidateModal from "./CandidateModal";
 
 
 export default function EmployerJobs(props) {
@@ -23,16 +17,13 @@ export default function EmployerJobs(props) {
 
     const [candidateData, setCandidateData] = useState([]);
     const candidateFetchData = async (jobId) => {
-        console.log("jobId:", jobId);
         const response = await getJobOfferCandidatesByJobId(jobId);
         const data = response.data;
-        console.log(data)
         setCandidateData(data);
     };
 
     const handleCandidatesClick = (jobId, jobTitle) => {
         handleModalOpen(jobId);
-        console.log(jobTitle)
         setJobTitle(jobTitle);
     };
 
@@ -87,31 +78,12 @@ export default function EmployerJobs(props) {
                     ))}
                 </StyledProfilePaper>
             )}
-
-            <Dialog open={showModal} onClose={handleModalClose}>
-                <DialogTitle sx={{textAlign: "center"}} id="responsive-dialog-title">
-                    Applicants for {jobTitle}
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText
-                        component="legend"
-                        sx={{textAlign: "center"}}
-                    >
-                        {candidateData.map((candidate) =>(
-                            <StyledPaperJobsCard>
-                                <JobTitleOnJobsCard variant="h1" component="h1">
-                                    {candidate.name}
-                                </JobTitleOnJobsCard>
-                            </StyledPaperJobsCard>
-                        ))}
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleModalClose} color="secondary">
-                        Discard
-                    </Button>
-                </DialogActions>
-            </Dialog>
+            <CandidateModal
+                jobTitle={jobTitle}
+                showModal={showModal}
+                handleModalClose={handleModalClose}
+                candidateData={candidateData}
+            />
         </>
     );
 }
