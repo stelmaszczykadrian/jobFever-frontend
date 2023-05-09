@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Box} from '@mui/material';
 import {
-    StyledTopBox, StyledInput,
+    StyledTopBox,
     StyledLeftBox,
     StyledProfilePaper,
     StyledRightBox, StyledBottomBoxPersonalInfo
@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
 import {StyledPersonIcon} from "../atoms/StyledPersonIcon";
-import {editCandidate, saveCandidatesImgFilename, useCandidateById} from "../../api/CandidateApi";
+import {editCandidate, saveCandidatesCvFile, saveCandidatesImgFilename, useCandidateById} from "../../api/CandidateApi";
 import EditableInput from "../atoms/EditableInput";
 import Cookies from "js-cookie";
 import {uploadFile} from "../../api/FilesApi";
@@ -20,27 +20,28 @@ import {StyledProfilePhoto} from "../atoms/ProfilePhoto.styles";
 
 
 export default function CandidateProfilePersonalInformation(props) {
-
     const {data, loading} = useCandidateById(props.id)
     const [isEdit, setIsEdit] = useState(false);
     const [name, setName] = useState('Name Surname');
     const [city, setCity] = useState('City');
     const [linkedin, setLinkedIn] = useState('https://www.linkedin.com/');
     const [github, setGitHub] = useState('https://github.com/');
-    const [filename, setFilename] = useState("");
-    const [newPicture, setNewPicture] = useState();
     const [previewPicture, setPreviewPicture] = useState(null);
-    const [picture, setPicture] = useState();
+    const [picture, setPicture] = useState("");
+    const [previewCv, setPreviewCv] = useState(null);
+    const [cv, setCv] = useState("");
 
-    const getFileByFilename = async () => {
+    const getImgFile = async () => {
         try {
-            const {data: response} = await axios.get('http://localhost:8080/api/file/url', {
-                params: {filename: filename},
-                headers: {
-                    Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
-                }
-            });
-            setPicture(response);
+            if (picture) {
+                const {data: response} = await axios.get('http://localhost:8080/api/file/url', {
+                    params: {filename: picture},
+                    headers: {
+                        Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+                    }
+                });
+                setPreviewPicture(response);
+            }
         } catch (error) {
             console.error(error)
         }
@@ -60,11 +61,18 @@ export default function CandidateProfilePersonalInformation(props) {
                 github: github
             };
             await editCandidate(props.id, updatedCandidateData);
-            if (newPicture) {
-                await uploadFile(newPicture);
+            if (picture) {
+                await uploadFile(picture);
                 await saveCandidatesImgFilename(
                     JSON.parse(Cookies.get('jwt')).candidate_id,
-                    newPicture.name
+                    picture.name
+                );
+            }
+            if (cv) {
+                await uploadFile(cv);
+                await saveCandidatesCvFile(
+                    JSON.parse(Cookies.get('jwt')).candidate_id,
+                    cv.name
                 );
             }
         }
@@ -75,17 +83,23 @@ export default function CandidateProfilePersonalInformation(props) {
             setCity(data.city);
             setLinkedIn(data.linkedin);
             setGitHub(data.github);
-            setFilename(data.imgFileName);
+            setPicture(data.imgFileName);
+            setCv(data.cvFile)
         }
     }, [data]);
 
     const savePreviewPicture = (e) => {
         setPreviewPicture(URL.createObjectURL(e.target.files[0]));
-        setNewPicture(e.target.files[0]);
+        setPicture(e.target.files[0]);
+    };
+
+    const savePreviewCv = (e) => {
+        setPreviewCv(URL.createObjectURL(e.target.files[0]));
+        setCv(e.target.files[0]);
     };
 
     if (!loading) {
-        getFileByFilename();
+        getImgFile();
         const RenderEditIcons = () => {
             if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
                 return (
@@ -112,6 +126,31 @@ export default function CandidateProfilePersonalInformation(props) {
                 )
             }
         };
+
+        const RenderChangeCvButtons = () => {
+            if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
+                return (
+                    isEdit ? (
+                        <form encType="multipart/form-data">
+                            <input type="file" accept=".pdf,.doc,.docx" name="cv" onChange={savePreviewCv}/>
+                        </form>
+                    ) : undefined
+                )
+            }
+        };
+
+        const RenderCv = () => {
+            if (previewCv === null) {
+                return (
+                    <span>{cv}</span>
+                )
+            } else {
+                return (
+                    <span>{cv.name}</span>
+                )
+            }
+        }
+
         const RenderProfilePicture = () => {
             if (previewPicture === null) {
                 return (
@@ -134,8 +173,8 @@ export default function CandidateProfilePersonalInformation(props) {
                         {/* Photo */}
                         <Box mb={1}>
                             <RenderProfilePicture/>
+                            <RenderChangePhotoButtons/>
                         </Box>
-                        <RenderChangePhotoButtons/>
                         {/* Name */}
                         <h3>Name</h3>
                         <Box mb={1}>
@@ -179,11 +218,10 @@ export default function CandidateProfilePersonalInformation(props) {
                                 isRequired={false}
                             />
                         </Box>
-                        <Box mb={8}>
+                        <Box mb={10}>
                             <h3>CV file</h3>
-                            <StyledInput>
-                                <input type="file" accept=".pdf,.doc,.docx"/>
-                            </StyledInput>
+                            <RenderCv/>
+                            <RenderChangeCvButtons/>
                         </Box>
                         <Box>
                             {/* Edit button */}
