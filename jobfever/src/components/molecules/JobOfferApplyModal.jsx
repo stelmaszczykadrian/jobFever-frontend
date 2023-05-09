@@ -88,7 +88,7 @@ export default function JobOfferApplyModal(props) {
                              name = "r2"/>}
                          label="I also consent to processing of my personal data for the purposes of any future recruitment processes."/>
                     </StyledGridItem>
-                    <StyledText tag={"h4"} color={"green"} text={appliedText} />
+                    <StyledText tag={"h4"} color={"black"} text={appliedText} />
                 </DialogContent>
                 <DialogActions>
                     <RedButtonStyled onClick={handleClose}>
