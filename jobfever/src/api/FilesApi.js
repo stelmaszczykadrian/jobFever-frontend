@@ -7,13 +7,13 @@ export async function uploadFile(file) {
     return await axios.post('http://localhost:8080/api/file/upload', formData, {
         headers: {
             Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`,
-            'Content-Type': 'multipart/form-data', // Set the content type header to multipart/form-data
+            'Content-Type': 'multipart/form-data',
 
         }
     }).then(response => {
-        console.log(response.data); // Handle response from the server
+        console.log(response.data);
     }).catch(error => {
-        console.error(error); // Handle error if any
+        console.error(error);
     });
 }
 

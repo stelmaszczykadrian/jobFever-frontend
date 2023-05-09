@@ -13,7 +13,6 @@ import React, {useState, useEffect} from "react";
 import {Form} from "react-bootstrap";
 import Navbar from "../molecules/Navbar";
 import StyledText from "../atoms/StyledText";
-import DialogContentText from "@mui/material/DialogContentText";
 import TechnicalRequirementsContainer from "../molecules/TechnicalRequirementsContainer";
 import JobOfferFormula from "../molecules/JobOfferFormulaModal";
 import {useNavigate, useParams} from "react-router-dom";

@@ -16,15 +16,13 @@ import SingleOfferPage from "./pages/SingleOfferPage";
 import EmployerProfile from "./pages/EmployerProfile";
 import Layout from "./pages/Layout";
 import EditJobOffer from "./pages/EditJobOffer";
-import {ProtectedRoute} from "./pages/AuthProvider/ProtectedRoot";
+import {ProtectedRoute} from "./pages/ProtectedRoot/ProtectedRoot";
 function App() {
     return (
 
             <BrowserRouter>
                 <Layout>
-                    {/*<Layout>*/}
                     <Routes>
-
                         <Route path="/" element={<Home/>}/>
                         <Route path="/candidate/register" element={<CandidateRegister/>}/>
                         <Route path="/candidate/login" element={<CandidateLogin/>}/>
@@ -54,10 +52,8 @@ function App() {
                             </ProtectedRoute>
                         }></Route>
                         <Route path="*" element={<NoPage/>}></Route>
-
                     </Routes>
                 </Layout>
-                {/*</Layout>*/}
             </BrowserRouter>
 
     );

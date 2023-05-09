@@ -14,32 +14,6 @@ export const StyledPaper = styled(Paper)`
 `;
 
 
-export const Test = styled('p')`
-  position: absolute;
-  width: 46px;
-  height: 43px;
-  left: 858px;
-  top: 54px;
-
-  background: #B6B6B6;
-  border-radius: 13px;
-`
-
-export const Test2 = styled('p')`
-  position: absolute;
-  width: 46px;
-  height: 38px;
-  left: 864px;
-  top: 62px;
-
-  font-family: 'Padauk';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 29px;
-
-  color: #000000;
-`
 export const Wrapper = styled('div')`
   display: flex;
   flex-wrap: wrap;
