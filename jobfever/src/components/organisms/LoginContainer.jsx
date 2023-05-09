@@ -1,13 +1,10 @@
 import {
     CandidateRegisterTextCandidateExist,
-    StyledLabel,
     StyledRightContainer,
-    StyledPasswordInputValidation, StyledEmailInputValidation
 } from "./CandidateRegisterRightContainer.styles";
 import RightNavbar from "../molecules/RightNavbar";
 import Sheet from "@mui/joy/Sheet";
 import FormControl from "@mui/joy/FormControl";
-import Input from "@mui/joy/Input";
 import StyledText from "../atoms/StyledText";
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
@@ -22,11 +19,9 @@ import {
 import EmailInputField from "../molecules/EmailInputField";
 import PasswordInputField from "../molecules/PasswordInputField";
 
-
 export default function LoginContainer(props) {
     const [loginMessage, setLoginMessage] = useState('');
     const navigate = useNavigate();
-    // const [showPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
         password: '',

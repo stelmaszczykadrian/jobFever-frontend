@@ -181,50 +181,11 @@ export default function EmployerRegisterRightContainer() {
                         </FormControl>
                     </EmployerRegisterRightContainerColumn>
                     <EmployerRegisterRightContainerColumn>
-                        {/*<FormControl width="40">*/}
-                        {/*    <StyledLabel>E-mail</StyledLabel>*/}
-                        {/*    <StyledPasswordInputValidation>*/}
-                        {/*        <Input*/}
-                        {/*            type="text"*/}
-                        {/*            name="email"*/}
-                        {/*            placeholder='ex. jobFever@email.com'*/}
-                        {/*            value={formData.email}*/}
-                        {/*            onChange={onInputChange}*/}
-                        {/*            onBlur={validateInput}*/}
-                        {/*        />*/}
-                        {/*    </StyledPasswordInputValidation>*/}
-                        {/*    {formData.errors.email &&*/}
-                        {/*        <StyledText*/}
-                        {/*            tag="span"*/}
-                        {/*            color="red"*/}
-                        {/*            text={formData.errors.email}*/}
-                        {/*        />}*/}
-                        {/*</FormControl>*/}
                         <EmailInputField
                             formData={formData}
                             onInputChange={onInputChange}
                             validateInput={validateInput}
                         />
-                        {/*<FormControl>*/}
-                        {/*    <StyledLabel>*/}
-                        {/*        Password*/}
-                        {/*    </StyledLabel>*/}
-                        {/*    <StyledPasswordInputValidation>*/}
-                        {/*        <Input*/}
-                        {/*            type="password"*/}
-                        {/*            name={'password'}*/}
-                        {/*            value={formData.password}*/}
-                        {/*            onChange={onInputChange}*/}
-                        {/*            onBlur={validateInput}*/}
-                        {/*        />*/}
-                        {/*    </StyledPasswordInputValidation>*/}
-                        {/*    {formData.errors.password &&*/}
-                        {/*        <StyledText*/}
-                        {/*            tag="span"*/}
-                        {/*            color="red"*/}
-                        {/*            text={formData.errors.password}*/}
-                        {/*        />}*/}
-                        {/*</FormControl>*/}
                         <PasswordInputField
                             formData={formData}
                             onInputChange={onInputChange}
@@ -235,26 +196,6 @@ export default function EmployerRegisterRightContainer() {
                             inputType="password"
                             inputError={formData.errors.password}
                         />
-                        {/*<FormControl>*/}
-                        {/*    <StyledLabel>*/}
-                        {/*        Confirm Password*/}
-                        {/*    </StyledLabel>*/}
-                        {/*    <StyledPasswordInputValidation>*/}
-                        {/*        <Input*/}
-                        {/*            type="password"*/}
-                        {/*            name={'confirmPassword'}*/}
-                        {/*            value={formData.confirmPassword}*/}
-                        {/*            onChange={onInputChange}*/}
-                        {/*            onBlur={validateInput}*/}
-                        {/*        />*/}
-                        {/*    </StyledPasswordInputValidation>*/}
-                        {/*    {formData.errors.confirmPassword &&*/}
-                        {/*        <StyledText*/}
-                        {/*            tag="span"*/}
-                        {/*            color="red"*/}
-                        {/*            text={formData.errors.confirmPassword}*/}
-                        {/*        />}*/}
-                        {/*</FormControl>*/}
                         <PasswordInputField
                             formData={formData}
                             onInputChange={onInputChange}
@@ -275,7 +216,6 @@ export default function EmployerRegisterRightContainer() {
                     text={"REGISTER"}>
                 </RedButton>
             </StyleEmployerRegisterSubmitButton>
-
         </Form>
         <SocialMediaButtons/>
     </StyledRightContainer>);
