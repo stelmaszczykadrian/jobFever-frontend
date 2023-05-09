@@ -8,9 +8,11 @@ import {StyledGridItem, StyledTextarea} from "../organisms/JobOfferFormContainer
 import {RedButtonStyled} from "../atoms/RedButton.styles";
 import IconButton from "@mui/material/IconButton";
 import {editEmployer} from "../../api/EmployersApi";
+import {useNavigate} from "react-router-dom";
 
 export default function EmployerAboutUsModal(props) {
     const [open, setOpen] = React.useState(false);
+    const navigate = useNavigate();
     const [input, setInput] = useState({
         aboutMe: '',
     });
@@ -36,6 +38,8 @@ export default function EmployerAboutUsModal(props) {
         setOpen(false);
 
         editEmployer(props.id,null,null,null, null,input.aboutMe)
+        navigate(`/employer/${props.id}`);
+        window.location.reload();
     };
 
     return (
