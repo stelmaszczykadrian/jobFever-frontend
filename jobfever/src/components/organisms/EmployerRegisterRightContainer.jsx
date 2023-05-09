@@ -25,6 +25,8 @@ import {
     passwordsDoNotMatchMessage
 } from "../../constants/RegisterFormValidationsMessages";
 import {isValidEmail, isValidPhoneNumber, validateFormData} from "../../utils/Validators";
+import EmailInputField from "../molecules/EmailInputField";
+import PasswordInputField from "../molecules/PasswordInputField";
 
 export default function EmployerRegisterRightContainer() {
     const [errorMessage, setErrorMessage] = useState(null);
@@ -179,65 +181,90 @@ export default function EmployerRegisterRightContainer() {
                         </FormControl>
                     </EmployerRegisterRightContainerColumn>
                     <EmployerRegisterRightContainerColumn>
-                        <FormControl width="40">
-                            <StyledLabel>E-mail</StyledLabel>
-                            <StyledPasswordInputValidation>
-                                <Input
-                                    type="text"
-                                    name="email"
-                                    placeholder='ex. jobFever@email.com'
-                                    value={formData.email}
-                                    onChange={onInputChange}
-                                    onBlur={validateInput}
-                                />
-                            </StyledPasswordInputValidation>
-                            {formData.errors.email &&
-                                <StyledText
-                                    tag="span"
-                                    color="red"
-                                    text={formData.errors.email}
-                                />}
-                        </FormControl>
-                        <FormControl>
-                            <StyledLabel>
-                                Password
-                            </StyledLabel>
-                            <StyledPasswordInputValidation>
-                                <Input
-                                    type="password"
-                                    name={'password'}
-                                    value={formData.password}
-                                    onChange={onInputChange}
-                                    onBlur={validateInput}
-                                />
-                            </StyledPasswordInputValidation>
-                            {formData.errors.password &&
-                                <StyledText
-                                    tag="span"
-                                    color="red"
-                                    text={formData.errors.password}
-                                />}
-                        </FormControl>
-                        <FormControl>
-                            <StyledLabel>
-                                Confirm Password
-                            </StyledLabel>
-                            <StyledPasswordInputValidation>
-                                <Input
-                                    type="password"
-                                    name={'confirmPassword'}
-                                    value={formData.confirmPassword}
-                                    onChange={onInputChange}
-                                    onBlur={validateInput}
-                                />
-                            </StyledPasswordInputValidation>
-                            {formData.errors.confirmPassword &&
-                                <StyledText
-                                    tag="span"
-                                    color="red"
-                                    text={formData.errors.confirmPassword}
-                                />}
-                        </FormControl>
+                        {/*<FormControl width="40">*/}
+                        {/*    <StyledLabel>E-mail</StyledLabel>*/}
+                        {/*    <StyledPasswordInputValidation>*/}
+                        {/*        <Input*/}
+                        {/*            type="text"*/}
+                        {/*            name="email"*/}
+                        {/*            placeholder='ex. jobFever@email.com'*/}
+                        {/*            value={formData.email}*/}
+                        {/*            onChange={onInputChange}*/}
+                        {/*            onBlur={validateInput}*/}
+                        {/*        />*/}
+                        {/*    </StyledPasswordInputValidation>*/}
+                        {/*    {formData.errors.email &&*/}
+                        {/*        <StyledText*/}
+                        {/*            tag="span"*/}
+                        {/*            color="red"*/}
+                        {/*            text={formData.errors.email}*/}
+                        {/*        />}*/}
+                        {/*</FormControl>*/}
+                        <EmailInputField
+                            formData={formData}
+                            onInputChange={onInputChange}
+                            validateInput={validateInput}
+                        />
+                        {/*<FormControl>*/}
+                        {/*    <StyledLabel>*/}
+                        {/*        Password*/}
+                        {/*    </StyledLabel>*/}
+                        {/*    <StyledPasswordInputValidation>*/}
+                        {/*        <Input*/}
+                        {/*            type="password"*/}
+                        {/*            name={'password'}*/}
+                        {/*            value={formData.password}*/}
+                        {/*            onChange={onInputChange}*/}
+                        {/*            onBlur={validateInput}*/}
+                        {/*        />*/}
+                        {/*    </StyledPasswordInputValidation>*/}
+                        {/*    {formData.errors.password &&*/}
+                        {/*        <StyledText*/}
+                        {/*            tag="span"*/}
+                        {/*            color="red"*/}
+                        {/*            text={formData.errors.password}*/}
+                        {/*        />}*/}
+                        {/*</FormControl>*/}
+                        <PasswordInputField
+                            formData={formData}
+                            onInputChange={onInputChange}
+                            validateInput={validateInput}
+                            label="Password"
+                            inputName="password"
+                            inputPlaceholder="Enter Password"
+                            inputType="password"
+                            inputError={formData.errors.password}
+                        />
+                        {/*<FormControl>*/}
+                        {/*    <StyledLabel>*/}
+                        {/*        Confirm Password*/}
+                        {/*    </StyledLabel>*/}
+                        {/*    <StyledPasswordInputValidation>*/}
+                        {/*        <Input*/}
+                        {/*            type="password"*/}
+                        {/*            name={'confirmPassword'}*/}
+                        {/*            value={formData.confirmPassword}*/}
+                        {/*            onChange={onInputChange}*/}
+                        {/*            onBlur={validateInput}*/}
+                        {/*        />*/}
+                        {/*    </StyledPasswordInputValidation>*/}
+                        {/*    {formData.errors.confirmPassword &&*/}
+                        {/*        <StyledText*/}
+                        {/*            tag="span"*/}
+                        {/*            color="red"*/}
+                        {/*            text={formData.errors.confirmPassword}*/}
+                        {/*        />}*/}
+                        {/*</FormControl>*/}
+                        <PasswordInputField
+                            formData={formData}
+                            onInputChange={onInputChange}
+                            validateInput={validateInput}
+                            label="Confirm Password"
+                            inputName="confirmPassword"
+                            inputPlaceholder="Confirm Password"
+                            inputType="password"
+                            inputError={formData.errors.confirmPassword}
+                        />
                     </EmployerRegisterRightContainerColumn>
                 </Container>
             </Sheet>

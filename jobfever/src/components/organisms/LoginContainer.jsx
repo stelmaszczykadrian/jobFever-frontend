@@ -19,16 +19,14 @@ import {
     incorrectEmailAddressMessage,
     incorrectEmailEmptyMessage, incorrectPasswordBlankMessage
 } from "../../constants/RegisterFormValidationsMessages";
-import IconButton from "@mui/material/IconButton";
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import { MailOutline } from '@material-ui/icons';
+import EmailInputField from "../molecules/EmailInputField";
+import PasswordInputField from "../molecules/PasswordInputField";
 
 
 export default function LoginContainer(props) {
     const [loginMessage, setLoginMessage] = useState('');
     const navigate = useNavigate();
-    const [showPassword, setShowPassword] = useState(false);
+    // const [showPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -106,51 +104,21 @@ export default function LoginContainer(props) {
                     text={props.text}
                 />
                 <form onSubmit={handleSubmit}>
-                    <FormControl>
-                        <StyledLabel>E-mail</StyledLabel>
-                        <StyledEmailInputValidation>
-                            <Input
-                                type="text"
-                                name="email"
-                                placeholder='ex. jobFever@email.com'
-                                value={formData.email}
-                                onChange={onInputChange}
-                                onBlur={validateInput}
-                            />
-                            <IconButton sx={{color: 'white'}}>
-                                <MailOutline/>
-                            </IconButton>
-                        </StyledEmailInputValidation>
-                        {formData.errors.email &&
-                            <StyledText
-                                tag="span"
-                                color="red"
-                                text={formData.errors.email}
-                            />}
-                    </FormControl>
-                    <FormControl>
-                        <StyledLabel>
-                            Password
-                        </StyledLabel>
-                        <StyledPasswordInputValidation>
-                            <Input
-                                type={showPassword ? "text" : "password"}
-                                name={'password'}
-                                value={formData.password}
-                                onChange={onInputChange}
-                                onBlur={validateInput}
-                            />
-                            <IconButton sx={{color: 'white'}} onClick={() => setShowPassword(!showPassword)}>
-                                {showPassword ? <VisibilityOffIcon/> : <VisibilityIcon/>}
-                            </IconButton>
-                        </StyledPasswordInputValidation>
-                        {formData.errors.password &&
-                            <StyledText
-                                tag="span"
-                                color="red"
-                                text={formData.errors.password}
-                            />}
-                    </FormControl>
+                    <EmailInputField
+                        formData={formData}
+                        onInputChange={onInputChange}
+                        validateInput={validateInput}
+                    />
+                    <PasswordInputField
+                        formData={formData}
+                        onInputChange={onInputChange}
+                        validateInput={validateInput}
+                        label="Password"
+                        inputName="password"
+                        inputPlaceholder="Enter Password"
+                        inputType="password"
+                        inputError={formData.errors.password}
+                    />
                     {loginMessage &&
                         <CandidateRegisterTextCandidateExist>{loginMessage}</CandidateRegisterTextCandidateExist>}
                     <FormControl sx={{justifyContent: 'center'}}>
