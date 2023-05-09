@@ -1,5 +1,5 @@
 import {styled} from "@mui/material";
-import img from "../../images/background_1.jpg"
+import img from "../../images/backgrounds/background_1.jpg"
 export const StyledHomeMainComponent = styled("div")`
   display: flex;
   width: 100%;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import img from "../../images/404.png";
+import img from "../../images/404/404.png";
 
 export const StyledNoPageMainContainer = styled('div')`
   margin-top: 2% !important;

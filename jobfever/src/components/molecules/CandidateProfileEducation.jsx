@@ -9,7 +9,7 @@ import CandidateEducationModal from "./CandidateEducationModal";
 import {deleteCandidateEducation, useCandidateById} from "../../api/CandidateApi";
 import {Grid} from "@mui/joy";
 import {Img, StyledPaper} from "./JobOfferGrid.styles";
-import img from "../../images/logo.png";
+import img from "../../images/logos/logo.png";
 import Typography from "@mui/joy/Typography";
 import {StyledDeleteIcon} from "../atoms/StyledDeleteIcon";
 import IconButton from "@mui/material/IconButton";

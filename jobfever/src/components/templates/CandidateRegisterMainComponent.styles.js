@@ -1,5 +1,5 @@
 import {styled} from "@mui/material";
-import img from "../../images/background_2.jpg";
+import img from "../../images/backgrounds/background_2.jpg";
 
 export const StyledCandidateRegisterMainComponent = styled("div")`
   display: flex;

@@ -1,5 +1,5 @@
 import {styled} from "@mui/material";
-import img from "../../images/background_6.jpg"
+import img from "../../images/backgrounds/background_6.jpg"
 
 
 export const StyledProfileMainComponent = styled("div")`

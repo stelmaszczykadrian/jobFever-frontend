@@ -1,4 +1,4 @@
-import logo from "../../images/logo2.png";
+import logo from "../../images/logos/logo2.png";
 import React from "react";
 import {StyledLogo} from "./LogoIcon.styles";
 import {Link} from "react-router-dom";
