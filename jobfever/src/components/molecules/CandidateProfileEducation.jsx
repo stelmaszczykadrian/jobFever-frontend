@@ -18,12 +18,14 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import {RedButtonStyled} from "../atoms/RedButton.styles";
 import Dialog from "@mui/material/Dialog";
-
+import Cookies from "js-cookie";
 
 export default function CandidateProfileEducation(props) {
 
-    const {data, loading} = useCandidateById(props.id);
+    const {data} = useCandidateById(props.id);
     const [educations, setEducations] = useState([]);
+    const [deleteEducationId, setDeleteEducationId] = useState(null);
+    const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
 
     React.useEffect(() => {
         if (data.candidateEducations) {
@@ -31,8 +33,6 @@ export default function CandidateProfileEducation(props) {
         }
     }, [data.candidateEducations]);
 
-    const [deleteEducationId, setDeleteEducationId] = useState(null);
-    const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
 
     const handleDeleteEducation = (educationId) => {
         setDeleteEducationId(educationId);
@@ -53,6 +53,40 @@ export default function CandidateProfileEducation(props) {
         setIsDeleteConfirmationOpen(false);
     };
 
+    const RenderCandidateProfileEducationModalAddButton = ({candidate}) => {
+        if (candidate.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
+            return (
+                <StyledIconBox>
+                    <CandidateEducationModal
+                        candidate={props}
+                        isNew
+                        setEducations={setEducations}
+                        tag={<StyledAddIcon/>}
+                    />
+                </StyledIconBox>
+            )
+        }
+    }
+
+    const RenderCandidateProfileEducationModal = ({education, candidate, setEducations, isNew}) => {
+        if (candidate.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
+            return (
+                <StyledIconBox>
+                    <CandidateEducationModal
+                        candidate={props}
+                        education={education}
+                        setEducations={setEducations}
+                        isNew={false}
+                        tag={<StyledEditIcon/>}
+                    />
+                    <IconButton onClick={() => handleDeleteEducation(education.id)}>
+                        <StyledDeleteIcon/>
+                    </IconButton>
+                </StyledIconBox>
+            )
+        }
+    }
+
     if (!data || !data.candidateEducations) {
         return <div>Loading...</div>;
     } else {
@@ -61,14 +95,10 @@ export default function CandidateProfileEducation(props) {
                 <StyledTopBox>
                     <StyledSchoolIcon/>
                     <ProfileContainerTitle text={'Education'}/>
-                    <StyledIconBox>
-                        <CandidateEducationModal
-                            candidate={props}
-                            isNew
-                            setEducations={setEducations}
-                            tag={<StyledAddIcon/>}
-                        />
-                    </StyledIconBox>
+                    <RenderCandidateProfileEducationModalAddButton
+                        candidate={props}
+                        setEducations={setEducations}
+                    />
                 </StyledTopBox>
                 <StyledBottomBox>
                     {educations.sort((a, b) => a.id - b.id).map((education) => (
@@ -96,16 +126,12 @@ export default function CandidateProfileEducation(props) {
                                     </Grid>
                                 </Grid>
                                 <StyledIconBox>
-                                    <CandidateEducationModal
-                                        candidate={props}
+                                    <RenderCandidateProfileEducationModal
                                         education={education}
+                                        candidate={props}
                                         setEducations={setEducations}
                                         isNew={false}
-                                        tag={<StyledEditIcon/>}
                                     />
-                                    <IconButton onClick={() => handleDeleteEducation(education.id)}>
-                                        <StyledDeleteIcon />
-                                    </IconButton>
                                 </StyledIconBox>
                             </Grid>
                         </StyledPaper>

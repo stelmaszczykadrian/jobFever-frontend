@@ -22,11 +22,14 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Dialog from "@mui/material/Dialog";
 import {RedButtonStyled} from "../atoms/RedButton.styles";
+import Cookies from "js-cookie";
 
 export default function CandidateProfileExperience(props) {
 
     const {data} = useCandidateById(props.id);
     const [experiences, setExperiences] = useState([]);
+    const [deleteExperienceId, setDeleteExperienceId] = useState(null);
+    const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
 
     React.useEffect(() => {
         if (data.candidateExperiences) {
@@ -34,8 +37,6 @@ export default function CandidateProfileExperience(props) {
         }
     }, [data.candidateExperiences]);
 
-    const [deleteExperienceId, setDeleteExperienceId] = useState(null);
-    const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
 
     const handleDeleteExperience = (experienceId) => {
         setDeleteExperienceId(experienceId);
@@ -56,6 +57,38 @@ export default function CandidateProfileExperience(props) {
         setIsDeleteConfirmationOpen(false);
     };
 
+    const RenderCandidateProfileExperienceModal = ({experience, candidate, setExperiences, isNew}) => {
+        if (candidate.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
+            return (
+                <StyledIconBox>
+                    <CandidateExperienceModal
+                        candidate={candidate}
+                        experience={experience}
+                        setExperiences={setExperiences}
+                        isNew={isNew}
+                        tag={<StyledEditIcon/>}
+                    />
+                    <IconButton onClick={() => handleDeleteExperience(experience.id)}>
+                        <StyledDeleteIcon/>
+                    </IconButton>
+                </StyledIconBox>
+            )
+        }
+    }
+    const RenderCandidateProfileExperienceModalAddButton = ({candidate, setExperiences}) => {
+        if (candidate.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
+            return (
+                <StyledIconBox>
+                    <CandidateExperienceModal
+                        candidate={props}
+                        isNew
+                        setExperiences={setExperiences}
+                        tag={<StyledAddIcon/>}/>
+                </StyledIconBox>
+            )
+        }
+    }
+
     if (!data || !data.candidateExperiences) {
         return <div>Loading...</div>;
     } else {
@@ -64,13 +97,10 @@ export default function CandidateProfileExperience(props) {
                 <StyledTopBox>
                     <StyledWorkIcon/>
                     <ProfileContainerTitle text={'Experience'}/>
-                    <StyledIconBox>
-                        <CandidateExperienceModal
-                            candidate={props}
-                            isNew
-                            setExperiences={setExperiences}
-                            tag={<StyledAddIcon/>}/>
-                    </StyledIconBox>
+                    <RenderCandidateProfileExperienceModalAddButton
+                        candidate={props}
+                        setExperiences={setExperiences}
+                    />
                 </StyledTopBox>
                 <StyledBottomBox>
                     {experiences.sort((a, b) => a.id - b.id).map((experience) => (
@@ -101,16 +131,12 @@ export default function CandidateProfileExperience(props) {
                                     </Grid>
                                 </Grid>
                                 <StyledIconBox>
-                                    <CandidateExperienceModal
-                                        candidate={props}
+                                    <RenderCandidateProfileExperienceModal
                                         experience={experience}
+                                        candidate={props}
                                         setExperiences={setExperiences}
                                         isNew={false}
-                                        tag={<StyledEditIcon/>}
                                     />
-                                    <IconButton onClick={() => handleDeleteExperience(experience.id)}>
-                                        <StyledDeleteIcon />
-                                    </IconButton>
                                 </StyledIconBox>
                             </Grid>
                         </StyledPaper>

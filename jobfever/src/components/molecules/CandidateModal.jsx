@@ -6,10 +6,17 @@ import DialogActions from "@mui/material/DialogActions";
 import Dialog from "@mui/material/Dialog";
 import RedButton from "../atoms/RedButton";
 import Typography from "@mui/joy/Typography";
+import {useNavigate} from "react-router-dom";
 
 
 export default function CandidateModal(props) {
+    const navigate = useNavigate();
     const {showModal, handleModalClose, jobTitle, candidateData} = props;
+
+
+    const handleClick = (candidateId) => {
+        navigate(`/candidate/${candidateId}`);
+    };
 
     return (
         <Dialog
@@ -26,7 +33,11 @@ export default function CandidateModal(props) {
                     {candidateData.length > 0 ? (
                         candidateData.map((candidate) => (
                             <StyledPaperJobsCard key={candidate.id}>
-                                <JobTitleOnJobsCard variant="h1" component="h1">
+                                <JobTitleOnJobsCard
+                                    variant="h1"
+                                    component="h1"
+                                    onClick={() => handleClick(candidate.id)}
+                                >
                                     {candidate.name}
                                 </JobTitleOnJobsCard>
                             </StyledPaperJobsCard>
