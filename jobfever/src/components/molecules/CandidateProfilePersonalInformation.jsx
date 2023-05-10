@@ -26,21 +26,24 @@ export default function CandidateProfilePersonalInformation(props) {
     const [city, setCity] = useState('City');
     const [linkedin, setLinkedIn] = useState('https://www.linkedin.com/');
     const [github, setGitHub] = useState('https://github.com/');
+    const [filename, setFilename] = useState("");
     const [previewPicture, setPreviewPicture] = useState(null);
-    const [picture, setPicture] = useState("");
+    const [picture, setPicture] = useState();
+    const [newPicture, setNewPicture] = useState();
     const [previewCv, setPreviewCv] = useState(null);
-    const [cv, setCv] = useState("");
+    const [cv, setCv] = useState();
+    const [newCv, setNewCv] = useState(false);
 
     const getImgFile = async () => {
         try {
-            if (picture) {
+            if (filename) {
                 const {data: response} = await axios.get('http://localhost:8080/api/file/url', {
-                    params: {filename: picture},
+                    params: {filename: filename},
                     headers: {
                         Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
                     }
                 });
-                setPreviewPicture(response);
+                setPicture(response);
             }
         } catch (error) {
             console.error(error)
@@ -61,14 +64,14 @@ export default function CandidateProfilePersonalInformation(props) {
                 github: github
             };
             await editCandidate(props.id, updatedCandidateData);
-            if (picture) {
-                await uploadFile(picture);
+            if (newPicture) {
+                await uploadFile(newPicture);
                 await saveCandidatesImgFilename(
                     JSON.parse(Cookies.get('jwt')).candidate_id,
-                    picture.name
+                    newPicture.name
                 );
             }
-            if (cv) {
+            if (newCv) {
                 await uploadFile(cv);
                 await saveCandidatesCvFile(
                     JSON.parse(Cookies.get('jwt')).candidate_id,
@@ -83,19 +86,20 @@ export default function CandidateProfilePersonalInformation(props) {
             setCity(data.city);
             setLinkedIn(data.linkedin);
             setGitHub(data.github);
-            setPicture(data.imgFileName);
+            setFilename(data.imgFileName)
             setCv(data.cvFile)
         }
     }, [data]);
 
     const savePreviewPicture = (e) => {
         setPreviewPicture(URL.createObjectURL(e.target.files[0]));
-        setPicture(e.target.files[0]);
+        setNewPicture(e.target.files[0]);
     };
 
     const savePreviewCv = (e) => {
         setPreviewCv(URL.createObjectURL(e.target.files[0]));
         setCv(e.target.files[0]);
+        setNewCv(true);
     };
 
     if (!loading) {
@@ -180,7 +184,7 @@ export default function CandidateProfilePersonalInformation(props) {
                         <Box mb={1}>
                             <EditableInput
                                 isEdit={isEdit}
-                                value={name}
+                                value={name || ""}
                                 onChange={(e) => setName(e.target.value)}
                                 placeholder="Name Surname"
                                 isRequired
@@ -191,7 +195,7 @@ export default function CandidateProfilePersonalInformation(props) {
                         <Box mb={1}>
                             <EditableInput
                                 isEdit={isEdit}
-                                value={city}
+                                value={city || ""}
                                 onChange={(e) => setCity(e.target.value)}
                                 placeholder="Localization"
                                 isRequired
