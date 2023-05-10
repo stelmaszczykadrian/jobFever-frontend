@@ -27,6 +27,7 @@ export default function EmployerProfilePersonalInfo(props) {
     const [github, setGitHub] = useState('https://github.com/');
     const [localization, setLocalization] = useState('Pcim');
     const [phoneNumber, setPhoneNumber] = useState(123456789);
+    const [nip, setNip] = useState();
     const [filename, setFilename] = useState("");
     const [newPicture, setNewPicture] = useState();
     const [previewPicture, setPreviewPicture] = useState(null);
@@ -49,9 +50,9 @@ export default function EmployerProfilePersonalInfo(props) {
         setIsEdit(true);
     };
     const handleSaveClick = async () => {
-        if (nameAndSurname && nameAndSurname.trim() !== '' && localization && localization.trim() !== '' && phoneNumber.toString() && phoneNumber.toString().trim() !== '') {
+        if (nameAndSurname && nameAndSurname.trim() !== '' && localization && localization.trim() !== '' && phoneNumber.toString() && phoneNumber.toString().trim() !== '' && nip && nip.toString().trim() !== '' && nip.toString().length === 10) {
             setIsEdit(false);
-            await editEmployer(props.id, companyName, nameAndSurname, phoneNumber, localization, null);
+            await editEmployer(props.id, companyName, nameAndSurname, phoneNumber, localization, null, nip);
             if (newPicture) {
                 await uploadFile(newPicture)
                 await saveEmployersImgFilename(JSON.parse(Cookies.get("jwt")).employer_id, newPicture.name);
@@ -65,16 +66,19 @@ export default function EmployerProfilePersonalInfo(props) {
             setPhoneNumber(data.phoneNumber)
             setLocalization(data.localization)
             setFilename(data.imgFileName)
+            if (data.nip !== 0){
+                setNip(data.nip)
+            }
         }
-
-
     }, [data]);
+
     const savePreviewPicture = (e) => {
         setPreviewPicture(URL.createObjectURL(e.target.files[0]))
         setNewPicture(
             e.target.files[0]
         )
     }
+
     if (!loading) {
         getFileByFilename()
         const RenderEditIcons = () => {
@@ -144,7 +148,7 @@ export default function EmployerProfilePersonalInfo(props) {
                         <Box mb={1}>
                             <EditableInput
                                 isEdit={isEdit}
-                                value={localization}
+                                value={localization || ""}
                                 onChange={(e) => setLocalization(e.target.value)}
                                 placeholder="Localization"
                                 isRequired={true}
@@ -154,12 +158,25 @@ export default function EmployerProfilePersonalInfo(props) {
 
                     <StyledRightBox>
                         <h3>Phone number</h3>
-                        <Box mb={4}>
+                        <Box mb={1}>
                             <EditableInput
                                 isEdit={isEdit}
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                                 placeholder="Phone number"
+                                isRequired={true}
+                            />
+                        </Box>
+                        <h3>NIP</h3>
+                        <Box mb={1}>
+                            <EditableInput
+                                isEdit={isEdit}
+                                isCorrect={nip && nip.toString().length === 10}
+                                errorMsg = "This field must be 10 digits long"
+                                type = "number"
+                                value={nip}
+                                onChange={(e) => setNip(e.target.value)}
+                                placeholder="NIP"
                                 isRequired={true}
                             />
                         </Box>
@@ -173,7 +190,7 @@ export default function EmployerProfilePersonalInfo(props) {
                                 isRequired={false}
                             />
                         </Box>
-                        <Box mb={8}>
+                        <Box mb={2}>
                             <EditableInput
                                 isEdit={isEdit}
                                 value={github}

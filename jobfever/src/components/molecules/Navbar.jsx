@@ -339,7 +339,6 @@ export default function ResponsiveAppBar() {
     }else{
         if (!loading) {
             if (!data){
-                console.log("jestem")
                 getFileByFilename(defaultFilename)
                 return LoggedInNavbar()
             }

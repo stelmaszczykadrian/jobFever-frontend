@@ -9,46 +9,52 @@ export const useEmployerById = (id) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-    const fetchData = async () => {
-        try {
-            const { data: response } = await axios.get(url, {
-                params:{id:id},
-            });
-            setEmployer(response);
-        } catch (error) {
-        }
-        setLoading(false);
-    };
-
-    fetchData();
-}, []);
-
-return {
-    data: employer,
-    loading,
-};
-};
-export async function editEmployer(id, companyName, nameAndSurname, phoneNumber, localization, aboutUs) {
-    if (!aboutUs){
-    await axios.put(url, {
-        companyName: companyName,
-        nameAndSurname: nameAndSurname,
-        phoneNumber: parseInt(phoneNumber),
-        localization: localization
-    },
-        {
-            params:{id:id},
-            headers: {
-                Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
-
+        const fetchData = async () => {
+            try {
+                const {data: response} = await axios.get(url, {
+                    params: {id: id},
+                });
+                setEmployer(response);
+            } catch (error) {
             }
-        });}
-    else{
+            setLoading(false);
+        };
+
+        fetchData();
+    }, []);
+
+    return {
+        data: employer,
+        loading,
+    };
+};
+
+export async function editEmployer(id, companyName, nameAndSurname, phoneNumber, localization, aboutUs, nip) {
+    if (!aboutUs) {
+        try {
+            await axios.put(url, {
+                    companyName: companyName,
+                    nameAndSurname: nameAndSurname,
+                    phoneNumber: parseInt(phoneNumber),
+                    localization: localization,
+                    nip: parseInt(nip),
+                },
+                {
+                    params: {id: id},
+                    headers: {
+                        Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+
+                    }
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    } else {
         await axios.put(url, {
-            aboutUs: aboutUs
+                aboutUs: aboutUs
             },
             {
-                params:{id:id},
+                params: {id: id},
                 headers: {
                     Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
                 }
@@ -59,8 +65,7 @@ export async function editEmployer(id, companyName, nameAndSurname, phoneNumber,
 
 export const saveEmployersImgFilename = async (id, filename) => {
     try {
-        await axios.put("http://localhost:8080/api/employers/add-image", {
-        },{
+        await axios.put("http://localhost:8080/api/employers/add-image", {}, {
             params: {
                 id: id,
                 filename: filename
