@@ -1,6 +1,7 @@
 import {
     CandidateRegisterTextCandidateExist,
     StyledRightContainer,
+    StyledPasswordInputValidation, StyledEmailInputValidation, StyledInputRedHover
 } from "./CandidateRegisterRightContainer.styles";
 import RightNavbar from "../molecules/RightNavbar";
 import Sheet from "@mui/joy/Sheet";
@@ -16,6 +17,12 @@ import {
     incorrectEmailAddressMessage,
     incorrectEmailEmptyMessage, incorrectPasswordBlankMessage
 } from "../../constants/RegisterFormValidationsMessages";
+import IconButton from "@mui/material/IconButton";
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import { MailOutline } from '@material-ui/icons';
+import {createTheme} from "@mui/material/styles";
+
 import EmailInputField from "../molecules/EmailInputField";
 import PasswordInputField from "../molecules/PasswordInputField";
 
@@ -95,7 +102,7 @@ export default function LoginContainer(props) {
             <Sheet style={{backgroundColor: 'transparent'}}>
                 <StyledText
                     color="white"
-                    tag={"h2"}
+                    tag={"h3"}
                     text={props.text}
                 />
                 <form onSubmit={handleSubmit}>

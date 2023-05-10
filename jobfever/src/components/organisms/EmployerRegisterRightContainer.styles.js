@@ -9,6 +9,7 @@ export const StyleEmployerRegisterSubmitButton = styled('div')`
   text-align: center;
   width: 100%;
   display: flex;
+  margin-top: 35%;
   justify-content: center;
 `
 
