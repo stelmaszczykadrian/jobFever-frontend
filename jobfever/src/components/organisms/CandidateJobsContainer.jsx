@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {JobCard} from "../molecules/JobsCard";
 import {StyledAppliedJobsIcon} from "./CandidateJobsContainer.styles";
 import {useJobsByCandidateId} from "../../api/JobsApi";
-
+import Cookies from "js-cookie";
 
 export default function CandidateJobsContainer(props) {
     const [data, setData] = useState();
@@ -20,14 +20,13 @@ export default function CandidateJobsContainer(props) {
         fetchOffer();
     }, []);
 
-
     const handleJobClick = (jobId) => {
         navigate(`/job/${jobId}`);
     };
 
-    return (
-        <>
-            {data && (
+    const RenderCandidateJobCard= () => {
+        if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
+            return (
                 <StyledProfilePaper>
                     <StyledAppliedJobsIcon/>
                     <ProfileContainerTitle text={'Applied Jobs'}/>
@@ -35,6 +34,13 @@ export default function CandidateJobsContainer(props) {
                         <JobCard job={job} handleJobClick={handleJobClick} key={job.jobId} />
                     ))}
                 </StyledProfilePaper>
+            )
+        }
+    }
+    return (
+        <>
+            {data && (
+                <RenderCandidateJobCard/>
             )}
         </>
     );
