@@ -1,5 +1,5 @@
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
-import {StyledProfilePaper} from "./CandidateProfile.styles";
+import {StyledIconBox, StyledProfilePaper} from "./CandidateProfile.styles";
 import React, {useEffect, useState} from "react";
 import {deleteJobOfferById, getJobOfferCandidatesByJobId, useJobsByName} from "../../api/JobsApi";
 import RedButton from "../atoms/RedButton";
@@ -11,6 +11,8 @@ import IconButton from "@mui/material/IconButton";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledDeleteIcon} from "../atoms/StyledDeleteIcon";
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import Cookies from "js-cookie";
+import EmployerAboutUsModal from "./EmployerAboutUsModal";
 
 
 export default function EmployerJobs(props) {
@@ -64,6 +66,46 @@ export default function EmployerJobs(props) {
     const handleModalClose = () => {
         setShowModal(false);
     };
+
+
+    const RenderEmployerJobCardButtons= ({ id, job }) => {
+        if (props.id === JSON.parse(Cookies.get("jwt")).employer_id.toString()) {
+
+            return (
+                <div>
+                    <IconButton onClick={() => navigate(`/job/${job.jobId}/edit`)}>
+                        <StyledEditIcon/>
+                    </IconButton>
+                    <IconButton onClick={() => deleteOffer(job.jobId)}>
+                        <StyledDeleteIcon />
+                    </IconButton>
+                    <IconButton onClick={() => handleCandidatesClick(job.jobId, job.title)}>
+                        <PeopleAltIcon style={{fill: "rgb(183, 4, 11)", fontSize: '1.4em'}}/>
+                    </IconButton>
+                </div>
+            )
+        }
+    }
+
+    return (
+        <StyledProfilePaper>
+            <ProfileContainerTitle text={"Our Jobs"} />
+            {data.length > 0 ? (
+                <>
+                    {data.map((job, index) => (
+                        <div key={job.jobId}>
+                            <JobCard job={job} handleJobClick={handleJobClick} />
+                            {/*<IconButton onClick={() => navigate(`/job/${job.jobId}/edit`)}>*/}
+                            {/*    <StyledEditIcon/>*/}
+                            {/*</IconButton>*/}
+                            {/*<IconButton onClick={() => deleteOffer(job.jobId)}>*/}
+                            {/*    <StyledDeleteIcon />*/}
+                            {/*</IconButton>*/}
+                            {/*<IconButton onClick={() => handleCandidatesClick(job.jobId, job.title)}>*/}
+                            {/*    <PeopleAltIcon style={{fill: "rgb(183, 4, 11)", fontSize: '1.4em'}}/>*/}
+                            {/*</IconButton>*/}
+                            {/*<RenderEmployerJobCardButtons/>*/}
+                            <RenderEmployerJobCardButtons id={props.id} job={job} />
     return (
         <StyledProfilePaper>
             <ProfileContainerTitle text={"Our Jobs"} />
