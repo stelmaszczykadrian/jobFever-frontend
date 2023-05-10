@@ -70,17 +70,19 @@ export default function EmployerJobs(props) {
             {data.length > 0 ? (
                 <>
                     {data.map((job, index) => (
-                        <div key={job.jobId}>
-                            <JobCard job={job} handleJobClick={handleJobClick} />
-                            <IconButton onClick={() => navigate(`/job/${job.jobId}/edit`)}>
-                                <StyledEditIcon/>
-                            </IconButton>
-                            <IconButton onClick={() => deleteOffer(job.jobId)}>
-                                <StyledDeleteIcon />
-                            </IconButton>
-                            <IconButton onClick={() => handleCandidatesClick(job.jobId, job.title)}>
-                                <PeopleAltIcon style={{fill: "rgb(183, 4, 11)", fontSize: '1.4em'}}/>
-                            </IconButton>
+                        <div key={job.jobId} style={{backgroundColor: 'rgba(0, 0, 0, 0.05)', borderRadius: '8px'}}>
+                            <JobCard job={job} style={{marginTop: '2%', marginBottom: '2%'}} handleJobClick={handleJobClick} />
+                            <div style={{display: 'flex', flexDirection: 'row-reverse'}}>
+                                <IconButton onClick={() => navigate(`/job/${job.jobId}/edit`)}>
+                                    <StyledEditIcon/>
+                                </IconButton>
+                                <IconButton onClick={() => deleteOffer(job.jobId)}>
+                                    <StyledDeleteIcon />
+                                </IconButton>
+                                <IconButton onClick={() => handleCandidatesClick(job.jobId, job.title)}>
+                                    <PeopleAltIcon style={{fill: "rgb(183, 4, 11)", fontSize: '1.4em'}}/>
+                                </IconButton>
+                            </div>
                         </div>
                     ))}
                     <CandidateModal
