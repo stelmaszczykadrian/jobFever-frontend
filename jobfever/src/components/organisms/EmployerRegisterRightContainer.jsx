@@ -15,7 +15,7 @@ import StyledText from "../atoms/StyledText";
 import {
     StyledPasswordInputValidation,
     StyledLabel,
-    StyledRightContainer,
+    StyledRightContainer, StyledInputRedHover,
 } from "./CandidateRegisterRightContainer.styles";
 import {registerEmployer} from "../../api/EmployersApi";
 import {
@@ -124,7 +124,8 @@ export default function EmployerRegisterRightContainer() {
                         <FormControl width="40">
                             <StyledLabel>Company name</StyledLabel>
                             <StyledPasswordInputValidation>
-                                <Input
+                                <StyledInputRedHover
+                                    error
                                     type="text"
                                     name="companyName"
                                     placeholder='ex. job Fever'
@@ -142,7 +143,8 @@ export default function EmployerRegisterRightContainer() {
                         <FormControl width="40">
                             <StyledLabel>Name and surname</StyledLabel>
                             <StyledPasswordInputValidation>
-                                <Input
+                                <StyledInputRedHover
+                                    error
                                     type="text"
                                     name="nameAndSurname"
                                     placeholder='ex. Jan Kowalski'
@@ -161,7 +163,8 @@ export default function EmployerRegisterRightContainer() {
                         <FormControl width="40">
                             <StyledLabel>Phone number</StyledLabel>
                             <StyledPasswordInputValidation>
-                                <Input
+                                <StyledInputRedHover
+                                    error
                                     type="number"
                                     name="phoneNumber"
                                     placeholder='ex. 505438212'
@@ -182,7 +185,8 @@ export default function EmployerRegisterRightContainer() {
                         <FormControl width="40">
                             <StyledLabel>E-mail</StyledLabel>
                             <StyledPasswordInputValidation>
-                                <Input
+                                <StyledInputRedHover
+                                    error
                                     type="text"
                                     name="email"
                                     placeholder='ex. jobFever@email.com'
@@ -203,7 +207,8 @@ export default function EmployerRegisterRightContainer() {
                                 Password
                             </StyledLabel>
                             <StyledPasswordInputValidation>
-                                <Input
+                                <StyledInputRedHover
+                                    error
                                     type="password"
                                     name={'password'}
                                     value={formData.password}
@@ -223,7 +228,8 @@ export default function EmployerRegisterRightContainer() {
                                 Confirm Password
                             </StyledLabel>
                             <StyledPasswordInputValidation>
-                                <Input
+                                <StyledInputRedHover
+                                    error
                                     type="password"
                                     name={'confirmPassword'}
                                     value={formData.confirmPassword}

@@ -11,7 +11,7 @@ import {
     CandidateRegisterTextCandidateExist,
     StyledPasswordInputValidation,
     StyledLabel,
-    StyledRightContainer
+    StyledRightContainer, StyledInputRedHover, StyledPasswordInputValidationRegister, StyledEmailInputValidationRegister
 } from "./CandidateRegisterRightContainer.styles";
 import {
     incorrectEmailEmptyMessage,
@@ -103,8 +103,9 @@ export default function CandidateRegisterRightContainer() {
                         <StyledLabel>
                             E-mail
                         </StyledLabel>
-                        <StyledPasswordInputValidation>
-                            <Input
+                        <StyledPasswordInputValidationRegister>
+                            <StyledInputRedHover
+                                error
                                 type="text"
                                 name="email"
                                 placeholder='jobFever@email.com'
@@ -112,7 +113,7 @@ export default function CandidateRegisterRightContainer() {
                                 onChange={onInputChange}
                                 onBlur={validateInput}
                             />
-                        </StyledPasswordInputValidation>
+                        </StyledPasswordInputValidationRegister>
                         {formData.errors.email &&
                             <StyledText
                                 tag="span"
@@ -124,8 +125,9 @@ export default function CandidateRegisterRightContainer() {
                         <StyledLabel>
                             Password
                         </StyledLabel>
-                        <StyledPasswordInputValidation>
-                            <Input
+                        <StyledEmailInputValidationRegister>
+                            <StyledInputRedHover
+                                error
                                 type="password"
                                 name={'password'}
                                 value={formData.password}
@@ -133,7 +135,7 @@ export default function CandidateRegisterRightContainer() {
                                 onChange={onInputChange}
                                 onBlur={validateInput}
                             />
-                        </StyledPasswordInputValidation>
+                        </StyledEmailInputValidationRegister>
                         {formData.errors.password &&
                             <StyledText
                                 tag="span"
@@ -145,8 +147,9 @@ export default function CandidateRegisterRightContainer() {
                         <StyledLabel>
                             Confirm Password
                         </StyledLabel>
-                        <StyledPasswordInputValidation>
-                            <Input
+                        <StyledEmailInputValidationRegister>
+                            <StyledInputRedHover
+                                error
                                 type="password"
                                 name={'confirmPassword'}
                                 value={formData.confirmPassword}
@@ -154,7 +157,7 @@ export default function CandidateRegisterRightContainer() {
                                 onChange={onInputChange}
                                 onBlur={validateInput}
                             />
-                        </StyledPasswordInputValidation>
+                        </StyledEmailInputValidationRegister>
                         {formData.errors.confirmPassword &&
                             <StyledText
                                 tag="span"

@@ -2,7 +2,7 @@ import {
     CandidateRegisterTextCandidateExist,
     StyledLabel,
     StyledRightContainer,
-    StyledPasswordInputValidation, StyledEmailInputValidation
+    StyledPasswordInputValidation, StyledEmailInputValidation, StyledInputRedHover
 } from "./CandidateRegisterRightContainer.styles";
 import RightNavbar from "../molecules/RightNavbar";
 import Sheet from "@mui/joy/Sheet";
@@ -23,6 +23,7 @@ import IconButton from "@mui/material/IconButton";
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import { MailOutline } from '@material-ui/icons';
+import {createTheme} from "@mui/material/styles";
 
 
 export default function LoginContainer(props) {
@@ -36,6 +37,20 @@ export default function LoginContainer(props) {
             email: '',
             password: '',
         }
+    });
+
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: '#2f2f2f',
+            },
+            error: {
+                main: '#f44336',
+            },
+            black: {
+                main: '#000000',
+            },
+        },
     });
 
     const onInputChange = (e) => {
@@ -102,14 +117,16 @@ export default function LoginContainer(props) {
             <Sheet style={{backgroundColor: 'transparent'}}>
                 <StyledText
                     color="white"
-                    tag={"h2"}
+                    tag={"h3"}
                     text={props.text}
                 />
                 <form onSubmit={handleSubmit}>
                     <FormControl>
                         <StyledLabel>E-mail</StyledLabel>
                         <StyledEmailInputValidation>
-                            <Input
+                            <StyledInputRedHover
+                                error
+                                id="outlined-error"
                                 type="text"
                                 name="email"
                                 placeholder='ex. jobFever@email.com'
@@ -133,7 +150,8 @@ export default function LoginContainer(props) {
                             Password
                         </StyledLabel>
                         <StyledPasswordInputValidation>
-                            <Input
+                            <StyledInputRedHover
+                                error
                                 type={showPassword ? "text" : "password"}
                                 name={'password'}
                                 value={formData.password}
