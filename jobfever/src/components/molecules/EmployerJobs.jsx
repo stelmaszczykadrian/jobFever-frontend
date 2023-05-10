@@ -71,7 +71,7 @@ export default function EmployerJobs(props) {
                 <>
                     {data.map((job, index) => (
                         <div key={job.jobId} style={{backgroundColor: 'rgba(0, 0, 0, 0.05)', borderRadius: '8px'}}>
-                            <JobCard job={job} style={{marginTop: '2%', marginBottom: '2%'}} handleJobClick={handleJobClick} />
+                            <JobCard job={job} handleJobClick={handleJobClick} />
                             <div style={{display: 'flex', flexDirection: 'row-reverse'}}>
                                 <IconButton onClick={() => navigate(`/job/${job.jobId}/edit`)}>
                                     <StyledEditIcon/>
