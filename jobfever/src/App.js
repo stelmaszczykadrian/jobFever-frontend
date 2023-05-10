@@ -27,7 +27,7 @@ function App() {
                         <Route path="/candidate/register" element={<CandidateRegister/>}/>
                         <Route path="/candidate/login" element={<CandidateLogin/>}/>
                         <Route path="/candidate/:id" element={
-                            <ProtectedRoute role={"CANDIDATE"}>
+                            <ProtectedRoute>
                             <CandidateProfile/>
                             </ProtectedRoute>
                         }/>
