@@ -10,4 +10,7 @@ export const RedButtonStyled = styled(Button)(() => ({
         backgroundColor: '#852222',
         color: 'white'
     },
+    ':disabled' : {
+        backgroundColor: '#808080',
+    }
 }));
