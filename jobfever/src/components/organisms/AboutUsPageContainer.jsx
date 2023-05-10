@@ -30,7 +30,7 @@ export default function AboutUsPageContainer() {
                         <StyledContactPageHeading>Karolina Mazurczak</StyledContactPageHeading>
                         <StyledAboutUsPageText>
                             <img src={linkedin} width="30px" height="30px" alt="linkedin"/>
-                            <a href="#">Linkedin</a>
+                            <a href="https://www.linkedin.com/in/karolina-mazurczak-a71852275/">Linkedin</a>
                         </StyledAboutUsPageText>
                         <StyledAboutUsPageText>
                             <img src={github} alt="github"/>
@@ -48,7 +48,7 @@ export default function AboutUsPageContainer() {
                         <StyledContactPageHeading>Monika Markulis</StyledContactPageHeading>
                         <StyledAboutUsPageText>
                             <img src={linkedin} width="30px" height="30px" alt="linkedin"/>
-                            <a href="#">Linkedin</a>
+                            <a href="https://www.linkedin.com/in/monika-markulis-8a396b13b/">Linkedin</a>
                         </StyledAboutUsPageText>
                         <StyledAboutUsPageText>
                             <img src={github} alt="github"/>
@@ -66,7 +66,7 @@ export default function AboutUsPageContainer() {
                         <StyledContactPageHeading>Grzegorz Reizer</StyledContactPageHeading>
                         <StyledAboutUsPageText>
                             <img src={linkedin} width="30px" height="30px" alt="linkedin"/>
-                            <a href="#">Linkedin</a>
+                            <a href="https://www.linkedin.com/in/grzegorz-reizer-00522b276/">Linkedin</a>
                         </StyledAboutUsPageText>
                         <StyledAboutUsPageText>
                             <img src={github} alt="github"/>
@@ -102,7 +102,7 @@ export default function AboutUsPageContainer() {
                         <StyledContactPageHeading>Piotr Petryka</StyledContactPageHeading>
                         <StyledAboutUsPageText>
                             <img src={linkedin} width="30px" height="30px" alt="linkedin"/>
-                            <a href="#">Linkedin</a>
+                            <a href="https://www.linkedin.com/in/piotr-petryka-90528a270/">Linkedin</a>
                         </StyledAboutUsPageText>
                         <StyledAboutUsPageText>
                             <img src={github} alt="github"/>
