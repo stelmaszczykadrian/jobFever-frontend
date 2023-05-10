@@ -1,8 +1,7 @@
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
-import {StyledIconBox, StyledProfilePaper} from "./CandidateProfile.styles";
+import {StyledProfilePaper} from "./CandidateProfile.styles";
 import React, {useEffect, useState} from "react";
 import {deleteJobOfferById, getJobOfferCandidatesByJobId, useJobsByName} from "../../api/JobsApi";
-import RedButton from "../atoms/RedButton";
 import {useNavigate} from "react-router-dom"
 import {JobCard} from "./JobsCard";
 import CandidateModal from "./CandidateModal";
@@ -12,7 +11,6 @@ import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledDeleteIcon} from "../atoms/StyledDeleteIcon";
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import Cookies from "js-cookie";
-import EmployerAboutUsModal from "./EmployerAboutUsModal";
 
 
 export default function EmployerJobs(props) {
@@ -67,7 +65,6 @@ export default function EmployerJobs(props) {
         setShowModal(false);
     };
 
-
     const RenderEmployerJobCardButtons= ({ id, job }) => {
         if (props.id === JSON.parse(Cookies.get("jwt")).employer_id.toString()) {
 
@@ -93,37 +90,10 @@ export default function EmployerJobs(props) {
             {data.length > 0 ? (
                 <>
                     {data.map((job, index) => (
-                        <div key={job.jobId}>
-                            <JobCard job={job} handleJobClick={handleJobClick} />
-                            {/*<IconButton onClick={() => navigate(`/job/${job.jobId}/edit`)}>*/}
-                            {/*    <StyledEditIcon/>*/}
-                            {/*</IconButton>*/}
-                            {/*<IconButton onClick={() => deleteOffer(job.jobId)}>*/}
-                            {/*    <StyledDeleteIcon />*/}
-                            {/*</IconButton>*/}
-                            {/*<IconButton onClick={() => handleCandidatesClick(job.jobId, job.title)}>*/}
-                            {/*    <PeopleAltIcon style={{fill: "rgb(183, 4, 11)", fontSize: '1.4em'}}/>*/}
-                            {/*</IconButton>*/}
-                            {/*<RenderEmployerJobCardButtons/>*/}
-                            <RenderEmployerJobCardButtons id={props.id} job={job} />
-    return (
-        <StyledProfilePaper>
-            <ProfileContainerTitle text={"Our Jobs"} />
-            {data.length > 0 ? (
-                <>
-                    {data.map((job, index) => (
                         <div key={job.jobId} style={{backgroundColor: 'rgba(0, 0, 0, 0.05)', borderRadius: '8px'}}>
                             <JobCard job={job} handleJobClick={handleJobClick} />
                             <div style={{display: 'flex', flexDirection: 'row-reverse'}}>
-                                <IconButton onClick={() => navigate(`/job/${job.jobId}/edit`)}>
-                                    <StyledEditIcon/>
-                                </IconButton>
-                                <IconButton onClick={() => deleteOffer(job.jobId)}>
-                                    <StyledDeleteIcon />
-                                </IconButton>
-                                <IconButton onClick={() => handleCandidatesClick(job.jobId, job.title)}>
-                                    <PeopleAltIcon style={{fill: "rgb(183, 4, 11)", fontSize: '1.4em'}}/>
-                                </IconButton>
+                                <RenderEmployerJobCardButtons id={props.id} job={job} />
                             </div>
                         </div>
                     ))}
