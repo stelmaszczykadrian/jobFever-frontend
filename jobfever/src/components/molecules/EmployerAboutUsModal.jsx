@@ -37,7 +37,7 @@ export default function EmployerAboutUsModal(props) {
     const handleSave = () => {
         setOpen(false);
 
-        editEmployer(props.id,null,null,null, null,input.aboutMe)
+        editEmployer(props.id,null,null,null, null,input.aboutMe, null)
         navigate(`/employer/${props.id}`);
         window.location.reload();
     };

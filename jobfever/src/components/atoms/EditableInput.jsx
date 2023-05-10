@@ -15,20 +15,21 @@ const theme = createTheme({
     },
 });
 
-export default function EditableInput({ isEdit, value, onChange, placeholder, isRequired }) {
+export default function EditableInput({ isEdit, value, onChange, placeholder, isRequired, isCorrect = true, errorMsg = 'This field cannot be empty',  type = "text" }) {
     const isFieldEmpty = isRequired && !value;
     if (isEdit) {
         return (
             <ThemeProvider theme={theme}>
                 <TextField
                     required={isRequired}
-                    error={isFieldEmpty}
-                    helperText={isFieldEmpty ? 'This field cannot be empty' : ''}
+                    error={isFieldEmpty || !isCorrect}
+                    helperText={isFieldEmpty || !isCorrect ? errorMsg : ''}
                     color={isFieldEmpty ? 'error' : 'black'}
                     placeholder={placeholder}
                     value={value}
                     onChange={onChange}
                     label={placeholder}
+                    type ={type}
                 />
             </ThemeProvider>
         );
