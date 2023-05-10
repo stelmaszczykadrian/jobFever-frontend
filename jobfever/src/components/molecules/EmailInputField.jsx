@@ -1,4 +1,8 @@
-import {StyledEmailInputValidation, StyledLabel} from "../organisms/CandidateRegisterRightContainer.styles";
+import {
+    StyledEmailInputValidation,
+    StyledInputRedHover,
+    StyledLabel
+} from "../organisms/CandidateRegisterRightContainer.styles";
 import FormControl from "@mui/joy/FormControl";
 import Input from "@mui/joy/Input";
 import IconButton from "@mui/material/IconButton";
@@ -11,7 +15,8 @@ export default function EmailInputField({ formData, onInputChange, validateInput
         <FormControl>
             <StyledLabel>E-mail</StyledLabel>
             <StyledEmailInputValidation>
-                <Input
+                <StyledInputRedHover
+                    error
                     type="text"
                     name="email"
                     placeholder='ex. jobFever@email.com'

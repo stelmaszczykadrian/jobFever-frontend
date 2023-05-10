@@ -1,5 +1,9 @@
 import FormControl from "@mui/joy/FormControl";
-import {StyledLabel, StyledPasswordInputValidation} from "../organisms/CandidateRegisterRightContainer.styles";
+import {
+    StyledInputRedHover,
+    StyledLabel,
+    StyledPasswordInputValidation
+} from "../organisms/CandidateRegisterRightContainer.styles";
 import Input from "@mui/joy/Input";
 import IconButton from "@mui/material/IconButton";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
@@ -26,7 +30,8 @@ export default function PasswordInputField({
         <FormControl>
             <StyledLabel>{label}</StyledLabel>
             <StyledPasswordInputValidation>
-                <Input
+                <StyledInputRedHover
+                    error
                     type={showPassword ? "text" : inputType}
                     name={inputName}
                     value={formData[inputName]}

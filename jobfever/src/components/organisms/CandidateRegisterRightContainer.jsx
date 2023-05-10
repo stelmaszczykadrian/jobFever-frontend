@@ -8,9 +8,6 @@ import {useNavigate} from "react-router-dom";
 import StyledText from "../atoms/StyledText";
 import {
     CandidateRegisterTextCandidateExist,
-    StyledPasswordInputValidation,
-    StyledLabel,
-    StyledRightContainer, StyledInputRedHover, StyledPasswordInputValidationRegister, StyledEmailInputValidationRegister
     StyledRightContainer
 } from "./CandidateRegisterRightContainer.styles";
 import {
@@ -107,7 +104,6 @@ export default function CandidateRegisterRightContainer() {
                         validateInput={validateInput}
                     />
                     <PasswordInputField
-                        error
                         formData={formData}
                         onInputChange={onInputChange}
                         validateInput={validateInput}
