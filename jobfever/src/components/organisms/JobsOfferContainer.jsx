@@ -4,7 +4,7 @@ import Pagination from "@mui/material/Pagination";
 import Typography from "@mui/joy/Typography";
 import {makeStyles} from "@mui/styles";
 import {useNavigate} from "react-router-dom";
-import {StyledJobsPageMainComponent} from "../templates/JobsPageMainComponent.styles";
+import {StyledBoxShadow, StyledJobsPageMainComponent} from "../templates/JobsPageMainComponent.styles";
 import {StyledJobOffersContainer, StyledPaginationContainer} from "./JobOffersContainer.styles";
 import JobsPageSortComponent from "../molecules/JobsPageSortComponent";
 import JobOfferGrid from "../molecules/JobOfferGrid";
@@ -90,7 +90,7 @@ export default function JobsOfferContainer() {
     };
 
     return (
-            <StyledJobsPageMainComponent>
+        <box>
                 <StyledJobOffersContainer>
                     <SearchBar onSearch={handleSearch} />
                     <JobsPageSortComponent onLanguageChange={handleLanguageChange} />
@@ -118,7 +118,7 @@ export default function JobsOfferContainer() {
                         classes={{ ul: classes.ul }}
                     />
                 </StyledPaginationContainer>
-            </StyledJobsPageMainComponent>
+        </box>
     );
 }
 

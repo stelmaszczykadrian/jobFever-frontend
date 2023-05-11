@@ -5,7 +5,7 @@ import {
     StyledGridItem,
     StyledSelectJobType,
     StyledCurrencyType,
-    StyledButtonCenter, StyledJobOfferContainer, StyledRedButtonModalButton, StyledInputLabel, StyledOption
+    StyledButtonCenter, StyledJobOfferContainer, StyledRedButtonModalButton, StyledInputLabel, StyledOption, Styledbg
 } from "./JobOfferFormContainer.styles";
 import React, {useState, useEffect} from "react";
 import {Form} from "react-bootstrap";
@@ -42,7 +42,7 @@ import {
     missingTechnicalRequirementMessage, incorrectWhoWeAreLookingForBlankMessage, incorrectBenefitsBlankMessage
 } from "../../constants/JobOfferFormValidationsMessages";
 import {
-    StyledRedHoverTextFiled
+    StyledRedHoverTextFiled, StyledRedHoverTextFiledSmall
 } from "./CandidateRegisterRightContainer.styles";
 
 const jobType = [
@@ -305,10 +305,11 @@ export default function JobOfferFormContainer(props) {
 
     return (
         <StyledJobOfferContainer>
+        <Styledbg>
             <Navbar/>
             <Form onSubmit={handleSubmit}>
-                <StyledText tag="h1"
-                            color="BLACK"
+                <StyledText tag="h2"
+                            color="white"
                             text={props.pageTitle}/>
                 <StyledJobOfferCreationContainer>
                     <StyledInputJobOfferContainer>
@@ -402,7 +403,7 @@ export default function JobOfferFormContainer(props) {
                                 <StyledGridItem>
                                     <StyledGridContainer>
                                         <StyledGridItem>
-                                            <StyledRedHoverTextFiled
+                                            <StyledRedHoverTextFiledSmall
                                                 placeholder="From"
                                                 name="salaryFrom"
                                                 value={input.salaryFrom}
@@ -416,7 +417,7 @@ export default function JobOfferFormContainer(props) {
                                                 /></Typography>}
                                         </StyledGridItem>
                                         <StyledGridItem>
-                                            <StyledRedHoverTextFiled
+                                            <StyledRedHoverTextFiledSmall
                                                 placeholder="To"
                                                 name="salaryTo"
                                                 value={input.salaryTo}
@@ -538,7 +539,7 @@ export default function JobOfferFormContainer(props) {
                     </StyledInputJobOfferContainer>
                 </StyledJobOfferCreationContainer>
             </Form>
-
+            </Styledbg>
         </StyledJobOfferContainer>
     );
 
