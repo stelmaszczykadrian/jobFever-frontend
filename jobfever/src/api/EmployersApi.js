@@ -1,12 +1,14 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
+import {useNavigate} from "react-router-dom";
 
 const url = "http://localhost:8080/api/employers/";
 
 export const useEmployerById = (id) => {
     const [employer, setEmployer] = useState({});
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -14,6 +16,9 @@ export const useEmployerById = (id) => {
                 const {data: response} = await axios.get(url, {
                     params: {id: id},
                 });
+                if(!response){
+                    navigate('/404')
+                }
                 setEmployer(response);
             } catch (error) {
             }
