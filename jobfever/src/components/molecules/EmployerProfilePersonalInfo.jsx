@@ -28,7 +28,7 @@ export default function EmployerProfilePersonalInfo(props) {
     const [companyName, setCompanyName] = useState("asd");
     const [nameAndSurname, setNameAndSurname] = useState('City');
     const [linkedin, setLinkedIn] = useState('https://www.linkedin.com/');
-    const [github, setGitHub] = useState('https://github.com/');
+    const [email, setEmail] = useState('');
     const [localization, setLocalization] = useState('Pcim');
     const [phoneNumber, setPhoneNumber] = useState(123456789);
     const [nip, setNip] = useState();
@@ -66,6 +66,7 @@ export default function EmployerProfilePersonalInfo(props) {
     React.useEffect(() => {
         if (!loading) {
             setCompanyName(data.companyName);
+            setEmail(data.email);
             setNameAndSurname(data.nameAndSurname)
             setPhoneNumber(data.phoneNumber)
             setLocalization(data.localization)
@@ -184,16 +185,12 @@ export default function EmployerProfilePersonalInfo(props) {
                                 isRequired={true}
                             />
                         </Box>
-                        {/*<Box mb={1}>*/}
-                        {/*    <StyledEmailIcon />*/}
-                        {/*    <EditableInput*/}
-                        {/*        isEdit={isEdit}*/}
-                        {/*        value={linkedin}*/}
-                        {/*        onChange={(e) => setLinkedIn(e.target.value)}*/}
-                        {/*        placeholder="email here"*/}
-                        {/*        isRequired={false}*/}
-                        {/*    />*/}
-                        {/*</Box>*/}
+                        <Box mb={1}>
+                            <StyledEmailIcon />
+                            <EditableInput
+                                value={email}
+                            />
+                        </Box>
                         <Box mb={6}>
                             <a href={linkedin} target="_blank"><StyledLinkedInIcon /></a>
                             <EditableInput
