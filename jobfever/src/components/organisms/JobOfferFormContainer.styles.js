@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import img from "../../images/backgrounds/background_9.jpg"
+import img from "../../images/backgrounds/background_4.jpg"
 import Button from "@mui/joy/Button";
 
 export const StyledJobOfferCreationContainer = styled('div')`
@@ -22,6 +22,10 @@ export const StyledJobOfferContainer = styled('div')`
   background-size: cover;
 `
 
+export const Styledbg = styled('div')`
+    background: rgba(29, 25, 23, 0.8);`
+
+
 export const StyledTextarea = styled("textarea")`
   width: 97%;
   height: 150px;
@@ -41,7 +45,9 @@ export const StyledGridContainer = styled("div")`
 `
 export const StyledGridItem = styled("div")`
   text-align: center;
-  margin: 12px 5px;
+  margin: 12px 0px;
+ 
+  justify-content: space-between;
   border-radius: 4px;
   color: white;
 `
@@ -55,7 +61,7 @@ export const StyledSelectJobType = styled("select")`
   text-color: grey;
   height: 56px;
   border-color: #B7B7B7;
-  width: 100%;
+  width: 97%;
   :focus{
     border-color: red;
     outline: none;
@@ -102,7 +108,7 @@ export const StyledRedButtonModalButton = styled(Button)(() => ({
 }));
 
 export const StyledInputLabel = styled.div`
-  color: black;
+  color: white;
   font-size: 15px;
   font-weight: bold;
   margin: 10px 0;

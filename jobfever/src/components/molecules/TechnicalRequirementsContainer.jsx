@@ -22,8 +22,8 @@ const TechnicalRequirementsContainer = ({pressedButtons, setPressedButtons, setI
     }
 
     return (
-        <div>
-        <StyledContainer>
+        <div >
+        <StyledContainer >
             {languageIcons.map((icon, index) => (
                 <div key={`${icon}-${index}`}>
                     <StyledSortButton
@@ -35,7 +35,7 @@ const TechnicalRequirementsContainer = ({pressedButtons, setPressedButtons, setI
                         {icon}
                     </StyledSortButton>
                     <div>
-                        <DialogContentText sx={{color: 'BLACK', fontSize: '12px'}}>{languageLabels[index]}</DialogContentText></div>
+                        <DialogContentText sx={{marginBottom : '20px', color: 'white', fontSize: '14px'}}>{languageLabels[index]}</DialogContentText></div>
                 </div>
             ))}
         </StyledContainer>

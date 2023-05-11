@@ -29,10 +29,12 @@ export const StyledInputRedHover = styled(Input)`
 `
 
 export const StyledRedHoverTextFiled = styled(TextField)({
+    marginRight: '8px',
     width : '100%',
     display: 'flex',
     backgroundColor : 'white',
     borderRadius : '4px',
+    marginBottom : '20px',
 
     '& label.Mui-focused': {
         color: 'white',
@@ -58,6 +60,37 @@ export const StyledRedHoverTextFiled = styled(TextField)({
     },
 });
 
+export const StyledRedHoverTextFiledSmall = styled(TextField)({
+    marginRight: '8px',
+    width : '96%',
+    display: 'flex',
+    backgroundColor : 'white',
+    borderRadius : '4px',
+    marginBottom : '20px',
+
+    '& label.Mui-focused': {
+        color: 'white',
+        borderRadius: '4px',
+    },
+    '& .MuiInput-underline:after': {
+        borderBottomColor: 'red',
+        borderRadius: '4px',
+    },
+    '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+            borderColor: 'none',
+            borderRadius: '4px',
+        },
+        '&:hover fieldset': {
+            borderColor: 'red',
+            borderRadius: '4px',
+        },
+        '&.Mui-focused fieldset': {
+            borderColor: 'red',
+            borderRadius: '4px',
+        },
+    },
+});
 
 export const CandidateRegisterTextCandidateExist = styled('div')`
   color: whitesmoke;

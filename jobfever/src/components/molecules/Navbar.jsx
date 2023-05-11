@@ -9,7 +9,6 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
@@ -18,9 +17,6 @@ import {StyledLink} from "../atoms/Link.styles";
 import Cookies from "js-cookie";
 import {StyledPostJobButton} from "./Navbar.styles";
 import {useState} from "react";
-import {useCandidateById} from "../../api/CandidateApi";
-import axios from "axios";
-
 
 const pages = [
     <StyledLink to='/jobs'>OFFERS</StyledLink>,
@@ -31,12 +27,10 @@ const pages = [
 
 export default function ResponsiveAppBar() {
     let jwt = Cookies.get('jwt');
-    const {data, loading} = useCandidateById(JSON.parse(jwt).candidate_id);
-    const [pictureUrl, setPictureUrl] = useState("");
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [settings, setSettings] = useState([]);
-    const defaultFilename = "defaultlogo.png"
+
     const navigate = useNavigate();
 
     const handleOpenNavMenu = (event) => {
@@ -79,16 +73,7 @@ export default function ResponsiveAppBar() {
             navigate('/employer/' + JSON.parse(jwt).employer_id);
         }
     };
-    const getFileByFilename = async (name) => {
-        try {
-            const {data: response} = await axios.get('http://localhost:8080/api/file/url', {
-                params: {filename: name},
-            });
-            setPictureUrl(response);
-        } catch (error) {
-            console.error(error)
-        }
-    };
+
     function AddJobButton() {
 
         if (!jwt) {
@@ -106,6 +91,7 @@ export default function ResponsiveAppBar() {
             );
         }
     }
+
     function LoggedInNavbar() {
         return (
             <AppBar position="static" style={{margin: 0, background: 'rgba(29, 25, 23, 0.7)'}}>
@@ -200,9 +186,14 @@ export default function ResponsiveAppBar() {
                             <AddJobButton/>
                         </Box>
                         <Box sx={{flexGrow: 0}}>
-                            <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{p: 2}}>
-                                    <Avatar src={pictureUrl}/>
+                            <Tooltip title="Open details">
+                                <IconButton size="large"
+                                            edge="start"
+                                            color="inherit"
+                                            aria-label="menu"
+                                            sx={{ mr: 2 }}
+                                            onClick={handleOpenUserMenu} sx={{p: 2}}>
+                                    <MenuIcon />
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -337,14 +328,6 @@ export default function ResponsiveAppBar() {
     if (!jwt) {
         return  LoggedOutNavbar()
     }else{
-        if (!loading) {
-            if (!data){
-                getFileByFilename(defaultFilename)
-                return LoggedInNavbar()
-            }
-            const name = data.imgFileName
-            getFileByFilename(name)
             return LoggedInNavbar()
-        }
     }
 }
