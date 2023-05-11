@@ -17,6 +17,10 @@ import {uploadFile} from "../../api/FilesApi";
 import {StyledProfilePhoto} from "../atoms/ProfilePhoto.styles";
 import axios from "axios";
 
+import {StyledEmailIcon} from "../atoms/StyledEmailIcon";
+import {StyledLinkedInIcon} from "../atoms/StyledLinkedinIcon";
+import {StyledContactPhoneIcon} from "../atoms/StyledPhoneIcon";
+
 
 export default function EmployerProfilePersonalInfo(props) {
     const {data, loading} = useEmployerById(props.id)
@@ -52,7 +56,7 @@ export default function EmployerProfilePersonalInfo(props) {
     const handleSaveClick = async () => {
         if (nameAndSurname && nameAndSurname.trim() !== '' && localization && localization.trim() !== '' && phoneNumber.toString() && phoneNumber.toString().trim() !== '' && nip && nip.toString().trim() !== '' && nip.toString().length === 10) {
             setIsEdit(false);
-            await editEmployer(props.id, companyName, nameAndSurname, phoneNumber, localization, null, nip);
+            await editEmployer(props.id, companyName, nameAndSurname, phoneNumber, localization, null, nip, linkedin);
             if (newPicture) {
                 await uploadFile(newPicture)
                 await saveEmployersImgFilename(JSON.parse(Cookies.get("jwt")).employer_id, newPicture.name);
@@ -69,6 +73,7 @@ export default function EmployerProfilePersonalInfo(props) {
             if (data.nip !== 0){
                 setNip(data.nip)
             }
+            setLinkedIn(data.linkedin)
         }
     }, [data]);
 
@@ -155,20 +160,9 @@ export default function EmployerProfilePersonalInfo(props) {
                             />
                         </Box>
                     </StyledLeftBox>
-
                     <StyledRightBox>
-                        <h3>Phone number</h3>
-                        <Box mb={1}>
-                            <EditableInput
-                                isEdit={isEdit}
-                                value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
-                                placeholder="Phone number"
-                                isRequired={true}
-                            />
-                        </Box>
                         <h3>NIP</h3>
-                        <Box mb={1}>
+                        <Box mb={8}>
                             <EditableInput
                                 isEdit={isEdit}
                                 isCorrect={nip && nip.toString().length === 10}
@@ -180,22 +174,33 @@ export default function EmployerProfilePersonalInfo(props) {
                                 isRequired={true}
                             />
                         </Box>
-                        <h3>Social Links</h3>
                         <Box mb={1}>
+                            <StyledContactPhoneIcon />
+                            <EditableInput
+                                isEdit={isEdit}
+                                value={phoneNumber}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                placeholder="Phone number"
+                                isRequired={true}
+                            />
+                        </Box>
+                        {/*<Box mb={1}>*/}
+                        {/*    <StyledEmailIcon />*/}
+                        {/*    <EditableInput*/}
+                        {/*        isEdit={isEdit}*/}
+                        {/*        value={linkedin}*/}
+                        {/*        onChange={(e) => setLinkedIn(e.target.value)}*/}
+                        {/*        placeholder="email here"*/}
+                        {/*        isRequired={false}*/}
+                        {/*    />*/}
+                        {/*</Box>*/}
+                        <Box mb={6}>
+                            <a href={linkedin} target="_blank"><StyledLinkedInIcon /></a>
                             <EditableInput
                                 isEdit={isEdit}
                                 value={linkedin}
                                 onChange={(e) => setLinkedIn(e.target.value)}
                                 placeholder="https://www.linkedin.com/"
-                                isRequired={false}
-                            />
-                        </Box>
-                        <Box mb={2}>
-                            <EditableInput
-                                isEdit={isEdit}
-                                value={github}
-                                onChange={(e) => setGitHub(e.target.value)}
-                                placeholder="https://github.com/"
                                 isRequired={false}
                             />
                         </Box>
