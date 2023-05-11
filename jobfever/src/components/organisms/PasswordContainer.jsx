@@ -25,10 +25,7 @@ import {changePassword} from "../../api/AuthApi";
 
 export default function PasswordContainer(){
     const params = useParams();
-    console.log(params)
-
     const [errorMessage, setErrorMessage] = useState(null);
-
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
@@ -69,7 +66,7 @@ export default function PasswordContainer(){
             setFormData((prevFormData) => ({...prevFormData, errors}));
             return;
         }
-        console.log(changePassword("http://localhost:8080/api/authentication/reset-password", params.token, formData.password))
+        changePassword("http://localhost:8080/api/authentication/reset-password", params.token, formData.password)
         setErrorMessage('Password changed successfully.');
 
             setTimeout(() => {
