@@ -44,7 +44,8 @@ export async function editCandidate(id, updatedCandidateData) {
             name: updatedCandidateData.name,
             city: updatedCandidateData.city,
             linkedin: updatedCandidateData.linkedin,
-            github: updatedCandidateData.github
+            github: updatedCandidateData.github,
+            email: updatedCandidateData.email
         },
         {
             params: {id: id},
@@ -130,8 +131,7 @@ export async function addCandidateExperience(candidateId, updatedCandidateExperi
 
 export const saveCandidatesImgFilename = async (id, filename) => {
     try {
-        await axios.put("http://localhost:8080/api/candidates/add-image", {
-        },{
+        await axios.put("http://localhost:8080/api/candidates/add-image", {}, {
             params: {
                 id: id,
                 filename: filename
@@ -147,8 +147,7 @@ export const saveCandidatesImgFilename = async (id, filename) => {
 
 export const saveCandidatesCvFile = async (id, filename) => {
     try {
-        await axios.put("http://localhost:8080/api/candidates/add-cv-file", {
-        },{
+        await axios.put("http://localhost:8080/api/candidates/add-cv-file", {}, {
             params: {
                 id: id,
                 filename: filename
