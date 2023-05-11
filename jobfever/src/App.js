@@ -16,7 +16,8 @@ import SingleOfferPage from "./pages/SingleOfferPage";
 import EmployerProfile from "./pages/EmployerProfile";
 import Layout from "./pages/Layout";
 import EditJobOffer from "./pages/EditJobOffer";
-import {ProtectedRoute} from "./pages/ProtectedRoot/ProtectedRoot";
+import {ProtectedRoute} from "./pages/AuthProvider/ProtectedRoot";
+import ChangePassword from "./pages/ChangePassword";
 function App() {
     return (
 
@@ -32,6 +33,7 @@ function App() {
                             </ProtectedRoute>
                         }/>
                         <Route path="/employer/login" element={<EmployerLogin/>}/>
+                        <Route path="/change-password/:token" element={<ChangePassword/>}/>
                         <Route path="/employer/register" element={<EmployerRegister/>}/>
                         <Route path="/employer/:id" element={
                             <EmployerProfile/>

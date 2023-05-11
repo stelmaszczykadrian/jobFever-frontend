@@ -9,13 +9,12 @@ import {Link} from "@mui/joy";
 import Input from "@mui/joy/Input";
 import {MailOutline} from "@material-ui/icons";
 import {StyledEmailInputValidation} from "../organisms/CandidateRegisterRightContainer.styles";
-import {changePassword, forgotPassword} from "../../api/AuthApi";
+import {forgotPassword} from "../../api/AuthApi";
 
 export default function ChangePasswordModal() {
     const [open, setOpen] = useState(false);
     const [input, setInput] = useState({
     });
-    const [urlForPasswordChange, setUrlForPasswordChange] = useState("")
     const onInputChange = e => {
         const {name, value} = e.target;
         setInput(prev => ({
@@ -30,15 +29,13 @@ export default function ChangePasswordModal() {
         setOpen(false);
     };
     const handleSave = async () => {
-        const url = await forgotPassword(input.email)
-        console.log(typeof url)
-        changePassword(url, "222222")
+        await forgotPassword(input.email)
         setOpen(false);
     };
 
     return (
         <div>
-            <Link onClick={handleClickOpen}>You dont remember password?</Link>
+            <Link sx={{left: '39%'}} onClick={handleClickOpen}>You dont remember password?</Link>
             <Dialog
                 fullWidth
                 maxWidth="sm"
@@ -54,9 +51,7 @@ export default function ChangePasswordModal() {
                                     type="text"
                                     name="email"
                                     placeholder='ex. jobFever@email.com'
-                                    // value={formData.email}
                                     onChange={onInputChange}
-                                    // onBlur={validateInput}
                                 />
                                 <IconButton sx={{color: 'white'}}>
                                     <MailOutline/>

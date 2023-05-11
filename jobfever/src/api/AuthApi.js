@@ -9,9 +9,6 @@ export const forgotPassword = async (email) => {
             params: {
                 email: email
             },
-            // headers: {
-            //     Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
-            // }
         }).then((response) => {
             console.log(response.data)
             data = response.data;
@@ -21,16 +18,14 @@ export const forgotPassword = async (email) => {
     }
     return data
 }
-export const changePassword = async (url, password) => {
+export const changePassword = async (url,token, password) => {
     try {
         await axios.put(url, {
         },{
             params: {
+                token,
                 password
             },
-            // headers: {
-            //     Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
-            // }
         }).then((response) => {
             console.log(response.data)
             return response.data;
