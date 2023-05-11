@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-export const forgotPassword = async (email) => {
+export const sendEmailForPasswordChange = async (email) => {
     let data
     try {
         await axios.post("http://localhost:8080/api/authentication/forgot-password", {
@@ -10,7 +10,6 @@ export const forgotPassword = async (email) => {
                 email: email
             },
         }).then((response) => {
-            console.log(response.data)
             data = response.data;
         });
     } catch (error) {
@@ -27,7 +26,6 @@ export const changePassword = async (url,token, password) => {
                 password
             },
         }).then((response) => {
-            console.log(response.data)
             return response.data;
         });
     } catch (error) {

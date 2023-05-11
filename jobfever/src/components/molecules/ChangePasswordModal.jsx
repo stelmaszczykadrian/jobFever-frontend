@@ -9,7 +9,7 @@ import {Link} from "@mui/joy";
 import Input from "@mui/joy/Input";
 import {MailOutline} from "@material-ui/icons";
 import {StyledEmailInputValidation} from "../organisms/CandidateRegisterRightContainer.styles";
-import {forgotPassword} from "../../api/AuthApi";
+import {sendEmailForPasswordChange} from "../../api/AuthApi";
 
 export default function ChangePasswordModal() {
     const [open, setOpen] = useState(false);
@@ -29,7 +29,7 @@ export default function ChangePasswordModal() {
         setOpen(false);
     };
     const handleSave = async () => {
-        await forgotPassword(input.email)
+        await sendEmailForPasswordChange(input.email)
         setOpen(false);
     };
 
