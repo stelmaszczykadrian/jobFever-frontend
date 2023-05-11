@@ -16,7 +16,8 @@ import {
     incorrectEmailAddressMessage,
     incorrectEmailEmptyMessage, incorrectPasswordBlankMessage
 } from "../../constants/RegisterFormValidationsMessages";
-
+import ChangePasswordModal from "../molecules/ChangePasswordModal";
+import {StyledAddIcon} from "../atoms/StyledAddIcon";
 import EmailInputField from "../molecules/EmailInputField";
 import PasswordInputField from "../molecules/PasswordInputField";
 
@@ -121,6 +122,7 @@ export default function LoginContainer(props) {
                         <RedButton
                             text="LOG IN">
                         </RedButton>
+                            <ChangePasswordModal id={props.id} text={'About Us..'} tag={<StyledAddIcon/>}/>
                     </FormControl>
                 </form>
             </Sheet>
