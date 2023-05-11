@@ -14,7 +14,7 @@ export default function EmployerAboutUsModal(props) {
     const [open, setOpen] = React.useState(false);
     const navigate = useNavigate();
     const [input, setInput] = useState({
-        aboutMe: '',
+        aboutMe: props.previousAboutUs,
     });
 
     const onInputChange = e => {
@@ -29,7 +29,6 @@ export default function EmployerAboutUsModal(props) {
         setOpen(true);
     };
 
-
     const handleClose = () => {
         setOpen(false);
     };
@@ -37,10 +36,12 @@ export default function EmployerAboutUsModal(props) {
     const handleSave = () => {
         setOpen(false);
 
-        editEmployer(props.id,null,null,null, null,input.aboutMe, null)
+        editEmployer(props.id, null, null, null, null, input.aboutMe, null)
         navigate(`/employer/${props.id}`);
         window.location.reload();
     };
+
+    const isSaveDisabled = !input.aboutMe;
 
     return (
         <div>
@@ -63,7 +64,7 @@ export default function EmployerAboutUsModal(props) {
                             <StyledTextarea
                                 placeholder="Write some information about your company"
                                 name="aboutMe"
-                                value={input.aboutMe}
+                                value={input.aboutMe || ''}
                                 onChange={onInputChange}
                             />
                         </StyledGridItem>
@@ -73,7 +74,7 @@ export default function EmployerAboutUsModal(props) {
                     <RedButtonStyled onClick={handleClose}>
                         Discard
                     </RedButtonStyled>
-                    <RedButtonStyled onClick={handleSave}>
+                    <RedButtonStyled onClick={handleSave} disabled={isSaveDisabled}>
                         Save
                     </RedButtonStyled>
                 </DialogActions>
