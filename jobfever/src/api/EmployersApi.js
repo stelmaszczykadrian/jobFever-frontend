@@ -34,7 +34,7 @@ export const useEmployerById = (id) => {
     };
 };
 
-export async function editEmployer(id, companyName, nameAndSurname, phoneNumber, localization, aboutUs, nip, linkedin) {
+export async function editEmployer(id, companyName, nameAndSurname, phoneNumber, localization, aboutUs, nip, linkedin, email) {
     if (!aboutUs) {
         try {
             await axios.put(url, {
@@ -43,7 +43,8 @@ export async function editEmployer(id, companyName, nameAndSurname, phoneNumber,
                     phoneNumber: parseInt(phoneNumber),
                     localization: localization,
                     nip: parseInt(nip),
-                    linkedin: linkedin
+                    linkedin: linkedin,
+                    email: email
                 },
                 {
                     params: {id: id},
