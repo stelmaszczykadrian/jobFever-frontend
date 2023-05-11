@@ -6,7 +6,6 @@ import {useNavigate} from "react-router-dom"
 import CandidateModal from "./CandidateModal";
 import Typography from "@mui/joy/Typography";
 import {JobCardForEmployer} from "./JobCardForEmployer";
-import Cookies from "js-cookie";
 
 export default function EmployerJobs(props) {
     const [data, setData] = useState([]);
