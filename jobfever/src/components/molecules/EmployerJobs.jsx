@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom"
 import CandidateModal from "./CandidateModal";
 import Typography from "@mui/joy/Typography";
 import {JobCardForEmployer} from "./JobCardForEmployer";
+import Cookies from "js-cookie";
 
 export default function EmployerJobs(props) {
     const [data, setData] = useState([]);
@@ -62,6 +63,7 @@ export default function EmployerJobs(props) {
     const handleModalClose = () => {
         setShowModal(false);
     };
+
     return (
         <StyledProfilePaper>
             <ProfileContainerTitle text={"Our Jobs"} />
@@ -69,7 +71,12 @@ export default function EmployerJobs(props) {
                 <>
                     {data.map((job, index) => (
                         <div key={job.jobId} style={{backgroundColor: 'rgba(0, 0, 0, 0.05)', borderRadius: '8px'}}>
-                            <JobCardForEmployer job={job} handleJobClick={handleJobClick} handleJobEdit={handleJobEdit} handleDeleteOffer={deleteOffer} handleCandidatesClick={handleCandidatesClick}/>
+                            <JobCardForEmployer employerId={props.id}
+                                                job={job}
+                                                handleJobClick={handleJobClick}
+                                                handleJobEdit={handleJobEdit}
+                                                handleDeleteOffer={deleteOffer}
+                                                handleCandidatesClick={handleCandidatesClick}/>
                         </div>
                     ))}
                     <CandidateModal
