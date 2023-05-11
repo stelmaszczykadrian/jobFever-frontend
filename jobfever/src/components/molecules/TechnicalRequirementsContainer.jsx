@@ -35,7 +35,7 @@ const TechnicalRequirementsContainer = ({pressedButtons, setPressedButtons, setI
                         {icon}
                     </StyledSortButton>
                     <div>
-                        <DialogContentText sx={{color: 'rgba(171, 36, 36)', fontWeight: 'bold'}}>{languageLabels[index]}</DialogContentText></div>
+                        <DialogContentText sx={{color: 'BLACK', fontSize: '12px'}}>{languageLabels[index]}</DialogContentText></div>
                 </div>
             ))}
         </StyledContainer>

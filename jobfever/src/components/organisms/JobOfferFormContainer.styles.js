@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import img from "../../images/backgrounds/addjobbackround.png"
+import img from "../../images/backgrounds/background_9.jpg"
 import Button from "@mui/joy/Button";
 
 export const StyledJobOfferCreationContainer = styled('div')`
@@ -11,6 +11,8 @@ export const StyledJobOfferCreationContainer = styled('div')`
 
 export const StyledInputJobOfferContainer = styled('div')`
   width: 100%;
+  border-radius: 4px;
+  color: white;
 `
 
 export const StyledJobOfferContainer = styled('div')`
@@ -25,7 +27,7 @@ export const StyledTextarea = styled("textarea")`
   height: 150px;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
   font-size: 16px;
   margin-bottom: 20px;
 `
@@ -33,30 +35,60 @@ export const StyledTextarea = styled("textarea")`
 export const StyledGridContainer = styled("div")`
   display: grid;
   grid-template-columns: auto auto;
+  border-radius: 4px;
+  color: white;
   
 `
 export const StyledGridItem = styled("div")`
   text-align: center;
   margin: 12px 5px;
+  border-radius: 4px;
+  color: white;
 `
 
 export const StyledSelectJobType = styled("select")`
-  font-size: 1.2rem;
+
+  font-size: 1rem;
   padding: 0.5rem;
-  border-radius: 0.5rem;
-  margin-bottom: 20px;
-  
+  border-radius: 4px;
+  margin-bottom: 0px;
+  text-color: grey;
+  height: 56px;
+  border-color: #B7B7B7;
+  width: 100%;
+  :focus{
+    border-color: red;
+    outline: none;
+}
 `
 
 export const StyledCurrencyType = styled("select")`
-  font-size: 1rem;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
- 
+      font-size: 1rem;
+      text-color: grey;
+      padding: 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 2px;
+      margin-top : 10px;
+      height: 56px;
+      width: 100%;
+      border-color: #B7B7B7;
+      :focus{
+        border-color: red;
+        outline: none;
+    }
+    `
+
+export const StyledOption = styled("option")`
+    :hover {
+      background-color: red;
+      border-color: red;
+    }
+}
 `
 
 export const StyledButtonCenter = styled("div")`
   text-align: center;
+  margin-bottom: 100px;
 `
 
 export const StyledRedButtonModalButton = styled(Button)(() => ({
@@ -70,9 +102,10 @@ export const StyledRedButtonModalButton = styled(Button)(() => ({
 }));
 
 export const StyledInputLabel = styled.div`
-  color: rgba(171, 36, 36);
+  color: black;
+  font-size: 15px;
   font-weight: bold;
-  margin: 15px 0;
+  margin: 10px 0;
 `;
 
 

@@ -1,4 +1,4 @@
-import {styled} from "@mui/material";
+import {styled, TextField} from "@mui/material";
 import Sheet from "@mui/joy/Sheet";
 import Input from "@mui/joy/Input";
 
@@ -27,6 +27,36 @@ export const StyledInputRedHover = styled(Input)`
   color: grey;
 }}
 `
+
+export const StyledRedHoverTextFiled = styled(TextField)({
+    width : '100%',
+    display: 'flex',
+    backgroundColor : 'white',
+    borderRadius : '4px',
+
+    '& label.Mui-focused': {
+        color: 'white',
+        borderRadius: '4px',
+    },
+    '& .MuiInput-underline:after': {
+        borderBottomColor: 'red',
+        borderRadius: '4px',
+    },
+    '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+            borderColor: 'none',
+            borderRadius: '4px',
+        },
+        '&:hover fieldset': {
+            borderColor: 'red',
+            borderRadius: '4px',
+        },
+        '&.Mui-focused fieldset': {
+            borderColor: 'red',
+            borderRadius: '4px',
+        },
+    },
+});
 
 
 export const CandidateRegisterTextCandidateExist = styled('div')`
