@@ -16,8 +16,8 @@ import SingleOfferPage from "./pages/SingleOfferPage";
 import EmployerProfile from "./pages/EmployerProfile";
 import Layout from "./pages/Layout";
 import EditJobOffer from "./pages/EditJobOffer";
-import {ProtectedRoute} from "./pages/AuthProvider/ProtectedRoot";
 import ChangePassword from "./pages/ChangePassword";
+import {ProtectedRoute} from "./pages/ProtectedRoot/ProtectedRoot";
 function App() {
     return (
 
