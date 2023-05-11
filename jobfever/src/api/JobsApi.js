@@ -92,7 +92,6 @@ export const createJob = (userData, onSuccess, onError) => {
         }
     }))
         .then((response) => {
-            console.log(response);
             if (response.status === 200 && response.data === "Job added successfully.") {
                 onSuccess();
             }
