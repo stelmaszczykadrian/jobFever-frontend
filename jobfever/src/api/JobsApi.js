@@ -71,6 +71,17 @@ export const applyForJob = async (jobId, candidateId) => {
 }
 
 
+export async function checkIfCandidateApplied(candidateId, jobId) {
+    try {
+        const response = await axios.get(`http://localhost:8080/api/jobs/job-applications?candidateId=${candidateId}&jobId=${jobId}`);
+        const jobApplications = response.data;
+        return jobApplications.length > 0;
+    } catch (error) {
+        console.error(error);
+        throw new Error("Failed to check if candidate has applied for the job");
+    }
+}
+
 
 export const createJob = (userData, onSuccess, onError) => {
     const url = "http://localhost:8080/api/jobs";

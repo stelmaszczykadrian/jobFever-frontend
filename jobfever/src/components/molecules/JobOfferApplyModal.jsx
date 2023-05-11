@@ -10,7 +10,7 @@ import {Checkbox} from "@mui/joy";
 import {FormControlLabel} from "@mui/material";
 import StyledText from "../atoms/StyledText";
 import Cookies from "js-cookie";
-import {applyForJob} from "../../api/JobsApi";
+import {applyForJob, checkIfCandidateApplied} from "../../api/JobsApi";
 import {useState} from "react";
 
 export default function JobOfferApplyModal(props) {
@@ -33,13 +33,36 @@ export default function JobOfferApplyModal(props) {
     function timeout(delay) {
         return new Promise( res => setTimeout(res, delay) );
     }
+    // const handleSave = async () => {
+    //     const message = await applyForJob(props.jobId, JSON.parse(jwt).candidate_id)
+    //     setAppliedText(message)
+    //     await timeout(2000);
+    //     setOpen(false);
+    //     setAppliedText("")
+    // };
+
+
     const handleSave = async () => {
-        const message = await applyForJob(props.jobId, JSON.parse(jwt).candidate_id)
-        setAppliedText(message)
+        const candidateId = JSON.parse(jwt).candidate_id;
+        const jobId = props.jobId;
+
+        const hasApplied = await checkIfCandidateApplied(candidateId, jobId);
+        if (hasApplied) {
+            setAppliedText("You have already applied for this job");
+            await timeout(2000);
+            setOpen(false);
+            setAppliedText("");
+            return;
+        }
+
+        const message = await applyForJob(jobId, candidateId);
+        setAppliedText(message);
         await timeout(2000);
         setOpen(false);
-        setAppliedText("")
+        setAppliedText("");
     };
+
+
     const RenderApplyButton = () => {
         if (jwt){
             if (JSON.parse(jwt).role === "CANDIDATE"){
