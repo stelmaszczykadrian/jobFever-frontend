@@ -17,6 +17,9 @@ import Cookies from "js-cookie";
 import {uploadFile} from "../../api/FilesApi";
 import axios from "axios";
 import {StyledProfilePhoto} from "../atoms/ProfilePhoto.styles";
+import {StyledLinkedInIcon} from "../atoms/StyledLinkedinIcon";
+import {StyledEmailIcon} from "../atoms/StyledEmailIcon";
+import {StyledGithubIcon} from "../atoms/StyledGithubIcon";
 
 
 export default function CandidateProfilePersonalInformation(props) {
@@ -25,6 +28,7 @@ export default function CandidateProfilePersonalInformation(props) {
     const [name, setName] = useState('Name Surname');
     const [city, setCity] = useState('City');
     const [linkedin, setLinkedIn] = useState('https://www.linkedin.com/');
+    const [email, setEmail] = useState('');
     const [github, setGitHub] = useState('https://github.com/');
     const [filename, setFilename] = useState("");
     const [previewPicture, setPreviewPicture] = useState(null);
@@ -61,7 +65,8 @@ export default function CandidateProfilePersonalInformation(props) {
                 name: name,
                 city: city,
                 linkedin: linkedin,
-                github: github
+                github: github,
+                email : email
             };
             await editCandidate(props.id, updatedCandidateData);
             if (newPicture) {
@@ -83,6 +88,7 @@ export default function CandidateProfilePersonalInformation(props) {
     React.useEffect(() => {
         if (data) {
             setName(data.name);
+            setEmail(data.email);
             setCity(data.city);
             setLinkedIn(data.linkedin);
             setGitHub(data.github);
@@ -203,8 +209,18 @@ export default function CandidateProfilePersonalInformation(props) {
                         </Box>
                     </StyledLeftBox>
                     <StyledRightBox>
-                        <h3>Social Links</h3>
                         <Box mb={1}>
+                            <StyledEmailIcon />
+                            <EditableInput
+                                isEdit={isEdit}
+                                value={email || ""}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="email@email.com"
+                                isRequired={false}
+                            />
+                        </Box>
+                        <Box mb={1}>
+                            <a href={linkedin} target="_blank" rel="noopener noreferrer"><StyledLinkedInIcon /></a>
                             <EditableInput
                                 isEdit={isEdit}
                                 value={linkedin || ""}
@@ -214,6 +230,7 @@ export default function CandidateProfilePersonalInformation(props) {
                             />
                         </Box>
                         <Box mb={6}>
+                            <a href={github} target="_blank" rel="noopener noreferrer"><StyledGithubIcon /></a>
                             <EditableInput
                                 isEdit={isEdit}
                                 value={github || ""}
