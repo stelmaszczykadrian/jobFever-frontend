@@ -122,7 +122,7 @@ export default function LoginContainer(props) {
                         <RedButton
                             text="LOG IN">
                         </RedButton>
-                            <ChangePasswordModal id={props.id} text={'About Us..'} tag={<StyledAddIcon/>}/>
+                        <ChangePasswordModal id={props.id} tag={<StyledAddIcon/>}/>
                     </FormControl>
                 </form>
             </Sheet>
