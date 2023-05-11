@@ -4,7 +4,6 @@ import {
     StyledLabel
 } from "../organisms/CandidateRegisterRightContainer.styles";
 import FormControl from "@mui/joy/FormControl";
-import Input from "@mui/joy/Input";
 import IconButton from "@mui/material/IconButton";
 import {MailOutline} from "@material-ui/icons";
 import StyledText from "../atoms/StyledText";

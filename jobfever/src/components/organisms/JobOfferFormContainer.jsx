@@ -1,13 +1,11 @@
-import Input from "@mui/joy/Input";
 import {
     StyledJobOfferCreationContainer,
     StyledInputJobOfferContainer,
-    StyledTextarea,
     StyledGridContainer,
     StyledGridItem,
     StyledSelectJobType,
     StyledCurrencyType,
-    StyledButtonCenter, StyledJobOfferContainer, StyledRedButtonModalButton, StyledInputLabel
+    StyledButtonCenter, StyledJobOfferContainer, StyledRedButtonModalButton, StyledInputLabel, StyledOption
 } from "./JobOfferFormContainer.styles";
 import React, {useState, useEffect} from "react";
 import {Form} from "react-bootstrap";
@@ -43,15 +41,18 @@ import {
     minTechnicalRequirementsValue,
     missingTechnicalRequirementMessage, incorrectWhoWeAreLookingForBlankMessage, incorrectBenefitsBlankMessage
 } from "../../constants/JobOfferFormValidationsMessages";
+import {
+    StyledRedHoverTextFiled
+} from "./CandidateRegisterRightContainer.styles";
 
 const jobType = [
-    {value: "", label: "Job type", disabled: true},
-    {value: 'FULL_TIME', label: 'Full-time'},
-    {value: 'PART_TIME', label: 'Part-time'},
-    {value: 'CONTRACT', label: 'Contract'},
-    {value: 'FREELANCE', label: 'Freelance'},
-    {value: 'INTERNSHIP', label: 'Internship'},
-    {value: 'TEMPORARY', label: 'Temporary'},
+    {value: "", label: "Contract type", disabled: true},
+    {value: 'EMPLOYMENT', label: 'Employment contract'},
+    {value: 'COMMISSION', label: 'Commission contract'},
+    {value: 'SPECIFIC', label: 'Specific-task contract'},
+    {value: 'B2B', label: 'B2B contract'},
+    {value: 'INTERNSHIP', label: 'Internship'}
+
 ];
 
 const currencyType = [
@@ -62,10 +63,10 @@ const currencyType = [
 ];
 
 const workType = [
-    {value: "", label: "Work type", disabled: true},
-    {value: 'REMOTE', label: 'remote'},
-    {value: 'ONSITE', label: 'on-site'},
-    {value: 'HYBRID', label: 'hybrid'},
+    {value: "", label: "Employment type", disabled: true},
+    {value: 'REMOTE', label: 'Remote'},
+    {value: 'ONSITE', label: 'On-site'},
+    {value: 'HYBRID', label: 'Hybrid'},
 ];
 
 export default function JobOfferFormContainer(props) {
@@ -307,14 +308,14 @@ export default function JobOfferFormContainer(props) {
             <Navbar/>
             <Form onSubmit={handleSubmit}>
                 <StyledText tag="h1"
-                            color="rgba(171, 36, 36)"
+                            color="BLACK"
                             text={props.pageTitle}/>
                 <StyledJobOfferCreationContainer>
                     <StyledInputJobOfferContainer>
                         <StyledInputLabel>Title :</StyledInputLabel>
-                        <Input
+                        <StyledRedHoverTextFiled
                             type="text"
-                            placeholder="Ex. Junior java developer"
+                            placeholder="Enter offer title"
                             name="title"
                             value={input.title}
                             onChange={onInputChange}
@@ -326,7 +327,9 @@ export default function JobOfferFormContainer(props) {
                                 text={input.errors.title}
                             /></Typography>}
                         <StyledInputLabel>Project description:</StyledInputLabel>
-                        <StyledTextarea
+                        <StyledRedHoverTextFiled
+                            multiline
+                            rows="5"
                             placeholder="Enter description"
                             name="description"
                             value={input.description}
@@ -349,7 +352,9 @@ export default function JobOfferFormContainer(props) {
                                 text={input.errors.technicalRequirements}
                             />}
                         <StyledInputLabel>Responsibilities:</StyledInputLabel>
-                        <StyledTextarea
+                        <StyledRedHoverTextFiled
+                            multiline
+                            rows="5"
                             placeholder="Enter responsibilities"
                             name="responsibilities"
                             value={input.responsibilities}
@@ -362,7 +367,9 @@ export default function JobOfferFormContainer(props) {
                                 text={input.errors.responsibilities}
                             />}
                         <StyledInputLabel>Who we are looking for: </StyledInputLabel>
-                        <StyledTextarea
+                        <StyledRedHoverTextFiled
+                            multiline
+                            rows="5"
                             placeholder="Enter who we are looking for"
                             name="whoWeAreLookingFor"
                             value={input.whoWeAreLookingFor}
@@ -375,7 +382,9 @@ export default function JobOfferFormContainer(props) {
                                 text={input.errors.whoWeAreLookingFor}
                             />}
                         <StyledInputLabel>Benefits:</StyledInputLabel>
-                        <StyledTextarea
+                        <StyledRedHoverTextFiled
+                            multiline
+                            rows="5"
                             placeholder="Enter benefits"
                             name="benefits"
                             value={input.benefits}
@@ -393,7 +402,7 @@ export default function JobOfferFormContainer(props) {
                                 <StyledGridItem>
                                     <StyledGridContainer>
                                         <StyledGridItem>
-                                            <Input
+                                            <StyledRedHoverTextFiled
                                                 placeholder="From"
                                                 name="salaryFrom"
                                                 value={input.salaryFrom}
@@ -407,7 +416,7 @@ export default function JobOfferFormContainer(props) {
                                                 /></Typography>}
                                         </StyledGridItem>
                                         <StyledGridItem>
-                                            <Input
+                                            <StyledRedHoverTextFiled
                                                 placeholder="To"
                                                 name="salaryTo"
                                                 value={input.salaryTo}
@@ -432,14 +441,14 @@ export default function JobOfferFormContainer(props) {
                                         value={input.currencyType}
                                         onChange={onCurrencyTypeChange}
                                     >
-                                        {currencyType.map((option) => (
-                                            <option
+                                        {currencyType.map((option,numb) => (
+                                            <StyledOption
                                                 key={option.value}
                                                 value={option.value}
                                                 disabled={option.disabled}
                                             >
                                                 {option.label}
-                                            </option>
+                                            </StyledOption>
                                         ))}
                                     </StyledCurrencyType>
                                     {input.errors.currencyType &&
@@ -452,7 +461,7 @@ export default function JobOfferFormContainer(props) {
                             </StyledGridItem>
                         </StyledGridContainer>
                         <StyledInputLabel>Location:</StyledInputLabel>
-                        <Input
+                        <StyledRedHoverTextFiled
                             placeholder="Enter location"
                             name="location"
                             value={input.location}
@@ -467,16 +476,17 @@ export default function JobOfferFormContainer(props) {
                         <StyledGridContainer>
                             <StyledGridItem>
                                 <StyledGridItem>
-                                    <StyledInputLabel>Types of jobs:</StyledInputLabel>
+                                    <StyledInputLabel>Contract type:</StyledInputLabel>
                                 </StyledGridItem>
                                 <StyledGridItem>
                                     <StyledSelectJobType
+                                        checked
                                         value={input.jobType}
                                         onChange={onJobTypeChange}
                                     >
                                         {jobType.map((option) => (
-                                            <option key={option.value} value={option.value}
-                                                    disabled={option.disabled}>{option.label}</option>
+                                            <StyledOption key={option.value} value={option.value}
+                                                    disabled={option.disabled}>{option.label}</StyledOption>
                                         ))}
                                     </StyledSelectJobType>
                                     {input.errors.jobType &&
@@ -489,7 +499,7 @@ export default function JobOfferFormContainer(props) {
                             </StyledGridItem>
                             <StyledGridItem>
                                 <StyledGridItem>
-                                    <StyledInputLabel>Work types:</StyledInputLabel>
+                                    <StyledInputLabel>Employment types:</StyledInputLabel>
                                 </StyledGridItem>
                                 <StyledGridItem>
                                     <StyledGridItem>
