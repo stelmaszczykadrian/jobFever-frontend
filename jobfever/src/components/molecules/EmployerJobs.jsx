@@ -3,15 +3,9 @@ import {StyledProfilePaper} from "./CandidateProfile.styles";
 import React, {useEffect, useState} from "react";
 import {deleteJobOfferById, getJobOfferCandidatesByJobId, useJobsByName} from "../../api/JobsApi";
 import {useNavigate} from "react-router-dom"
-import {JobCard} from "./JobsCard";
 import CandidateModal from "./CandidateModal";
 import Typography from "@mui/joy/Typography";
-import IconButton from "@mui/material/IconButton";
-import {StyledEditIcon} from "../atoms/StyledEditIcon";
-import {StyledDeleteIcon} from "../atoms/StyledDeleteIcon";
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import Cookies from "js-cookie";
-
+import {JobCardForEmployer} from "./JobCardForEmployer";
 
 export default function EmployerJobs(props) {
     const [data, setData] = useState([]);
@@ -61,29 +55,13 @@ export default function EmployerJobs(props) {
         navigate(`/job/${jobId}`);
     };
 
+    const handleJobEdit = (jobId) => {
+        navigate(`/job/${jobId}/edit`)
+    };
+
     const handleModalClose = () => {
         setShowModal(false);
     };
-
-    const RenderEmployerJobCardButtons= ({ id, job }) => {
-        if (props.id === JSON.parse(Cookies.get("jwt")).employer_id.toString()) {
-
-            return (
-                <div>
-                    <IconButton onClick={() => navigate(`/job/${job.jobId}/edit`)}>
-                        <StyledEditIcon/>
-                    </IconButton>
-                    <IconButton onClick={() => deleteOffer(job.jobId)}>
-                        <StyledDeleteIcon />
-                    </IconButton>
-                    <IconButton onClick={() => handleCandidatesClick(job.jobId, job.title)}>
-                        <PeopleAltIcon style={{fill: "rgb(183, 4, 11)", fontSize: '1.4em'}}/>
-                    </IconButton>
-                </div>
-            )
-        }
-    }
-
     return (
         <StyledProfilePaper>
             <ProfileContainerTitle text={"Our Jobs"} />
@@ -91,10 +69,7 @@ export default function EmployerJobs(props) {
                 <>
                     {data.map((job, index) => (
                         <div key={job.jobId} style={{backgroundColor: 'rgba(0, 0, 0, 0.05)', borderRadius: '8px'}}>
-                            <JobCard job={job} handleJobClick={handleJobClick} />
-                            <div style={{display: 'flex', flexDirection: 'row-reverse'}}>
-                                <RenderEmployerJobCardButtons id={props.id} job={job} />
-                            </div>
+                            <JobCardForEmployer job={job} handleJobClick={handleJobClick} handleJobEdit={handleJobEdit} handleDeleteOffer={deleteOffer} handleCandidatesClick={handleCandidatesClick}/>
                         </div>
                     ))}
                     <CandidateModal
