@@ -56,7 +56,7 @@ export default function EmployerProfilePersonalInfo(props) {
     const handleSaveClick = async () => {
         if (nameAndSurname && nameAndSurname.trim() !== '' && localization && localization.trim() !== '' && phoneNumber.toString() && phoneNumber.toString().trim() !== '' && nip && nip.toString().trim() !== '' && nip.toString().length === 10) {
             setIsEdit(false);
-            await editEmployer(props.id, companyName, nameAndSurname, phoneNumber, localization, null, nip, linkedin);
+            await editEmployer(props.id, companyName, nameAndSurname, phoneNumber, localization, null, nip, linkedin, email);
             if (newPicture) {
                 await uploadFile(newPicture)
                 await saveEmployersImgFilename(JSON.parse(Cookies.get("jwt")).employer_id, newPicture.name);
@@ -144,10 +144,10 @@ export default function EmployerProfilePersonalInfo(props) {
                         <Box mb={1}>
                             <EditableInput
                                 isEdit={isEdit}
-                                value={nameAndSurname}
+                                value={nameAndSurname || ""}
                                 onChange={(e) => setNameAndSurname(e.target.value)}
                                 placeholder="Name Surname"
-                                isRequired={true}
+                                isRequired
                             />
                         </Box>
                         <h3>Localization</h3>
@@ -157,7 +157,7 @@ export default function EmployerProfilePersonalInfo(props) {
                                 value={localization || ""}
                                 onChange={(e) => setLocalization(e.target.value)}
                                 placeholder="Localization"
-                                isRequired={true}
+                                isRequired
                             />
                         </Box>
                     </StyledLeftBox>
@@ -169,33 +169,37 @@ export default function EmployerProfilePersonalInfo(props) {
                                 isCorrect={nip && nip.toString().length === 10}
                                 errorMsg = "This field must be 10 digits long"
                                 type = "number"
-                                value={nip}
+                                value={nip || ""}
                                 onChange={(e) => setNip(e.target.value)}
                                 placeholder="NIP"
-                                isRequired={true}
+                                isRequired
                             />
                         </Box>
                         <Box mb={1}>
                             <StyledContactPhoneIcon />
                             <EditableInput
                                 isEdit={isEdit}
-                                value={phoneNumber}
+                                value={phoneNumber || ""}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                                 placeholder="Phone number"
-                                isRequired={true}
+                                isRequired
                             />
                         </Box>
                         <Box mb={1}>
                             <StyledEmailIcon />
                             <EditableInput
-                                value={email}
+                                isEdit={isEdit}
+                                value={email || ""}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="email@email.com"
+                                isRequired={false}
                             />
                         </Box>
                         <Box mb={6}>
-                            <a href={linkedin} target="_blank"><StyledLinkedInIcon /></a>
+                            <a href={linkedin} target="_blank" rel="noopener noreferrer"><StyledLinkedInIcon /></a>
                             <EditableInput
                                 isEdit={isEdit}
-                                value={linkedin}
+                                value={linkedin || ""}
                                 onChange={(e) => setLinkedIn(e.target.value)}
                                 placeholder="https://www.linkedin.com/"
                                 isRequired={false}
