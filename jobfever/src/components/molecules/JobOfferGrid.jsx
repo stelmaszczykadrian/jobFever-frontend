@@ -51,7 +51,7 @@ export default function JobOfferGrid({job, onClick}) {
                                         {job.title}
                                     </Typography>
                                 </Grid>
-                                <Grid item style={{ display: 'flex', alignItems: 'center', marginTop: '4%'}}>
+                                <Grid item style={{ display: 'flex', alignItems: 'center'}}>
                                     <Grid item style={{marginTop: '8%', display: 'flex', color: "black", fontSize: '14px'}}>
                                     <Text>
                                         <img src={pin} alt="my" width={"15px"}/>{job.location}
