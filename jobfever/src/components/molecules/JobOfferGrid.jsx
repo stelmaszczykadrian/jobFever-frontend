@@ -6,7 +6,9 @@ import React, {useState} from "react";
 import {useEmployerById} from "../../api/EmployersApi";
 import axios from "axios";
 import {StyledJobImage} from "../atoms/JobImage.styles";
-
+import pin from "../../images/languages/pin.svg"
+import contract from "../../images/languages/contract.svg"
+import work from "../../images/languages/work.svg"
 
 export default function JobOfferGrid({job, onClick}) {
     const {data, loading} = useEmployerById(job.employer_id);
@@ -30,18 +32,13 @@ export default function JobOfferGrid({job, onClick}) {
         return (
             <StyledPaper onClick={() => handleJobClick()}>
                 <Grid container spacing={2}>
-                    <Grid item xs={4} container >
-                        <Grid item>
-                            <ButtonBase sx={{width: 128, height: 128}}>
+                    <Grid item xs={4} container style={{ alignItems: 'center' }} >
+                            <ButtonBase sx={{ marginBottom: '20px', width: 128, height: 128}}>
                                 <StyledJobImage alt="Employer logo" src={pictureUrl} />
                             </ButtonBase>
-                        </Grid>
-                        <Grid item xs={3} container>
-                            <Grid container direction="column">
+                        <Grid item xs={8} container>
                                 <Grid item>
                                     <Typography
-                                        variant="h1"
-                                        component="h1"
                                         style={{
                                             fontWeight: 'bold',
                                             color: 'rgba(171, 36, 36)',
@@ -49,45 +46,46 @@ export default function JobOfferGrid({job, onClick}) {
                                             wordWrap: 'break-word',
                                             overflow: 'hidden',
                                             textOverflow: 'ellipsis',
-                                            maxWidth: '300px'
                                         }}
                                     >
                                         {job.title}
                                     </Typography>
                                 </Grid>
-                                <Grid item>
-                                    <Typography variant="body2" gutterBottom style={{fontWeight: 'bold', color: "black", fontSize: '15px'}}>
-                                        {job.jobType}
-                                    </Typography>
-                                </Grid>
-                                <Grid item>
-                                    <Typography variant="body2" color="text.secondary" style={{fontWeight: 'bold', color: "black", fontSize: '15px'}}>
-                                        {job.location}
-                                    </Typography>
+                                <Grid item style={{ display: 'flex', alignItems: 'center', marginTop: '4%'}}>
+                                    <Grid item style={{marginTop: '8%', display: 'flex', color: "black", fontSize: '14px'}}>
+                                    <Text>
+                                        <img src={pin} alt="my" width={"15px"}/>{job.location}
+                                    </Text>
+                                    </Grid>
+                                    <Grid item style={{marginTop: '8%', display: 'flex', color: "black", fontSize: '14px'}}>
+                                    <Text>
+                                        <img src={contract} alt="my" width={"15px"}/>{ job.jobType}
+                                    </Text>
+                                    </Grid>
+                                    <Grid item style={{marginTop: '8%', display: 'flex', color: "black", fontSize: '14px'}}>
+                                    <Text sx={{marginLeft: '2px'}}>
+                                            <img src={work} alt="my" width={"15px"} sx={{marginRight: '2px'}}/>{job.workType}
+                                    </Text>
                                 </Grid>
                             </Grid>
                         </Grid>
 
                     </Grid>
-                    <Grid item xs={4} style={{ display: 'flex', alignItems: 'center' }}>
-                        <Wrapper style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', width: '100%' }}>
-                            {job.technicalRequirements.map(tech => (
-                                <Square key={tech}>
-                                    <Text>{tech}</Text>
-                                </Square>
-                            ))}
-                        </Wrapper>
-                    </Grid>
-                    <Grid item xs={3} container direction="column" justifyContent="center" alignItems="center">
-                        <Grid item>
-                            <Typography variant="subtitle1" component="div" style={{textAlign: 'center', fontWeight: 'bold', color: "black"}}>
+
+                    <Grid item xs={7.8} container align-items direction="column" alignItems="right">
+                        <Grid item sx={{marginTop: '0'}}>
+                            <Typography variant="subtitle1" component="div" style={{ marginTop: '10px', marginBottom: '6%', textAlign: 'right', fontSize: '25px',fontWeight: 'bold', color: "rgba(171, 36, 36)"}}>
                                 {job.salaryFrom} - {job.salaryTo} {job.currencyType}
                             </Typography>
                         </Grid>
-                        <Grid item>
-                            <Typography variant="subtitle1" component="div" style={{textAlign: 'center', fontWeight: 'bold', color: "black"}}>
-                                {job.workType}
-                            </Typography>
+                        <Grid item sx={{bottom: '0'}}>
+                                <Wrapper style={{ bottom: '0', display: 'flex', flexWrap: 'wrap', width: '100%', textAlign: 'right' }}>
+                                    {job.technicalRequirements.map(tech => (
+                                        <Square key={tech}>
+                                            <Text>{tech}</Text>
+                                        </Square>
+                                    ))}
+                                </Wrapper>
                         </Grid>
                     </Grid>
                 </Grid>

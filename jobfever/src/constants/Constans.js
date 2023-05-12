@@ -13,7 +13,7 @@ import Dotnet from "../images/languages/dotnet.svg";
 import PowerShell from "../images/languages/powershell.svg";
 import Data from "../images/languages/data.svg";
 import SQL from "../images/languages/sql.svg";
-import All from "../images/languages/all.svg";
+import All from "../images/languages/search.svg";
 import * as React from "react";
 
 

@@ -14,10 +14,9 @@ export default function SearchBar({ onSearch }) {
         setSearchTerm(event.target.value);
     };
 
-
     return (
         <div>
-            <Search>
+            <Search >
                 <form onSubmit={handleSubmit}>
                     <SearchIconWrapper>
                         <SearchIcon/>

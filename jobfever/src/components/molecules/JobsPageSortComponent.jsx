@@ -18,8 +18,10 @@ export default function JobsPageSortComponent({onLanguageChange}) {
     return(
         <StyledContainer>
             {languageIconsSortJobsPage.map((icon, index) => (
-                <div key={`${icon}-${index}`}>
+                <div
+                    key={`${icon}-${index}`}>
                     <StyledSortButton
+                        sx={{marginTop: '10px'}}
                         id={index}
                         value={languageLabelsSortJobsPage[index]}
                         onClick={() => handleButtonClick(languageLabelsSortJobsPage[index], index)}
@@ -27,7 +29,7 @@ export default function JobsPageSortComponent({onLanguageChange}) {
                     >
                         {icon}
                     </StyledSortButton>
-                    <DialogContentText sx={{color: 'rgba(171, 36, 36)', fontWeight: 'bold', marginBottom: '10px'}}>{languageLabelsSortJobsPage[index]}</DialogContentText>
+                    <DialogContentText sx={{color: 'white', fontSize: '14px',marginBottom: '20px'}}>{languageLabelsSortJobsPage[index]}</DialogContentText>
                 </div>
             ))}
         </StyledContainer>

@@ -5,12 +5,12 @@ export const Search = styled('div')(({theme}) => ({
     marginBottom: "1%",
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.white, 0.95),
     '&:hover': {
         backgroundColor: alpha(theme.palette.common.white, 0.35),
     },
-    marginLeft: 0,
-    marginTop: 6,
+    marginTop: '12px',
+    marginLeft : '10px',
     width: '100%',
     [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(1),
@@ -39,3 +39,15 @@ export const StyledInputBase = styled(InputBase)(({theme}) => ({
 
     },
 }));
+
+export const StyledBoxFlex = styled("box")`
+    display: flex;
+    flex: content;
+    border-radius: 20px;
+    align-self: center;
+    text-align: center;
+    grid-column-gap: 10px;
+    justify-content: space-around;
+    flex-direction: row;
+    font-family: 'monospace';
+`
