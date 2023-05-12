@@ -4,13 +4,12 @@ import Pagination from "@mui/material/Pagination";
 import Typography from "@mui/joy/Typography";
 import {makeStyles} from "@mui/styles";
 import {useNavigate} from "react-router-dom";
-import {StyledBoxShadow, StyledJobsPageMainComponent} from "../templates/JobsPageMainComponent.styles";
 import {StyledJobOffersContainer, StyledPaginationContainer} from "./JobOffersContainer.styles";
 import JobsPageSortComponent from "../molecules/JobsPageSortComponent";
 import JobOfferGrid from "../molecules/JobOfferGrid";
 import axios from "axios";
 import SearchBar from "../molecules/SearchBar";
-
+import {StyledBoxFlex} from "../molecules/SearchBar.styles";
 
 const useStyles = makeStyles(() => ({
     ul: {
@@ -92,8 +91,10 @@ export default function JobsOfferContainer() {
     return (
         <box>
                 <StyledJobOffersContainer>
-                    <SearchBar onSearch={handleSearch} />
+                    <StyledBoxFlex>
                     <JobsPageSortComponent onLanguageChange={handleLanguageChange} />
+                    <SearchBar onSearch={handleSearch} />
+                    </StyledBoxFlex>
                     {loading ? (
                         <Typography></Typography>
                     ) : (

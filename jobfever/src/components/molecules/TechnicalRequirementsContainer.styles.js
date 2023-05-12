@@ -7,7 +7,7 @@ export const StyledContainer = styled('div')`
     border-radius: 20px;
     align-self: center;
     text-align: center;
-    grid-column-gap: 5px;
+    grid-column-gap: 10px;
     justify-content: space-around;
     flex-direction: row;
     font-family: 'monospace'`;

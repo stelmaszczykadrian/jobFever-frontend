@@ -17,6 +17,8 @@ import {StyledLink} from "../atoms/Link.styles";
 import Cookies from "js-cookie";
 import {StyledPostJobButton} from "./Navbar.styles";
 import {useState} from "react";
+import icon from "../../images/languages/add.svg"
+import Python from "../../images/languages/python.svg";
 
 const pages = [
     <StyledLink to='/jobs'>OFFERS</StyledLink>,
@@ -86,7 +88,7 @@ export default function ResponsiveAppBar() {
                         navigate('/add-job');
                     }}
                 >
-                    POST JOB
+                    <img src={icon} width={"25px"}/> ADD JOB OFFER
                 </StyledPostJobButton>
             );
         }
@@ -182,7 +184,7 @@ export default function ResponsiveAppBar() {
                                 </Button>
                             ))}
                         </Box>
-                        <Box sx={{flexGrow: 0.1}}>
+                        <Box sx={{flexGrow: 0.1, marginRight: '30px'}}>
                             <AddJobButton/>
                         </Box>
                         <Box sx={{flexGrow: 0}}>
