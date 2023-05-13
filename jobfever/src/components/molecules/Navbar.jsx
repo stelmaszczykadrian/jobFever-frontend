@@ -18,7 +18,6 @@ import Cookies from "js-cookie";
 import {StyledPostJobButton} from "./Navbar.styles";
 import {useState} from "react";
 import icon from "../../images/languages/add.svg"
-import Python from "../../images/languages/python.svg";
 
 const pages = [
     <StyledLink to='/jobs'>OFFERS</StyledLink>,
@@ -27,7 +26,7 @@ const pages = [
 ];
 
 
-export default function ResponsiveAppBar() {
+export default function Navbar() {
     let jwt = Cookies.get('jwt');
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
