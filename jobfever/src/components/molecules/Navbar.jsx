@@ -30,29 +30,15 @@ export default function Navbar() {
     let jwt = Cookies.get('jwt');
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
-    const [settings, setSettings] = useState([]);
+    const [settings] = useState([]);
 
     const navigate = useNavigate();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
-    function setProfileLink(){
-        if (jwt) {
-            if (!JSON.parse(jwt).employer_id) {
-                setSettings([
-                    'Dashboard', 'Favourites'
-                ])
-            } else {
-                setSettings([
-                    'Dashboard', 'Favourites'
-                ])
-            }
-        }
-    }
 
     const handleOpenUserMenu = (event) => {
-        setProfileLink();
         setAnchorElUser(event.currentTarget);
     };
 
@@ -70,13 +56,12 @@ export default function Navbar() {
     const navigateToProfile = () => {
         if (!JSON.parse(jwt).employer_id) {
             navigate('/candidate/' + JSON.parse(jwt).candidate_id);
-        }else{
+        } else {
             navigate('/employer/' + JSON.parse(jwt).employer_id);
         }
     };
 
     function AddJobButton() {
-
         if (!jwt) {
             return null;
         }
@@ -87,7 +72,7 @@ export default function Navbar() {
                         navigate('/add-job');
                     }}
                 >
-                    <img src={icon} width={"25px"}/> ADD JOB OFFER
+                    <img src={icon} width={"25px"} alt="AddIcon"/> ADD JOB OFFER
                 </StyledPostJobButton>
             );
         }
@@ -100,7 +85,7 @@ export default function Navbar() {
                     <Toolbar disableGutters>
                         <Link to='/'>
                             <Box sx={{m: 0}}>
-                                <img width="185" height="45" alt={"jobfever logo"} src={logo} margin="left"/>
+                                <img width="185" height="45" alt={"jobFever logo"} src={logo} margin="left"/>
                             </Box>
                         </Link>
                         <Typography
@@ -192,9 +177,8 @@ export default function Navbar() {
                                             edge="start"
                                             color="inherit"
                                             aria-label="menu"
-                                            sx={{ mr: 2 }}
                                             onClick={handleOpenUserMenu} sx={{p: 2}}>
-                                    <MenuIcon />
+                                    <MenuIcon/>
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -326,9 +310,10 @@ export default function Navbar() {
                 </Container>
             </AppBar>);
     }
+
     if (!jwt) {
-        return  LoggedOutNavbar()
-    }else{
-            return LoggedInNavbar()
+        return LoggedOutNavbar()
+    } else {
+        return LoggedInNavbar()
     }
 }
