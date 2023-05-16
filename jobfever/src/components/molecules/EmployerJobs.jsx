@@ -6,12 +6,15 @@ import {useNavigate} from "react-router-dom"
 import CandidateModal from "./CandidateModal";
 import Typography from "@mui/joy/Typography";
 import {JobCardForEmployer} from "./JobCardForEmployer";
+import {DeleteConfirmationModal} from "./DeleteConfirmationModal";
 
 export default function EmployerJobs(props) {
     const [data, setData] = useState([]);
     const fetchData = useJobsByName(props.id);
     const [jobTitle, setJobTitle] = useState("");
     const [showModal, setShowModal] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [deletedJobId, setDeletedJobId] = useState(0)
     const navigate = useNavigate();
 
     const [candidateData, setCandidateData] = useState([]);
@@ -33,13 +36,10 @@ export default function EmployerJobs(props) {
         setShowModal(true);
     };
 
-    const deleteOffer = async (jobId) => {
-        const userAgree = window.confirm("Are you sure to delete?");
-        if (!userAgree) {
-            return;
-        }
-        await deleteJobOfferById(jobId);
+    const deleteOffer = async () => {
+        await deleteJobOfferById(deletedJobId);
         await fetchOffer();
+        setIsDeleteModalOpen(false);
     };
 
     const fetchOffer = async () => {
@@ -74,7 +74,10 @@ export default function EmployerJobs(props) {
                                                 job={job}
                                                 handleJobClick={handleJobClick}
                                                 handleJobEdit={handleJobEdit}
-                                                handleDeleteOffer={deleteOffer}
+                                                handleDeleteOffer={() => {
+                                                    setDeletedJobId(job.jobId);
+                                                    setIsDeleteModalOpen(true);
+                                                }}
                                                 handleCandidatesClick={handleCandidatesClick}/>
                         </div>
                     ))}
@@ -90,6 +93,7 @@ export default function EmployerJobs(props) {
                     There are no jobs already.
                 </Typography>
             )}
+            <DeleteConfirmationModal isOpen={isDeleteModalOpen} handleCancel={() => setIsDeleteModalOpen(false)} handleConfirm={deleteOffer}/>
         </StyledProfilePaper>
     );
 }
