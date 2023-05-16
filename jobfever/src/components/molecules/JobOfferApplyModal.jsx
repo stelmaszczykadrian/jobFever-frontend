@@ -16,8 +16,6 @@ import {StyledApplyModalGridItem, StyledMessage} from "./JobOfferApplyModal.styl
 export default function JobOfferApplyModal(props) {
     let jwt = Cookies.get("jwt")
     const [open, setOpen] = useState(false);
-    const [fullWidth] = useState(true);
-    const [maxWidth] = useState('sm');
     const [appliedText, setAppliedText] = useState("");
     const [isFirstBoxChecked, setIsFirstBoxChecked] = useState(false)
     const [isSecondBoxChecked, setIsSecondBoxChecked] = useState(false)
@@ -68,6 +66,7 @@ export default function JobOfferApplyModal(props) {
             }
         }
     }
+
     return (
         <div>
             <RenderApplyButton />

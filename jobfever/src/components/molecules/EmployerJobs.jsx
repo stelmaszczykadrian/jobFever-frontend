@@ -66,7 +66,7 @@ export default function EmployerJobs(props) {
     return (
         <StyledProfilePaper>
             <ProfileContainerTitle text={"Our Jobs"} />
-            {data.length > 0 ? (
+            {data && data.length > 0 ? (
                 <>
                     {data.map((job, index) => (
                         <div key={job.jobId} style={{backgroundColor: 'rgba(0, 0, 0, 0.05)', borderRadius: '8px'}}>

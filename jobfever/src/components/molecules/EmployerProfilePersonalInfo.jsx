@@ -12,7 +12,6 @@ import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
 import {editEmployer, saveEmployersImgFilename, useEmployerById} from "../../api/EmployersApi";
 import EditableInput from "../atoms/EditableInput";
-import Cookies from "js-cookie";
 import {uploadFile} from "../../api/FilesApi";
 import {StyledProfilePhoto} from "../atoms/ProfilePhoto.styles";
 import axios from "axios";
@@ -20,6 +19,7 @@ import axios from "axios";
 import {StyledEmailIcon} from "../atoms/StyledEmailIcon";
 import {StyledLinkedInIcon} from "../atoms/StyledLinkedinIcon";
 import {StyledContactPhoneIcon} from "../atoms/StyledPhoneIcon";
+import {useAuthorization} from "../../utils/AuthUtils";
 
 
 export default function EmployerProfilePersonalInfo(props) {
@@ -36,13 +36,14 @@ export default function EmployerProfilePersonalInfo(props) {
     const [newPicture, setNewPicture] = useState();
     const [previewPicture, setPreviewPicture] = useState(null);
     const [picture, setPicture] = useState();
+    const {getAccessToken, getEmployerId} = useAuthorization();
 
     const getFileByFilename = async () => {
         try {
             const {data: response} = await axios.get('http://localhost:8080/api/file/url', {
                 params: {filename: filename},
                 headers: {
-                    Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+                    Authorization: `Bearer ${getAccessToken()}`
                 }
             });
             setPicture(response);
@@ -59,7 +60,7 @@ export default function EmployerProfilePersonalInfo(props) {
             await editEmployer(props.id, companyName, nameAndSurname, phoneNumber, localization, null, nip, linkedin, email);
             if (newPicture) {
                 await uploadFile(newPicture)
-                await saveEmployersImgFilename(JSON.parse(Cookies.get("jwt")).employer_id, newPicture.name);
+                await saveEmployersImgFilename(getEmployerId(), newPicture.name);
             }
         }
     };
@@ -88,7 +89,7 @@ export default function EmployerProfilePersonalInfo(props) {
     if (!loading) {
         getFileByFilename()
         const RenderEditIcons = () => {
-            if (props.id === JSON.parse(Cookies.get("jwt")).employer_id.toString()) {
+            if (props.id === getEmployerId()) {
 
                 return (
                     isEdit ? (
@@ -105,7 +106,7 @@ export default function EmployerProfilePersonalInfo(props) {
             }
         }
         const RenderChangePhotoButtons = () => {
-            if (props.id === JSON.parse(Cookies.get("jwt")).employer_id.toString()) {
+            if (props.id === getEmployerId()) {
                 return (
                     isEdit ? (
                         <form encType="multipart/form-data">
