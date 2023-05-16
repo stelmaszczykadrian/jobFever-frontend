@@ -1,20 +1,21 @@
-import { Navigate } from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 import React from "react";
 import Cookies from "js-cookie";
+
 export const ProtectedRoute = (props) => {
+    const params = useParams();
     const jwt = Cookies.get("jwt")
     if (!jwt) {
-        return <Navigate to={"/"} replace />;
+        return <Navigate to={"/"} replace/>;
     }
-    if (props.role === "CANDIDATE"){
-        if(JSON.parse(jwt).role !== "CANDIDATE"){
-            return <Navigate to={"/"} replace />;
-        }
+    const parsed = JSON.parse(jwt);
+
+    console.log(parsed.candidate_id)
+    console.log(params)
+
+    if (parsed.role === "CANDIDATE" && parsed.candidate_id.toString() !== params.id) {
+        return <Navigate to={"/"} replace/>;
     }
-    if (props.role === "EMPLOYER"){
-        if(JSON.parse(jwt).role !== "EMPLOYER"){
-            return <Navigate to={"/"} replace />;
-        }
-    }
+
     return <>{props.children}</>;
 };
