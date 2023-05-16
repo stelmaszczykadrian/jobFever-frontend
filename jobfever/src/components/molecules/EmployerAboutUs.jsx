@@ -5,12 +5,13 @@ import {Box} from "@mui/material";
 import EmployerAboutUsModal from "./EmployerAboutUsModal";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {useEmployerById} from "../../api/EmployersApi";
-import Cookies from "js-cookie";
+import {useAuthorization} from "../../utils/AuthUtils";
 
 export default function EmployerAboutUs(props) {
     const {data, loading} = useEmployerById(props.id);
     const [aboutUs, setAboutUs] = useState("");
     const [previousAboutUs, setPreviousAboutUs] = useState("");
+    const {getEmployerId} = useAuthorization();
 
     React.useEffect(() => {
         if (!loading) {
@@ -20,7 +21,7 @@ export default function EmployerAboutUs(props) {
     }, [data]);
 
     const RenderEmployerAboutUsModal = (props) => {
-        if (props.id === JSON.parse(Cookies.get("jwt")).employer_id.toString()) {
+        if (props.id === getEmployerId()) {
             return (
                 <StyledIconBox>
                     <EmployerAboutUsModal

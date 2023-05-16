@@ -4,16 +4,18 @@ import IconButton from "@mui/material/IconButton";
 import {StyledEditIcon} from "../atoms/StyledEditIcon";
 import {StyledDeleteIcon} from "../atoms/StyledDeleteIcon";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import Cookies from "js-cookie";
+import {useAuthorization} from "../../utils/AuthUtils";
 
 
 export function JobCardForEmployer({ employerId, job, handleJobClick, handleJobEdit, handleDeleteOffer, handleCandidatesClick }) {
+    const {getEmployerId} = useAuthorization();
+
 
     const handleCardClick = () => {
         handleJobClick(job.jobId);
     };
 
-    const isEmployer = useMemo(() => employerId === JSON.parse(Cookies.get("jwt")).employer_id.toString(),[employerId])
+    const isEmployer = useMemo(() => employerId === getEmployerId(),[employerId])
 
     return (
         <StyledPaperJobsCard>
