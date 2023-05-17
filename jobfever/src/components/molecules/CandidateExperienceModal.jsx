@@ -15,6 +15,8 @@ import {
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import EditableModalInput from "../atoms/EditableModalInput";
+import StyledText from "../atoms/StyledText";
+import Typography from "@mui/joy/Typography";
 
 export default function CandidateExperienceModal(props) {
     const title = (props.isNew ? "Add Experience" : "Edit experience");
@@ -30,8 +32,8 @@ export default function CandidateExperienceModal(props) {
     const candidate = props.candidate;
 
     const [open, setOpen] = React.useState(false);
-    const [fullWidth, setFullWidth] = React.useState(true);
-    const [maxWidth, setMaxWidth] = React.useState('sm');
+    const [fullWidth] = React.useState(true);
+    const [maxWidth] = React.useState('sm');
 
     const [position, setPosition] = useState(experience.position);
     const [companyName, setCompanyName] = useState(experience.companyName);
@@ -40,6 +42,8 @@ export default function CandidateExperienceModal(props) {
     const [endDate, setEndDate] = useState(experience.endDate);
     const [industry, setIndustry] = useState(experience.industry);
     const [description, setDescription] = useState(experience.description);
+
+    const [error, setError] = useState("");
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -53,7 +57,13 @@ export default function CandidateExperienceModal(props) {
             if (position.trim() === '' || companyName.trim() === '' || location.trim() === '' || industry.trim() === '' || description.trim() === '' || endDate === '' || startDate === '') {
                 return
             }
+
+            if (endDate < startDate) {
+                setError("End date cannot be earlier than Start date");
+                return;
+            }
             setOpen(false);
+            setError("");
             const updatedExperienceData = {
                 position: position,
                 companyName: companyName,
@@ -160,13 +170,18 @@ export default function CandidateExperienceModal(props) {
                             </StyledGridItem>
                             <StyledGridItem>
                                 <CalendarForm
-                                    name="End Date"
+                                    name="End date"
                                     date={endDate}
                                     setDate={setEndDate}
                                 />
                             </StyledGridItem>
                         </LocalizationProvider>
                     </StyledGridContainer>
+                    {error && <Typography sx={{textAlign: 'center'}}><StyledText
+                        tag="span"
+                        color="red"
+                        text={error}
+                    /></Typography>}
                     <StyledGridItem>
                         <EditableModalInput
                             placeholder="Ex. Gaming, Software, Hardware, IT consultant"

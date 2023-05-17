@@ -12,6 +12,8 @@ import {editCandidateEducation, addCandidateEducation} from "../../api/Candidate
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import EditableModalInput from "../atoms/EditableModalInput";
+import Typography from "@mui/joy/Typography";
+import StyledText from "../atoms/StyledText";
 
 export default function CandidateEducationModal(props) {
     const title = (props.isNew ? "Add Education" : "Edit education");
@@ -36,6 +38,8 @@ export default function CandidateEducationModal(props) {
     const [endDate, setEndDate] = useState(education.endDate);
     const [description, setDescription] = useState(education.description);
 
+    const [error, setError] = useState("");
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -48,6 +52,12 @@ export default function CandidateEducationModal(props) {
         if (school.trim() === '' || degree.trim() === '' || description.trim() === '' || fieldOfStudy.trim() === '' || endDate === '' || startDate === '') {
             return
         }
+
+        if (endDate < startDate) {
+            setError("End date cannot be earlier than Start date");
+            return;
+        }
+
         setOpen(false);
         const updatedEducationData = {
             degree: degree,
@@ -161,6 +171,11 @@ export default function CandidateEducationModal(props) {
                             </StyledGridItem>
                         </LocalizationProvider>
                     </StyledGridContainer>
+                    {error && <Typography sx={{textAlign: 'center'}}><StyledText
+                        tag="span"
+                        color="red"
+                        text={error}
+                    /></Typography>}
                     <StyledGridItem>
                         <EditableModalInput
                             placeholder="Ex. Activity clubs, extra achievements"

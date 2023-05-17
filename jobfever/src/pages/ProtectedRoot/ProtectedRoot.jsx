@@ -10,9 +10,6 @@ export const ProtectedRoute = (props) => {
     }
     const parsed = JSON.parse(jwt);
 
-    console.log(parsed.candidate_id)
-    console.log(params)
-
     if (parsed.role === "CANDIDATE" && parsed.candidate_id.toString() !== params.id) {
         return <Navigate to={"/"} replace/>;
     }
