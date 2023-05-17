@@ -9,4 +9,5 @@ export const StyledCandidateRegisterMainComponent = styled("div")`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  overflow: hidden;
 `
