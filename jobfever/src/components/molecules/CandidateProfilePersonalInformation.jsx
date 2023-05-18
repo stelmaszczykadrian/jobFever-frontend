@@ -108,70 +108,71 @@ export default function CandidateProfilePersonalInformation(props) {
         setNewCv(true);
     };
 
+    const RenderEditIcons = () => {
+        if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
+            return (
+                isEdit ? (
+                    <IconButton onClick={handleSaveClick}>
+                        <StyledCheckIcon/>
+                    </IconButton>
+                ) : (
+                    <IconButton onClick={handleEditClick}>
+                        <StyledEditIcon/>
+                    </IconButton>
+                )
+            )
+        }
+    };
+    const RenderChangePhotoButtons = () => {
+        if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
+            return (
+                isEdit ? (
+                    <form encType="multipart/form-data">
+                        <input type="file" name="file" onChange={savePreviewPicture}/>
+                    </form>
+                ) : undefined
+            )
+        }
+    };
+
+    const RenderChangeCvButtons = () => {
+        if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
+            return (
+                isEdit ? (
+                    <form encType="multipart/form-data">
+                        <input type="file" accept=".pdf,.doc,.docx" name="cv" onChange={savePreviewCv}/>
+                    </form>
+                ) : undefined
+            )
+        }
+    };
+
+    const RenderCv = () => {
+        if (previewCv === null) {
+            return (
+                <span>{cv}</span>
+            )
+        } else {
+            return (
+                <span>{cv.name}</span>
+            )
+        }
+    }
+
+    const RenderProfilePicture = () => {
+        if (previewPicture === null) {
+            return (
+                <StyledProfilePhoto src={picture} alt="Profile"/>
+            )
+        } else {
+            return (
+                <StyledProfilePhoto src={previewPicture} alt="Profile"/>
+            )
+        }
+    }
+
     if (!loading) {
         getImgFile();
-        const RenderEditIcons = () => {
-            if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
-                return (
-                    isEdit ? (
-                        <IconButton onClick={handleSaveClick}>
-                            <StyledCheckIcon/>
-                        </IconButton>
-                    ) : (
-                        <IconButton onClick={handleEditClick}>
-                            <StyledEditIcon/>
-                        </IconButton>
-                    )
-                )
-            }
-        };
-        const RenderChangePhotoButtons = () => {
-            if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
-                return (
-                    isEdit ? (
-                        <form encType="multipart/form-data">
-                            <input type="file" name="file" onChange={savePreviewPicture}/>
-                        </form>
-                    ) : undefined
-                )
-            }
-        };
-
-        const RenderChangeCvButtons = () => {
-            if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
-                return (
-                    isEdit ? (
-                        <form encType="multipart/form-data">
-                            <input type="file" accept=".pdf,.doc,.docx" name="cv" onChange={savePreviewCv}/>
-                        </form>
-                    ) : undefined
-                )
-            }
-        };
-
-        const RenderCv = () => {
-            if (previewCv === null) {
-                return (
-                    <span>{cv}</span>
-                )
-            } else {
-                return (
-                    <span>{cv.name}</span>
-                )
-            }
-        }
-
-        const RenderProfilePicture = () => {
-            if (previewPicture === null) {
-                return (
-                    <StyledProfilePhoto src={picture} alt="Profile"/>
-                )
-            } else {
-                return (
-                    <StyledProfilePhoto src={previewPicture} alt="Profile"/>
-                )
-            }
-        }
         return (
             <StyledProfilePaper>
                 <StyledTopBox>
