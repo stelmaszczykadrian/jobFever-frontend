@@ -15,7 +15,6 @@ import EditableInput from "../atoms/EditableInput";
 import {uploadFile} from "../../api/FilesApi";
 import {StyledProfilePhoto} from "../atoms/ProfilePhoto.styles";
 import axios from "axios";
-
 import {StyledEmailIcon} from "../atoms/StyledEmailIcon";
 import {StyledLinkedInIcon} from "../atoms/StyledLinkedinIcon";
 import {StyledContactPhoneIcon} from "../atoms/StyledPhoneIcon";
@@ -38,7 +37,7 @@ export default function EmployerProfilePersonalInfo(props) {
     const [picture, setPicture] = useState();
     const {getAccessToken, getEmployerId} = useAuthorization();
 
-    const getFileByFilename = async () => {
+    const getImgFile = async () => {
         try {
             const {data: response} = await axios.get('http://localhost:8080/api/file/url', {
                 params: {filename: filename},
@@ -86,48 +85,47 @@ export default function EmployerProfilePersonalInfo(props) {
         )
     }
 
+    const RenderEditIcons = () => {
+        if (props.id === getEmployerId()) {
+            return (
+                isEdit ? (
+                    <IconButton onClick={handleSaveClick}>
+                        <StyledCheckIcon/>
+                    </IconButton>
+                ) : (
+
+                    <IconButton onClick={handleEditClick}>
+                        <StyledEditIcon/>
+                    </IconButton>
+                )
+            )
+        }
+    }
+    const RenderChangePhotoButtons = () => {
+        if (props.id === getEmployerId()) {
+            return (
+                isEdit ? (
+                    <form encType="multipart/form-data">
+                        <input type="file" name="file" onChange={savePreviewPicture}/>
+                    </form>
+                ) : undefined
+            )
+        }
+    }
+    const RenderProfilePicture = () => {
+        if (previewPicture === null) {
+            return (
+                <StyledProfilePhoto src={picture} alt="Profile"/>
+            )
+        } else {
+            return (
+                <StyledProfilePhoto src={previewPicture} alt="Profile"/>
+            )
+        }
+    }
+
     if (!loading) {
-        getFileByFilename()
-        const RenderEditIcons = () => {
-            if (props.id === getEmployerId()) {
-
-                return (
-                    isEdit ? (
-                        <IconButton onClick={handleSaveClick}>
-                            <StyledCheckIcon/>
-                        </IconButton>
-                    ) : (
-
-                        <IconButton onClick={handleEditClick}>
-                            <StyledEditIcon/>
-                        </IconButton>
-                    )
-                )
-            }
-        }
-        const RenderChangePhotoButtons = () => {
-            if (props.id === getEmployerId()) {
-                return (
-                    isEdit ? (
-                        <form encType="multipart/form-data">
-                            <input type="file" name="file" onChange={savePreviewPicture}/>
-                        </form>
-                    ) : undefined
-                )
-            }
-        }
-        const RenderProfilePicture = () => {
-            if (previewPicture === null) {
-                return (
-                    <StyledProfilePhoto src={picture} alt="Profile"/>
-                )
-            } else {
-                return (
-                    <StyledProfilePhoto src={previewPicture} alt="Profile"/>
-                )
-            }
-        }
-
+        getImgFile()
         return (
             <StyledProfilePaper>
                 <StyledTopBox>
@@ -177,7 +175,7 @@ export default function EmployerProfilePersonalInfo(props) {
                             />
                         </Box>
                         <Box mb={1}>
-                            <StyledContactPhoneIcon />
+                            <a href={`tel:${phoneNumber}`}><StyledContactPhoneIcon /></a>
                             <EditableInput
                                 isEdit={isEdit}
                                 value={phoneNumber || ""}
@@ -187,7 +185,7 @@ export default function EmployerProfilePersonalInfo(props) {
                             />
                         </Box>
                         <Box mb={1}>
-                            <StyledEmailIcon />
+                            <a href={`mailto:${email}`}><StyledEmailIcon /></a>
                             <EditableInput
                                 isEdit={isEdit}
                                 value={email || ""}
@@ -207,7 +205,6 @@ export default function EmployerProfilePersonalInfo(props) {
                             />
                         </Box>
                         <Box>
-                            {/* Edit button */}
                             <RenderEditIcons/>
                         </Box>
                     </StyledRightBox>
