@@ -71,7 +71,7 @@ export default function EmployerProfilePersonalInfo(props) {
             setPhoneNumber(data.phoneNumber)
             setLocalization(data.localization)
             setFilename(data.imgFileName)
-            if (data.nip !== 0){
+            if (data.nip !== 0) {
                 setNip(data.nip)
             }
             setLinkedIn(data.linkedin)
@@ -124,8 +124,17 @@ export default function EmployerProfilePersonalInfo(props) {
         }
     }
 
+    const ValidateLinkedinLink = () => {
+        if (linkedin && linkedin.startsWith("https://www.linkedin.com/in/") || linkedin.startsWith("https://www.linkedin.com/company/")) {
+            return linkedin;
+        } else {
+            return 'https://www.linkedin.com/in/' + linkedin || 'https://www.linkedin.com/company/' + linkedin;
+        }
+    }
+
     if (!loading) {
         getImgFile()
+        const validLinkedinHref = ValidateLinkedinLink();
         return (
             <StyledProfilePaper>
                 <StyledTopBox>
@@ -160,49 +169,50 @@ export default function EmployerProfilePersonalInfo(props) {
                     </StyledLeftBox>
                     <StyledRightBox>
                         <StyledRightContentBox>
-                        <Box mb={2}>
-                            <a href={`tel:${phoneNumber}`}><StyledContactPhoneIcon /></a>
-                            <EditableInput
-                                isEdit={isEdit}
-                                value={phoneNumber || ""}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
-                                placeholder="Phone number"
-                                isRequired
-                            />
-                        </Box>
-                        <Box mb={2}>
-                            <a href={`mailto:${email}`}><StyledEmailIcon /></a>
-                            <EditableInput
-                                isEdit={isEdit}
-                                value={email || ""}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="email@email.com"
-                                isRequired={false}
-                            />
-                        </Box>
-                        <Box mb={6}>
-                            <a href={linkedin} target="_blank" rel="noopener noreferrer"><StyledLinkedInIcon /></a>
-                            <EditableInput
-                                isEdit={isEdit}
-                                value={linkedin || ""}
-                                onChange={(e) => setLinkedIn(e.target.value)}
-                                placeholder="https://www.linkedin.com/"
-                                isRequired={false}
-                            />
-                        </Box>
-                        <h3>NIP</h3>
-                        <Box mb={1}>
-                            <EditableInput
-                                isEdit={isEdit}
-                                isCorrect={nip && nip.toString().length === 10}
-                                errorMsg = "This field must be 10 digits long"
-                                type = "number"
-                                value={nip || ""}
-                                onChange={(e) => setNip(e.target.value)}
-                                placeholder="NIP"
-                                isRequired
-                            />
-                        </Box>
+                            <Box mb={2}>
+                                <a href={`tel:${phoneNumber}`}><StyledContactPhoneIcon/></a>
+                                <EditableInput
+                                    isEdit={isEdit}
+                                    value={phoneNumber || ""}
+                                    onChange={(e) => setPhoneNumber(e.target.value)}
+                                    placeholder="Phone number"
+                                    isRequired
+                                />
+                            </Box>
+                            <Box mb={2}>
+                                <a href={`mailto:${email}`}><StyledEmailIcon/></a>
+                                <EditableInput
+                                    isEdit={isEdit}
+                                    value={email || ""}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="email@email.com"
+                                    isRequired={false}
+                                />
+                            </Box>
+                            <Box mb={6}>
+                                <a href={validLinkedinHref} target="_blank"
+                                   rel="noopener noreferrer"><StyledLinkedInIcon/></a>
+                                <EditableInput
+                                    isEdit={isEdit}
+                                    value={linkedin || ""}
+                                    onChange={(e) => setLinkedIn(e.target.value)}
+                                    placeholder="https://www.linkedin.com/"
+                                    isRequired={false}
+                                />
+                            </Box>
+                            <h3>NIP</h3>
+                            <Box mb={1}>
+                                <EditableInput
+                                    isEdit={isEdit}
+                                    isCorrect={nip && nip.toString().length === 10}
+                                    errorMsg="This field must be 10 digits long"
+                                    type="number"
+                                    value={nip || ""}
+                                    onChange={(e) => setNip(e.target.value)}
+                                    placeholder="NIP"
+                                    isRequired
+                                />
+                            </Box>
                         </StyledRightContentBox>
                         <Box>
                             <RenderEditIcons/>
