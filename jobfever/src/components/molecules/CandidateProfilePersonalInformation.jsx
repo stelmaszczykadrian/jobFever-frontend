@@ -13,13 +13,13 @@ import {StyledCheckIcon} from "../atoms/StyledCheckIcon";
 import {StyledPersonIcon} from "../atoms/StyledPersonIcon";
 import {editCandidate, saveCandidatesCvFile, saveCandidatesImgFilename, useCandidateById} from "../../api/CandidateApi";
 import EditableInput from "../atoms/EditableInput";
-import Cookies from "js-cookie";
 import {uploadFile} from "../../api/FilesApi";
 import axios from "axios";
 import {StyledProfilePhoto} from "../atoms/ProfilePhoto.styles";
 import {StyledLinkedInIcon} from "../atoms/StyledLinkedinIcon";
 import {StyledEmailIcon} from "../atoms/StyledEmailIcon";
 import {StyledGithubIcon} from "../atoms/StyledGithubIcon";
+import {useAuthorization} from "../../utils/AuthUtils";
 
 
 export default function CandidateProfilePersonalInformation(props) {
@@ -37,6 +37,7 @@ export default function CandidateProfilePersonalInformation(props) {
     const [previewCv, setPreviewCv] = useState(null);
     const [cv, setCv] = useState();
     const [newCv, setNewCv] = useState(false);
+    const {getAccessToken, getCandidateId} = useAuthorization();
 
     const getImgFile = async () => {
         try {
@@ -44,7 +45,7 @@ export default function CandidateProfilePersonalInformation(props) {
                 const {data: response} = await axios.get('http://localhost:8080/api/file/url', {
                     params: {filename: filename},
                     headers: {
-                        Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+                        Authorization: `Bearer ${getAccessToken()}`
                     }
                 });
                 setPicture(response);
@@ -71,20 +72,15 @@ export default function CandidateProfilePersonalInformation(props) {
             await editCandidate(props.id, updatedCandidateData);
             if (newPicture) {
                 await uploadFile(newPicture);
-                await saveCandidatesImgFilename(
-                    JSON.parse(Cookies.get('jwt')).candidate_id,
-                    newPicture.name
-                );
+                await saveCandidatesImgFilename(getCandidateId(), newPicture.name);
             }
             if (newCv) {
                 await uploadFile(cv);
-                await saveCandidatesCvFile(
-                    JSON.parse(Cookies.get('jwt')).candidate_id,
-                    cv.name
-                );
+                await saveCandidatesCvFile(getCandidateId(), cv.name);
             }
         }
     };
+
     React.useEffect(() => {
         if (data) {
             setName(data.name);
@@ -109,7 +105,7 @@ export default function CandidateProfilePersonalInformation(props) {
     };
 
     const RenderEditIcons = () => {
-        if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
+        if (props.id === getCandidateId()) {
             return (
                 isEdit ? (
                     <IconButton onClick={handleSaveClick}>
@@ -124,7 +120,7 @@ export default function CandidateProfilePersonalInformation(props) {
         }
     };
     const RenderChangePhotoButtons = () => {
-        if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
+        if (props.id === getCandidateId()) {
             return (
                 isEdit ? (
                     <form encType="multipart/form-data">
@@ -136,7 +132,7 @@ export default function CandidateProfilePersonalInformation(props) {
     };
 
     const RenderChangeCvButtons = () => {
-        if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
+        if (props.id === getCandidateId()) {
             return (
                 isEdit ? (
                     <form encType="multipart/form-data">
@@ -211,7 +207,7 @@ export default function CandidateProfilePersonalInformation(props) {
                     </StyledLeftBox>
                     <StyledRightBox>
                         <Box mb={1}>
-                            <StyledEmailIcon />
+                            <a href={`mailto:${email}`}><StyledEmailIcon /></a>
                             <EditableInput
                                 isEdit={isEdit}
                                 value={email || ""}
@@ -246,7 +242,6 @@ export default function CandidateProfilePersonalInformation(props) {
                             <RenderChangeCvButtons/>
                         </Box>
                         <Box>
-                            {/* Edit button */}
                             <RenderEditIcons/>
                         </Box>
                     </StyledRightBox>
