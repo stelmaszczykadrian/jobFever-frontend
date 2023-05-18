@@ -20,6 +20,7 @@ import {StyledLinkedInIcon} from "../atoms/StyledLinkedinIcon";
 import {StyledEmailIcon} from "../atoms/StyledEmailIcon";
 import {StyledGithubIcon} from "../atoms/StyledGithubIcon";
 import {useAuthorization} from "../../utils/AuthUtils";
+import {useNavigate} from "react-router-dom";
 
 
 export default function CandidateProfilePersonalInformation(props) {
@@ -67,7 +68,7 @@ export default function CandidateProfilePersonalInformation(props) {
                 city: city,
                 linkedin: linkedin,
                 github: github,
-                email : email
+                email: email
             };
             await editCandidate(props.id, updatedCandidateData);
             if (newPicture) {
@@ -167,8 +168,26 @@ export default function CandidateProfilePersonalInformation(props) {
         }
     }
 
+    const ValidateLinkedinLink = () => {
+        if (linkedin && linkedin.startsWith("https://www.linkedin.com/in/")) {
+            return linkedin;
+        } else {
+            return 'https://www.linkedin.com/in/' + linkedin;
+        }
+    }
+
+    const ValidateGithubLink = () => {
+        if (github && github.startsWith("https://github.com/")) {
+            return github;
+        } else {
+            return 'https://github.com/' + github;
+        }
+    }
+
     if (!loading) {
         getImgFile();
+        const validLinkedinHref = ValidateLinkedinLink();
+        const validGithubHref = ValidateGithubLink();
         return (
             <StyledProfilePaper>
                 <StyledTopBox>
@@ -204,41 +223,42 @@ export default function CandidateProfilePersonalInformation(props) {
                     </StyledLeftBox>
                     <StyledRightBox>
                         <StyledRightContentBox>
-                        <Box mb={2}>
-                            <a href={`mailto:${email}`}><StyledEmailIcon /></a>
-                            <EditableInput
-                                isEdit={isEdit}
-                                value={email || ""}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="email@email.com"
-                                isRequired={false}
-                            />
-                        </Box>
-                        <Box mb={2}>
-                            <a href={linkedin} target="_blank" rel="noopener noreferrer"><StyledLinkedInIcon /></a>
-                            <EditableInput
-                                isEdit={isEdit}
-                                value={linkedin || ""}
-                                onChange={(e) => setLinkedIn(e.target.value)}
-                                placeholder="https://www.linkedin.com/"
-                                isRequired={false}
-                            />
-                        </Box>
-                        <Box mb={6}>
-                            <a href={github} target="_blank" rel="noopener noreferrer"><StyledGithubIcon /></a>
-                            <EditableInput
-                                isEdit={isEdit}
-                                value={github || ""}
-                                onChange={(e) => setGitHub(e.target.value)}
-                                placeholder="https://github.com/"
-                                isRequired={false}
-                            />
-                        </Box>
-                        <Box mb={1}>
-                            <h3>CV file</h3>
-                            <RenderCv/>
-                            <RenderChangeCvButtons/>
-                        </Box>
+                            <Box mb={2}>
+                                <a href={`mailto:${email}`}><StyledEmailIcon/></a>
+                                <EditableInput
+                                    isEdit={isEdit}
+                                    value={email || ""}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="email@email.com"
+                                    isRequired={false}
+                                />
+                            </Box>
+                            <Box mb={2}>
+                                <a href={validLinkedinHref} target="_blank"
+                                   rel="noopener noreferrer"><StyledLinkedInIcon/></a>
+                                <EditableInput
+                                    isEdit={isEdit}
+                                    value={linkedin || ""}
+                                    onChange={(e) => setLinkedIn(e.target.value)}
+                                    placeholder="https://www.linkedin.com/"
+                                    isRequired={false}
+                                />
+                            </Box>
+                            <Box mb={6}>
+                                <a href={validGithubHref} target="_blank" rel="noopener noreferrer"><StyledGithubIcon/></a>
+                                <EditableInput
+                                    isEdit={isEdit}
+                                    value={github || ""}
+                                    onChange={(e) => setGitHub(e.target.value)}
+                                    placeholder="https://github.com/"
+                                    isRequired={false}
+                                />
+                            </Box>
+                            <Box mb={1}>
+                                <h3>CV file</h3>
+                                <RenderCv/>
+                                <RenderChangeCvButtons/>
+                            </Box>
                         </StyledRightContentBox>
                         <Box>
                             <RenderEditIcons/>
