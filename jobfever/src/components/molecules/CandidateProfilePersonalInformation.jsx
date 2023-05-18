@@ -4,7 +4,7 @@ import {
     StyledTopBox,
     StyledLeftBox,
     StyledProfilePaper,
-    StyledRightBox, StyledBottomBoxPersonalInfo
+    StyledRightBox, StyledBottomBoxPersonalInfo, StyledRightContentBox
 } from "./CandidateProfile.styles";
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
 import IconButton from "@mui/material/IconButton";
@@ -177,12 +177,10 @@ export default function CandidateProfilePersonalInformation(props) {
                 </StyledTopBox>
                 <StyledBottomBoxPersonalInfo>
                     <StyledLeftBox>
-                        {/* Photo */}
                         <Box mb={1}>
                             <RenderProfilePicture/>
                             <RenderChangePhotoButtons/>
                         </Box>
-                        {/* Name */}
                         <h3>Name</h3>
                         <Box mb={1}>
                             <EditableInput
@@ -193,7 +191,6 @@ export default function CandidateProfilePersonalInformation(props) {
                                 isRequired
                             />
                         </Box>
-                        {/* City */}
                         <h3>Localization</h3>
                         <Box mb={1}>
                             <EditableInput
@@ -206,7 +203,8 @@ export default function CandidateProfilePersonalInformation(props) {
                         </Box>
                     </StyledLeftBox>
                     <StyledRightBox>
-                        <Box mb={1}>
+                        <StyledRightContentBox>
+                        <Box mb={2}>
                             <a href={`mailto:${email}`}><StyledEmailIcon /></a>
                             <EditableInput
                                 isEdit={isEdit}
@@ -216,7 +214,7 @@ export default function CandidateProfilePersonalInformation(props) {
                                 isRequired={false}
                             />
                         </Box>
-                        <Box mb={1}>
+                        <Box mb={2}>
                             <a href={linkedin} target="_blank" rel="noopener noreferrer"><StyledLinkedInIcon /></a>
                             <EditableInput
                                 isEdit={isEdit}
@@ -236,11 +234,12 @@ export default function CandidateProfilePersonalInformation(props) {
                                 isRequired={false}
                             />
                         </Box>
-                        <Box mb={10}>
+                        <Box mb={1}>
                             <h3>CV file</h3>
                             <RenderCv/>
                             <RenderChangeCvButtons/>
                         </Box>
+                        </StyledRightContentBox>
                         <Box>
                             <RenderEditIcons/>
                         </Box>
