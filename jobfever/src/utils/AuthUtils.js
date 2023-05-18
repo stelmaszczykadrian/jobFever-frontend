@@ -26,5 +26,12 @@ export const useAuthorization = () => {
         return token.employer_id.toString();
     }
 
-    return {getAccessToken,getEmployerId}
+    const getCandidateId = () => {
+        if(!token || !token.candidate_id){
+            return '';
+        }
+        return token.candidate_id.toString();
+    }
+
+    return {getAccessToken,getEmployerId,getCandidateId}
 }
