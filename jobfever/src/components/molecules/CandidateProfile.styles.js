@@ -8,6 +8,7 @@ export const StyledProfilePaper = styled(Paper)`
 `;
 
 export const StyledRightBox = styled(Box)`
+  width: 40%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -15,7 +16,15 @@ export const StyledRightBox = styled(Box)`
   flex-grow: 1;
 `;
 
+export const StyledRightContentBox = styled(Box)`
+  margin-top: 8%;
+  margin-bottom: 15%;
+  text-align: start;
+  overflow-wrap: break-word;
+`;
+
 export const StyledLeftBox = styled(Box)`
+  width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

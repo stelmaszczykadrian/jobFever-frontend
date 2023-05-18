@@ -4,7 +4,7 @@ import {
     StyledTopBox,
     StyledLeftBox,
     StyledProfilePaper,
-    StyledRightBox, StyledBottomBoxPersonalInfo
+    StyledRightBox, StyledBottomBoxPersonalInfo, StyledRightContentBox
 } from "./CandidateProfile.styles";
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
 import IconButton from "@mui/material/IconButton";
@@ -133,12 +133,10 @@ export default function EmployerProfilePersonalInfo(props) {
                 </StyledTopBox>
                 <StyledBottomBoxPersonalInfo>
                     <StyledLeftBox>
-                        {/* Photo */}
                         <Box mb={1}>
                             <RenderProfilePicture/>
                         </Box>
                         <RenderChangePhotoButtons/>
-                        {/* Name */}
                         <h3>Owner</h3>
                         <Box mb={1}>
                             <EditableInput
@@ -161,20 +159,8 @@ export default function EmployerProfilePersonalInfo(props) {
                         </Box>
                     </StyledLeftBox>
                     <StyledRightBox>
-                        <h3>NIP</h3>
-                        <Box mb={8}>
-                            <EditableInput
-                                isEdit={isEdit}
-                                isCorrect={nip && nip.toString().length === 10}
-                                errorMsg = "This field must be 10 digits long"
-                                type = "number"
-                                value={nip || ""}
-                                onChange={(e) => setNip(e.target.value)}
-                                placeholder="NIP"
-                                isRequired
-                            />
-                        </Box>
-                        <Box mb={1}>
+                        <StyledRightContentBox>
+                        <Box mb={2}>
                             <a href={`tel:${phoneNumber}`}><StyledContactPhoneIcon /></a>
                             <EditableInput
                                 isEdit={isEdit}
@@ -184,7 +170,7 @@ export default function EmployerProfilePersonalInfo(props) {
                                 isRequired
                             />
                         </Box>
-                        <Box mb={1}>
+                        <Box mb={2}>
                             <a href={`mailto:${email}`}><StyledEmailIcon /></a>
                             <EditableInput
                                 isEdit={isEdit}
@@ -204,6 +190,20 @@ export default function EmployerProfilePersonalInfo(props) {
                                 isRequired={false}
                             />
                         </Box>
+                        <h3>NIP</h3>
+                        <Box mb={1}>
+                            <EditableInput
+                                isEdit={isEdit}
+                                isCorrect={nip && nip.toString().length === 10}
+                                errorMsg = "This field must be 10 digits long"
+                                type = "number"
+                                value={nip || ""}
+                                onChange={(e) => setNip(e.target.value)}
+                                placeholder="NIP"
+                                isRequired
+                            />
+                        </Box>
+                        </StyledRightContentBox>
                         <Box>
                             <RenderEditIcons/>
                         </Box>
