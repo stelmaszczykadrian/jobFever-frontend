@@ -20,6 +20,8 @@ import {StyledLinkedInIcon} from "../atoms/StyledLinkedinIcon";
 import {StyledEmailIcon} from "../atoms/StyledEmailIcon";
 import {StyledGithubIcon} from "../atoms/StyledGithubIcon";
 import {useAuthorization} from "../../utils/AuthUtils";
+import logo from "../../images/logos/profiledefaultlogo.png";
+import {StyledLink} from "../atoms/StyledLink";
 
 
 export default function CandidateProfilePersonalInformation(props) {
@@ -31,14 +33,11 @@ export default function CandidateProfilePersonalInformation(props) {
     const [email, setEmail] = useState('');
     const [github, setGitHub] = useState('https://github.com/');
     const [filenameImg, setFilenameImg] = useState("");
-    const [filenameCv, setFilenameCv] = useState("");
     const [previewPicture, setPreviewPicture] = useState(null);
-    const [picture, setPicture] = useState();
+    const [picture, setPicture] = useState(logo);
     const [newPicture, setNewPicture] = useState();
-    const [previewCv, setPreviewCv] = useState(null);
     const [cv, setCv] = useState();
-    const [newCv, setNewCv] = useState(false);
-    const [cvFile, setCVfile] = useState();
+    const [newCv, setNewCv] = useState();
     const {getAccessToken, getCandidateId} = useAuthorization();
 
     const getImgFile = async () => {
@@ -57,22 +56,19 @@ export default function CandidateProfilePersonalInformation(props) {
         }
     };
 
-    const getCvFile = async () => {
+    const getCvFile = async (filenameCv) => {
         try {
-            if (filenameCv) {
-                const { data: cvUrl } = await axios.get('http://localhost:8080/api/file/url', {
+            const { data: cvUrl } = await axios.get('http://localhost:8080/api/file/url', {
                     params: {filename: filenameCv},
                     headers: {
                         Authorization: `Bearer ${getAccessToken()}`
                     }
                 });
                 setCv(cvUrl);
-            }
         } catch (error) {
             console.error(error);
         }
     };
-
 
     const handleEditClick = () => {
         setIsEdit(true);
@@ -94,21 +90,29 @@ export default function CandidateProfilePersonalInformation(props) {
                 await saveCandidatesImgFilename(getCandidateId(), newPicture.name);
             }
             if (newCv) {
-                await uploadFile(cvFile);
-                await saveCandidatesCvFile(getCandidateId(), filenameCv);
+                await uploadFile(newCv);
+                await saveCandidatesCvFile(getCandidateId(), newCv.name);
             }
         }
     };
 
     React.useEffect(() => {
-        if (data) {
+        if (data
+            && Object.keys(data).length > 0
+            && Object.getPrototypeOf(data) === Object.prototype) {
+
             setName(data.name);
             setEmail(data.email);
             setCity(data.city);
             setLinkedIn(data.linkedin);
             setGitHub(data.github);
-            setFilenameImg(data.imgFileName)
-            setFilenameCv(data.cvFile)
+            setFilenameImg(data.imgFileName);
+            if(data.imgFileName){
+                getImgFile();
+            }
+            if(data.cvFile){
+                getCvFile(data.cvFile);
+            }
         }
     }, [data]);
 
@@ -118,11 +122,8 @@ export default function CandidateProfilePersonalInformation(props) {
     };
 
     const savePreviewCv = (e) => {
-        setPreviewCv(URL.createObjectURL(e.target.files[0]));
         setCv(e.target.files[0]);
-        setCVfile(e.target.files[0]);
-        setFilenameCv(e.target.files[0].name)
-        setNewCv(true);
+        setNewCv(e.target.files[0]);
     };
 
     const RenderEditIcons = () => {
@@ -165,12 +166,16 @@ export default function CandidateProfilePersonalInformation(props) {
     };
 
     const RenderCv = () => {
-        getCvFile();
-        if (previewCv === null || (typeof cv) === "string") {
+        if ((typeof cv) === "string") {
             const cvUrlName = cv || '';
             const cvFileName = cvUrlName.substring(cvUrlName.lastIndexOf('/') + 1, cvUrlName.lastIndexOf('?'));
             return (
-                <a href={cv} download>{cvFileName}</a>
+                <StyledLink href={cv} download>{cvFileName}</StyledLink>
+            )
+        } else if (newCv) {
+            const cvUrl = URL.createObjectURL(newCv)
+            return (
+                <StyledLink href={cvUrl} download>{newCv.name}</StyledLink>
             )
         }
     }
@@ -204,7 +209,6 @@ export default function CandidateProfilePersonalInformation(props) {
     }
 
     if (!loading) {
-        getImgFile();
         const validLinkedinHref = ValidateLinkedinLink();
         const validGithubHref = ValidateGithubLink();
         return (
