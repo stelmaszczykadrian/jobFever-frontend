@@ -10,26 +10,27 @@ export const useCandidateById = (id) => {
     const [candidate, setCandidate] = useState({});
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const {data: response} = await axios.get(url, {
-                    params: {id: id},
-                    headers: {
-                        Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
-                    }
-                });
-                if(!response){
-                    navigate('/404')
-                }
 
-                setCandidate(response);
-            } catch (error) {
-                console.error(error)
+    const fetchData = async () => {
+        try {
+            const {data: response} = await axios.get(url, {
+                params: {id: id},
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+                }
+            });
+
+            if(!response){
+                navigate('/404')
             }
             setLoading(false);
-        };
+            setCandidate(response);
+        } catch (error) {
+            console.error(error)
+        }
+    };
 
+    useEffect(() => {
         fetchData();
     }, []);
 
