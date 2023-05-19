@@ -17,10 +17,15 @@ export const StyledRightBox = styled(Box)`
 `;
 
 export const StyledRightContentBox = styled(Box)`
-  margin-top: 8%;
-  margin-bottom: 15%;
+  margin-top: 4%;
+  margin-bottom: 20%;
   text-align: start;
   overflow-wrap: break-word;
+`;
+
+export const StyledBoxElement = styled(Box)`
+  display: flex;
+  overflow-wrap: anywhere;
 `;
 
 export const StyledLeftBox = styled(Box)`
