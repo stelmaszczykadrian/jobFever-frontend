@@ -4,7 +4,7 @@ import {
     StyledTopBox,
     StyledLeftBox,
     StyledProfilePaper,
-    StyledRightBox, StyledBottomBoxPersonalInfo, StyledRightContentBox
+    StyledRightBox, StyledBottomBoxPersonalInfo, StyledRightContentBox, StyledBoxElement
 } from "./CandidateProfile.styles";
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
 import IconButton from "@mui/material/IconButton";
@@ -125,10 +125,10 @@ export default function EmployerProfilePersonalInfo(props) {
     }
 
     const ValidateLinkedinLink = () => {
-        if (linkedin && linkedin.startsWith("https://www.linkedin.com/in/") || linkedin.startsWith("https://www.linkedin.com/company/")) {
+        if (linkedin && linkedin.startsWith("https://www.linkedin.com/company/") || linkedin && linkedin.startsWith("https://www.linkedin.com/in/")) {
             return linkedin;
         } else {
-            return 'https://www.linkedin.com/in/' + linkedin || 'https://www.linkedin.com/company/' + linkedin;
+            return 'https://www.linkedin.com/company/' + linkedin || 'https://www.linkedin.com/in/' + linkedin;
         }
     }
 
@@ -169,7 +169,7 @@ export default function EmployerProfilePersonalInfo(props) {
                     </StyledLeftBox>
                     <StyledRightBox>
                         <StyledRightContentBox>
-                            <Box mb={2}>
+                            <StyledBoxElement mb={2}>
                                 <a href={`tel:${phoneNumber}`}><StyledContactPhoneIcon/></a>
                                 <EditableInput
                                     isEdit={isEdit}
@@ -178,8 +178,8 @@ export default function EmployerProfilePersonalInfo(props) {
                                     placeholder="Phone number"
                                     isRequired
                                 />
-                            </Box>
-                            <Box mb={2}>
+                            </StyledBoxElement>
+                            <StyledBoxElement mb={2}>
                                 <a href={`mailto:${email}`}><StyledEmailIcon/></a>
                                 <EditableInput
                                     isEdit={isEdit}
@@ -188,18 +188,18 @@ export default function EmployerProfilePersonalInfo(props) {
                                     placeholder="email@email.com"
                                     isRequired={false}
                                 />
-                            </Box>
-                            <Box mb={6}>
+                            </StyledBoxElement>
+                            <StyledBoxElement mb={6}>
                                 <a href={validLinkedinHref} target="_blank"
                                    rel="noopener noreferrer"><StyledLinkedInIcon/></a>
                                 <EditableInput
                                     isEdit={isEdit}
                                     value={linkedin || ""}
                                     onChange={(e) => setLinkedIn(e.target.value)}
-                                    placeholder="https://www.linkedin.com/"
+                                    placeholder="https://www.linkedin.com/company/"
                                     isRequired={false}
                                 />
-                            </Box>
+                            </StyledBoxElement>
                             <h3>NIP</h3>
                             <Box mb={1}>
                                 <EditableInput
