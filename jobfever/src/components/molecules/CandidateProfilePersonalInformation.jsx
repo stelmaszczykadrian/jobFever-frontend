@@ -4,7 +4,7 @@ import {
     StyledTopBox,
     StyledLeftBox,
     StyledProfilePaper,
-    StyledRightBox, StyledBottomBoxPersonalInfo, StyledRightContentBox
+    StyledRightBox, StyledBottomBoxPersonalInfo, StyledRightContentBox, StyledBoxElement
 } from "./CandidateProfile.styles";
 import ProfileContainerTitle from "../atoms/ProfileContainerTitle";
 import IconButton from "@mui/material/IconButton";
@@ -20,7 +20,6 @@ import {StyledLinkedInIcon} from "../atoms/StyledLinkedinIcon";
 import {StyledEmailIcon} from "../atoms/StyledEmailIcon";
 import {StyledGithubIcon} from "../atoms/StyledGithubIcon";
 import {useAuthorization} from "../../utils/AuthUtils";
-import {useNavigate} from "react-router-dom";
 
 
 export default function CandidateProfilePersonalInformation(props) {
@@ -28,23 +27,25 @@ export default function CandidateProfilePersonalInformation(props) {
     const [isEdit, setIsEdit] = useState(false);
     const [name, setName] = useState('Name Surname');
     const [city, setCity] = useState('City');
-    const [linkedin, setLinkedIn] = useState('https://www.linkedin.com/');
+    const [linkedin, setLinkedIn] = useState('https://www.linkedin.com/in/');
     const [email, setEmail] = useState('');
     const [github, setGitHub] = useState('https://github.com/');
-    const [filename, setFilename] = useState("");
+    const [filenameImg, setFilenameImg] = useState("");
+    const [filenameCv, setFilenameCv] = useState("");
     const [previewPicture, setPreviewPicture] = useState(null);
     const [picture, setPicture] = useState();
     const [newPicture, setNewPicture] = useState();
     const [previewCv, setPreviewCv] = useState(null);
     const [cv, setCv] = useState();
     const [newCv, setNewCv] = useState(false);
+    const [cvFile, setCVfile] = useState();
     const {getAccessToken, getCandidateId} = useAuthorization();
 
     const getImgFile = async () => {
         try {
-            if (filename) {
+            if (filenameImg) {
                 const {data: response} = await axios.get('http://localhost:8080/api/file/url', {
-                    params: {filename: filename},
+                    params: {filename: filenameImg},
                     headers: {
                         Authorization: `Bearer ${getAccessToken()}`
                     }
@@ -55,6 +56,23 @@ export default function CandidateProfilePersonalInformation(props) {
             console.error(error)
         }
     };
+
+    const getCvFile = async () => {
+        try {
+            if (filenameCv) {
+                const { data: cvUrl } = await axios.get('http://localhost:8080/api/file/url', {
+                    params: {filename: filenameCv},
+                    headers: {
+                        Authorization: `Bearer ${getAccessToken()}`
+                    }
+                });
+                setCv(cvUrl);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
 
     const handleEditClick = () => {
         setIsEdit(true);
@@ -76,8 +94,8 @@ export default function CandidateProfilePersonalInformation(props) {
                 await saveCandidatesImgFilename(getCandidateId(), newPicture.name);
             }
             if (newCv) {
-                await uploadFile(cv);
-                await saveCandidatesCvFile(getCandidateId(), cv.name);
+                await uploadFile(cvFile);
+                await saveCandidatesCvFile(getCandidateId(), filenameCv);
             }
         }
     };
@@ -89,8 +107,8 @@ export default function CandidateProfilePersonalInformation(props) {
             setCity(data.city);
             setLinkedIn(data.linkedin);
             setGitHub(data.github);
-            setFilename(data.imgFileName)
-            setCv(data.cvFile)
+            setFilenameImg(data.imgFileName)
+            setFilenameCv(data.cvFile)
         }
     }, [data]);
 
@@ -102,6 +120,8 @@ export default function CandidateProfilePersonalInformation(props) {
     const savePreviewCv = (e) => {
         setPreviewCv(URL.createObjectURL(e.target.files[0]));
         setCv(e.target.files[0]);
+        setCVfile(e.target.files[0]);
+        setFilenameCv(e.target.files[0].name)
         setNewCv(true);
     };
 
@@ -145,13 +165,12 @@ export default function CandidateProfilePersonalInformation(props) {
     };
 
     const RenderCv = () => {
-        if (previewCv === null) {
+        getCvFile();
+        if (previewCv === null || (typeof cv) === "string") {
+            const cvUrlName = cv || '';
+            const cvFileName = cvUrlName.substring(cvUrlName.lastIndexOf('/') + 1, cvUrlName.lastIndexOf('?'));
             return (
-                <span>{cv}</span>
-            )
-        } else {
-            return (
-                <span>{cv.name}</span>
+                <a href={cv} download>{cvFileName}</a>
             )
         }
     }
@@ -223,7 +242,7 @@ export default function CandidateProfilePersonalInformation(props) {
                     </StyledLeftBox>
                     <StyledRightBox>
                         <StyledRightContentBox>
-                            <Box mb={2}>
+                            <StyledBoxElement mb={2}>
                                 <a href={`mailto:${email}`}><StyledEmailIcon/></a>
                                 <EditableInput
                                     isEdit={isEdit}
@@ -232,19 +251,19 @@ export default function CandidateProfilePersonalInformation(props) {
                                     placeholder="email@email.com"
                                     isRequired={false}
                                 />
-                            </Box>
-                            <Box mb={2}>
+                            </StyledBoxElement>
+                            <StyledBoxElement mb={2}>
                                 <a href={validLinkedinHref} target="_blank"
                                    rel="noopener noreferrer"><StyledLinkedInIcon/></a>
                                 <EditableInput
                                     isEdit={isEdit}
                                     value={linkedin || ""}
                                     onChange={(e) => setLinkedIn(e.target.value)}
-                                    placeholder="https://www.linkedin.com/"
+                                    placeholder="https://www.linkedin.com/in/"
                                     isRequired={false}
                                 />
-                            </Box>
-                            <Box mb={6}>
+                            </StyledBoxElement>
+                            <StyledBoxElement mb={6}>
                                 <a href={validGithubHref} target="_blank" rel="noopener noreferrer"><StyledGithubIcon/></a>
                                 <EditableInput
                                     isEdit={isEdit}
@@ -253,7 +272,7 @@ export default function CandidateProfilePersonalInformation(props) {
                                     placeholder="https://github.com/"
                                     isRequired={false}
                                 />
-                            </Box>
+                            </StyledBoxElement>
                             <Box mb={1}>
                                 <h3>CV file</h3>
                                 <RenderCv/>
