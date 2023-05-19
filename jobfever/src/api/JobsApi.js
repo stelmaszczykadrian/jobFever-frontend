@@ -114,7 +114,6 @@ export const createJob = (userData, onSuccess, onError) => {
 };
 
 export const useJobsByCandidateId = (id) => {
-    // const [data, setData] = useState({});
     const [setLoading] = useState(true);
     const {getAccessToken} = useAuthorization();
 
