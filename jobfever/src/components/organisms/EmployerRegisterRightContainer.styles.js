@@ -15,7 +15,6 @@ export const StyleEmployerRegisterSubmitButton = styled('div')`
 export const EmployerRegisterTextEmployerExist = styled('div')`
   color: whitesmoke;
   text-align: center;
-  margin-top: 38%;
   font-weight: bold;
   font-size: 130%;
 `
