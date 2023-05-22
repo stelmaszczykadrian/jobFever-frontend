@@ -1,17 +1,16 @@
 import styled from "styled-components";
 
 export const StyledAboutsUsPageMainContainer = styled('div')`
-  margin-top: 100px !important;
+  margin-top: 20px !important;
   width: 50%;
   margin: 0 auto;
 `;
 
 export const StyledAuthorInfoContainer = styled.div`
+  border-radius: 30px;
   max-width: 850px;
   margin: 2%;
   display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: #fff;
   box-shadow: 0px 0px 19px 5px rgba(0, 0, 0, 0.19);
 `;
@@ -21,6 +20,8 @@ export const StyledImageContainer = styled.div`
   width: 200px;
   height: 239px;
   background-size: cover;
+  display: flex;
+  justify-content: flex-start;
 `;
 
 export const StyledInfoRightContainer = styled.div`
@@ -49,7 +50,8 @@ export const StyledAuthorPersonalInfoContainer = styled.div`
 export const StyledAboutUsPageText = styled.p`
   display: flex;
   align-items: center;
-  margin: 10px`
+  margin: 10px
+`
 
 
 export const StyledAboutUsPageHeading = styled.div`
