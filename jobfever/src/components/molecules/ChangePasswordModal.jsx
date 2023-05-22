@@ -6,17 +6,16 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import {RedButtonStyled} from "../atoms/RedButton.styles";
 import {Link} from "@mui/joy";
-import Input from "@mui/joy/Input";
 import {MailOutline} from "@material-ui/icons";
 import {StyledEmailInputValidation} from "../organisms/CandidateRegisterRightContainer.styles";
 import {sendEmailForPasswordChange} from "../../api/AuthApi";
+import EditableModalInput from "../atoms/EditableModalInput";
 import {GoogleReCaptcha, GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
 import {StyledDontRememberPasswordLink} from "../atoms/StyledLink";
 
 export default function ChangePasswordModal() {
     const [open, setOpen] = useState(false);
-    const [input, setInput] = useState({
-    });
+    const [input, setInput] = useState({});
     let isVerified = false;
     const onInputChange = e => {
         const {name, value} = e.target;
@@ -44,29 +43,31 @@ export default function ChangePasswordModal() {
 
     return (
         <div>
-            {/*<Link sx={{color: 'red', textAlign: 'center'}} onClick={handleClickOpen}>You dont remember password?</Link>*/}
             <StyledDontRememberPasswordLink onClick={handleClickOpen}>You dont remember password?</StyledDontRememberPasswordLink>
-            <Dialog
+            <Dialog PaperProps={{style: {borderRadius: "20px", maxWidth: "520px", padding:"0.5%"}}}
                 fullWidth
-                maxWidth="sm"
+                maxWidth='sm'
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
             >
                 <DialogTitle sx={{textAlign: "center", fontWeight: 'bold'}} id="responsive-dialog-title">
-                    Insert email
+                    Forgot your account’s password? Enter your email and we’ll send you a recovery link.
                 </DialogTitle>
-                            <StyledEmailInputValidation>
-                                <Input
-                                    type="text"
-                                    name="email"
-                                    placeholder='ex. jobFever@email.com'
-                                    onChange={onInputChange}
-                                />
-                                <IconButton sx={{color: 'white'}}>
-                                    <MailOutline/>
-                                </IconButton>
-                            </StyledEmailInputValidation>
+                <StyledEmailInputValidation>
+                    <EditableModalInput
+                        type="text"
+                        name="email"
+                        placeholder="ex. jobFever@email.com"
+                        label="ex. jobFever@email.com"
+                        onChange={onInputChange}
+                        fullWidth
+                        isRequired={false}
+                    />
+                    <IconButton sx={{color: 'white'}}>
+                        <MailOutline/>
+                    </IconButton>
+                </StyledEmailInputValidation>
                 <DialogActions>
                     <RedButtonStyled onClick={handleClose}>
                         Discard
@@ -81,5 +82,4 @@ export default function ChangePasswordModal() {
             </Dialog>
         </div>
     );
-
 }
