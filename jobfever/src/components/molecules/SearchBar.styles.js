@@ -40,7 +40,7 @@ export const StyledInputBase = styled(InputBase)(({theme}) => ({
     },
 }));
 
-export const StyledBoxFlex = styled("box")`
+export const StyledBoxFlex = styled("div")`
     display: flex;
     flex: content;
     border-radius: 20px;
