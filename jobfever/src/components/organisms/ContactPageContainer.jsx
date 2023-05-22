@@ -27,6 +27,10 @@ export default function ContactPageContainer() {
         event.preventDefault();
         if (isVerified){
             sendContactUs(name, email, phone, message)
+            setName("")
+            setMessage("")
+            setEmail("")
+            setPhone("")
         }
 
     };
