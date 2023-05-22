@@ -37,7 +37,7 @@ export default function ChangePasswordModal() {
     return (
         <div>
             {/*<Link sx={{color: 'red', textAlign: 'center'}} onClick={handleClickOpen}>You dont remember password?</Link>*/}
-            <StyledDontRememberPasswordLink>You dont remember password?</StyledDontRememberPasswordLink>
+            <StyledDontRememberPasswordLink onClick={handleClickOpen}>You dont remember password?</StyledDontRememberPasswordLink>
             <Dialog
                 fullWidth
                 maxWidth="sm"
