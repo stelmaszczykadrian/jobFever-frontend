@@ -1,6 +1,5 @@
 import {
     StyledContactBox,
-    StyledContactPageButton,
     StyledContactPageContainer,
     StyledContactPageHeading,
     StyledContactPageInputField,
@@ -12,12 +11,19 @@ import {
 import {useState} from "react";
 import {sendContactUs} from "../../api/ContactUsApi";
 import {GoogleReCaptcha, GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
+import StyledText from "../atoms/StyledText";
+import {useNavigate} from "react-router-dom";
+import RedButton from "../atoms/RedButton";
+import {StyledButtonCenter} from "./JobOfferFormContainer.styles";
+
 
 export default function ContactPageContainer() {
+    const navigate = useNavigate();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [message, setMessage] = useState("");
+    const [confirmationText, setConfiramtionText] = useState("")
     let isVerified = false;
     const handleVerify = () => {
         isVerified = true;
@@ -31,6 +37,10 @@ export default function ContactPageContainer() {
             setMessage("")
             setEmail("")
             setPhone("")
+            setConfiramtionText("EMAIL SUCCESSFULLY SENT")
+            setTimeout(() => {
+                navigate('/');
+            }, 2000);
         }
 
     };
@@ -51,7 +61,9 @@ export default function ContactPageContainer() {
                             <GoogleReCaptchaProvider reCaptchaKey="6LfrfCwmAAAAABYCQj15CnQgsCuZ6djnXOoyn33M">
                                 <GoogleReCaptcha onVerify={handleVerify} />
                             </GoogleReCaptchaProvider>
-                        <StyledContactPageButton type={"submit"}>Send</StyledContactPageButton>
+                            <StyledButtonCenter><RedButton text={"SEND"} color={"secondary"}/></StyledButtonCenter>
+
+                            <StyledText text={confirmationText} color={"black"} tag={"h4"} />
                         </form>
                     </StyledContactPageRightContainer>
                 </StyledContactBox>
