@@ -11,15 +11,24 @@ import {
 } from "./ContactPageContainer.styles";
 import {useState} from "react";
 import {sendContactUs} from "../../api/ContactUsApi";
+import {GoogleReCaptcha, GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
 
 export default function ContactPageContainer() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [message, setMessage] = useState("");
+    let isVerified = false;
+    const handleVerify = () => {
+        isVerified = true;
+        console.log(isVerified)
+    }
     const handleSubmit = event => {
         event.preventDefault();
-        sendContactUs(name, email, phone, message)
+        if (isVerified){
+            sendContactUs(name, email, phone, message)
+        }
+
     };
     return (
         <StyledContactPageMainContainer>
@@ -35,6 +44,9 @@ export default function ContactPageContainer() {
                         <StyledContactPageInputField type="text" placeholder="Your Email" name={"email"} value={email} onChange={event => setEmail(event.target.value)}></StyledContactPageInputField>
                         <StyledContactPageInputField type="text" placeholder="Phone" name={"phone"} value={phone} onChange={event => setPhone(event.target.value)}></StyledContactPageInputField>
                         <StyledContactPageTextarea placeholder="Message" name={"message"} value={message} onChange={event => setMessage(event.target.value)}></StyledContactPageTextarea>
+                            <GoogleReCaptchaProvider reCaptchaKey="6LfrfCwmAAAAABYCQj15CnQgsCuZ6djnXOoyn33M">
+                                <GoogleReCaptcha onVerify={handleVerify} />
+                            </GoogleReCaptchaProvider>
                         <StyledContactPageButton type={"submit"}>Send</StyledContactPageButton>
                         </form>
                     </StyledContactPageRightContainer>
