@@ -1,13 +1,35 @@
 import {
     StyledContactBox,
+    StyledContactPageButton,
     StyledContactPageContainer,
     StyledContactPageHeading,
+    StyledContactPageInputField,
     StyledContactPageLeftContainer,
     StyledContactPageRightContainer,
-    StyledContactPageMainContainer, StyledContactPageText
+    StyledContactPageTextarea,
+    StyledContactPageMainContainer
 } from "./ContactPageContainer.styles";
+import {useState} from "react";
+import {sendContactUs} from "../../api/ContactUsApi";
+import {GoogleReCaptcha, GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
 
 export default function ContactPageContainer() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [message, setMessage] = useState("");
+    let isVerified = false;
+    const handleVerify = () => {
+        isVerified = true;
+        console.log(isVerified)
+    }
+    const handleSubmit = event => {
+        event.preventDefault();
+        if (isVerified){
+            sendContactUs(name, email, phone, message)
+        }
+
+    };
     return (
         <StyledContactPageMainContainer>
             <StyledContactPageContainer>
@@ -15,12 +37,18 @@ export default function ContactPageContainer() {
                     <StyledContactPageLeftContainer/>
                     <StyledContactPageRightContainer>
                         <StyledContactPageHeading>Contact Us</StyledContactPageHeading>
-                        <StyledContactPageText>Feel free to contact us if you need any help or want to discuss our
-                            services. Our team will be happy to answer your questions and help solve any
-                            problems.</StyledContactPageText>
-                        <StyledContactPageText>
-                            <a href="mailto:job.fever.contact@gmail.com">job.fever.contact@gmail.com</a>
-                        </StyledContactPageText>
+                        <form onSubmit={handleSubmit}>
+                        <StyledContactPageInputField type="text" placeholder="Your Name"
+                                                     name={"name"} value={name} onChange={event => setName(event.target.value)}>
+                        </StyledContactPageInputField>
+                        <StyledContactPageInputField type="text" placeholder="Your Email" name={"email"} value={email} onChange={event => setEmail(event.target.value)}></StyledContactPageInputField>
+                        <StyledContactPageInputField type="text" placeholder="Phone" name={"phone"} value={phone} onChange={event => setPhone(event.target.value)}></StyledContactPageInputField>
+                        <StyledContactPageTextarea placeholder="Message" name={"message"} value={message} onChange={event => setMessage(event.target.value)}></StyledContactPageTextarea>
+                            <GoogleReCaptchaProvider reCaptchaKey="6LfrfCwmAAAAABYCQj15CnQgsCuZ6djnXOoyn33M">
+                                <GoogleReCaptcha onVerify={handleVerify} />
+                            </GoogleReCaptchaProvider>
+                        <StyledContactPageButton type={"submit"}>Send</StyledContactPageButton>
+                        </form>
                     </StyledContactPageRightContainer>
                 </StyledContactBox>
             </StyledContactPageContainer>
