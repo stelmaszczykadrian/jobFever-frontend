@@ -10,18 +10,24 @@ import Input from "@mui/joy/Input";
 import {MailOutline} from "@material-ui/icons";
 import {StyledEmailInputValidation} from "../organisms/CandidateRegisterRightContainer.styles";
 import {sendEmailForPasswordChange} from "../../api/AuthApi";
+import {GoogleReCaptcha, GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
 import {StyledDontRememberPasswordLink} from "../atoms/StyledLink";
 
 export default function ChangePasswordModal() {
     const [open, setOpen] = useState(false);
     const [input, setInput] = useState({
     });
+    let isVerified = false;
     const onInputChange = e => {
         const {name, value} = e.target;
         setInput(prev => ({
             ...prev,
             [name]: value
         }));
+    }
+    const handleVerify = () => {
+        isVerified = true;
+        console.log(isVerified)
     }
     const handleClickOpen = () => {
         setOpen(true);
@@ -30,7 +36,9 @@ export default function ChangePasswordModal() {
         setOpen(false);
     };
     const handleSave = async () => {
-        await sendEmailForPasswordChange(input.email)
+        if (isVerified){
+            await sendEmailForPasswordChange(input.email)
+        }
         setOpen(false);
     };
 
@@ -66,6 +74,9 @@ export default function ChangePasswordModal() {
                     <RedButtonStyled onClick={handleSave}>
                         Send
                     </RedButtonStyled>
+                    <GoogleReCaptchaProvider reCaptchaKey="6LfrfCwmAAAAABYCQj15CnQgsCuZ6djnXOoyn33M">
+                        <GoogleReCaptcha onVerify={handleVerify} />
+                    </GoogleReCaptchaProvider>
                 </DialogActions>
             </Dialog>
         </div>
