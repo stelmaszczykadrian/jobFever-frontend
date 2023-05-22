@@ -1,10 +1,13 @@
 import {
     StyledContactBox,
+    StyledContactPageButton,
     StyledContactPageContainer,
     StyledContactPageHeading,
+    StyledContactPageInputField,
     StyledContactPageLeftContainer,
     StyledContactPageRightContainer,
-    StyledContactPageMainContainer, StyledContactPageText
+    StyledContactPageTextarea,
+    StyledContactPageMainContainer
 } from "./ContactPageContainer.styles";
 
 export default function ContactPageContainer() {
@@ -15,12 +18,11 @@ export default function ContactPageContainer() {
                     <StyledContactPageLeftContainer/>
                     <StyledContactPageRightContainer>
                         <StyledContactPageHeading>Contact Us</StyledContactPageHeading>
-                        <StyledContactPageText>Feel free to contact us if you need any help or want to discuss our
-                            services. Our team will be happy to answer your questions and help solve any
-                            problems.</StyledContactPageText>
-                        <StyledContactPageText>
-                            <a href="mailto:job.fever.contact@gmail.com">job.fever.contact@gmail.com</a>
-                        </StyledContactPageText>
+                        <StyledContactPageInputField type="text" placeholder="Your Name"></StyledContactPageInputField>
+                        <StyledContactPageInputField type="text" placeholder="Your Email"></StyledContactPageInputField>
+                        <StyledContactPageInputField type="text" placeholder="Phone"></StyledContactPageInputField>
+                        <StyledContactPageTextarea placeholder="Message"></StyledContactPageTextarea>
+                        <StyledContactPageButton>Send</StyledContactPageButton>
                     </StyledContactPageRightContainer>
                 </StyledContactBox>
             </StyledContactPageContainer>
