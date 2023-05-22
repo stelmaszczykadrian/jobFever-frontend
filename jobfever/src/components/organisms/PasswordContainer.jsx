@@ -7,27 +7,21 @@ import {
     passwordsDoNotMatchMessage
 } from "../../constants/RegisterFormValidationsMessages";
 import {
-    StyledLabel,
-    StyledPasswordInputValidation,
     StyledRightContainer
 } from "./CandidateRegisterRightContainer.styles";
 import RightNavbar from "../molecules/RightNavbar";
 import Sheet from "@mui/joy/Sheet";
 import StyledText from "../atoms/StyledText";
 import FormControl from "@mui/joy/FormControl";
-import Input from "@mui/joy/Input";
-import IconButton from "@mui/material/IconButton";
-import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import VisibilityIcon from "@material-ui/icons/Visibility";
 import RedButton from "../atoms/RedButton";
 import {EmployerRegisterTextEmployerExist} from "./EmployerRegisterRightContainer.styles";
 import {changePassword} from "../../api/AuthApi";
+import PasswordInputField from "../molecules/PasswordInputField";
 
 export default function PasswordContainer(){
     const params = useParams();
     const [errorMessage, setErrorMessage] = useState(null);
     const navigate = useNavigate();
-    const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         password: '',
         confirmPassword: '',
@@ -85,51 +79,29 @@ export default function PasswordContainer(){
                 />
                 <form onSubmit={handleSubmit}>
                     <FormControl>
-                        <StyledLabel>
-                            Password
-                        </StyledLabel>
-                        <StyledPasswordInputValidation>
-                            <Input
-                                type={showPassword ? "text" : "password"}
-                                name={'password'}
-                                value={formData.password}
-                                onChange={onInputChange}
-                                onBlur={validateInput}
+                            <PasswordInputField
+                                formData={formData}
+                                onInputChange={onInputChange}
+                                validateInput={validateInput}
+                                label="Password"
+                                inputName="password"
+                                inputPlaceholder="Enter Password"
+                                inputType="password"
+                                inputError={formData.errors.password}
                             />
-                            <IconButton sx={{color: 'white'}} onClick={() => setShowPassword(!showPassword)}>
-                                {showPassword ? <VisibilityOffIcon/> : <VisibilityIcon/>}
-                            </IconButton>
-                        </StyledPasswordInputValidation>
-                        {formData.errors.password &&
-                            <StyledText
-                                tag="span"
-                                color="red"
-                                text={formData.errors.password}
-                            />}
                     </FormControl>
                     <FormControl>
-                        <StyledLabel>
-                            Confirm Password
-                        </StyledLabel>
-                        <StyledPasswordInputValidation>
-                            <Input
-                                type={showPassword ? "text" : "password"}
-                                name={'confirmPassword'}
-                                value={formData.confirmPassword}
-                                onChange={onInputChange}
-                                onBlur={validateInput}
-                            />
-                            <IconButton sx={{color: 'white'}} onClick={() => setShowPassword(!showPassword)}>
-                                {showPassword ? <VisibilityOffIcon/> : <VisibilityIcon/>}
-                            </IconButton>
-                        </StyledPasswordInputValidation>
-
-                        {formData.errors.confirmPassword &&
-                            <StyledText
-                                tag="span"
-                                color="red"
-                                text={formData.errors.confirmPassword}
-                            />}
+                        <PasswordInputField
+                            error
+                            formData={formData}
+                            onInputChange={onInputChange}
+                            validateInput={validateInput}
+                            label="Confirm Password"
+                            inputName="confirmPassword"
+                            inputPlaceholder="Confirm Password"
+                            inputType="password"
+                            inputError={formData.errors.confirmPassword}
+                        />
                     </FormControl>
                     <FormControl sx={{justifyContent: 'center'}}>
                         <RedButton
