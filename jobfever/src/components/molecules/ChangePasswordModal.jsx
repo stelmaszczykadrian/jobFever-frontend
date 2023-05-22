@@ -62,7 +62,7 @@ export default function ChangePasswordModal() {
                         Discard
                     </RedButtonStyled>
                     <RedButtonStyled onClick={handleSave}>
-                        Try
+                        Send
                     </RedButtonStyled>
                 </DialogActions>
             </Dialog>
