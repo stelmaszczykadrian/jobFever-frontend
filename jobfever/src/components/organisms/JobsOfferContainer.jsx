@@ -10,6 +10,7 @@ import JobOfferGrid from "../molecules/JobOfferGrid";
 import axios from "axios";
 import SearchBar from "../molecules/SearchBar";
 import {StyledBoxFlex} from "../molecules/SearchBar.styles";
+import Container from "@mui/material/Container";
 
 const useStyles = makeStyles(() => ({
     ul: {
@@ -89,7 +90,7 @@ export default function JobsOfferContainer() {
     };
 
     return (
-        <box>
+        <Container>
                 <StyledJobOffersContainer>
                     <StyledBoxFlex>
                     <JobsPageSortComponent onLanguageChange={handleLanguageChange} />
@@ -119,7 +120,7 @@ export default function JobsOfferContainer() {
                         classes={{ ul: classes.ul }}
                     />
                 </StyledPaginationContainer>
-        </box>
+        </Container>
     );
 }
 
