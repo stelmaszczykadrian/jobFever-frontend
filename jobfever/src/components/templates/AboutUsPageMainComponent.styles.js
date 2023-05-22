@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import img from "../../images/backgrounds/background_6.jpg";
+import img from "../../images/backgrounds/background_7.jpg";
 
 
 export const StyledAboutUsPageMainComponent = styled("div")`
@@ -7,4 +7,5 @@ export const StyledAboutUsPageMainComponent = styled("div")`
   background-image: url(${img});
   background-position: center;
   background-size: cover;
+  overflow: hidden;
 `
