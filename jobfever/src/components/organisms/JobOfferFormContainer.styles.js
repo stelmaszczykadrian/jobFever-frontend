@@ -89,12 +89,11 @@ export const StyledOption = styled("option")`
       background-color: red;
       border-color: red;
     }
-}
 `
 
 export const StyledButtonCenter = styled("div")`
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 20px;
 `
 
 export const StyledRedButtonModalButton = styled(Button)(() => ({

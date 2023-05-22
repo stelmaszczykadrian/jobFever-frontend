@@ -8,11 +8,11 @@ export const StyledContactPageContainer = styled("div")`
 
 
 export const StyledContactPageMainContainer = styled('div')`
-  margin-top: 100px !important;
+  padding-top: 100px;
   width: 50%;
-  margin: 0 auto;
-  text-align: center;
-
+  margin: auto;
+  height: 90%;
+  padding-bottom: 50px;
 `;
 
 export const StyledContactBox = styled("div")`
@@ -29,7 +29,6 @@ export const StyledContactPageLeftContainer = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 100%;
 `;
 
 
@@ -99,22 +98,4 @@ export const StyledContactPageTextarea = styled("textarea")`
     background-color: #fff;
   }
 `
-
-
-export const StyledContactPageButton = styled.button`
-  width: 100%;
-  padding: 0.5rem 1rem;
-  background-color: red;
-  
-  color: #fff;
-  font-size: 1.1rem;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  transition: .3s;
-
-  &:hover {
-    background-color: yellow;
-  }
-  `;
 
