@@ -90,11 +90,11 @@ export default function JobsOfferContainer() {
     };
 
     return (
-        <Container>
+        <div>
                 <StyledJobOffersContainer>
                     <StyledBoxFlex>
                     <JobsPageSortComponent onLanguageChange={handleLanguageChange} />
-                    <SearchBar onSearch={handleSearch} />
+                    <SearchBar onSearch={handleSearch} style={{ marginRight: '200px' }}/>
                     </StyledBoxFlex>
                     {loading ? (
                         <Typography></Typography>
@@ -120,7 +120,7 @@ export default function JobsOfferContainer() {
                         classes={{ ul: classes.ul }}
                     />
                 </StyledPaginationContainer>
-        </Container>
+        </div>
     );
 }
 

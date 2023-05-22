@@ -30,7 +30,7 @@ export default function JobOfferGrid({job, onClick}) {
         };
         getFileByFilename()
         return (
-            <StyledPaper onClick={() => handleJobClick()}>
+            <StyledPaper onClick={() => handleJobClick()} style={{ marginRight: '1.5%' }}>
                 <Grid container spacing={2}>
                     <Grid item xs={4} container style={{ alignItems: 'center' }} >
                             <ButtonBase sx={{ marginBottom: '20px', width: 128, height: 128}}>
