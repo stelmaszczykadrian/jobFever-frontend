@@ -54,8 +54,8 @@ export const StyledContactPageHeading = styled.h2`
     transform: translateX(-50%);
     height: 4px;
     width: 50px;
-    border-radius: 2px;
-    background-color: red;
+    background-color: #ea3526;
+    border-radius: 5px;
   }
 `;
 
@@ -70,14 +70,16 @@ export const StyledContactPageInputField = styled.input`
   margin-bottom: 22px;
   margin-right: 50%;
   transition: .3s;
+  border-radius: 5px;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
 
   &:focus {
-    border: 2px solid rgba(30, 85, 250, 0.47);
+    border: 2px solid rgb(234, 53, 38);
     background-color: #fff;
+    border-radius: 5px;
   }
 `;
 
@@ -92,14 +94,16 @@ export const StyledContactPageTextarea = styled("textarea")`
   font-size: 1.1rem;
   margin-bottom: 22px;
   transition: .3s;
+  border-radius: 5px;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
 
   &:focus {
-    border: 2px solid rgba(30, 85, 250, 0.47);
+    border: 2px solid rgb(215, 49, 35);
     background-color: #fff;
+    border-radius: 5px;
   }
 `
 
