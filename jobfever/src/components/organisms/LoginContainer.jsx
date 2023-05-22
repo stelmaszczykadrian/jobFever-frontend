@@ -119,10 +119,10 @@ export default function LoginContainer(props) {
                     {loginMessage &&
                         <CandidateRegisterTextCandidateExist>{loginMessage}</CandidateRegisterTextCandidateExist>}
                     <FormControl sx={{justifyContent: 'center'}}>
+                        <ChangePasswordModal id={props.id} tag={<StyledAddIcon/>}/>
                         <RedButton
                             text="LOG IN">
                         </RedButton>
-                        <ChangePasswordModal id={props.id} tag={<StyledAddIcon/>}/>
                     </FormControl>
                 </form>
             </Sheet>

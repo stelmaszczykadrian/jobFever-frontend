@@ -10,6 +10,7 @@ import Input from "@mui/joy/Input";
 import {MailOutline} from "@material-ui/icons";
 import {StyledEmailInputValidation} from "../organisms/CandidateRegisterRightContainer.styles";
 import {sendEmailForPasswordChange} from "../../api/AuthApi";
+import {StyledDontRememberPasswordLink} from "../atoms/StyledLink";
 
 export default function ChangePasswordModal() {
     const [open, setOpen] = useState(false);
@@ -35,7 +36,8 @@ export default function ChangePasswordModal() {
 
     return (
         <div>
-            <Link sx={{left: '39%'}} onClick={handleClickOpen}>You dont remember password?</Link>
+            {/*<Link sx={{color: 'red', textAlign: 'center'}} onClick={handleClickOpen}>You dont remember password?</Link>*/}
+            <StyledDontRememberPasswordLink>You dont remember password?</StyledDontRememberPasswordLink>
             <Dialog
                 fullWidth
                 maxWidth="sm"
