@@ -6,10 +6,12 @@ import SingleOfferField from "../molecules/SingleOfferField";
 function SingleOfferLeftContainer(props) {
 
     const {offerDetails} = props;
-
+    const {employer} = props;
+    console.log(employer);
     return (
         <StyledSingleOfferLeftContainer>
             {/*<SingleOfferField title={offerDetails.employer.companyName} text={offerDetails.title} />*/}
+            {/*<SingleOfferField title={employer.companyName} text={offerDetails.title} />*/}
             <SingleOfferField title="Offer Title" text={offerDetails.title} />
             <SingleOfferField title="Description" text={offerDetails.description} />
             <SingleOfferField title="Technical Requirements" text={(offerDetails.technicalRequirements).join(", ")} />
