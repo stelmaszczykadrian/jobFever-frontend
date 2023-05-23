@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import * as React from "react";
 import Cookies from "js-cookie";
 import {useNavigate} from "react-router-dom";
+import {useAuthorization} from "../utils/AuthUtils";
 
 const url = "http://localhost:8080/api/candidates/";
 
@@ -10,21 +11,44 @@ export const useCandidateById = (id) => {
     const [candidate, setCandidate] = useState({});
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const {getAccessToken} = useAuthorization();
+
+    const getImgFile = async (filename) => {
+        try {
+            if (filename) {
+                const resp = await axios.get('http://localhost:8080/api/file/url', {
+                    params: {filename: filename},
+                    headers: {
+                        Authorization: `Bearer ${getAccessToken()}`
+                    }
+                });
+                return resp.data;
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    };
 
     const fetchData = async () => {
         try {
-            const {data: response} = await axios.get(url, {
+            const resp = await axios.get(url, {
                 params: {id: id},
                 headers: {
-                    Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+                    Authorization: `Bearer ${getAccessToken()}`
                 }
             });
 
-            if(!response){
+            const pic = await getImgFile(resp.data.imgFileName);
+
+            const fullData = {...resp.data,
+                    picture: pic
+            }
+
+            if(!fullData){
                 navigate('/404')
             }
             setLoading(false);
-            setCandidate(response);
+            setCandidate(fullData);
         } catch (error) {
             console.error(error)
         }
