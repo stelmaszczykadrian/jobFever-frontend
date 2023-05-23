@@ -191,7 +191,7 @@ export default function CandidateProfilePersonalInformation(props) {
                 <StyledBottomBoxPersonalInfo>
                     <StyledLeftBox>
                         <Box mb={1}>
-                                <StyledProfilePhoto src={picture} alt="Profile"/>
+                            <StyledProfilePhoto src={picture} alt="Profile"/>
                             <RenderChangePhotoButtons/>
                         </Box>
                         <h3>Name</h3>

@@ -2,6 +2,7 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import {useNavigate} from "react-router-dom";
+import {useAuthorization} from "../utils/AuthUtils";
 
 const url = "http://localhost:8080/api/employers/";
 
@@ -9,22 +10,51 @@ export const useEmployerById = (id) => {
     const [employer, setEmployer] = useState({});
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const {getAccessToken} = useAuthorization();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const {data: response} = await axios.get(url, {
-                    params: {id: id},
+    const getImgFile = async (filename) => {
+        try {
+            if (filename) {
+                const resp = await axios.get('http://localhost:8080/api/file/url', {
+                    params: {filename: filename},
+                    headers: {
+                        Authorization: `Bearer ${getAccessToken()}`
+                    }
                 });
-                if(!response){
-                    navigate('/404')
+                return resp.data;
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    };
+
+    const fetchData = async () => {
+        try {
+            const resp = await axios.get(url, {
+                params: {id: id},
+                headers: {
+                    Authorization: `Bearer ${getAccessToken()}`
                 }
-                setEmployer(response);
-            } catch (error) {
+            });
+
+            const pic = await getImgFile(resp.data.imgFileName);
+
+            const fullData = {
+                ...resp.data,
+                picture: pic
+            }
+
+            if (!fullData) {
+                navigate('/404')
             }
             setLoading(false);
-        };
+            setEmployer(fullData);
+        } catch (error) {
+            console.error(error)
+        }
+    };
 
+    useEffect(() => {
         fetchData();
     }, []);
 
