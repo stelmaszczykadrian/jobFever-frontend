@@ -17,3 +17,19 @@ export async function uploadFile(file) {
     });
 }
 
+export async function getImgFile(filename){
+    try {
+        if (filename) {
+            const resp = await axios.get('http://localhost:8080/api/file/url', {
+                params: {filename: filename},
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+                }
+            });
+            return resp.data;
+        }
+    } catch (error) {
+        console.error(error)
+    }
+};
+
