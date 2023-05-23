@@ -32,29 +32,11 @@ export default function CandidateProfilePersonalInformation(props) {
     const [linkedin, setLinkedIn] = useState('https://www.linkedin.com/in/');
     const [email, setEmail] = useState('');
     const [github, setGitHub] = useState('https://github.com/');
-    const [filenameImg, setFilenameImg] = useState("");
-    const [previewPicture, setPreviewPicture] = useState(null);
-    const [picture, setPicture] = useState(logo);
+    const [picture, setPicture] = useState();
     const [newPicture, setNewPicture] = useState();
     const [cv, setCv] = useState();
     const [newCv, setNewCv] = useState();
     const {getAccessToken, getCandidateId} = useAuthorization();
-
-    const getImgFile = async () => {
-        try {
-            if (filenameImg) {
-                const {data: response} = await axios.get('http://localhost:8080/api/file/url', {
-                    params: {filename: filenameImg},
-                    headers: {
-                        Authorization: `Bearer ${getAccessToken()}`
-                    }
-                });
-                setPicture(response);
-            }
-        } catch (error) {
-            console.error(error)
-        }
-    };
 
     const getCvFile = async (filenameCv) => {
         try {
@@ -106,9 +88,10 @@ export default function CandidateProfilePersonalInformation(props) {
             setCity(data.city);
             setLinkedIn(data.linkedin);
             setGitHub(data.github);
-            setFilenameImg(data.imgFileName);
-            if(data.imgFileName){
-                getImgFile();
+            if(data.picture){
+                setPicture(data.picture);
+            } else {
+                setPicture(logo);
             }
             if(data.cvFile){
                 getCvFile(data.cvFile);
@@ -116,8 +99,8 @@ export default function CandidateProfilePersonalInformation(props) {
         }
     }, [data]);
 
-    const savePreviewPicture = (e) => {
-        setPreviewPicture(URL.createObjectURL(e.target.files[0]));
+    const savePicture = (e) => {
+        setPicture(URL.createObjectURL(e.target.files[0]));
         setNewPicture(e.target.files[0]);
     };
 
@@ -146,7 +129,7 @@ export default function CandidateProfilePersonalInformation(props) {
             return (
                 isEdit ? (
                     <form encType="multipart/form-data">
-                        <input type="file" name="file" onChange={savePreviewPicture}/>
+                        <input type="file" name="file" onChange={savePicture}/>
                     </form>
                 ) : undefined
             )
@@ -180,18 +163,6 @@ export default function CandidateProfilePersonalInformation(props) {
         }
     }
 
-    const RenderProfilePicture = () => {
-        if (previewPicture === null) {
-            return (
-                <StyledProfilePhoto src={picture} alt="Profile"/>
-            )
-        } else {
-            return (
-                <StyledProfilePhoto src={previewPicture} alt="Profile"/>
-            )
-        }
-    }
-
     const ValidateLinkedinLink = () => {
         if (linkedin && linkedin.startsWith("https://www.linkedin.com/in/")) {
             return linkedin;
@@ -220,7 +191,7 @@ export default function CandidateProfilePersonalInformation(props) {
                 <StyledBottomBoxPersonalInfo>
                     <StyledLeftBox>
                         <Box mb={1}>
-                            <RenderProfilePicture/>
+                                <StyledProfilePhoto src={picture} alt="Profile"/>
                             <RenderChangePhotoButtons/>
                         </Box>
                         <h3>Name</h3>
