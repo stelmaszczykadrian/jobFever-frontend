@@ -14,11 +14,11 @@ import {editEmployer, saveEmployersImgFilename, useEmployerById} from "../../api
 import EditableInput from "../atoms/EditableInput";
 import {uploadFile} from "../../api/FilesApi";
 import {StyledProfilePhoto} from "../atoms/ProfilePhoto.styles";
-import axios from "axios";
 import {StyledEmailIcon} from "../atoms/StyledEmailIcon";
 import {StyledLinkedInIcon} from "../atoms/StyledLinkedinIcon";
 import {StyledContactPhoneIcon} from "../atoms/StyledPhoneIcon";
 import {useAuthorization} from "../../utils/AuthUtils";
+import logo from "../../images/logos/profiledefaultlogo.png";
 
 
 export default function EmployerProfilePersonalInfo(props) {
@@ -31,25 +31,10 @@ export default function EmployerProfilePersonalInfo(props) {
     const [localization, setLocalization] = useState('Pcim');
     const [phoneNumber, setPhoneNumber] = useState(123456789);
     const [nip, setNip] = useState();
-    const [filename, setFilename] = useState("");
-    const [newPicture, setNewPicture] = useState();
-    const [previewPicture, setPreviewPicture] = useState(null);
     const [picture, setPicture] = useState();
-    const {getAccessToken, getEmployerId} = useAuthorization();
+    const [newPicture, setNewPicture] = useState();
+    const {getEmployerId} = useAuthorization();
 
-    const getImgFile = async () => {
-        try {
-            const {data: response} = await axios.get('http://localhost:8080/api/file/url', {
-                params: {filename: filename},
-                headers: {
-                    Authorization: `Bearer ${getAccessToken()}`
-                }
-            });
-            setPicture(response);
-        } catch (error) {
-            console.error(error)
-        }
-    };
     const handleEditClick = () => {
         setIsEdit(true);
     };
@@ -70,7 +55,12 @@ export default function EmployerProfilePersonalInfo(props) {
             setNameAndSurname(data.nameAndSurname)
             setPhoneNumber(data.phoneNumber)
             setLocalization(data.localization)
-            setFilename(data.imgFileName)
+            if (data.picture) {
+                setPicture(data.picture);
+            } else {
+                setPicture(logo);
+            }
+
             if (data.nip !== 0) {
                 setNip(data.nip)
             }
@@ -78,12 +68,10 @@ export default function EmployerProfilePersonalInfo(props) {
         }
     }, [data]);
 
-    const savePreviewPicture = (e) => {
-        setPreviewPicture(URL.createObjectURL(e.target.files[0]))
-        setNewPicture(
-            e.target.files[0]
-        )
-    }
+    const savePicture = (e) => {
+        setPicture(URL.createObjectURL(e.target.files[0]))
+        setNewPicture(e.target.files[0]);
+    };
 
     const RenderEditIcons = () => {
         if (props.id === getEmployerId()) {
@@ -106,20 +94,9 @@ export default function EmployerProfilePersonalInfo(props) {
             return (
                 isEdit ? (
                     <form encType="multipart/form-data">
-                        <input type="file" name="file" onChange={savePreviewPicture}/>
+                        <input type="file" name="file" onChange={savePicture}/>
                     </form>
                 ) : undefined
-            )
-        }
-    }
-    const RenderProfilePicture = () => {
-        if (previewPicture === null) {
-            return (
-                <StyledProfilePhoto src={picture} alt="Profile"/>
-            )
-        } else {
-            return (
-                <StyledProfilePhoto src={previewPicture} alt="Profile"/>
             )
         }
     }
@@ -133,7 +110,6 @@ export default function EmployerProfilePersonalInfo(props) {
     }
 
     if (!loading) {
-        getImgFile()
         const validLinkedinHref = ValidateLinkedinLink();
         return (
             <StyledProfilePaper>
@@ -143,9 +119,9 @@ export default function EmployerProfilePersonalInfo(props) {
                 <StyledBottomBoxPersonalInfo>
                     <StyledLeftBox>
                         <Box mb={1}>
-                            <RenderProfilePicture/>
+                            <StyledProfilePhoto src={picture} alt="Profile"/>
+                            <RenderChangePhotoButtons/>
                         </Box>
-                        <RenderChangePhotoButtons/>
                         <h3>Owner</h3>
                         <Box mb={1}>
                             <EditableInput
