@@ -49,7 +49,9 @@ export default function EmployerProfilePersonalInfo(props) {
         }
     };
     React.useEffect(() => {
-        if (!loading) {
+        if (data
+            && Object.keys(data).length > 0
+            && Object.getPrototypeOf(data) === Object.prototype) {
             setCompanyName(data.companyName);
             setEmail(data.email);
             setNameAndSurname(data.nameAndSurname)
@@ -102,7 +104,7 @@ export default function EmployerProfilePersonalInfo(props) {
     }
 
     const ValidateLinkedinLink = () => {
-        if (linkedin && linkedin.startsWith("https://www.linkedin.com/company/") || linkedin && linkedin.startsWith("https://www.linkedin.com/in/")) {
+        if ((linkedin && linkedin.startsWith("https://www.linkedin.com/company/")) || (linkedin && linkedin.startsWith("https://www.linkedin.com/in/"))) {
             return linkedin;
         } else {
             return 'https://www.linkedin.com/company/' + linkedin || 'https://www.linkedin.com/in/' + linkedin;
