@@ -2,6 +2,10 @@ import React from "react";
 import {StyledSingleOfferDetailsContainer} from "./SingleOfferDetailsContainer.styles";
 import JobOfferApplyModal from "./JobOfferApplyModal";
 import moment from "moment";
+import {StyledSalaryIcon} from "../atoms/StyledSalaryIcon";
+import {StyledCalendarIcon} from "../atoms/StyledCalendarIcon";
+import {StyledBagIcon} from "../atoms/StyledBagIcon";
+import {StyledLocalizationIcon} from "../atoms/StyledLocalizationIcon";
 
 function SingleOfferDetailsContainer(props) {
     const {offerDetails} = props;
@@ -12,15 +16,34 @@ function SingleOfferDetailsContainer(props) {
     return (
         <StyledSingleOfferDetailsContainer>
             <JobOfferApplyModal jobId = {offerDetails.jobId}/>
-            <h3>Salary</h3>
-            <p>{offerDetails.salaryFrom}-{offerDetails.salaryTo} {offerDetails.currencyType}</p>
-            <h3>Valid</h3>
-            <p>{postingDate.format("DD/MM/YYYY")} (expires in {remainingDays} days)</p>
-            <h3>Contract Type</h3>
-            <p>{offerDetails.jobType}</p>
-            <h3>Location</h3>
-            <p>{offerDetails.location}</p>
-
+            <div style={{display: 'flex', margin: '15%'}}>
+                <StyledSalaryIcon />
+                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}}>
+                    <h3 style={{marginBlock: 0}}>Salary</h3>
+                    <p style={{marginBlock: 0}}>{offerDetails.salaryFrom}-{offerDetails.salaryTo} {offerDetails.currencyType}</p>
+                </div>
+            </div>
+            <div style={{display: 'flex', margin: '15%'}}>
+                <StyledCalendarIcon />
+                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}}>
+                    <h3 style={{marginBlock: 0}}>Valid</h3>
+                    <p style={{marginBlock: 0}}>{postingDate.format("DD/MM/YYYY")} (expires in {remainingDays} days)</p>
+                </div>
+            </div>
+            <div style={{display: 'flex', margin: '15%'}}>
+                <StyledBagIcon />
+                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}}>
+                    <h3 style={{marginBlock: 0}}>Contract Type</h3>
+                    <p style={{marginBlock: 0}}>{offerDetails.jobType}</p>
+                </div>
+            </div>
+            <div style={{display: 'flex', margin: '15%'}}>
+                <StyledLocalizationIcon />
+                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}}>
+                    <h3 style={{marginBlock: 0}}>Location</h3>
+                    <p style={{marginBlock: 0}}>{offerDetails.location}</p>
+                </div>
+            </div>
         </StyledSingleOfferDetailsContainer>
     );
 }
