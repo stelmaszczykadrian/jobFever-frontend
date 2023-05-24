@@ -48,7 +48,39 @@ export const useCandidateById = (id) => {
         loading,
     };
 };
+export const useCandidateRatingById = (id, jobId) => {
+    const [rating, setRating] = useState();
+    const [loading, setLoading] = useState(true);
+    const fetchData = async () => {
+        try {
+            const {data: response} = await axios.get(url + "rating", {
+                params: {
+                    id: id,
+                    employerId: JSON.parse(Cookies.get("jwt")).employer_id,
+                    jobId:jobId
+                },
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+                }
+            })
+            setLoading(false);
+            // if(!response){
+            //     navigate('/404')
+            // }
+            setRating(response)
 
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    useEffect(() => {
+        fetchData();
+    }, []);
+    return {
+        data: rating,
+        loading,
+    }
+};
 export async function editCandidate(id, updatedCandidateData) {
     await axios.put(url, {
             name: updatedCandidateData.name,
@@ -59,6 +91,21 @@ export async function editCandidate(id, updatedCandidateData) {
         },
         {
             params: {id: id},
+            headers: {
+                Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
+            }
+        });
+}
+
+export async function addRating(id, rating, jobId) {
+    await axios.put(url + "rating", {},
+        {
+            params: {
+                id: id,
+                rating: rating,
+                employerId: JSON.parse(Cookies.get("jwt")).employer_id,
+                jobId: jobId
+            },
             headers: {
                 Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
             }
