@@ -15,6 +15,7 @@ export default function EmployerJobs(props) {
     const [showModal, setShowModal] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [deletedJobId, setDeletedJobId] = useState(0)
+    const [jobId, setJobId] = useState(0)
     const navigate = useNavigate();
 
     const [candidateData, setCandidateData] = useState([]);
@@ -26,6 +27,7 @@ export default function EmployerJobs(props) {
 
     const handleCandidatesClick = (jobId, jobTitle) => {
         handleModalOpen(jobId);
+        setJobId(jobId)
         setJobTitle(jobTitle);
     };
 
@@ -82,6 +84,7 @@ export default function EmployerJobs(props) {
                         </div>
                     ))}
                     <CandidateModal
+                        jobId={jobId}
                         jobTitle={jobTitle}
                         showModal={showModal}
                         handleModalClose={handleModalClose}
