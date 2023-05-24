@@ -7,7 +7,8 @@ export const StyledLink = styled("a")(() => ({
 
 
 export const StyledDontRememberPasswordLink = styled(Link)`
-  color: red;
+  text-decoration: none;
+  color: #a1a0a0;
   display: flex;
   justify-content: center;
 `;

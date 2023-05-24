@@ -43,7 +43,7 @@ export default function ChangePasswordModal() {
 
     return (
         <div>
-            <StyledDontRememberPasswordLink onClick={handleClickOpen}>You dont remember password?</StyledDontRememberPasswordLink>
+            <StyledDontRememberPasswordLink onClick={handleClickOpen}>You don't remember password?</StyledDontRememberPasswordLink>
             <Dialog PaperProps={{style: {borderRadius: "20px", maxWidth: "520px", padding:"0.5%"}}}
                 fullWidth
                 maxWidth='sm'
