@@ -7,17 +7,17 @@ import Dialog from "@mui/material/Dialog";
 import RedButton from "../atoms/RedButton";
 import Typography from "@mui/joy/Typography";
 import {useNavigate} from "react-router-dom";
+import React from "react";
+import RenderRating from "../atoms/RatingStars";
 
 
 export default function CandidateModal(props) {
     const navigate = useNavigate();
     const {showModal, handleModalClose, jobTitle, candidateData} = props;
 
-
     const handleClick = (candidateId) => {
         navigate(`/candidate/${candidateId}`);
     };
-
     return (
         <Dialog
             open={showModal}
@@ -40,6 +40,7 @@ export default function CandidateModal(props) {
                                 >
                                     {candidate.name}
                                 </JobTitleOnJobsCard>
+                                <RenderRating candidateId={candidate.id} jobId={props.jobId}/>
                             </StyledPaperJobsCard>
                         ))
                     ) : (
