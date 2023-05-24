@@ -6,10 +6,8 @@ export const StyledContactPageContainer = styled("div")`
   height: 100%;
 `
 
-
 export const StyledContactPageMainContainer = styled('div')`
-  padding-top: 100px;
-  width: 50%;
+  margin-top: 50px !important;
   margin: auto;
 `;
 
@@ -45,7 +43,6 @@ export const StyledContactPageHeading = styled.h2`
   padding: 0 0 10px;
   text-align: center;
   margin-bottom: 20px;
-
   &:after {
     content: '';
     position: absolute;
@@ -71,11 +68,9 @@ export const StyledContactPageInputField = styled.input`
   margin-right: 50%;
   transition: .3s;
   border-radius: 5px;
-
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
-
   &:focus {
     border: 2px solid rgb(234, 53, 38);
     background-color: #fff;
@@ -86,7 +81,7 @@ export const StyledContactPageInputField = styled.input`
 
 export const StyledContactPageTextarea = styled("textarea")`
   width: 90%;
-  min-height: 150px;
+  min-height: 120px;
   border: 2px solid rgba(0, 0, 0, 0);
   outline: none;
   background-color: rgba(230, 230, 230, 0.6);
@@ -95,15 +90,25 @@ export const StyledContactPageTextarea = styled("textarea")`
   margin-bottom: 22px;
   transition: .3s;
   border-radius: 5px;
-
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
-
   &:focus {
     border: 2px solid rgb(215, 49, 35);
     background-color: #fff;
     border-radius: 5px;
   }
 `
+
+export const RedButton = styled('button')`
+  background-color: ${props => props.disabled ? '#888888' : 'rgba(171, 36, 36) !important'};
+  color: #ffffff;
+  padding: 12px 40px; 
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  opacity: ${props => props.disabled ? 0.6 : 1};
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+`;
+
 
