@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledSingleOfferDetailsContainer = styled("div")`
   margin: 1rem auto auto;
   padding: 1%;
-  width: 50%;
+  width: 55%;
   text-align: center;
   color: black;
   background-color: white;
