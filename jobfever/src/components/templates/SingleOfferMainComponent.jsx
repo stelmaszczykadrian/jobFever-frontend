@@ -22,7 +22,7 @@ function SingleOfferMainComponent() {
     return jobDetails ? (
         <StyledSingleOfferMainComponent>
             <Navbar />
-        <div style={{display:"flex", flexDirection:"row", maxHeight:"100vh", overflowY:"auto", height:"80%", marginTop:"2%"}}>
+        <div style={{display:"flex", flexDirection:"row", maxHeight:"100vh", overflowY:"auto", marginBottom:"1%", marginTop:"2%"}}>
             <SingleOfferLeftContainer offerDetails={jobDetails}/>
             <SingleOfferRightContainer offerDetails={jobDetails}/>
         </div>
