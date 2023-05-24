@@ -3,12 +3,12 @@ import React from "react";
 import Navbar from "../molecules/Navbar";
 import JobsOfferContainer from "../organisms/JobsOfferContainer";
 
-export default function JobsPageMainComponent(){
-    return(
+export default function JobsPageMainComponent() {
+    return (
         <StyledJobsPageMainComponent>
             <StyledBoxShadow>
-            <Navbar />
-            <JobsOfferContainer/>
+                <Navbar/>
+                <JobsOfferContainer/>
             </StyledBoxShadow>
         </StyledJobsPageMainComponent>
     )
