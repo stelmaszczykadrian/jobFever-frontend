@@ -64,11 +64,7 @@ export const useCandidateRatingById = (id, jobId) => {
                 }
             })
             setLoading(false);
-            // if(!response){
-            //     navigate('/404')
-            // }
             setRating(response)
-
         } catch (error) {
             console.error(error)
         }
