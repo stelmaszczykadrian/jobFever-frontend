@@ -4,9 +4,26 @@ import dayjs from "dayjs";
 import EditableModalInput from "../atoms/EditableModalInput";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 
-
 const theme = createTheme({
     components: {
+        MuiFormLabel: {
+            styleOverrides: {
+                root: {
+                    '&.Mui-focused': {
+                        color: '#000000',
+                    },
+                },
+            },
+        },
+        MuiOutlinedInput: {
+            styleOverrides: {
+                root: {
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#000000',
+                    },
+                },
+            },
+        },
         MuiPickersDay: {
             styleOverrides: {
                 root: {
@@ -31,8 +48,19 @@ const theme = createTheme({
                 },
             },
         },
+        MuiPickersYear: {
+            styleOverrides: {
+                yearButton: {
+                    '&.Mui-selected': {
+                        color: '#fff',
+                        backgroundColor: '#c0030b !important',
+                    },
+                },
+            },
+        },
     },
 });
+
 
 export default function CalendarForm({name, date, setDate}) {
     let required = true;
