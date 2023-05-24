@@ -27,7 +27,6 @@ export default function JobOfferApplyModal(props) {
     const handleClose = () => {
         setOpen(false);
     };
-
     function timeout(delay) {
         return new Promise(res => setTimeout(res, delay));
     }
@@ -68,8 +67,8 @@ export default function JobOfferApplyModal(props) {
     }
 
     return (
-        <div>
-            <RenderApplyButton/>
+        <div style={{margin:'10%'}}>
+            <RenderApplyButton />
             <Dialog
                 fullWidth
                 maxWidth={'sm'}
