@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {StyledSingleOfferRightContainer} from "./SingleOfferRightContainer.styles";
 import SingleOfferDetailsContainer from "../molecules/SingleOfferDetailsContainer";
 import SingleOfferEmployerNameField from "../molecules/SingleOfferEmployerNameField";
