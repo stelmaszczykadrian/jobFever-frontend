@@ -87,15 +87,9 @@ export default function CandidateRegisterRightContainer() {
             <RightNavbar/>
             <Sheet style={{backgroundColor: 'transparent'}}>
                 <StyledText
-                    color="rgba(171, 36, 36)"
-                    tag={"h2"}
-                    text={"Welcome!"}
-                >
-                </StyledText>
-                <StyledText
                     color="white"
-                    tag={"h3"}
-                    text={"Create candidate account."}>
+                    tag={"h2"}
+                    text={"Create candidate account"}>
                 </StyledText>;
                 <form onSubmit={handleSubmit}>
                     <EmailInputField

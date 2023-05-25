@@ -110,14 +110,9 @@ export default function EmployerRegisterRightContainer() {
         <RightNavbar/>
         <Form onSubmit={handleSubmit}>
             <StyledText
-                color="rgba(171, 36, 36)"
-                tag={"h2"}
-                text={"Welcome!"}
-            />
-            <StyledText
                 color="white"
-                tag={"h3"}
-                text={"Create employer account."}
+                tag={"h2"}
+                text={"Create employer account"}
             />
             <Sheet style={{backgroundColor: 'transparent'}}>
                 <Container>

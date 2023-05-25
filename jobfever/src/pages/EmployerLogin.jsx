@@ -3,6 +3,6 @@ import EmployerLoginMainComponent from "../components/templates/EmployerLoginMai
 export default function EmployerLogin() {
     return (
         <EmployerLoginMainComponent apiUrl="http://localhost:8080/api/authentication/authenticate/employer"
-                                    text="Login to employer profile."/>
+                                    text="Login to employer profile"/>
     );
 }
