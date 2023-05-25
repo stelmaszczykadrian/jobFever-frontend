@@ -13,7 +13,7 @@ function SingleOfferEmployerNameField(props) {
 
     return (
         <StyledSingleOfferDetailsContainer onClick={props.onClick}>
-            <SingleOfferFieldTitle title="Employer"></SingleOfferFieldTitle>
+            <SingleOfferFieldTitle title="Company"></SingleOfferFieldTitle>
             <SingleOfferFieldText text={data.companyName}></SingleOfferFieldText>
         </StyledSingleOfferDetailsContainer>
     );
