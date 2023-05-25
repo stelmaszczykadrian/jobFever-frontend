@@ -37,7 +37,7 @@ function SingleOfferDetailsContainer(props) {
                     alignItems: 'flex-start'
                 }}>
                     <h3 style={{marginBlock: 0}}>Valid</h3>
-                    <p style={{marginBlock: 0}}>{postingDate.format("DD/MM/YYYY")} (expires in {remainingDays} days)</p>
+                    <p style={{marginBlock: 0}}>{postingDate.format("DD/MM/YYYY")} ({remainingDays} days left)</p>
                 </div>
             </div>
             <div style={{display: 'flex', margin: '10%'}}>
