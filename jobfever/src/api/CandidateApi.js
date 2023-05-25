@@ -1,6 +1,5 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
-import * as React from "react";
 import Cookies from "js-cookie";
 import {useNavigate} from "react-router-dom";
 import {useAuthorization} from "../utils/AuthUtils";

@@ -5,7 +5,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import {RedButtonStyled} from "../atoms/RedButton.styles";
-import {Link} from "@mui/joy";
 import {MailOutline} from "@material-ui/icons";
 import {StyledEmailInputValidation} from "../organisms/CandidateRegisterRightContainer.styles";
 import {sendEmailForPasswordChange} from "../../api/AuthApi";
