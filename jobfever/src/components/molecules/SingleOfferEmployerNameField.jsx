@@ -4,16 +4,15 @@ import {StyledSingleOfferDetailsContainer} from "./SingleOfferDetailsContainer.s
 import {useEmployerById} from "../../api/EmployersApi";
 import {useState} from "react";
 
-
 function SingleOfferEmployerNameField(props) {
 
     const {offerDetails} = props;
     const {data, loading} = useEmployerById(offerDetails.employer_id);
-    console.log(data);
+
     const [pictureUrl, setPictureUrl] = useState();
 
     return (
-        <StyledSingleOfferDetailsContainer>
+        <StyledSingleOfferDetailsContainer onClick={props.onClick}>
             <SingleOfferFieldTitle title="Employer"></SingleOfferFieldTitle>
             <SingleOfferFieldText text={data.companyName}></SingleOfferFieldText>
         </StyledSingleOfferDetailsContainer>
