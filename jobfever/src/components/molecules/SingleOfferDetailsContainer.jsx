@@ -16,7 +16,7 @@ function SingleOfferDetailsContainer(props) {
     return (
         <StyledSingleOfferDetailsContainer>
             <JobOfferApplyModal jobId={offerDetails.jobId}/>
-            <div style={{display: 'flex', margin: '10%'}}>
+            <div style={{display: 'flex', margin: '11%'}}>
                 <StyledSalaryIcon/>
                 <div style={{
                     display: 'flex',
@@ -28,7 +28,7 @@ function SingleOfferDetailsContainer(props) {
                     <p style={{marginBlock: 0}}>{offerDetails.salaryFrom}-{offerDetails.salaryTo} {offerDetails.currencyType}</p>
                 </div>
             </div>
-            <div style={{display: 'flex', margin: '10%'}}>
+            <div style={{display: 'flex', margin: '11%'}}>
                 <StyledCalendarIcon/>
                 <div style={{
                     display: 'flex',
@@ -40,7 +40,7 @@ function SingleOfferDetailsContainer(props) {
                     <p style={{marginBlock: 0}}>{postingDate.format("DD/MM/YYYY")} ({remainingDays} days left)</p>
                 </div>
             </div>
-            <div style={{display: 'flex', margin: '10%'}}>
+            <div style={{display: 'flex', margin: '11%'}}>
                 <StyledBagIcon/>
                 <div style={{
                     display: 'flex',
@@ -52,7 +52,7 @@ function SingleOfferDetailsContainer(props) {
                     <p style={{marginBlock: 0}}>{offerDetails.jobType}</p>
                 </div>
             </div>
-            <div style={{display: 'flex', margin: '10%'}}>
+            <div style={{display: 'flex', margin: '11%'}}>
                 <StyledLocalizationIcon/>
                 <div style={{
                     display: 'flex',
