@@ -1,4 +1,4 @@
-import { Check as MUICheckIcon } from '@mui/icons-material'
+import {Check as MUICheckIcon} from '@mui/icons-material'
 import React from "react";
 import {styled} from "@mui/material";
 

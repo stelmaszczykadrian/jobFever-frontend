@@ -13,6 +13,7 @@ import {useNavigate} from "react-router-dom";
 export default function EmployerAboutUsModal(props) {
     const [open, setOpen] = React.useState(false);
     const navigate = useNavigate();
+    const isSaveDisabled = !input.aboutMe;
     const [input, setInput] = useState({
         aboutMe: props.previousAboutUs,
     });
@@ -36,12 +37,10 @@ export default function EmployerAboutUsModal(props) {
     const handleSave = () => {
         setOpen(false);
 
-        editEmployer(props.id,null,null,null, null,input.aboutMe, null, null)
+        editEmployer(props.id, null, null, null, null, input.aboutMe, null, null)
         navigate(`/employer/${props.id}`);
         window.location.reload();
     };
-
-    const isSaveDisabled = !input.aboutMe;
 
     return (
         <div>

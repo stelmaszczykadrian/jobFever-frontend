@@ -9,5 +9,4 @@ export default function ProfileMainComponent(props) {
             <ProfileContainer type={props.type}/>
         </StyledProfileMainComponent>
     );
-
 }

@@ -23,10 +23,11 @@ export const StyledInputRedHover = styled(Input)`
   border-radius: 8px;
   -webkit-transition: 0.1s;
   transition: 0.5s;
-  &:placeholder {
-  color: grey;
-}}
-`
+
+  &::placeholder {
+    color: grey;
+  }
+`;
 
 export const StyledRedHoverTextFiled = styled(TextField)({
     marginRight: '8px',
@@ -96,8 +97,7 @@ export const CandidateRegisterTextCandidateExist = styled('div')`
   color: whitesmoke;
   text-align: center;
   font-weight: bold;
-  font-size: large;
-`
+  font-size: large;`
 
 export const StyledPasswordInputValidation = styled("div")`
   border: 5px;
@@ -110,16 +110,6 @@ export const StyledPasswordInputValidation = styled("div")`
   align-items: center;
 `;
 
-export const StyledPasswordInputValidationRegister = styled("div")`
-  border: 5px;
-  align-self: center;
-  color: black;
-  margin-top: 2%;
-  display: flex;
-  align-items: center;
-`;
-
-
 export const StyledEmailInputValidation = styled("div")`
   border: 10px;
   align-self: center;
@@ -129,17 +119,6 @@ export const StyledEmailInputValidation = styled("div")`
   flex-direction: row;
   display: flex;
   align-items: center;
-  }
-`;
-
-export const StyledEmailInputValidationRegister = styled("div")`
-  border: 10px;
-  align-self: center;
-  color: black;
-  margin-top: 2%;
-  display: flex;
-  align-items: center;
-  }
 `;
 
 export const StyledLabel = styled("span")`
@@ -149,6 +128,3 @@ export const StyledLabel = styled("span")`
   font-size: medium;
   margin-top: 2%;
 `
-
-
-

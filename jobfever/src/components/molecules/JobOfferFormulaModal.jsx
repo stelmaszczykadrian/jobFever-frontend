@@ -4,7 +4,7 @@ import {StyledModal} from "./JobOfferFormulaModal.styles";
 import Container from "@mui/material/Container";
 
 
-export default function JobOfferFormulaModal({ open, handleClose, errorMessage, text }) {
+export default function JobOfferFormulaModal({open, handleClose, errorMessage, text}) {
     const handleCloseModal = () => handleClose();
 
     return (

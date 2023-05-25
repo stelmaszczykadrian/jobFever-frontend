@@ -40,13 +40,13 @@ export default function CandidateProfilePersonalInformation(props) {
 
     const getCvFile = async (filenameCv) => {
         try {
-            const { data: cvUrl } = await axios.get('http://localhost:8080/api/file/url', {
-                    params: {filename: filenameCv},
-                    headers: {
-                        Authorization: `Bearer ${getAccessToken()}`
-                    }
-                });
-                setCv(cvUrl);
+            const {data: cvUrl} = await axios.get('http://localhost:8080/api/file/url', {
+                params: {filename: filenameCv},
+                headers: {
+                    Authorization: `Bearer ${getAccessToken()}`
+                }
+            });
+            setCv(cvUrl);
         } catch (error) {
             console.error(error);
         }
@@ -88,12 +88,12 @@ export default function CandidateProfilePersonalInformation(props) {
             setCity(data.city);
             setLinkedIn(data.linkedin);
             setGitHub(data.github);
-            if(data.picture){
+            if (data.picture) {
                 setPicture(data.picture);
             } else {
                 setPicture(logo);
             }
-            if(data.cvFile){
+            if (data.cvFile) {
                 getCvFile(data.cvFile);
             }
         }

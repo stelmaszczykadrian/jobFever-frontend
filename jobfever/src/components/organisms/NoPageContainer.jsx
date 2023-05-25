@@ -3,12 +3,12 @@ import {useNavigate} from "react-router-dom";
 import RedButton from "../atoms/RedButton";
 import React from "react";
 
-export default function NoPageContainer(){
+export default function NoPageContainer() {
     const navigate = useNavigate();
 
-    return(
+    return (
         <StyledNoPageMainContainer>
-            <StyledNoPageImage />
+            <StyledNoPageImage/>
             <RedButton text="Home Page" onClick={() => navigate(`/`)}/>
         </StyledNoPageMainContainer>
     );

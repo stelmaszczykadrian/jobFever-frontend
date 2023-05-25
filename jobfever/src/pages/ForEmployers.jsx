@@ -3,6 +3,7 @@ import ForEmployersMainComponent from "../components/templates/ForEmployersMainC
 function ForEmployers() {
     return (
         <ForEmployersMainComponent/>
-    )}
+    )
+}
 
 export default ForEmployers;

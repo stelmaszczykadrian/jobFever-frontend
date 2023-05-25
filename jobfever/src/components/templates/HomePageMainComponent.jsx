@@ -5,8 +5,8 @@ import HomeRightContainer from "../organisms/HomeRightContainer";
 export default function HomeMainComponent() {
     return (
         <StyledHomeMainComponent>
-            <HomeLeftContainer />
-            <HomeRightContainer />
+            <HomeLeftContainer/>
+            <HomeRightContainer/>
         </StyledHomeMainComponent>
     );
 }

@@ -11,7 +11,7 @@ export default function ForEmployersMainContainer() {
     return (
         <StyledForEmployersMainContainer>
             <Container>
-                <StyledRegisterEmployerHeader >
+                <StyledRegisterEmployerHeader>
                     Do you already have an employer account on JobFever?
                 </StyledRegisterEmployerHeader>
                 <Container>
@@ -26,6 +26,5 @@ export default function ForEmployersMainContainer() {
                 </Container>
             </Container>
         </StyledForEmployersMainContainer>
-
     );
 }

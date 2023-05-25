@@ -12,13 +12,13 @@ const pages = [
 
 function RightNavbar() {
     return (
-    <Box sx={{ flexGrow: 1, display: {md: 'flex' }, justifyContent: 'space-between', margin: '0 50px' }}>
-        {pages.map((page,index) => (
-            <Button key={`RightNavbar_${index}`}>
-                {page}
-            </Button>
-        ))}
-    </Box>
+        <Box sx={{flexGrow: 1, display: {md: 'flex'}, justifyContent: 'space-between', margin: '0 50px'}}>
+            {pages.map((page, index) => (
+                <Button key={`RightNavbar_${index}`}>
+                    {page}
+                </Button>
+            ))}
+        </Box>
     )
 }
 

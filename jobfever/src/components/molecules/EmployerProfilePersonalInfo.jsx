@@ -83,7 +83,6 @@ export default function EmployerProfilePersonalInfo(props) {
                         <StyledCheckIcon/>
                     </IconButton>
                 ) : (
-
                     <IconButton onClick={handleEditClick}>
                         <StyledEditIcon/>
                     </IconButton>
@@ -201,5 +200,4 @@ export default function EmployerProfilePersonalInfo(props) {
         );
     }
     return <span>Loading</span>
-
 }

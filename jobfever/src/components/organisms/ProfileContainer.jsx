@@ -8,9 +8,8 @@ import EmployerJobs from "../molecules/EmployerJobs";
 import EmployerAboutUs from "../molecules/EmployerAboutUs";
 import CandidateProfileAppliedJobsContainer from "./CandidateJobsContainer";
 
-
-export default function ProfileContainer (props) {
-    const { id } = useParams();
+export default function ProfileContainer(props) {
+    const {id} = useParams();
     if (props.type === "candidate") {
         return (
             <StyledProfileContainer>
@@ -20,12 +19,13 @@ export default function ProfileContainer (props) {
                 <CandidateProfileAppliedJobsContainer id={id}/>
             </StyledProfileContainer>
         );
-    }else{
-        return(
-        <StyledProfileContainer>
-            <EmployerProfilePersonalInfo id={id}/>
-            <EmployerAboutUs id={id}/>
-            <EmployerJobs id={id}/>
-        </StyledProfileContainer>
-        )}
+    } else {
+        return (
+            <StyledProfileContainer>
+                <EmployerProfilePersonalInfo id={id}/>
+                <EmployerAboutUs id={id}/>
+                <EmployerJobs id={id}/>
+            </StyledProfileContainer>
+        )
+    }
 }

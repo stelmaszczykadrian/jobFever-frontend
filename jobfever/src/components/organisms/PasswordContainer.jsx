@@ -18,7 +18,7 @@ import {EmployerRegisterTextEmployerExist} from "./EmployerRegisterRightContaine
 import {changePassword} from "../../api/AuthApi";
 import PasswordInputField from "../molecules/PasswordInputField";
 
-export default function PasswordContainer(){
+export default function PasswordContainer() {
     const params = useParams();
     const [errorMessage, setErrorMessage] = useState(null);
     const navigate = useNavigate();
@@ -63,9 +63,9 @@ export default function PasswordContainer(){
         changePassword("http://localhost:8080/api/authentication/reset-password", params.token, formData.password)
         setErrorMessage('Password changed successfully.');
 
-            setTimeout(() => {
-                navigate("/");
-            }, 2000);
+        setTimeout(() => {
+            navigate("/");
+        }, 2000);
 
     };
     return (
@@ -79,16 +79,16 @@ export default function PasswordContainer(){
                 />
                 <form onSubmit={handleSubmit}>
                     <FormControl>
-                            <PasswordInputField
-                                formData={formData}
-                                onInputChange={onInputChange}
-                                validateInput={validateInput}
-                                label="Password"
-                                inputName="password"
-                                inputPlaceholder="Enter Password"
-                                inputType="password"
-                                inputError={formData.errors.password}
-                            />
+                        <PasswordInputField
+                            formData={formData}
+                            onInputChange={onInputChange}
+                            validateInput={validateInput}
+                            label="Password"
+                            inputName="password"
+                            inputPlaceholder="Enter Password"
+                            inputType="password"
+                            inputError={formData.errors.password}
+                        />
                     </FormControl>
                     <FormControl>
                         <PasswordInputField

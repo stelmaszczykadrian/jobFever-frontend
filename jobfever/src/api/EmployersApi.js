@@ -65,7 +65,6 @@ export async function editEmployer(id, companyName, nameAndSurname, phoneNumber,
                     params: {id: id},
                     headers: {
                         Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
-
                     }
                 });
         } catch (error) {
@@ -99,7 +98,6 @@ export const saveEmployersImgFilename = async (id, filename) => {
     } catch (error) {
         console.error(error)
     }
-
 }
 
 

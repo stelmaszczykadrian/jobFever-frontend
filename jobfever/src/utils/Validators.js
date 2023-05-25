@@ -8,9 +8,6 @@ export const isValidPhoneNumber = (phoneNumber) => {
     return phoneNumberRegex.test(phoneNumber);
 }
 
-
-
-
 export const validateFormData = (formData, validateInput) => {
     const errors = {...formData.errors};
     let formIsValid = true;
@@ -22,6 +19,5 @@ export const validateFormData = (formData, validateInput) => {
             formIsValid = false;
         }
     }
-
     return formIsValid ? null : errors;
 };

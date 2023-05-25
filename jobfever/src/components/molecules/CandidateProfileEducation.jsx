@@ -21,7 +21,6 @@ import Dialog from "@mui/material/Dialog";
 import Cookies from "js-cookie";
 
 export default function CandidateProfileEducation(props) {
-
     const {data} = useCandidateById(props.id);
     const [educations, setEducations] = useState([]);
     const [deleteEducationId, setDeleteEducationId] = useState(null);

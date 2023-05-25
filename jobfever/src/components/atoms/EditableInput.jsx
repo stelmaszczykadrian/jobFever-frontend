@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {TextField} from "@mui/material";
 
 const theme = createTheme({
@@ -15,7 +15,16 @@ const theme = createTheme({
     },
 });
 
-export default function EditableInput({ isEdit, value, onChange, placeholder, isRequired, isCorrect = true, errorMsg = 'This field cannot be empty',  type = "text" }) {
+export default function EditableInput({
+                                          isEdit,
+                                          value,
+                                          onChange,
+                                          placeholder,
+                                          isRequired,
+                                          isCorrect = true,
+                                          errorMsg = 'This field cannot be empty',
+                                          type = "text"
+                                      }) {
     const isFieldEmpty = isRequired && !value;
     if (isEdit) {
         return (
@@ -29,7 +38,7 @@ export default function EditableInput({ isEdit, value, onChange, placeholder, is
                     value={value}
                     onChange={onChange}
                     label={placeholder}
-                    type ={type}
+                    type={type}
                 />
             </ThemeProvider>
         );

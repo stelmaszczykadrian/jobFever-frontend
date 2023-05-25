@@ -5,7 +5,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import React from "react";
 
-function SocialMediaButtons(){
+function SocialMediaButtons() {
     return (
         <Sheet style={{background: 'transparent'}}
                sx={{
@@ -30,4 +30,5 @@ function SocialMediaButtons(){
     );
 
 }
+
 export default SocialMediaButtons

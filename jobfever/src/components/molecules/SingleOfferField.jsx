@@ -11,5 +11,6 @@ function SingleOfferField(props) {
         </StyledSingleOfferField>
     );
 }
+
 export default SingleOfferField;
 

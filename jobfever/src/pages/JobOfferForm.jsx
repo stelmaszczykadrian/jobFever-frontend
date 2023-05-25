@@ -16,7 +16,6 @@ function JobOfferForm() {
                                workType=''
                                type='CREATE'
                                pageTitle="Create job offer"/>
-
     );
 }
 

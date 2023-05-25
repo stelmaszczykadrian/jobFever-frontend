@@ -54,65 +54,62 @@ export default function CandidateExperienceModal(props) {
     };
 
     const handleSave = async () => {
-            if (position.trim() === '' || companyName.trim() === '' || location.trim() === '' || industry.trim() === '' || description.trim() === '' || endDate === '' || startDate === '') {
+        if (position.trim() === '' || companyName.trim() === '' || location.trim() === '' || industry.trim() === '' || description.trim() === '' || endDate === '' || startDate === '') {
+            return
+        }
+        if (endDate < startDate) {
+            setError("End date cannot be earlier than Start date");
+            return;
+        }
+        setOpen(false);
+        setError("");
+        const updatedExperienceData = {
+            position: position,
+            companyName: companyName,
+            location: location,
+            startDate: startDate,
+            endDate: endDate,
+            industry: industry,
+            description: description,
+        }
+
+        let expBeforeChange = props.experience;
+
+        if (props.isNew) {
+            const temp_id = "temp-" + crypto.randomUUID();
+            props.setExperiences((experiences) => {
+                experiences.push({...updatedExperienceData, id: temp_id});
+                return [...experiences];
+            });
+            const res = await addCandidateExperience(candidate.id, updatedExperienceData)
+            if (res.status !== 200) {
+                props.setExperiences((experiences) => {
+                    experiences.pop();
+                    return [...experiences];
+                });
                 return
             }
-
-            if (endDate < startDate) {
-                setError("End date cannot be earlier than Start date");
-                return;
-            }
-            setOpen(false);
-            setError("");
-            const updatedExperienceData = {
-                position: position,
-                companyName: companyName,
-                location: location,
-                startDate: startDate,
-                endDate: endDate,
-                industry: industry,
-                description: description,
-            }
-
-            let expBeforeChange = props.experience;
-
-            if (props.isNew) {
-                const temp_id = "temp-" + crypto.randomUUID();
-                props.setExperiences((experiences) => {
-                    experiences.push({...updatedExperienceData, id: temp_id});
-                    return [...experiences];
-                });
-                const res = await addCandidateExperience(candidate.id, updatedExperienceData)
-                if (res.status !== 200) {
-                    props.setExperiences((experiences) => {
-                        experiences.pop();
-                        return [...experiences];
-                    });
-                    return
-                }
-                props.setExperiences((experiences) => {
-                    let expIdx = experiences.findIndex((exp => exp.id === temp_id));
-                    experiences[expIdx] = {...experiences[expIdx], id: res.data};
-                    return [...experiences];
-                });
-            } else {
+            props.setExperiences((experiences) => {
+                let expIdx = experiences.findIndex((exp => exp.id === temp_id));
+                experiences[expIdx] = {...experiences[expIdx], id: res.data};
+                return [...experiences];
+            });
+        } else {
+            props.setExperiences((experiences) => {
+                const expIdx = experiences.findIndex((exp => exp.id === experience.id));
+                experiences[expIdx] = {...experiences[expIdx], ...updatedExperienceData};
+                return [...experiences];
+            });
+            const res = await editCandidateExperience(candidate.id, experience.id, updatedExperienceData)
+            if (res.status !== 200) {
                 props.setExperiences((experiences) => {
                     const expIdx = experiences.findIndex((exp => exp.id === experience.id));
-                    experiences[expIdx] = {...experiences[expIdx], ...updatedExperienceData};
+                    experiences[expIdx] = {...experiences[expIdx], ...expBeforeChange};
                     return [...experiences];
                 });
-                const res = await editCandidateExperience(candidate.id, experience.id, updatedExperienceData)
-                if (res.status !== 200) {
-                    props.setExperiences((experiences) => {
-                        const expIdx = experiences.findIndex((exp => exp.id === experience.id));
-                        experiences[expIdx] = {...experiences[expIdx], ...expBeforeChange};
-                        return [...experiences];
-                    });
-                }
             }
         }
-    ;
-
+    };
     return (
         <div>
             <IconButton onClick={handleClickOpen}>

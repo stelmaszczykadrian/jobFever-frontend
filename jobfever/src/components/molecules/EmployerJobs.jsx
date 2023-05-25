@@ -67,7 +67,7 @@ export default function EmployerJobs(props) {
 
     return (
         <StyledProfilePaper>
-            <ProfileContainerTitle text={"Our Jobs"} />
+            <ProfileContainerTitle text={"Our Jobs"}/>
             {data && data.length > 0 ? (
                 <>
                     {data.map((job, index) => (
@@ -92,11 +92,19 @@ export default function EmployerJobs(props) {
                     />
                 </>
             ) : (
-                <Typography sx={{ my: 2, fontWeight: 'bold', marginTop: '20px', fontSize: '1.2em', textAlign: 'center', color: 'gray' }}>
+                <Typography sx={{
+                    my: 2,
+                    fontWeight: 'bold',
+                    marginTop: '20px',
+                    fontSize: '1.2em',
+                    textAlign: 'center',
+                    color: 'gray'
+                }}>
                     There are no jobs already.
                 </Typography>
             )}
-            <DeleteConfirmationModal isOpen={isDeleteModalOpen} handleCancel={() => setIsDeleteModalOpen(false)} handleConfirm={deleteOffer}/>
+            <DeleteConfirmationModal isOpen={isDeleteModalOpen} handleCancel={() => setIsDeleteModalOpen(false)}
+                                     handleConfirm={deleteOffer}/>
         </StyledProfilePaper>
     );
 }

@@ -13,7 +13,7 @@ export const StyledNoPageMainContainer = styled('div')`
 export const StyledNoPageImage = styled("div")`
   width: 100%;
   height: 50vh;
-  background-image:url(${img});
+  background-image: url(${img});
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

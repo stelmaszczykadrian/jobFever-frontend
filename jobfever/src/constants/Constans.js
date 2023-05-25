@@ -57,6 +57,5 @@ export const languageIconsSortJobsPage = [
 ];
 
 
-
 export const languageLabels = ['Python', 'Ruby', 'JS', 'C', 'C#', 'PHP', 'Kotlin', 'Java', 'Scala', 'Pascal', 'Swift', '.Net', 'PowerShell', 'Data', 'SQL'];
 export const languageLabelsSortJobsPage = ['All', 'Python', 'Ruby', 'JS', 'C', 'C#', 'PHP', 'Kotlin', 'Java', 'Scala', 'Pascal', 'Swift', '.Net', 'PowerShell', 'Data', 'SQL'];

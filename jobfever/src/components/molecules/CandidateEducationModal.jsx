@@ -52,7 +52,6 @@ export default function CandidateEducationModal(props) {
         if (school.trim() === '' || degree.trim() === '' || description.trim() === '' || fieldOfStudy.trim() === '' || endDate === '' || startDate === '') {
             return
         }
-
         if (endDate < startDate) {
             setError("End date cannot be earlier than Start date");
             return;

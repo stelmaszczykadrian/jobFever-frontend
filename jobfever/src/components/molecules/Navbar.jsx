@@ -25,13 +25,11 @@ const pages = [
     <StyledLink to='/contact'>CONTACT</StyledLink>,
 ];
 
-
 export default function Navbar() {
     let jwt = Cookies.get('jwt');
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [settings] = useState([]);
-
     const navigate = useNavigate();
 
     const handleOpenNavMenu = (event) => {

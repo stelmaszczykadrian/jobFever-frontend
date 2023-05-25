@@ -15,31 +15,51 @@ function SingleOfferDetailsContainer(props) {
 
     return (
         <StyledSingleOfferDetailsContainer>
-            <JobOfferApplyModal jobId = {offerDetails.jobId}/>
+            <JobOfferApplyModal jobId={offerDetails.jobId}/>
             <div style={{display: 'flex', margin: '10%'}}>
-                <StyledSalaryIcon />
-                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}}>
+                <StyledSalaryIcon/>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'flex-start'
+                }}>
                     <h3 style={{marginBlock: 0}}>Salary</h3>
                     <p style={{marginBlock: 0}}>{offerDetails.salaryFrom}-{offerDetails.salaryTo} {offerDetails.currencyType}</p>
                 </div>
             </div>
             <div style={{display: 'flex', margin: '10%'}}>
-                <StyledCalendarIcon />
-                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}}>
+                <StyledCalendarIcon/>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'flex-start'
+                }}>
                     <h3 style={{marginBlock: 0}}>Valid</h3>
                     <p style={{marginBlock: 0}}>{postingDate.format("DD/MM/YYYY")} (expires in {remainingDays} days)</p>
                 </div>
             </div>
             <div style={{display: 'flex', margin: '10%'}}>
-                <StyledBagIcon />
-                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}}>
+                <StyledBagIcon/>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'flex-start'
+                }}>
                     <h3 style={{marginBlock: 0}}>Contract Type</h3>
                     <p style={{marginBlock: 0}}>{offerDetails.jobType}</p>
                 </div>
             </div>
             <div style={{display: 'flex', margin: '10%'}}>
-                <StyledLocalizationIcon />
-                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}}>
+                <StyledLocalizationIcon/>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'flex-start'
+                }}>
                     <h3 style={{marginBlock: 0}}>Location</h3>
                     <p style={{marginBlock: 0}}>{offerDetails.location}</p>
                 </div>
@@ -47,4 +67,5 @@ function SingleOfferDetailsContainer(props) {
         </StyledSingleOfferDetailsContainer>
     );
 }
+
 export default SingleOfferDetailsContainer;

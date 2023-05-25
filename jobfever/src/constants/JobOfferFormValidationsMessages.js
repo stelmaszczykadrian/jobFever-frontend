@@ -1,4 +1,4 @@
-export const incorrectTitleBlankMessage =  'Title field cannot be empty.';
+export const incorrectTitleBlankMessage = 'Title field cannot be empty.';
 export const incorrectTitleLengthMessage = 'Title field must be no longer than 30 characters.';
 export const maxTitleLengthValue = 30;
 export const incorrectDescriptionLengthMessage = 'Description field cannot exceed 2000 characters.';
@@ -9,7 +9,7 @@ export const incorrectWhoWeAreLookingLengthMessage = 'Who we are looking for fie
 export const missingTechnicalRequirementMessage = 'At least one technical requirement must be specified.';
 export const minTechnicalRequirementsValue = 0;
 export const incorrectBenefitsLengthMessage = 'Benefits field cannot be longer than 2000 characters.';
-export const incorrectLocationBlankMessage  = 'Location field cannot be empty.';
+export const incorrectLocationBlankMessage = 'Location field cannot be empty.';
 export const incorrectSalaryFromBlankMessage = 'Salary from field cannot be empty.';
 export const incorrectSalaryToBlankMessage = 'Salary to field cannot be empty.';
 export const incorrectJobTypeBlankMessage = "Job type field cannot be empty.";

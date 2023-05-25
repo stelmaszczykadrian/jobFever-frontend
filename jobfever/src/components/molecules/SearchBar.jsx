@@ -2,7 +2,7 @@ import {Search, SearchIconWrapper, StyledInputBase} from "./SearchBar.styles";
 import SearchIcon from "@mui/icons-material/Search";
 import React, {useState} from "react";
 
-export default function SearchBar({ onSearch }) {
+export default function SearchBar({onSearch}) {
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleSubmit = (event) => {
@@ -16,7 +16,7 @@ export default function SearchBar({ onSearch }) {
 
     return (
         <div>
-            <Search >
+            <Search>
                 <form onSubmit={handleSubmit}>
                     <SearchIconWrapper>
                         <SearchIcon/>

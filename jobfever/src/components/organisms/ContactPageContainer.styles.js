@@ -103,7 +103,7 @@ export const StyledContactPageTextarea = styled("textarea")`
 export const RedButton = styled('button')`
   background-color: ${props => props.disabled ? '#888888' : 'rgba(171, 36, 36) !important'};
   color: #ffffff;
-  padding: 12px 40px; 
+  padding: 12px 40px;
   font-size: 16px;
   border: none;
   border-radius: 8px;

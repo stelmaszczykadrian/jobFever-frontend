@@ -1,7 +1,7 @@
 import React from "react";
 import {JobTitleOnJobsCard, StyledPaperJobsCard} from "./JobsCard.styles";
 
-export function JobCard({ job, handleJobClick }) {
+export function JobCard({job, handleJobClick}) {
     const handleCardClick = () => {
         handleJobClick(job.jobId);
     };
