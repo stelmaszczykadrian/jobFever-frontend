@@ -11,7 +11,6 @@ function EditJobOffer() {
         const fetchOffer = async () => {
             const {data} = await getJobOfferById(id);
             setJobDetails(data)
-            console.log(data)
         };
         fetchOffer()
     }, [id]);
