@@ -16,12 +16,12 @@ export default function ForEmployersMainContainer() {
                 </StyledRegisterEmployerHeader>
                 <Container>
                     <StyledLink to='/employer/login'>
-                        <RedButton text={'Yes, go to login.'}>></RedButton>
+                        <RedButton text={'Yes, go to login'}>></RedButton>
                     </StyledLink>
                 </Container>
                 <Container>
                     <StyledLink to='/employer/register'>
-                        <RedButton text={'No, go to registration.'}>></RedButton>
+                        <RedButton text={'No, go to registration'}>></RedButton>
                     </StyledLink>
                 </Container>
             </Container>

@@ -71,7 +71,7 @@ export default function LoginContainer(props) {
 
             const response = await axios.post(`${props.apiUrl}`, userData);
             Cookies.set("jwt", JSON.stringify(response.data), {expires: 7})
-            setLoginMessage("Login successful.");
+            setLoginMessage("Login successful");
 
             setTimeout(() => {
                 navigate("/jobs");
@@ -79,7 +79,7 @@ export default function LoginContainer(props) {
         } catch (error) {
             if (error.response) {
                 if (error.response.status === 403) {
-                    setLoginMessage("Invalid email or password.");
+                    setLoginMessage("Invalid email or password");
                 } else {
                     console.log(error.response);
                 }
