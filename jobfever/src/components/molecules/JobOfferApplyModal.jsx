@@ -58,7 +58,7 @@ export default function JobOfferApplyModal(props) {
         if (jwt) {
             if (JSON.parse(jwt).role === "CANDIDATE") {
                 return (
-                    <RedButtonStyled onClick={handleClickOpen}>
+                    <RedButtonStyled style={{fontSize: 'large', width: '33%'}} onClick={handleClickOpen}>
                         Apply
                     </RedButtonStyled>
                 )
@@ -67,7 +67,7 @@ export default function JobOfferApplyModal(props) {
     }
 
     return (
-        <div style={{margin:'10%'}}>
+        <div style={{margin:'8%'}}>
             <RenderApplyButton />
             <Dialog
                 fullWidth

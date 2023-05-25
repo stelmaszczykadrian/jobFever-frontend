@@ -8,5 +8,7 @@ export const StyledSingleOfferDetailsContainer = styled("div")`
   color: black;
   background-color: white;
   border-radius: 0.5rem;
+  font-size: larger;
+  
 `;
 
