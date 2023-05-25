@@ -226,16 +226,13 @@ export default function JobOfferFormContainer(props) {
                     setErrorMessage(errorMessages);
                 });
             }else {
-                console.log('update');
-                console.log(userData);
-                console.log(id);
                 updateJob(userData, () => {
                     setShowModal(true);
                     setFormSubmitted(true);
                     setErrorMessage(null);
                     setModalText("Job edited successfully");
                     setTimeout(() => {
-                        navigate('/jobs');
+                        navigate(`/job/${id}`);
                     }, 2000);
                 }, (errorMessages) => {
                     setErrorMessage(errorMessages);
