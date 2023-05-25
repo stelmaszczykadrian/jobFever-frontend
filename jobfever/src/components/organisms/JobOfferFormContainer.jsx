@@ -7,7 +7,7 @@ import {
     StyledCurrencyType,
     StyledButtonCenter, StyledJobOfferContainer, StyledRedButtonModalButton, StyledInputLabel, StyledOption, Styledbg
 } from "./JobOfferFormContainer.styles";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Form} from "react-bootstrap";
 import Navbar from "../molecules/Navbar";
 import StyledText from "../atoms/StyledText";
@@ -77,7 +77,7 @@ export default function JobOfferFormContainer(props) {
         }
         const result = [];
         props.technicalRequirements.forEach(x => {
-            const index = languageLabels.findIndex(e => e.toLowerCase() === x.toLowerCase());
+            const index = languageLabels.findIndex(e =>e.toLowerCase()===x.toLowerCase()) ;
             if (index > -1) {
                 result.push(index)
             }
@@ -90,7 +90,7 @@ export default function JobOfferFormContainer(props) {
     const [pressedButtons, setPressedButtons] = useState(getInitialButtons())
     const [showModal, setShowModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
-    const [setFormSubmitted] = useState(false);
+    const [formSubmitted, setFormSubmitted] = useState(false);
 
 
     const [input, setInput] = useState({
@@ -134,13 +134,13 @@ export default function JobOfferFormContainer(props) {
             case 'description':
                 return value !== '' ? (value.length <= maximumValueLength ? '' : incorrectDescriptionLengthMessage) : incorrectDescriptionBlankMessage;
             case 'responsibilities':
-                return value !== '' ? (value.length <= maximumValueLength ? '' : incorrectResponsibilitiesLengthMessage) : incorrectResponsibilitiesBlankMessage;
+                return value!== '' ? (value.length <= maximumValueLength ? '' : incorrectResponsibilitiesLengthMessage) : incorrectResponsibilitiesBlankMessage;
             case 'whoWeAreLookingFor':
-                return value !== '' ? (value.length <= maximumValueLength ? '' : incorrectWhoWeAreLookingLengthMessage) : incorrectWhoWeAreLookingForBlankMessage;
+                return value!== '' ? (value.length <= maximumValueLength ? '' : incorrectWhoWeAreLookingLengthMessage) : incorrectWhoWeAreLookingForBlankMessage;
             case 'technicalRequirements':
                 return value.length > minTechnicalRequirementsValue ? '' : missingTechnicalRequirementMessage;
             case 'benefits':
-                return value !== '' ? (value.length <= maximumValueLength ? '' : incorrectBenefitsLengthMessage) : incorrectBenefitsBlankMessage;
+                return value!== '' ? (value.length <= maximumValueLength ? '' : incorrectBenefitsLengthMessage) : incorrectBenefitsBlankMessage;
             case 'location':
                 if (value === '') {
                     return incorrectLocationBlankMessage;
@@ -151,11 +151,11 @@ export default function JobOfferFormContainer(props) {
             case 'salaryFrom':
                 if (value === '') {
                     return incorrectSalaryFromBlankMessage;
-                } else if (isNaN(value)) {
+                }else if (isNaN(value)) {
                     return incorrectSalaryFromNotANumberMessage;
-                } else if (value <= minSalaryValueLength) {
+                }else if (value <= minSalaryValueLength) {
                     return incorrectSalaryFromLessThanZeroMessage;
-                } else if (parseInt(value) > maxSalaryValueLength) {
+                }else if (parseInt(value) > maxSalaryValueLength) {
                     return incorrectSalaryFromLengthMessage;
                 } else {
                     return '';
@@ -163,11 +163,11 @@ export default function JobOfferFormContainer(props) {
             case 'salaryTo':
                 if (value === '') {
                     return incorrectSalaryToBlankMessage;
-                } else if (isNaN(value)) {
+                }else if (isNaN(value)) {
                     return incorrectSalaryToNotANumberMessage;
-                } else if (value <= minSalaryValueLength) {
+                }else if (value <= minSalaryValueLength) {
                     return incorrectSalaryToLessThanZeroMessage;
-                } else if (parseInt(value) > maxSalaryValueLength) {
+                }else if (parseInt(value) > maxSalaryValueLength) {
                     return incorrectSalaryToLengthMessage;
                 } else {
                     return '';
@@ -213,7 +213,7 @@ export default function JobOfferFormContainer(props) {
                 workType: input.workType
             };
 
-            if (props.type === 'CREATE') {
+            if (props.type === 'CREATE'){
                 createJob(userData, () => {
                     setShowModal(true);
                     setFormSubmitted(true);
@@ -225,7 +225,10 @@ export default function JobOfferFormContainer(props) {
                 }, (errorMessages) => {
                     setErrorMessage(errorMessages);
                 });
-            } else {
+            }else {
+                console.log('update');
+                console.log(userData);
+                console.log(id);
                 updateJob(userData, () => {
                     setShowModal(true);
                     setFormSubmitted(true);
@@ -439,7 +442,7 @@ export default function JobOfferFormContainer(props) {
                                             value={input.currencyType}
                                             onChange={onCurrencyTypeChange}
                                         >
-                                            {currencyType.map((option, numb) => (
+                                            {currencyType.map((option,numb) => (
                                                 <StyledOption
                                                     key={option.value}
                                                     value={option.value}
@@ -531,8 +534,7 @@ export default function JobOfferFormContainer(props) {
                                     mt: 5,
                                     backgroundColor: 'rgba(171, 36, 36)'
                                 }} type='submit'>SUBMIT</StyledRedButtonModalButton>
-                                <JobOfferFormula open={showModal} handleClose={handleClose} errorMessage={errorMessage}
-                                                 text={modalText}/>
+                                <JobOfferFormula open={showModal} handleClose={handleClose} errorMessage={errorMessage} text={modalText}/>
                             </StyledButtonCenter>
                         </StyledInputJobOfferContainer>
                     </StyledJobOfferCreationContainer>
@@ -540,4 +542,5 @@ export default function JobOfferFormContainer(props) {
             </Styledbg>
         </StyledJobOfferContainer>
     );
+
 }

@@ -6,7 +6,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 
 export default function JobsPageSortComponent({onLanguageChange}) {
     const [pressedButtons, setPressedButtons] = useState([]);
-    const [setInput] = useState({technicalRequirements: []});
+    const [input, setInput] = useState({technicalRequirements: []});
 
     const handleButtonClick = (value, index) => {
         const newValue = value === 'All' ? '' : value;
@@ -15,7 +15,7 @@ export default function JobsPageSortComponent({onLanguageChange}) {
         onLanguageChange(newValue);
     };
 
-    return (
+    return(
         <StyledContainer>
             {languageIconsSortJobsPage.map((icon, index) => (
                 <div
@@ -29,11 +29,7 @@ export default function JobsPageSortComponent({onLanguageChange}) {
                     >
                         {icon}
                     </StyledSortButton>
-                    <DialogContentText sx={{
-                        color: 'white',
-                        fontSize: '14px',
-                        marginBottom: '20px'
-                    }}>{languageLabelsSortJobsPage[index]}</DialogContentText>
+                    <DialogContentText sx={{color: 'white', fontSize: '14px',marginBottom: '20px'}}>{languageLabelsSortJobsPage[index]}</DialogContentText>
                 </div>
             ))}
         </StyledContainer>
