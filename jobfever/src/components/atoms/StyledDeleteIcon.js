@@ -1,5 +1,4 @@
 import {Delete as MUIDeleteIcon} from '@mui/icons-material'
-import React from "react";
 import {styled} from "@mui/material";
 
 export const StyledDeleteIcon = styled(MUIDeleteIcon)(() => ({
