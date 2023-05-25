@@ -27,8 +27,9 @@ export default function JobOfferApplyModal(props) {
     const handleClose = () => {
         setOpen(false);
     };
+
     function timeout(delay) {
-        return new Promise( res => setTimeout(res, delay) );
+        return new Promise(res => setTimeout(res, delay));
     }
 
     const handleSave = async () => {
@@ -46,7 +47,6 @@ export default function JobOfferApplyModal(props) {
             setAppliedText("");
             return;
         }
-
         setAppliedText(
             <StyledMessage>{message}</StyledMessage>
         );
@@ -56,8 +56,8 @@ export default function JobOfferApplyModal(props) {
     };
 
     const RenderApplyButton = () => {
-        if (jwt){
-            if (JSON.parse(jwt).role === "CANDIDATE"){
+        if (jwt) {
+            if (JSON.parse(jwt).role === "CANDIDATE") {
                 return (
                     <RedButtonStyled onClick={handleClickOpen}>
                         Apply
@@ -69,7 +69,7 @@ export default function JobOfferApplyModal(props) {
 
     return (
         <div>
-            <RenderApplyButton />
+            <RenderApplyButton/>
             <Dialog
                 fullWidth
                 maxWidth={'sm'}
@@ -77,31 +77,32 @@ export default function JobOfferApplyModal(props) {
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
             >
-                <DialogTitle sx={{textAlign : "center"}} id="responsive-dialog-title">
+                <DialogTitle sx={{textAlign: "center"}} id="responsive-dialog-title">
                     Are You sure that You wanna apply for this offer?
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText component="legend" sx={{textAlign : "center"}}> If You're sure, please accept the RODO to continue application process.</DialogContentText>
+                    <DialogContentText component="legend" sx={{textAlign: "center"}}> If You're sure, please accept the
+                        RODO to continue application process.</DialogContentText>
                     <p/>
                     <StyledApplyModalGridItem>
                         <FormControlLabel control={<Checkbox
                             color="danger"
                             onChange={(e) => {
                                 setIsFirstBoxChecked(e.target.checked)
-                        }}
-                            name = "r1"/>}
-                         label="I hereby give consent for my personal data to be processed for the purpose of conducting recruitment for the position for which I am applying."/>
+                            }}
+                            name="r1"/>}
+                                          label="I hereby give consent for my personal data to be processed for the purpose of conducting recruitment for the position for which I am applying."/>
                     </StyledApplyModalGridItem>
                     <p/>
                     <StyledApplyModalGridItem>
                         <FormControlLabel control={<Checkbox color="danger"
-                             onChange={(e) => {
-                                 setIsSecondBoxChecked(e.target.checked)
-                             }}
-                             name = "r2"/>}
-                         label="I also consent to processing of my personal data for the purposes of any future recruitment processes."/>
+                                                             onChange={(e) => {
+                                                                 setIsSecondBoxChecked(e.target.checked)
+                                                             }}
+                                                             name="r2"/>}
+                                          label="I also consent to processing of my personal data for the purposes of any future recruitment processes."/>
                     </StyledApplyModalGridItem>
-                    <StyledText tag={"h4"} color={"black"} text={appliedText} />
+                    <StyledText tag={"h4"} color={"black"} text={appliedText}/>
                 </DialogContent>
                 <DialogActions>
                     <RedButtonStyled onClick={handleClose}>

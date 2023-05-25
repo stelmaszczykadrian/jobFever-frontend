@@ -64,7 +64,3 @@ export const StyledTopBox = styled(Box)`
   flex-direction: row;
   flex-grow: 1;
 `;
-
-export const StyledInput = styled("div")`
-  text-align-last: end;
-`;

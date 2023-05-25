@@ -22,14 +22,12 @@ export const useCandidateById = (id) => {
                     Authorization: `Bearer ${getAccessToken()}`
                 }
             });
-
             const pic = await getImgFile(resp.data.imgFileName);
-
-            const fullData = {...resp.data,
-                    picture: pic
+            const fullData = {
+                ...resp.data,
+                picture: pic
             }
-
-            if(!fullData){
+            if (!fullData) {
                 navigate('/404')
             }
             setLoading(false);
@@ -38,11 +36,9 @@ export const useCandidateById = (id) => {
             console.error(error)
         }
     };
-
     useEffect(() => {
         fetchData();
     }, []);
-
     return {
         data: candidate,
         loading,
@@ -57,7 +53,7 @@ export const useCandidateRatingById = (id, jobId) => {
                 params: {
                     id: id,
                     employerId: JSON.parse(Cookies.get("jwt")).employer_id,
-                    jobId:jobId
+                    jobId: jobId
                 },
                 headers: {
                     Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`
@@ -77,6 +73,7 @@ export const useCandidateRatingById = (id, jobId) => {
         loading,
     }
 };
+
 export async function editCandidate(id, updatedCandidateData) {
     await axios.put(url, {
             name: updatedCandidateData.name,

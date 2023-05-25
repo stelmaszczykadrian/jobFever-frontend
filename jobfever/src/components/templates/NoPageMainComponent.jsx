@@ -3,10 +3,10 @@ import {StyledNoPageMainComponent} from "./NoPageMainComponent.styles";
 import Navbar from "../molecules/Navbar";
 import React from "react";
 
-export default function NoPageMainComponent(){
-    return(
+export default function NoPageMainComponent() {
+    return (
         <StyledNoPageMainComponent>
-            <Navbar />
+            <Navbar/>
             <NoPageContainer/>
         </StyledNoPageMainComponent>
     );

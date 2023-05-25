@@ -10,7 +10,7 @@ export const Search = styled('div')(({theme}) => ({
         backgroundColor: alpha(theme.palette.common.white, 0.35),
     },
     marginTop: '12px',
-    marginLeft : '10px',
+    marginLeft: '10px',
     marginRight: '6%',
     width: '100%',
     [theme.breakpoints.up('sm')]: {
@@ -42,13 +42,13 @@ export const StyledInputBase = styled(InputBase)(({theme}) => ({
 }));
 
 export const StyledBoxFlex = styled("div")`
-    display: flex;
-    flex: content;
-    border-radius: 20px;
-    align-self: center;
-    text-align: center;
-    grid-column-gap: 10px;
-    justify-content: space-around;
-    flex-direction: row;
-    font-family: 'monospace';
+  display: flex;
+  flex: content;
+  border-radius: 20px;
+  align-self: center;
+  text-align: center;
+  grid-column-gap: 10px;
+  justify-content: space-around;
+  flex-direction: row;
+  font-family: 'monospace';
 `

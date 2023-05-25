@@ -7,9 +7,10 @@ function LogoIcon() {
     return (
         <StyledLogo>
             <Link to='/'>
-            <img id="logo" src={logo}  alt='Job fever logo'/>
+                <img id="logo" src={logo} alt='Job fever logo'/>
             </Link>
         </StyledLogo>
     );
 }
+
 export default LogoIcon

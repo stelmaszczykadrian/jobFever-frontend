@@ -13,6 +13,5 @@ export const ProtectedRoute = (props) => {
     if (parsed.role === "CANDIDATE" && parsed.candidate_id.toString() !== params.id) {
         return <Navigate to={"/"} replace/>;
     }
-
     return <>{props.children}</>;
 };

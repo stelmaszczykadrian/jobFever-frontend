@@ -41,7 +41,6 @@ export default function ContactPageContainer() {
                 navigate('/');
             }, 2000);
         }
-
     };
     return (
         <StyledContactPageMainContainer>

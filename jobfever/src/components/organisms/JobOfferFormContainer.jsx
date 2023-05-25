@@ -7,7 +7,7 @@ import {
     StyledCurrencyType,
     StyledButtonCenter, StyledJobOfferContainer, StyledRedButtonModalButton, StyledInputLabel, StyledOption, Styledbg
 } from "./JobOfferFormContainer.styles";
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {Form} from "react-bootstrap";
 import Navbar from "../molecules/Navbar";
 import StyledText from "../atoms/StyledText";
@@ -77,7 +77,7 @@ export default function JobOfferFormContainer(props) {
         }
         const result = [];
         props.technicalRequirements.forEach(x => {
-            const index = languageLabels.findIndex(e =>e.toLowerCase()===x.toLowerCase()) ;
+            const index = languageLabels.findIndex(e => e.toLowerCase() === x.toLowerCase());
             if (index > -1) {
                 result.push(index)
             }
@@ -90,7 +90,7 @@ export default function JobOfferFormContainer(props) {
     const [pressedButtons, setPressedButtons] = useState(getInitialButtons())
     const [showModal, setShowModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
-    const [formSubmitted, setFormSubmitted] = useState(false);
+    const [setFormSubmitted] = useState(false);
 
 
     const [input, setInput] = useState({
@@ -134,13 +134,13 @@ export default function JobOfferFormContainer(props) {
             case 'description':
                 return value !== '' ? (value.length <= maximumValueLength ? '' : incorrectDescriptionLengthMessage) : incorrectDescriptionBlankMessage;
             case 'responsibilities':
-                return value!== '' ? (value.length <= maximumValueLength ? '' : incorrectResponsibilitiesLengthMessage) : incorrectResponsibilitiesBlankMessage;
+                return value !== '' ? (value.length <= maximumValueLength ? '' : incorrectResponsibilitiesLengthMessage) : incorrectResponsibilitiesBlankMessage;
             case 'whoWeAreLookingFor':
-                return value!== '' ? (value.length <= maximumValueLength ? '' : incorrectWhoWeAreLookingLengthMessage) : incorrectWhoWeAreLookingForBlankMessage;
+                return value !== '' ? (value.length <= maximumValueLength ? '' : incorrectWhoWeAreLookingLengthMessage) : incorrectWhoWeAreLookingForBlankMessage;
             case 'technicalRequirements':
                 return value.length > minTechnicalRequirementsValue ? '' : missingTechnicalRequirementMessage;
             case 'benefits':
-                return value!== '' ? (value.length <= maximumValueLength ? '' : incorrectBenefitsLengthMessage) : incorrectBenefitsBlankMessage;
+                return value !== '' ? (value.length <= maximumValueLength ? '' : incorrectBenefitsLengthMessage) : incorrectBenefitsBlankMessage;
             case 'location':
                 if (value === '') {
                     return incorrectLocationBlankMessage;
@@ -151,11 +151,11 @@ export default function JobOfferFormContainer(props) {
             case 'salaryFrom':
                 if (value === '') {
                     return incorrectSalaryFromBlankMessage;
-                }else if (isNaN(value)) {
+                } else if (isNaN(value)) {
                     return incorrectSalaryFromNotANumberMessage;
-                }else if (value <= minSalaryValueLength) {
+                } else if (value <= minSalaryValueLength) {
                     return incorrectSalaryFromLessThanZeroMessage;
-                }else if (parseInt(value) > maxSalaryValueLength) {
+                } else if (parseInt(value) > maxSalaryValueLength) {
                     return incorrectSalaryFromLengthMessage;
                 } else {
                     return '';
@@ -163,11 +163,11 @@ export default function JobOfferFormContainer(props) {
             case 'salaryTo':
                 if (value === '') {
                     return incorrectSalaryToBlankMessage;
-                }else if (isNaN(value)) {
+                } else if (isNaN(value)) {
                     return incorrectSalaryToNotANumberMessage;
-                }else if (value <= minSalaryValueLength) {
+                } else if (value <= minSalaryValueLength) {
                     return incorrectSalaryToLessThanZeroMessage;
-                }else if (parseInt(value) > maxSalaryValueLength) {
+                } else if (parseInt(value) > maxSalaryValueLength) {
                     return incorrectSalaryToLengthMessage;
                 } else {
                     return '';
@@ -213,7 +213,7 @@ export default function JobOfferFormContainer(props) {
                 workType: input.workType
             };
 
-            if (props.type === 'CREATE'){
+            if (props.type === 'CREATE') {
                 createJob(userData, () => {
                     setShowModal(true);
                     setFormSubmitted(true);
@@ -225,10 +225,7 @@ export default function JobOfferFormContainer(props) {
                 }, (errorMessages) => {
                     setErrorMessage(errorMessages);
                 });
-            }else {
-                console.log('update');
-                console.log(userData);
-                console.log(id);
+            } else {
                 updateJob(userData, () => {
                     setShowModal(true);
                     setFormSubmitted(true);
@@ -305,242 +302,242 @@ export default function JobOfferFormContainer(props) {
 
     return (
         <StyledJobOfferContainer>
-        <Styledbg>
-            <Navbar/>
-            <Form onSubmit={handleSubmit}>
-                <StyledText tag="h2"
-                            color="white"
-                            text={props.pageTitle}/>
-                <StyledJobOfferCreationContainer>
-                    <StyledInputJobOfferContainer>
-                        <StyledInputLabel>Title :</StyledInputLabel>
-                        <StyledRedHoverTextFiled
-                            type="text"
-                            placeholder="Enter offer title"
-                            name="title"
-                            value={input.title}
-                            onChange={onInputChange}
-                        />
-                        {input.errors.title &&
-                            <Typography><StyledText
-                                tag="span"
-                                color="red"
-                                text={input.errors.title}
-                            /></Typography>}
-                        <StyledInputLabel>Project description:</StyledInputLabel>
-                        <StyledRedHoverTextFiled
-                            multiline
-                            rows="5"
-                            placeholder="Enter description"
-                            name="description"
-                            value={input.description}
-                            onChange={onInputChange}
-                        />
-                        {input.errors.description &&
-                            <StyledText
-                                tag="span"
-                                color="red"
-                                text={input.errors.description}
-                            />}
-                        <StyledInputLabel>Technical requirements:</StyledInputLabel>
-                        <TechnicalRequirementsContainer pressedButtons={pressedButtons}
-                                                        setPressedButtons={setPressedButtons} input={input}
-                                                        setInput={setInput}/>
-                        {input.errors.technicalRequirements && input.technicalRequirements.length === 0 &&
-                            <StyledText
-                                tag="span"
-                                color="red"
-                                text={input.errors.technicalRequirements}
-                            />}
-                        <StyledInputLabel>Responsibilities:</StyledInputLabel>
-                        <StyledRedHoverTextFiled
-                            multiline
-                            rows="5"
-                            placeholder="Enter responsibilities"
-                            name="responsibilities"
-                            value={input.responsibilities}
-                            onChange={onInputChange}
-                        />
-                        {input.errors.responsibilities &&
-                            <StyledText
-                                tag="span"
-                                color="red"
-                                text={input.errors.responsibilities}
-                            />}
-                        <StyledInputLabel>Who we are looking for: </StyledInputLabel>
-                        <StyledRedHoverTextFiled
-                            multiline
-                            rows="5"
-                            placeholder="Enter who we are looking for"
-                            name="whoWeAreLookingFor"
-                            value={input.whoWeAreLookingFor}
-                            onChange={onInputChange}
-                        />
-                        {input.errors.whoWeAreLookingFor &&
-                            <StyledText
-                                tag="span"
-                                color="red"
-                                text={input.errors.whoWeAreLookingFor}
-                            />}
-                        <StyledInputLabel>Benefits:</StyledInputLabel>
-                        <StyledRedHoverTextFiled
-                            multiline
-                            rows="5"
-                            placeholder="Enter benefits"
-                            name="benefits"
-                            value={input.benefits}
-                            onChange={onInputChange}
-                        />
-                        {input.errors.benefits &&
-                            <StyledText
-                                tag="span"
-                                color="red"
-                                text={input.errors.benefits}
-                            />}
-                        <StyledGridContainer>
-                            <StyledGridItem>
-                                <StyledInputLabel>Salary:</StyledInputLabel>
+            <Styledbg>
+                <Navbar/>
+                <Form onSubmit={handleSubmit}>
+                    <StyledText tag="h2"
+                                color="white"
+                                text={props.pageTitle}/>
+                    <StyledJobOfferCreationContainer>
+                        <StyledInputJobOfferContainer>
+                            <StyledInputLabel>Title :</StyledInputLabel>
+                            <StyledRedHoverTextFiled
+                                type="text"
+                                placeholder="Enter offer title"
+                                name="title"
+                                value={input.title}
+                                onChange={onInputChange}
+                            />
+                            {input.errors.title &&
+                                <Typography><StyledText
+                                    tag="span"
+                                    color="red"
+                                    text={input.errors.title}
+                                /></Typography>}
+                            <StyledInputLabel>Project description:</StyledInputLabel>
+                            <StyledRedHoverTextFiled
+                                multiline
+                                rows="5"
+                                placeholder="Enter description"
+                                name="description"
+                                value={input.description}
+                                onChange={onInputChange}
+                            />
+                            {input.errors.description &&
+                                <StyledText
+                                    tag="span"
+                                    color="red"
+                                    text={input.errors.description}
+                                />}
+                            <StyledInputLabel>Technical requirements:</StyledInputLabel>
+                            <TechnicalRequirementsContainer pressedButtons={pressedButtons}
+                                                            setPressedButtons={setPressedButtons} input={input}
+                                                            setInput={setInput}/>
+                            {input.errors.technicalRequirements && input.technicalRequirements.length === 0 &&
+                                <StyledText
+                                    tag="span"
+                                    color="red"
+                                    text={input.errors.technicalRequirements}
+                                />}
+                            <StyledInputLabel>Responsibilities:</StyledInputLabel>
+                            <StyledRedHoverTextFiled
+                                multiline
+                                rows="5"
+                                placeholder="Enter responsibilities"
+                                name="responsibilities"
+                                value={input.responsibilities}
+                                onChange={onInputChange}
+                            />
+                            {input.errors.responsibilities &&
+                                <StyledText
+                                    tag="span"
+                                    color="red"
+                                    text={input.errors.responsibilities}
+                                />}
+                            <StyledInputLabel>Who we are looking for: </StyledInputLabel>
+                            <StyledRedHoverTextFiled
+                                multiline
+                                rows="5"
+                                placeholder="Enter who we are looking for"
+                                name="whoWeAreLookingFor"
+                                value={input.whoWeAreLookingFor}
+                                onChange={onInputChange}
+                            />
+                            {input.errors.whoWeAreLookingFor &&
+                                <StyledText
+                                    tag="span"
+                                    color="red"
+                                    text={input.errors.whoWeAreLookingFor}
+                                />}
+                            <StyledInputLabel>Benefits:</StyledInputLabel>
+                            <StyledRedHoverTextFiled
+                                multiline
+                                rows="5"
+                                placeholder="Enter benefits"
+                                name="benefits"
+                                value={input.benefits}
+                                onChange={onInputChange}
+                            />
+                            {input.errors.benefits &&
+                                <StyledText
+                                    tag="span"
+                                    color="red"
+                                    text={input.errors.benefits}
+                                />}
+                            <StyledGridContainer>
                                 <StyledGridItem>
-                                    <StyledGridContainer>
-                                        <StyledGridItem>
-                                            <StyledRedHoverTextFiledSmall
-                                                placeholder="From"
-                                                name="salaryFrom"
-                                                value={input.salaryFrom}
-                                                onChange={onInputChange}
-                                            />
-                                            {input.errors.salaryFrom &&
-                                                <Typography><StyledText
-                                                    tag="span"
-                                                    color="red"
-                                                    text={input.errors.salaryFrom}
-                                                /></Typography>}
-                                        </StyledGridItem>
-                                        <StyledGridItem>
-                                            <StyledRedHoverTextFiledSmall
-                                                placeholder="To"
-                                                name="salaryTo"
-                                                value={input.salaryTo}
-                                                onChange={onInputChange}
-                                            />
-                                            {input.errors.salaryTo &&
-                                                <StyledText
-                                                    tag="span"
-                                                    color="red"
-                                                    text={input.errors.salaryTo}
-                                                />}
-                                        </StyledGridItem>
-                                    </StyledGridContainer>
-                                </StyledGridItem>
-                            </StyledGridItem>
-                            <StyledGridItem>
-                                <StyledGridItem>
-                                    <StyledInputLabel>Currency:</StyledInputLabel>
-                                </StyledGridItem>
-                                <StyledGridItem>
-                                    <StyledCurrencyType
-                                        value={input.currencyType}
-                                        onChange={onCurrencyTypeChange}
-                                    >
-                                        {currencyType.map((option,numb) => (
-                                            <StyledOption
-                                                key={option.value}
-                                                value={option.value}
-                                                disabled={option.disabled}
-                                            >
-                                                {option.label}
-                                            </StyledOption>
-                                        ))}
-                                    </StyledCurrencyType>
-                                    {input.errors.currencyType &&
-                                        <Typography><StyledText
-                                            tag="span"
-                                            color="red"
-                                            text={input.errors.currencyType}
-                                        /></Typography>}
-                                </StyledGridItem>
-                            </StyledGridItem>
-                        </StyledGridContainer>
-                        <StyledInputLabel>Location:</StyledInputLabel>
-                        <StyledRedHoverTextFiled
-                            placeholder="Enter location"
-                            name="location"
-                            value={input.location}
-                            onChange={onInputChange}
-                        />
-                        {input.errors.location &&
-                            <StyledText
-                                tag="span"
-                                color="red"
-                                text={input.errors.location}
-                            />}
-                        <StyledGridContainer>
-                            <StyledGridItem>
-                                <StyledGridItem>
-                                    <StyledInputLabel>Contract type:</StyledInputLabel>
-                                </StyledGridItem>
-                                <StyledGridItem>
-                                    <StyledSelectJobType
-                                        checked
-                                        value={input.jobType}
-                                        onChange={onJobTypeChange}
-                                    >
-                                        {jobType.map((option) => (
-                                            <StyledOption key={option.value} value={option.value}
-                                                    disabled={option.disabled}>{option.label}</StyledOption>
-                                        ))}
-                                    </StyledSelectJobType>
-                                    {input.errors.jobType &&
-                                        <Typography><StyledText
-                                            tag="span"
-                                            color="red"
-                                            text={input.errors.jobType}
-                                        /></Typography>}
-                                </StyledGridItem>
-                            </StyledGridItem>
-                            <StyledGridItem>
-                                <StyledGridItem>
-                                    <StyledInputLabel>Employment types:</StyledInputLabel>
+                                    <StyledInputLabel>Salary:</StyledInputLabel>
+                                    <StyledGridItem>
+                                        <StyledGridContainer>
+                                            <StyledGridItem>
+                                                <StyledRedHoverTextFiledSmall
+                                                    placeholder="From"
+                                                    name="salaryFrom"
+                                                    value={input.salaryFrom}
+                                                    onChange={onInputChange}
+                                                />
+                                                {input.errors.salaryFrom &&
+                                                    <Typography><StyledText
+                                                        tag="span"
+                                                        color="red"
+                                                        text={input.errors.salaryFrom}
+                                                    /></Typography>}
+                                            </StyledGridItem>
+                                            <StyledGridItem>
+                                                <StyledRedHoverTextFiledSmall
+                                                    placeholder="To"
+                                                    name="salaryTo"
+                                                    value={input.salaryTo}
+                                                    onChange={onInputChange}
+                                                />
+                                                {input.errors.salaryTo &&
+                                                    <StyledText
+                                                        tag="span"
+                                                        color="red"
+                                                        text={input.errors.salaryTo}
+                                                    />}
+                                            </StyledGridItem>
+                                        </StyledGridContainer>
+                                    </StyledGridItem>
                                 </StyledGridItem>
                                 <StyledGridItem>
                                     <StyledGridItem>
-                                        <StyledSelectJobType
-                                            value={input.workType}
-                                            onChange={onWorkTypeChange}
+                                        <StyledInputLabel>Currency:</StyledInputLabel>
+                                    </StyledGridItem>
+                                    <StyledGridItem>
+                                        <StyledCurrencyType
+                                            value={input.currencyType}
+                                            onChange={onCurrencyTypeChange}
                                         >
-                                            {workType.map((option) => (
-                                                <option key={option.value} value={option.value}
-                                                        disabled={option.disabled}>{option.label}</option>
+                                            {currencyType.map((option, numb) => (
+                                                <StyledOption
+                                                    key={option.value}
+                                                    value={option.value}
+                                                    disabled={option.disabled}
+                                                >
+                                                    {option.label}
+                                                </StyledOption>
                                             ))}
-                                        </StyledSelectJobType>
-                                        {input.errors.workType &&
+                                        </StyledCurrencyType>
+                                        {input.errors.currencyType &&
                                             <Typography><StyledText
                                                 tag="span"
                                                 color="red"
-                                                text={input.errors.workType}
+                                                text={input.errors.currencyType}
                                             /></Typography>}
                                     </StyledGridItem>
                                 </StyledGridItem>
-                            </StyledGridItem>
-                        </StyledGridContainer>
-                        <StyledButtonCenter>
-                            <StyledRedButtonModalButton sx={{
-                                ':hover': {
-                                    bgcolor: '#852222',
-                                    color: 'white'
-                                },
-                                width: 1 / 4,
-                                alignSelf: 'center',
-                                mt: 5,
-                                backgroundColor: 'rgba(171, 36, 36)'
-                            }} type='submit'>SUBMIT</StyledRedButtonModalButton>
-                            <JobOfferFormula open={showModal} handleClose={handleClose} errorMessage={errorMessage} text={modalText}/>
-                        </StyledButtonCenter>
-                    </StyledInputJobOfferContainer>
-                </StyledJobOfferCreationContainer>
-            </Form>
+                            </StyledGridContainer>
+                            <StyledInputLabel>Location:</StyledInputLabel>
+                            <StyledRedHoverTextFiled
+                                placeholder="Enter location"
+                                name="location"
+                                value={input.location}
+                                onChange={onInputChange}
+                            />
+                            {input.errors.location &&
+                                <StyledText
+                                    tag="span"
+                                    color="red"
+                                    text={input.errors.location}
+                                />}
+                            <StyledGridContainer>
+                                <StyledGridItem>
+                                    <StyledGridItem>
+                                        <StyledInputLabel>Contract type:</StyledInputLabel>
+                                    </StyledGridItem>
+                                    <StyledGridItem>
+                                        <StyledSelectJobType
+                                            checked
+                                            value={input.jobType}
+                                            onChange={onJobTypeChange}
+                                        >
+                                            {jobType.map((option) => (
+                                                <StyledOption key={option.value} value={option.value}
+                                                              disabled={option.disabled}>{option.label}</StyledOption>
+                                            ))}
+                                        </StyledSelectJobType>
+                                        {input.errors.jobType &&
+                                            <Typography><StyledText
+                                                tag="span"
+                                                color="red"
+                                                text={input.errors.jobType}
+                                            /></Typography>}
+                                    </StyledGridItem>
+                                </StyledGridItem>
+                                <StyledGridItem>
+                                    <StyledGridItem>
+                                        <StyledInputLabel>Employment types:</StyledInputLabel>
+                                    </StyledGridItem>
+                                    <StyledGridItem>
+                                        <StyledGridItem>
+                                            <StyledSelectJobType
+                                                value={input.workType}
+                                                onChange={onWorkTypeChange}
+                                            >
+                                                {workType.map((option) => (
+                                                    <option key={option.value} value={option.value}
+                                                            disabled={option.disabled}>{option.label}</option>
+                                                ))}
+                                            </StyledSelectJobType>
+                                            {input.errors.workType &&
+                                                <Typography><StyledText
+                                                    tag="span"
+                                                    color="red"
+                                                    text={input.errors.workType}
+                                                /></Typography>}
+                                        </StyledGridItem>
+                                    </StyledGridItem>
+                                </StyledGridItem>
+                            </StyledGridContainer>
+                            <StyledButtonCenter>
+                                <StyledRedButtonModalButton sx={{
+                                    ':hover': {
+                                        bgcolor: '#852222',
+                                        color: 'white'
+                                    },
+                                    width: 1 / 4,
+                                    alignSelf: 'center',
+                                    mt: 5,
+                                    backgroundColor: 'rgba(171, 36, 36)'
+                                }} type='submit'>SUBMIT</StyledRedButtonModalButton>
+                                <JobOfferFormula open={showModal} handleClose={handleClose} errorMessage={errorMessage}
+                                                 text={modalText}/>
+                            </StyledButtonCenter>
+                        </StyledInputJobOfferContainer>
+                    </StyledJobOfferCreationContainer>
+                </Form>
             </Styledbg>
         </StyledJobOfferContainer>
     );
-
 }

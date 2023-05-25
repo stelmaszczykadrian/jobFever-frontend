@@ -1,6 +1,5 @@
 import {styled} from "@mui/material";
 
-
 export const StyledModal = styled('div')`
   position: absolute;
   top: 50%;

@@ -7,4 +7,5 @@ function SingleOfferFieldTitle(props) {
         </h3>
     );
 }
+
 export default SingleOfferFieldTitle

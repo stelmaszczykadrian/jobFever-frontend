@@ -24,14 +24,14 @@ export default function CandidateJobsContainer(props) {
         navigate(`/job/${jobId}`);
     };
 
-    const RenderCandidateJobCard= () => {
+    const RenderCandidateJobCard = () => {
         if (props.id === JSON.parse(Cookies.get("jwt")).candidate_id.toString()) {
             return (
                 <StyledProfilePaper>
                     <StyledAppliedJobsIcon/>
                     <ProfileContainerTitle text={'Applied Jobs'}/>
                     {data.map((job, index) => (
-                        <JobCard job={job} handleJobClick={handleJobClick} key={job.jobId} />
+                        <JobCard job={job} handleJobClick={handleJobClick} key={job.jobId}/>
                     ))}
                 </StyledProfilePaper>
             )
@@ -44,6 +44,4 @@ export default function CandidateJobsContainer(props) {
             )}
         </>
     );
-
-
-    }
+}

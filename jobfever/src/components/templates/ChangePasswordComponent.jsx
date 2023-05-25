@@ -2,11 +2,11 @@ import {StyledEmployerRegisterMainComponent} from "./EmployersRegisterMainCompon
 import LeftContainer from "../organisms/LeftContainer";
 import PasswordContainer from "../organisms/PasswordContainer";
 
-export default function ChangePasswordComponent(){
-    return(
+export default function ChangePasswordComponent() {
+    return (
         <StyledEmployerRegisterMainComponent>
             <LeftContainer/>
-            <PasswordContainer />
+            <PasswordContainer/>
         </StyledEmployerRegisterMainComponent>
     )
 }

@@ -3,7 +3,7 @@ import {StyledHomeTextSideContainer} from "../molecules/HomeTextSideContainer.st
 import LogoIcon from "../atoms/LogoIcon";
 
 export default function HomeLeftContainer() {
-    return(
+    return (
         <StyledHomeLeftContainer>
             <StyledHomeTextSideContainer>
                 <LogoIcon/>

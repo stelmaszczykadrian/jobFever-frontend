@@ -7,7 +7,6 @@ import {useParams} from "react-router-dom";
 import {getJobOfferById} from "../../api/JobsApi";
 
 function SingleOfferMainComponent() {
-
     const {id} = useParams();
     const [jobDetails, setJobDetails] = useState();
 
@@ -21,12 +20,20 @@ function SingleOfferMainComponent() {
 
     return jobDetails ? (
         <StyledSingleOfferMainComponent>
-            <Navbar />
-        <div style={{display:"flex", flexDirection:"row", maxHeight:"100vh", overflowY:"auto", marginBottom:"1%", marginTop:"2%"}}>
-            <SingleOfferLeftContainer offerDetails={jobDetails}/>
-            <SingleOfferRightContainer offerDetails={jobDetails}/>
-        </div>
+            <Navbar/>
+            <div style={{
+                display: "flex",
+                flexDirection: "row",
+                maxHeight: "100vh",
+                overflowY: "auto",
+                marginBottom: "1%",
+                marginTop: "2%"
+            }}>
+                <SingleOfferLeftContainer offerDetails={jobDetails}/>
+                <SingleOfferRightContainer offerDetails={jobDetails}/>
+            </div>
         </StyledSingleOfferMainComponent>
-    ): <div>Loading</div>;
+    ) : <div>Loading</div>;
 }
+
 export default SingleOfferMainComponent;

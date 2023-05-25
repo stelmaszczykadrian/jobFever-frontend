@@ -18,45 +18,45 @@ import Layout from "./pages/Layout";
 import EditJobOffer from "./pages/EditJobOffer";
 import ChangePassword from "./pages/ChangePassword";
 import {ProtectedRoute} from "./pages/ProtectedRoot/ProtectedRoot";
+
 function App() {
     return (
-
-            <BrowserRouter>
-                <Layout>
-                    <Routes>
-                        <Route path="/" element={<Home/>}/>
-                        <Route path="/candidate/register" element={<CandidateRegister/>}/>
-                        <Route path="/candidate/login" element={<CandidateLogin/>}/>
-                        <Route path="/candidate/:id" element={
-                            <ProtectedRoute>
+        <BrowserRouter>
+            <Layout>
+                <Routes>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/candidate/register" element={<CandidateRegister/>}/>
+                    <Route path="/candidate/login" element={<CandidateLogin/>}/>
+                    <Route path="/candidate/:id" element={
+                        <ProtectedRoute>
                             <CandidateProfile/>
-                            </ProtectedRoute>
-                        }/>
-                        <Route path="/employer/login" element={<EmployerLogin/>}/>
-                        <Route path="/change-password/:token" element={<ChangePassword/>}/>
-                        <Route path="/employer/register" element={<EmployerRegister/>}/>
-                        <Route path="/employer/:id" element={
-                            <EmployerProfile/>
-                        }/>
-                        <Route path="/about" element={<About/>}/>
-                        <Route path="/add-job" element={
-                            <ProtectedRoute role={"EMPLOYER"}>
+                        </ProtectedRoute>
+                    }/>
+                    <Route path="/employer/login" element={<EmployerLogin/>}/>
+                    <Route path="/change-password/:token" element={<ChangePassword/>}/>
+                    <Route path="/employer/register" element={<EmployerRegister/>}/>
+                    <Route path="/employer/:id" element={
+                        <EmployerProfile/>
+                    }/>
+                    <Route path="/about" element={<About/>}/>
+                    <Route path="/add-job" element={
+                        <ProtectedRoute role={"EMPLOYER"}>
                             <JobOfferForm/>
-                            </ProtectedRoute>
-                        }/>
-                        <Route path="/jobs" element={<JobsPage/>}/>
-                        <Route path="/for-employers" element={<ForEmployers/>}/>
-                        <Route path="/contact" element={<Contact/>}/>
-                        <Route path="/job/:id" element={<SingleOfferPage/>}/>
-                        <Route path="/job/:id/edit" element={
-                            <ProtectedRoute role={"EMPLOYER"}>
+                        </ProtectedRoute>
+                    }/>
+                    <Route path="/jobs" element={<JobsPage/>}/>
+                    <Route path="/for-employers" element={<ForEmployers/>}/>
+                    <Route path="/contact" element={<Contact/>}/>
+                    <Route path="/job/:id" element={<SingleOfferPage/>}/>
+                    <Route path="/job/:id/edit" element={
+                        <ProtectedRoute role={"EMPLOYER"}>
                             <EditJobOffer/>
-                            </ProtectedRoute>
-                        }></Route>
-                        <Route path="*" element={<NoPage/>}></Route>
-                    </Routes>
-                </Layout>
-            </BrowserRouter>
+                        </ProtectedRoute>
+                    }></Route>
+                    <Route path="*" element={<NoPage/>}></Route>
+                </Routes>
+            </Layout>
+        </BrowserRouter>
 
     );
 }

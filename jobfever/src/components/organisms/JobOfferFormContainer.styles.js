@@ -17,13 +17,13 @@ export const StyledInputJobOfferContainer = styled('div')`
 
 export const StyledJobOfferContainer = styled('div')`
   width: 100%;
-  background-image:url(${ img });
+  background-image: url(${img});
   background-position: center;
   background-size: cover;
 `
 
 export const Styledbg = styled('div')`
-    background: rgba(29, 25, 23, 0.8);`
+  background: rgba(29, 25, 23, 0.8);`
 
 
 export const StyledTextarea = styled("textarea")`
@@ -41,12 +41,12 @@ export const StyledGridContainer = styled("div")`
   grid-template-columns: auto auto;
   border-radius: 4px;
   color: white;
-  
+
 `
 export const StyledGridItem = styled("div")`
   text-align: center;
   margin: 12px 0px;
- 
+
   justify-content: space-between;
   border-radius: 4px;
   color: white;
@@ -62,33 +62,35 @@ export const StyledSelectJobType = styled("select")`
   height: 56px;
   border-color: #B7B7B7;
   width: 97%;
-  :focus{
+
+  :focus {
     border-color: red;
     outline: none;
-}
+  }
 `
 
 export const StyledCurrencyType = styled("select")`
-      font-size: 1rem;
-      text-color: grey;
-      padding: 0.5rem;
-      border-radius: 4px;
-      margin-bottom: 2px;
-      margin-top : 10px;
-      height: 56px;
-      width: 100%;
-      border-color: #B7B7B7;
-      :focus{
-        border-color: red;
-        outline: none;
-    }
-    `
+  font-size: 1rem;
+  text-color: grey;
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  margin-top: 10px;
+  height: 56px;
+  width: 100%;
+  border-color: #B7B7B7;
+
+  :focus {
+    border-color: red;
+    outline: none;
+  }
+`
 
 export const StyledOption = styled("option")`
-    :hover {
-      background-color: red;
-      border-color: red;
-    }
+  :hover {
+    background-color: red;
+    border-color: red;
+  }
 `
 
 export const StyledButtonCenter = styled("div")`

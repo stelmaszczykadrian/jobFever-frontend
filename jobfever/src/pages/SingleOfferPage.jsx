@@ -2,12 +2,11 @@ import SingleOfferMainComponent from "../components/templates/SingleOfferMainCom
 import {useParams} from "react-router-dom";
 
 function SingleOfferPage() {
-
-    const { id } = useParams();
-
+    const {id} = useParams();
     return (
         <SingleOfferMainComponent id={id}/>
-    )}
+    )
+}
 
 export default SingleOfferPage;
 

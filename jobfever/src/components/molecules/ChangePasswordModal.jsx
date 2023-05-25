@@ -26,7 +26,6 @@ export default function ChangePasswordModal() {
     }
     const handleVerify = () => {
         isVerified = true;
-        console.log(isVerified)
     }
     const handleClickOpen = () => {
         setOpen(true);
@@ -35,7 +34,7 @@ export default function ChangePasswordModal() {
         setOpen(false);
     };
     const handleSave = async () => {
-        if (isVerified){
+        if (isVerified) {
             await sendEmailForPasswordChange(input.email)
         }
         setOpen(false);
@@ -43,13 +42,14 @@ export default function ChangePasswordModal() {
 
     return (
         <div>
-            <StyledDontRememberPasswordLink onClick={handleClickOpen}>You don't remember password?</StyledDontRememberPasswordLink>
-            <Dialog PaperProps={{style: {borderRadius: "20px", maxWidth: "520px", padding:"0.5%"}}}
-                fullWidth
-                maxWidth='sm'
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="responsive-dialog-title"
+            <StyledDontRememberPasswordLink onClick={handleClickOpen}>You don't remember
+                password?</StyledDontRememberPasswordLink>
+            <Dialog PaperProps={{style: {borderRadius: "20px", maxWidth: "520px", padding: "0.5%"}}}
+                    fullWidth
+                    maxWidth='sm'
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="responsive-dialog-title"
             >
                 <DialogTitle sx={{textAlign: "center", fontWeight: 'bold'}} id="responsive-dialog-title">
                     Forgot your account’s password? Enter your email and we’ll send you a recovery link.
@@ -76,7 +76,7 @@ export default function ChangePasswordModal() {
                         Send
                     </RedButtonStyled>
                     <GoogleReCaptchaProvider reCaptchaKey="6LfrfCwmAAAAABYCQj15CnQgsCuZ6djnXOoyn33M">
-                        <GoogleReCaptcha onVerify={handleVerify} />
+                        <GoogleReCaptcha onVerify={handleVerify}/>
                     </GoogleReCaptchaProvider>
                 </DialogActions>
             </Dialog>

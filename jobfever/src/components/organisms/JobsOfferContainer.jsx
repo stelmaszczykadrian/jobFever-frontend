@@ -10,7 +10,6 @@ import JobOfferGrid from "../molecules/JobOfferGrid";
 import axios from "axios";
 import SearchBar from "../molecules/SearchBar";
 import {StyledBoxFlex} from "../molecules/SearchBar.styles";
-import Container from "@mui/material/Container";
 
 const useStyles = makeStyles(() => ({
     ul: {
@@ -88,38 +87,37 @@ export default function JobsOfferContainer() {
         setSelectedLanguage("");
         setCurrentPage(0);
     };
-
     return (
         <div>
-                <StyledJobOffersContainer>
-                    <StyledBoxFlex>
-                    <JobsPageSortComponent onLanguageChange={handleLanguageChange} />
-                    <SearchBar onSearch={handleSearch} style={{ marginRight: '200px' }}/>
-                    </StyledBoxFlex>
-                    {loading ? (
-                        <Typography></Typography>
-                    ) : (
-                        <div>
-                            {jobs.map((job, index) => (
-                                <div key={`JobOffer_${index}`}>
-                                    <JobOfferGrid
-                                        job={job}
-                                        key={`JobOffer_${index}`}
-                                        onClick={() => handleJobClick(job.jobId)}
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </StyledJobOffersContainer>
-                <StyledPaginationContainer>
-                    <Pagination
-                        count={totalPages}
-                        page={currentPage + 1}
-                        onChange={handlePageChange}
-                        classes={{ ul: classes.ul }}
-                    />
-                </StyledPaginationContainer>
+            <StyledJobOffersContainer>
+                <StyledBoxFlex>
+                    <JobsPageSortComponent onLanguageChange={handleLanguageChange}/>
+                    <SearchBar onSearch={handleSearch} style={{marginRight: '200px'}}/>
+                </StyledBoxFlex>
+                {loading ? (
+                    <Typography></Typography>
+                ) : (
+                    <div>
+                        {jobs.map((job, index) => (
+                            <div key={`JobOffer_${index}`}>
+                                <JobOfferGrid
+                                    job={job}
+                                    key={`JobOffer_${index}`}
+                                    onClick={() => handleJobClick(job.jobId)}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </StyledJobOffersContainer>
+            <StyledPaginationContainer>
+                <Pagination
+                    count={totalPages}
+                    page={currentPage + 1}
+                    onChange={handlePageChange}
+                    classes={{ul: classes.ul}}
+                />
+            </StyledPaginationContainer>
         </div>
     );
 }

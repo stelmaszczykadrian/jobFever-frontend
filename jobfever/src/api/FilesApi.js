@@ -8,7 +8,6 @@ export async function uploadFile(file) {
         headers: {
             Authorization: `Bearer ${JSON.parse(Cookies.get("jwt")).access_token}`,
             'Content-Type': 'multipart/form-data',
-
         }
     }).then(response => {
         console.log(response.data);
@@ -17,7 +16,7 @@ export async function uploadFile(file) {
     });
 }
 
-export async function getImgFile(filename){
+export async function getImgFile(filename) {
     try {
         if (filename) {
             const resp = await axios.get('http://localhost:8080/api/file/url', {

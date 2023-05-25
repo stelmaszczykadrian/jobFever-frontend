@@ -3,15 +3,13 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import {useAuthorization} from "../utils/AuthUtils";
 
-
 const urls = [
     "http://localhost:8080/api/jobs/by-employer",
     "http://localhost:8080/api/jobs/"
 ]
 
 export const useJobsByName = (id) => {
-    const [data, setData] = useState({});
-    const [loading, setLoading] = useState(true);
+    const [setLoading] = useState(true);
     const {getAccessToken} = useAuthorization();
 
     const fetchData = async () => {
@@ -41,7 +39,7 @@ export const updateJob = (userData, onSuccess, onError, id) => {
     axios.put(`http://localhost:8080/api/jobs/${id}`, userData)
         .then((r) => {
             console.log(r);
-            if(r.status === 200) {
+            if (r.status === 200) {
                 onSuccess();
             }
         })

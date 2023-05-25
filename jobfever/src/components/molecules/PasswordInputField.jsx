@@ -9,16 +9,17 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import {useState} from "react";
 import StyledText from "../atoms/StyledText";
+
 export default function PasswordInputField({
-                                          formData,
-                                          onInputChange,
-                                          validateInput,
-                                          label,
-                                          inputName,
-                                          inputPlaceholder,
-                                          inputType,
-                                          inputError,
-                                      }) {
+                                               formData,
+                                               onInputChange,
+                                               validateInput,
+                                               label,
+                                               inputName,
+                                               inputPlaceholder,
+                                               inputType,
+                                               inputError,
+                                           }) {
     const [showPassword, setShowPassword] = useState(false);
 
     const handlePasswordVisibility = () => {
@@ -38,12 +39,12 @@ export default function PasswordInputField({
                     onBlur={validateInput}
                     placeholder={inputPlaceholder}
                 />
-                <IconButton sx={{ color: "white" }} onClick={handlePasswordVisibility}>
-                    {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                <IconButton sx={{color: "white"}} onClick={handlePasswordVisibility}>
+                    {showPassword ? <VisibilityOffIcon/> : <VisibilityIcon/>}
                 </IconButton>
             </StyledPasswordInputValidation>
             {inputError && (
-                <StyledText tag="span" color="red" text={inputError} />
+                <StyledText tag="span" color="red" text={inputError}/>
             )}
         </FormControl>
     );

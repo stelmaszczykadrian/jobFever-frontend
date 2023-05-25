@@ -5,4 +5,5 @@ function CandidateProfile() {
         <ProfileMainComponent type={"candidate"}/>
     );
 }
+
 export default CandidateProfile;

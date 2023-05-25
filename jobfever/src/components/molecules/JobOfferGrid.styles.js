@@ -1,6 +1,5 @@
 import {Paper, styled} from "@mui/material";
 
-
 export const Img = styled('img')({
     margin: 'auto',
     display: 'block',

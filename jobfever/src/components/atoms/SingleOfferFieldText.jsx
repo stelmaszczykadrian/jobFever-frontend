@@ -7,4 +7,5 @@ function SingleOfferFieldText(props) {
         </p>
     );
 }
+
 export default SingleOfferFieldText

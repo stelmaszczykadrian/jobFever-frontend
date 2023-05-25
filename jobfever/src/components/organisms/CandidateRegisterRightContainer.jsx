@@ -135,6 +135,5 @@ export default function CandidateRegisterRightContainer() {
             </Sheet>
             <SocialMediaButtons/>
         </StyledRightContainer>
-
     );
 }

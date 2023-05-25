@@ -10,7 +10,6 @@ import {useNavigate} from "react-router-dom";
 import React from "react";
 import RenderRating from "../atoms/RatingStars";
 
-
 export default function CandidateModal(props) {
     const navigate = useNavigate();
     const {showModal, handleModalClose, jobTitle, candidateData} = props;
@@ -24,7 +23,7 @@ export default function CandidateModal(props) {
             onClose={handleModalClose}
             maxWidth="sm"
             fullWidth
-            >
+        >
             <DialogTitle sx={{textAlign: "center", fontWeight: 'bold'}} id="responsive-dialog-title">
                 Applicants for : {jobTitle}
             </DialogTitle>

@@ -1,11 +1,9 @@
 import axios from "axios";
 
-
 export const sendEmailForPasswordChange = async (email) => {
     let data
     try {
-        await axios.post("http://localhost:8080/api/authentication/forgot-password", {
-        },{
+        await axios.post("http://localhost:8080/api/authentication/forgot-password", {}, {
             params: {
                 email: email
             },
@@ -17,10 +15,9 @@ export const sendEmailForPasswordChange = async (email) => {
     }
     return data
 }
-export const changePassword = async (url,token, password) => {
+export const changePassword = async (url, token, password) => {
     try {
-        await axios.put(url, {
-        },{
+        await axios.put(url, {}, {
             params: {
                 token,
                 password

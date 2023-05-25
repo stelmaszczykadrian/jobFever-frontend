@@ -15,7 +15,7 @@ const theme = createTheme({
     },
 });
 
-export default function EditableModalInput({value, onChange, placeholder, isRequired, label, fullWidth,name}) {
+export default function EditableModalInput({value, onChange, placeholder, isRequired, label, fullWidth, name}) {
     const isFieldEmpty = isRequired && !value;
     return (
         <ThemeProvider theme={theme}>

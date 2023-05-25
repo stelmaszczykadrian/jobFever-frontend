@@ -9,8 +9,8 @@ import {MailOutline} from "@material-ui/icons";
 import StyledText from "../atoms/StyledText";
 
 
-export default function EmailInputField({ formData, onInputChange, validateInput }){
-    return(
+export default function EmailInputField({formData, onInputChange, validateInput}) {
+    return (
         <FormControl>
             <StyledLabel>E-mail</StyledLabel>
             <StyledEmailInputValidation>

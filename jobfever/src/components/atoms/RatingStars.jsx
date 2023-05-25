@@ -3,17 +3,17 @@ import React, {useState} from "react";
 import {addRating, useCandidateRatingById} from "../../api/CandidateApi";
 import {StyledRatingStars} from "./RatingStars.styles";
 
-export default function RenderRating(props){
+export default function RenderRating(props) {
     const {data, loading} = useCandidateRatingById(props.candidateId, props.jobId)
-    const [rating, setRating]= useState(0)
+    const [rating, setRating] = useState(0)
     const [value, setValue] = useState(0)
     React.useEffect(() => {
-        if(!loading){
+        if (!loading) {
             setRating(data)
         }
-    },[data, rating]);
-    if (!loading){
-        if (value !== 0){
+    }, [data, rating]);
+    if (!loading) {
+        if (value !== 0) {
             return (
                 <Box mb={1}>
                     <StyledRatingStars
@@ -26,7 +26,7 @@ export default function RenderRating(props){
                     />
                 </Box>
             );
-        }else{
+        } else {
         }
         return (
             <Box>
@@ -40,8 +40,8 @@ export default function RenderRating(props){
                 />
             </Box>
         );
-    }else{
-        return(
+    } else {
+        return (
             <span>Loading...</span>
         )
     }
